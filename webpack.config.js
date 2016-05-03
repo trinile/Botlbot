@@ -104,10 +104,9 @@ if(TARGET === 'start' || !TARGET) {
       port: process.env.PORT || 3450
     },
     plugins: [
-      // new webpack.HotModuleReplacementPlugin()
       new webpack.HotModuleReplacementPlugin(),
       new NpmInstallPlugin({
-        save: true // --save
+        save: true// --save
       })
     ],
     devtool: 'eval-source-map'
