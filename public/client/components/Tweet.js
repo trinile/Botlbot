@@ -1,17 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
-
-class Tweet extends Component {
-
-  constructor() {
-    super(props)
-  }
-
-  render() {
+const Tweet = () => {
     return (
       <div> Tweet </div>
-    )
-  }
+    );
 };
 
 export default Tweet;
