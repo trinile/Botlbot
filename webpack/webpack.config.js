@@ -8,9 +8,9 @@ const NpmInstallPlugin = require('npm-install-webpack-plugin');
 const TARGET = process.env.npm_lifecycle_event;
 
 const PATHS = {
-  app: path.join(__dirname, 'public/client'),
-  build: path.join(__dirname, 'build'),
-  style: path.join(__dirname, 'public/client/styles')
+  app: path.join(__dirname, './public/client'),
+  build: path.join(__dirname, './build'),
+  style: path.join(__dirname, './public/client/styles')
 };
 
 //to configure babel-preset-react hmre
@@ -117,6 +117,7 @@ if(TARGET === 'start' || !TARGET) {
 if(TARGET === 'build') {
   module.exports = merge(common, {});
 }
+
 
 
 
