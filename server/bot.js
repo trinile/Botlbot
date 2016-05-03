@@ -15,7 +15,7 @@ var getPublicTweet = function(cb) {
     var botData;
     if (!err) {
       botData = {
-        baseTweet       : data.statuses[0].text.toLowerCase().replace(/@[.+]\b/, 'REDACTED'),
+        baseTweet       : data.statuses[0].text.toLowerCase().toLowerCase().replace(/@(\w+\b)/, 'REDACTED'),
         tweetID         : data.statuses[0].id_str,
         tweetUsername   : data.statuses[0].user.screen_name
       };
