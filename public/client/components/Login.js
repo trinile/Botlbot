@@ -8,10 +8,10 @@ class Login extends Component {
 
     return (
       <div>
-        <h1 className={styles.login}>Welcome! Login to Twitter
+        <h1 className={styles.login}>Welcome! Login to Twitter!</h1>
         <button onClick={(event) => this.handleClick(event)} className={styles.button}>
           Here
-        </button></h1>
+        </button>
       </div>
     )
   }
