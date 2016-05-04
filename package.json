@@ -4,7 +4,7 @@
   "description": "Twitter bot in a bottle",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "build": "node_modules/.bin/webpack",
     "start": "webpack-dev-server --progress --inline --hot",
     "lint:": "eslint . --ext .js --ext .jsx .gitignore --cache"
