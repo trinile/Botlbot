@@ -18,7 +18,7 @@ class Login extends Component {
 
   handleClick(event) {
     //DO SOMETHING
-  }     
+  }
 }
 
 export default Login;
