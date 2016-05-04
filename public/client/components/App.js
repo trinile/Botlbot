@@ -1,56 +1,24 @@
 import React, {Component, PropTypes} from 'react';
 import styles from '../styles/main.css';
-import Login from './Login.js';
+import Login from './Login';
 import Logout from './Logout';
 
 const App = () => {
-
+  const { dispatch, isAuthenticated } = this.props
   return (
     <div>
-    <Login/>
+    {
+      <!isAuthenticated && Login onLoginClick={ creds => dispatch(loginUser(creds)) } />
+    }
+    {
+      isAuthenticated && <Logout onLogoutClick={ () => dispatch(logoutUser()) } />
+    }
     </div>
   );
 };
 
-export default App;
-
-import React, { Component, PropTypes } from 'react'
-import Login from './Login'
-import Logout from './Logout'
-import { loginUser, logoutUser } from '../actions'
-
-export default class Navbar extends Component {
-
-  render() {
-    const { dispatch, isAuthenticated, errorMessage } = this.props
-
-    return (
-      <nav className='navbar navbar-default'>
-        <div className='container-fluid'>
-          <a className="navbar-brand" href="#">Quotes App</a>
-          <div className='navbar-form'>
-
-            {!isAuthenticated &&
-              <Login
-                errorMessage={errorMessage}
-                onLoginClick={ creds => dispatch(loginUser(creds)) }
-              />
-            }
-
-            {isAuthenticated &&
-              <Logout onLogoutClick={() => dispatch(logoutUser())} />
-            }
-
-          </div>
-        </div>
-      </nav>
-    )
-  }
-
-}
-
-Navbar.propTypes = {
+App.PropTypes = {
   dispatch: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired,
-  errorMessage: PropTypes.string
+  isAuthenticated: PropTypes.bool.isRequired
 }
+export default App;

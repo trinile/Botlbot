@@ -1,21 +1,19 @@
-// components/Logout.js
+import React, { Component, PropTypes } from 'react';
 
-// import React, { Component, PropTypes } from 'react'
+export default class Logout extends Component {
 
-// export default class Logout extends Component {
+  render() {
+    const { onLogoutClick } = this.props
 
-//   render() {
-//     const { onLogoutClick } = this.props
+    return (
+      <button onClick={() => onLogoutClick()} >
+        Logout
+      </button>
+    );
+  }
 
-//     return (
-//       <button onClick={() => onLogoutClick()} >
-//         Logout
-//       </button>
-//     )
-//   }
+};
 
-// }
-
-// Logout.propTypes = {
-//   onLogoutClick: PropTypes.func.isRequired
-// }
+Logout.propTypes = {
+  onLogoutClick: PropTypes.func.isRequired
+};

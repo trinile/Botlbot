@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import styles from '../styles/main.css';
 
-class Login extends Component {
+export class Login extends Component {
+
 
   handleClick(event) {
     console.log('click');
@@ -16,13 +17,22 @@ class Login extends Component {
     .catch();
   }
 
+  loginWithTwitter() {
+    //Do something here
+  }
+  
+  render() {
+    const {
+      logInWithTwitter
+    } = this.props;
+
   render() {
     return (
-      <div>
-        <h1 className={styles.login}>Welcome! Login to Twitter!</h1>
-        <button onClick={(event) => this.handleClick(event)} className={styles.button}>
-          Here
-        </button>
+      <div className="g-row sign-in">
+        <div className="g-col">
+          <h1 className="sign-in__heading">Log in</h1>
+          <button className="sign-in__button" onClick={logInWithTwitter} type="button">Twitter</button>
+        </div>
       </div>
     );
   }
@@ -30,3 +40,12 @@ class Login extends Component {
 }
 
 export default Login;
+=======
+}
+
+Login.propTypes = {
+  onLoginClick: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string
+};
+
+// export default connect(null, authActions)(SignIn);
