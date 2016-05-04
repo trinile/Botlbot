@@ -74,7 +74,10 @@ app.get('/auth', passport.authenticate('twitter'));
 // authentication has failed.
 app.get('/auth/callback',
   passport.authenticate('twitter', { successRedirect: '/dashboard',
-                                     failureRedirect: '/' }));
+                                     failureRedirect: '/' }),
+  function(req, res) {
+    res.json({userId: 'returned from successfulAuth'});
+  });
 
 var ensureAuthenticated = function(req, res, next) {
   // console.log('================================== \n req is:', req);

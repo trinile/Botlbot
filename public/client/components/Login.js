@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import styles from '../styles/main.css';
 
-export class Login extends Component {
+class Login extends Component {
 
 
   handleClick(event) {
@@ -18,9 +18,24 @@ export class Login extends Component {
   }
 
   loginWithTwitter() {
+    alert('Hello');
     //Do something here
+    // var init = {
+    //   method: 'GET',
+    //   headers: new Headers(),
+    //   mode: 'cors',
+    //   cache: 'default'
+    // };
+
+    // fetch('127.0.0.1:1337/auth', init)
+    // .then(function(response) {
+    //   return response.json();
+    // })
+    // .then(function(res) {
+
+    // })
   }
-  
+
   render() {
     const {
       logInWithTwitter
@@ -28,11 +43,9 @@ export class Login extends Component {
 
   render() {
     return (
-      <div className="g-row sign-in">
-        <div className="g-col">
-          <h1 className="sign-in__heading">Log in</h1>
-          <button className="sign-in__button" onClick={logInWithTwitter} type="button">Twitter</button>
-        </div>
+      <div>
+          <h1>Log in</h1>
+          <button className={styles.button} onClick={logInWithTwitter}>Twitter</button>
       </div>
     );
   }
@@ -43,9 +56,10 @@ export default Login;
 =======
 }
 
-Login.propTypes = {
-  onLoginClick: PropTypes.func.isRequired,
-  errorMessage: PropTypes.string
-};
+export default Login;
+// Login.propTypes = {
+//   onLoginClick: PropTypes.func.isRequired,
+//   errorMessage: PropTypes.string
+// };
 
 // export default connect(null, authActions)(SignIn);

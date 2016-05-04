@@ -8,7 +8,7 @@ const App = () => {
   return (
     <div>
     {
-      <!isAuthenticated && Login onLoginClick={ creds => dispatch(loginUser(creds)) } />
+      < !isAuthenticated && Login onLoginClick={ creds => dispatch(loginUser(creds)) } />
     }
     {
       isAuthenticated && <Logout onLogoutClick={ () => dispatch(logoutUser()) } />

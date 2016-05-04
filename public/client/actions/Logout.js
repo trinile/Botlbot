@@ -38,13 +38,13 @@ const LogoutFailure = () => {
       isFetching: false,
       isAuthenticated: true
     }
-  )
-}
+  );
+};
 
 export function logoutUser() {
-    return dispatch => {
-    dispatch(requestLogout())
-    localStorage.removeItem('id_token')
-    dispatch(receiveLogout())
-  }
-}
+  return dispatch => {
+    dispatch(requestLogout());
+    localStorage.removeItem('id_token');
+    dispatch(receiveLogout());
+  };
+};

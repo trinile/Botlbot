@@ -8,7 +8,7 @@ import LogoutReducer from './Logout.js';
 const Reducers = combineReducers({
   login: LoginReducer,
   logout: LogoutReducer,
-  routing: routeReducer
+  routing: routerReducer
 });
 
 export default Reducers;

@@ -28,7 +28,5 @@ const store = createStore(
 const history = syncHistoryWithStore(browserHistory, store);
 
 ReactDOM.render(
-  <Provider store={store}>
   <Router history={browserHistory} routes={Routes} />
-  </Provider>
   , document.getElementById('root'));
