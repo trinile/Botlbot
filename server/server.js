@@ -44,6 +44,8 @@ app.use(session({
   secret: 'SLDGJLSDHGLSKDJGLSKDGSECRET',
   resave: false,
   saveUninitialized: true
+  // NOTE we also need to be using a sessionStore –
+  // looks like connect-redis is a good option
 }));
 
 // used to serialize the user for the session
