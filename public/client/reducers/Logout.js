@@ -5,7 +5,7 @@ import {
 import { initialState } from './Login.js';
 
 
-export function LogoutReducer(state = { initialState }, action) {
+export default function LogoutReducer(state = { initialState }, action) {
   switch (action.type) {
     case LOGOUT_SUCCESS:
       return Object.assign({}, state, {

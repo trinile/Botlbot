@@ -46,5 +46,15 @@ export function logoutUser() {
     dispatch(requestLogout());
     localStorage.removeItem('id_token');
     dispatch(receiveLogout());
+    let config = {
+      method: 'GET',
+      mode: cors,
+      redirect: 'follow'
+    };
+    //get request to /logout path to log out user
+    fetch('http://127.0.0.1:1337/logout', config)
+    .then()
+    .catch();
+
   };
 };

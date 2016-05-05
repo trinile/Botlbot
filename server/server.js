@@ -74,10 +74,8 @@ app.get('/auth', passport.authenticate('twitter'));
 // authentication has failed.
 app.get('/auth/callback',
   passport.authenticate('twitter', { successRedirect: '/dashboard',
-                                     failureRedirect: '/' }),
-  function(req, res) {
-    res.json({userId: 'returned from successfulAuth'});
-  });
+                                     failureRedirect: '/' })
+);
 
 var ensureAuthenticated = function(req, res, next) {
   // console.log('================================== \n req is:', req);
@@ -91,7 +89,8 @@ var ensureAuthenticated = function(req, res, next) {
 };
 
 app.get('/dashboard', ensureAuthenticated, function(req, res) {
-  res.send('YOU DID IT');
+  // res.json('helloooooo');
+  res.sendFile(path.join(__dirname + '/../build/'));
 });
 
 var dummyTweets = [

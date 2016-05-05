@@ -6,9 +6,10 @@ import LoginReducer  from './Login.js';
 import LogoutReducer from './Logout.js';
 
 const Reducers = combineReducers({
-  login: LoginReducer,
-  logout: LogoutReducer,
+  LoginReducer,
+  LogoutReducer,
   routing: routerReducer
 });
 
+console.log('Reducers ', Reducers.LoginReducer);
 export default Reducers;

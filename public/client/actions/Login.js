@@ -22,18 +22,18 @@ export const requestLogin = () => {
 
 //Following are action creaters
 //return actions in object format { }
-const receiveLogin = (user) => {
+export const receiveLogin = (user) => {
   return (
     {
       type: LOGIN_SUCCESS,
       isFetching: false,
       isAuthenticated: true,
-      id_token: user.id_token 
+      // id_token: user.id_token 
     }
   );
 }
 
-const loginError = (message) => {
+export const loginError = (message) => {
   return (
     {
       type: LOGIN_FAILURE,
@@ -48,33 +48,51 @@ const loginError = (message) => {
 //bound action creater 
 //CALL THE API TO GET A TOKEN AND DISPATCH ACTIONS ALONG THE WAY
 
-export const loginUser = () => {
+export function loginUser() {
 
    return dispatch => {
     // dispatch requestLogin to kickoff the call to the API
+    'in logInUser dispatch action';
     let config = {
-      method: 'GET'
+      method: 'GET',
+      mode: 'cors',
+      redirect: 'follow'
     };
     
     dispatch(requestLogin());
-    return fetch('http://localhost/auth', config)
-      .then(response =>
-        response.json()
-        .then(user => ({ user, response }));
-      ).then(({ user, response }) =>  {
-        if (!response.ok) {
-          // If there was a problem, we want to
-          // dispatch the error condition
-          dispatch(loginError(user.message));
-          return Promise.reject(user);
-        }
-        else {
-          // If login was successful, set the token in local storage
-          localStorage.setItem('id_token', user.id_token);
-          
-          // Dispatch the success action
-          dispatch(receiveLogin(user));
-        }
-      }).catch(err => console.log("Error: ", err));
+    console.log('in login user');
+    return fetch('http://127.0.0.1:1337/auth', config)
+      // .then(user => ({ user, response }))
+      // ).then(({}))
+      .then()
+      .catch();
+      // .then(response =>
+      //   response.json()
+      //   console.log(response.json);
+      //   .then(user => ({ user, response }))
+      // ).then(({ user, response }) =>  {
+      //   if (!response.ok) {
+      //     // If there was a problem, we want to
+      //     // dispatch the error condition
+      //     dispatch(loginError(user.message));
+      //     return Promise.reject(user);
+      //   }
+      //   else {
+      //     // If login was successful, set the token in local storage
+      //     console.log('local storage', localStorage);
+      //     localStorage.setItem('id_token', user.id_token);
+      //     // Dispatch the success action
+      //     dispatch(receiveLogin(user));
+      //   }
+      // }).catch(err => console.log("Error: ", err));
   };
 };
+
+
+    // fetch('http://127.0.0.1:1337/auth', {
+    //   method: 'GET',
+    //   mode: 'cors',
+    //   redirect: 'follow',
+    // })
+    // .then()
+    // .catch();
