@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+
 // import { connect } from 'react-redux';
 import styles from '../styles/main.css';
 // import RaisedButton from 'material-ui/RaisedButton';

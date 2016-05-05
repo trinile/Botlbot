@@ -7,6 +7,10 @@ import Logout from './Logout';
 
 class Dashboard extends Component {
 
+  componentWillMount() {
+
+  }
+
   showTweets() {
     //TODO: click button will call this function show Tweets
     //this will dispatch an action -> change the state 
@@ -17,10 +21,10 @@ class Dashboard extends Component {
     return (
       <div>
         <Logout/>
-        <button>Click for More Tweets</button>
+        <button onClick={}>Click for More Tweets</button>
         <Tweet/>
       </div>
-    )
+    );
   }
 }
 
