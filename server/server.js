@@ -1,6 +1,11 @@
 var express = require('express');
 var path = require('path');
+
 var session = require('express-session');
+var redis = require('redis');
+var RedisStore = require('connect-redis')(session);
+var client = redis.createClient();
+
 var passport = require('passport');
 var TwitterStrategy = require('passport-twitter').Strategy;
 var Twit = require('twit');
@@ -41,11 +46,12 @@ var app = express();
 app.use(express.static(__dirname + '/../build/'));
 
 app.use(session({
+  store: new RedisStore({
+    client: client
+  }),
   secret: 'SLDGJLSDHGLSKDJGLSKDGSECRET',
   resave: false,
   saveUninitialized: true
-  // NOTE we also need to be using a sessionStore –
-  // looks like connect-redis is a good option
 }));
 
 // used to serialize the user for the session
