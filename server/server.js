@@ -11,10 +11,17 @@ var TwitterStrategy = require('passport-twitter').Strategy;
 var Twit = require('twit');
 require('dotenv').config();
 
-passport.use(new TwitterStrategy({
+var getTweets = require('./searchAlgo');
+const KEYS = {
+  access_token: process.env.ACCESS_TOKEN,
+  access_token_secret: process.env.ACCESS_TOKEN_SECRET,
+};
+
+passport.use(
+  new TwitterStrategy({
     consumerKey: process.env.CONSUMER_KEY,
     consumerSecret: process.env.CONSUMER_SECRET,
-    callbackURL: "http://127.0.0.1:1337/auth/callback" // NOTE you must use 127.0.0.1, not localhost
+    callbackURL: 'http://127.0.0.1:1337/auth/callback' // NOTE you must use 127.0.0.1, not localhost
   },
   function(token, tokenSecret, profile, done) {
     console.log('authentication is happening');
@@ -27,9 +34,13 @@ passport.use(new TwitterStrategy({
       timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests.
     });
 
-    T.post('statuses/update', {status: 'haha! I have posted on your account!' + Math.random()}, function(err, data, response) {
-      return err ? console.error(err) : console.log('posted:', data);
-    });
+    T.post(
+      'statuses/update',
+      { status: `haha! I have posted on your account!${Math.random()}` },
+      function(err, data, response) {
+        return err ? console.error(err) : console.log('posted:', data, 'response:', response);
+      }
+    );
 
     done(null, profile);
 
@@ -44,6 +55,12 @@ passport.use(new TwitterStrategy({
 var app = express();
 
 app.use(express.static(__dirname + '/../build/'));
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.use(session({
   store: new RedisStore({
@@ -98,6 +115,10 @@ var ensureAuthenticated = function(req, res, next) {
 app.get('/logout', function(req, res) {
   req.logout();
   res.redirect('/');
+});
+
+app.get('/generateTest', function(req, res) {
+  getTweets(KEYS.access_token, KEYS.access_token_secret, res);
 });
 
 
