@@ -4,14 +4,14 @@ import styles from '../styles/main.css';
 
 
 const TweetsList = ({ tweets }) => (
-  <main styles={styles['tweets-list']}>
+  <div styles={styles['tweets-list']}>
     {tweets.map((t) => (
       <Tweet
         key={t.id_str}
         {...t}
       />
     ))}
-  </main>
+  </div>
 );
 
 TweetsList.propTypes = {
