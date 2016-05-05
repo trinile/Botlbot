@@ -60,6 +60,7 @@ module.exports = function(app, passport) {
   });
 
   app.get('*', function(req, res) {
+    console.log(req.session);
     res.sendFile(path.join(__dirname, '/../build/bundle.html'));
   });
 

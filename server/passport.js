@@ -7,21 +7,21 @@ module.exports = function(passport) {
 
   // used to serialize the user for the session
   passport.serializeUser(function(user, done) {
-    console.log('===================== \n user is', user);
-    done(null, user);
+    done(null, { id: user.id, username: user.username });
   });
 
   // used to deserialize the user
   passport.deserializeUser(function(id, done) {
-    console.log('===================== \n id is', id);
-    done(null, id);
+    done(null, id); // NOTE: not sure if this is how things should be...
   });
 
   passport.use(
     new TwitterStrategy({
       consumerKey: process.env.CONSUMER_KEY,
       consumerSecret: process.env.CONSUMER_SECRET,
-      callbackURL: 'http://127.0.0.1:1337/auth/callback' // NOTE you must use 127.0.0.1, not localhost
+      callbackURL: 'http://127.0.0.1:1337/auth/callback'
+      // NOTE you must use 127.0.0.1, not localhost
+      // ALSO this must match the callback URL provided on apps.twitter.com settings page
     },
 
     function(token, tokenSecret, profile, done) {
