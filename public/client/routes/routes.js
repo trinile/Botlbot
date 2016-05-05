@@ -5,8 +5,10 @@ import Main from '../containers/Main';
 
 const Routes = (
   <Route>
-    <Route path="/" component={Main} />
-    <Route path="/dashboard" component={Dashboard} />
+    <Route path="/" component={Main}>
+      <IndexRoute component={Splash} />
+      <Route path="/dashboard" component={Dashboard} />
+    </Route>
   </Route>
 );
 
