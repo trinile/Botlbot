@@ -31,6 +31,6 @@ console.log('state ', store.getState());
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={browserHistory} routes={Routes} />
+    <Router history={history} routes={Routes} />
   </Provider>
   , document.getElementById('root'));
