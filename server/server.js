@@ -91,6 +91,18 @@ app.get('/dashboard', ensureAuthenticated, function(req, res) {
   res.send('YOU DID IT');
 });
 
+var dummyTweets = [
+  {status: 'Hey this is a dummy tweet'},
+  {status: 'guys check this out: http://www.theverge.com/2016/5/4/11585146/amazon-kindle-oasis-review'},
+  {status: 'hap 👏 py 👏 birth 👏 day'},
+  {status: 'wowwowwowwowwowwowowowowowowowowowowowowowowowowowowowowowowowowowowowowowoowowowowowowowowowowowowowowoowowowowowow'},
+  {status: 'balp'}
+];
+
+app.get('/generate', ensureAuthenticated, function(req, res) {
+  res.json(dummyTweets);
+});
+
 app.get('/logout', function(req, res) {
   req.logout();
   res.redirect('/');
