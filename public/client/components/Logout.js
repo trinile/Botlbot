@@ -1,21 +1,19 @@
-// components/Logout.js
+import React, { Component, PropTypes } from 'react';
+import styles from '../styles/main.css';
 
-// import React, { Component, PropTypes } from 'react'
+export default class Logout extends Component {
 
-// export default class Logout extends Component {
+  render() {
 
-//   render() {
-//     const { onLogoutClick } = this.props
+    return (
+      <div>
+        <div className={styles.login}>
+        <form action="http://127.0.0.1:1337/logout">
+        <input type="submit" className={styles.button} value="Logout" />
+        </form>
+        </div>
+      </div>
+    );
+  }
 
-//     return (
-//       <button onClick={() => onLogoutClick()} >
-//         Logout
-//       </button>
-//     )
-//   }
-
-// }
-
-// Logout.propTypes = {
-//   onLogoutClick: PropTypes.func.isRequired
-// }
+};
