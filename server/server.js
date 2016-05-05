@@ -117,6 +117,22 @@ app.get('/logout', function(req, res) {
   res.redirect('/');
 });
 
+app.get('/dashboard', ensureAuthenticated, function(req, res) {
+  res.send('YOU DID IT');
+});
+
+var dummyTweets = [
+  { status: 'Hey this is a dummy tweet' },
+  { status: 'guys check this out: http://www.theverge.com/2016/5/4/11585146/amazonkindleoasisreview' },
+  { status: 'hap 👏 py 👏 birth 👏 day' },
+  { status: 'wowwowwowwowwowwowowowowowowowowowowowowowowowowowowowowowowowowowowowowowoowowowowowowowowowowowowowowoowowowowowow' },
+  { status: 'balp' },
+];
+
+app.get('/generate', ensureAuthenticated, function(req, res) {
+  res.json(dummyTweets);
+});
+
 app.get('/generateTest', function(req, res) {
   getTweets(KEYS.access_token, KEYS.access_token_secret, res);
 });
