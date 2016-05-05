@@ -39,8 +39,8 @@ Main.PropTypes = {
 // state when it is started
 function mapStatetoProps(state) {
   console.log('state ', state);
-  const { LoginReducer, LogoutReducer } = state;
-  const { isAuthenticated } = LoginReducer;
+  const { AuthReducer } = state;
+  const { isAuthenticated } = AuthReducer;
 
   return {
     isAuthenticated

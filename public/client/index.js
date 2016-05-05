@@ -25,6 +25,10 @@ const history = syncHistoryWithStore(browserHistory, store);
 
 console.log('store ', store);
 
+// LOGOUT_SUCESS /// 
+
+console.log('state ', store.getState());
+
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory} routes={Routes} />

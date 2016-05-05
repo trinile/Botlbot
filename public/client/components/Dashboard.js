@@ -21,7 +21,7 @@ class Dashboard extends Component {
     return (
       <div>
         <Logout/>
-        <button onClick={}>Click for More Tweets</button>
+        <button>Click for More Tweets</button>
         <Tweet/>
       </div>
     );

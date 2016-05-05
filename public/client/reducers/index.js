@@ -2,14 +2,13 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
 // Reducers
-import LoginReducer  from './Login.js';
-import LogoutReducer from './Logout.js';
+import AuthReducer  from './Auth.js';
 
 const Reducers = combineReducers({
-  LoginReducer,
-  LogoutReducer,
-  routing: routerReducer
+  AuthReducer,
+  routing: routerReducer,
 });
 
+// { LoginReducer: { LoginReducer: ..... , LogoutReducer, Routing::; }
 console.log('Reducers ', Reducers.LoginReducer);
 export default Reducers;

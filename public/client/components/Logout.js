@@ -4,7 +4,6 @@ import styles from '../styles/main.css';
 export default class Logout extends Component {
 
   render() {
-    const { onLogoutClick } = this.props
 
     return (
       <div>
@@ -17,8 +16,4 @@ export default class Logout extends Component {
     );
   }
 
-};
-
-Logout.propTypes = {
-  onLogoutClick: PropTypes.func.isRequired
 };

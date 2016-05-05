@@ -1,10 +1,10 @@
 /* reducers specify how the application state changes in response to action
 */
 import {
-  INIT_AUTH,
+  LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-  LOGOUT_SUCCESS
+  LOGOUT_SUCCESS,
 } from '../constants.js';
 
 //initial state is user not authenticated & id is set to null
@@ -16,29 +16,34 @@ export const initialState = {
   isAuthenticated: localStorage.getItem('id_token') ? true: false
 };
 
-export default function LoginReducer(state = initialState, action) {
+export default function AuthReducer(state = initialState, action) {
   console.log('in Login Reducer');
-  console.log(initialState);
   switch (action.type) {
-    case INIT_AUTH:
+    case LOGIN_REQUEST:
       return Object.assign({}, state, {
         isFetching: true,
-        isAuthenticated: false
-      })
+        isAuthenticated: false,
+      });
 
     case LOGIN_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        isAuthenticated: true 
+        isAuthenticated: true, 
       })
 
     case LOGIN_FAILURE:
       return Object.assign({}, state, {
         isFetching: false,
-        isAuthenticated: false
+        isAuthenticated: false,
       })
-
+    case LOGOUT_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: true,
+        isAuthenticated: false,
+      })
     default:
       return state;
   };
 };
+
+
