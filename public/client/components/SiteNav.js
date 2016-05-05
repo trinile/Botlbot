@@ -1,9 +1,10 @@
 import React from 'react';
 import Link from 'react-router';
-import SignInManager from '../Containters/SignInManger';
+import Login from '../components/Login';
+import Logout from '../components/Logout';
 import styles from '../styles/main.css';
 
-const SiteNav = () => (
+const SiteNav = ({ isAuthenticated }) => (
   <nav>
     <img
       src="http://res.publicdomainfiles.com/pdf_view/2/13494514811992.png"
@@ -28,7 +29,7 @@ const SiteNav = () => (
         </Link>
       </li>
       <li>
-        <SignInManager />
+        { isAuthenticated ? <Logout /> : <Login /> }
       </li>
     </ul>
   </nav>
