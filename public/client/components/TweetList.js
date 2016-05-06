@@ -3,19 +3,31 @@ import Tweet from './Tweet';
 import styles from '../styles/main.css';
 
 
-const TweetList = ({ tweets = [] }) => (
-  <div styles={styles['tweets-list']}>
-    {tweets.map((t) => (
-      <Tweet
-        key={t.id_str}
-        {...t}
-      />
-    ))}
-  </div>
-);
+const TweetList = ({ tweets, onGetTweets }) => {
+  function fetchTweets() {
+    fetch('http://127.0.0.1:1337/generateDummy', { method: 'GET', mode: 'cors' })
+    .then(result => result.json())
+    .then(result => {console.log(result); onGetTweets(result)})
+    .catch(err => console.error(err));
+  }
+  return (
+    <div>
+      <button onClick={fetchTweets}>Get Tweeties</button>
+      <div styles={styles['tweets-list']}>
+        {tweets.map((t) => (
+          <Tweet
+            key={t.id_str}
+            {...t}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 TweetList.propTypes = {
-  tweets: PropTypes.arrayOf(React.PropTypes.element),
+  tweets: PropTypes.arrayOf(React.PropTypes.object),
+  onGetTweets: PropTypes.func,
 };
 
 export default TweetList;
