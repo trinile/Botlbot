@@ -1,9 +1,11 @@
 var TwitterStrategy = require('passport-twitter').Strategy;
 var Twit = require('twit');
+// var client = require('./db/redisClient.js');
+var User = require('./db/controllers/usersController.js');
 require('dotenv').config();
 
 
-module.exports = function(passport, client) {
+module.exports = function(passport) {
 
   // used to serialize the user for the session
   passport.serializeUser(function(user, done) {
@@ -27,7 +29,7 @@ module.exports = function(passport, client) {
     function(token, tokenSecret, profile, done) {
       console.log('authentication is happening', profile.id);
       // Saves user, access token, and access token secret in redis hash at key user:twitterid
-      client.hmset('user:' + profile.id, 'token', token, 'tokenSecret', tokenSecret);
+      User.addUser(profile, token, tokenSecret);
 
       // var T = new Twit({
       //   consumer_key:         process.env.CONSUMER_KEY,

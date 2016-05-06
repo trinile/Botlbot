@@ -1,4 +1,7 @@
 var path = require('path');
+// var client = require('./db/redisClient.js');
+var User = require('./db/controllers/usersController.js');
+var Tweets = require('./db/controllers/tweetsController.js');
 
 var getTweets = require('./searchAlgo.js');
 const KEYS = {
@@ -19,7 +22,7 @@ var ensureAuthenticated = function(req, res, next) {
 };
 
 
-module.exports = function(app, passport, client) {
+module.exports = function(app, passport) {
 
   // Redirect the user to Twitter for authentication.  When complete, Twitter
   // will redirect the user back to the application at
@@ -47,13 +50,28 @@ module.exports = function(app, passport, client) {
   // });
 
   app.get('/generate', ensureAuthenticated, function(req, res) {
-    client.hmget('user:' + req.user.id, 'token', 'tokenSecret', function(err, reply) {
-      getTweets(reply[0], reply[1], res);
-    });
+    // client.hmget('user:' + req.user.id, 'token', 'tokenSecret', function(err, reply) {
+    //   getTweets(reply[0], reply[1], res);
+    // });
+    User.retrieveUser(req.user.id, 'token', 'tokenSecret')
+      .then(function(reply) {
+        getTweets(reply[0], reply[1], req.user.id, res);
+      })
+      .catch(function(err) {
+        console.error('you are bad at promises', err);
+      });
+
   });
 
   app.get('/generateDummy', function(req, res) {
     res.json(dummyTweets);
+  });
+
+  app.get('/retrieve', function(req, res) {
+    Tweets.retrieveTweets(req.user.id)
+      .then(function(reply) {
+        res.send(reply);
+      });
   });
 
   app.get('/', function(req, res) {

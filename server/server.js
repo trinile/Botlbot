@@ -1,15 +1,14 @@
 var express = require('express');
 
 var session = require('express-session');
-var redis = require('redis');
-var client = redis.createClient();
+var client = require('./db/redisClient.js');
 var RedisStore = require('connect-redis')(session);
 
 var passport = require('passport');
 require('dotenv').config();
 
 // configure passport settings
-require('./passport.js')(passport, client);
+require('./passport.js')(passport);
 
 var app = express();
 
@@ -35,7 +34,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // routes
-require('./routes.js')(app, passport, client);
+require('./routes.js')(app, passport);
 
 app.listen(1337);
 console.log('Listening on port 1337');
