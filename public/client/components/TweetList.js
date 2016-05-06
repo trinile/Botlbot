@@ -3,7 +3,7 @@ import Tweet from './Tweet';
 import styles from '../styles/main.css';
 
 
-const TweetList = ({ tweets }) => (
+const TweetList = ({ tweets = [] }) => (
   <div styles={styles['tweets-list']}>
     {tweets.map((t) => (
       <Tweet
