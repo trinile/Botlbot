@@ -24,7 +24,7 @@ const dummyTweets = [
   { status: 'balp' },
 ];
 
-module.exports = function(app, passport) {
+module.exports = function(app, passport, client) {
 
   // Redirect the user to Twitter for authentication.  When complete, Twitter
   // will redirect the user back to the application at
@@ -52,7 +52,9 @@ module.exports = function(app, passport) {
   });
 
   app.get('/generate', ensureAuthenticated, function(req, res) {
-    getTweets(KEYS.access_token, KEYS.access_token_secret, res);
+    client.hmget('user:' + req.user.id, 'token', 'tokenSecret', function(err, reply) {
+      getTweets(reply[0], reply[1], res);
+    });
   });
 
   app.get('/generateDummy', ensureAuthenticated, function(req, res) {

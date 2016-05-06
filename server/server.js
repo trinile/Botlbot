@@ -9,7 +9,7 @@ var passport = require('passport');
 require('dotenv').config();
 
 // configure passport settings
-require('./passport.js')(passport);
+require('./passport.js')(passport, client);
 
 var app = express();
 
@@ -35,7 +35,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // routes
-require('./routes.js')(app, passport);
+require('./routes.js')(app, passport, client);
 
 app.listen(1337);
 console.log('Listening on port 1337');
