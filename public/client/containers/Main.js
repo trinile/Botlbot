@@ -1,14 +1,10 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import SiteNav from '../component/SiteNav';
-import styles from '../styles/main.css';
+import SiteNav from '../components/SiteNav';
 
 const Main = ({ isAuthenticated, children }) => (
   <div>
-    <SiteNav
-      isAuthenticated={isAuthenticated}
-      style={styles.sitenav}
-    />
+    <SiteNav isAuthenticated={isAuthenticated} />
     {children}
   </div>
 );
