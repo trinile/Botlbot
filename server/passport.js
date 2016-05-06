@@ -3,7 +3,7 @@ var Twit = require('twit');
 require('dotenv').config();
 
 
-module.exports = function(passport) {
+module.exports = function(passport, client) {
 
   // used to serialize the user for the session
   passport.serializeUser(function(user, done) {
@@ -25,31 +25,27 @@ module.exports = function(passport) {
     },
 
     function(token, tokenSecret, profile, done) {
-      console.log('authentication is happening');
+      console.log('authentication is happening', profile.id);
+      // Saves user, access token, and access token secret in redis hash at key user:twitterid
+      client.hmset('user:' + profile.id, 'token', token, 'tokenSecret', tokenSecret);
 
-      var T = new Twit({
-        consumer_key:         process.env.CONSUMER_KEY,
-        consumer_secret:      process.env.CONSUMER_SECRET,
-        access_token:         token,
-        access_token_secret:  tokenSecret,
-        timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests.
-      });
+      // var T = new Twit({
+      //   consumer_key:         process.env.CONSUMER_KEY,
+      //   consumer_secret:      process.env.CONSUMER_SECRET,
+      //   access_token:         token,
+      //   access_token_secret:  tokenSecret,
+      //   timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests.
+      // });
 
-      T.post(
-        'statuses/update',
-        { status: `haha! I have posted on your account!${Math.random()}` },
-        function(err, data, response) {
-          return err ? console.error(err) : console.log('posted:', data, 'response:', response);
-        }
-      );
+      // T.post(
+      //   'statuses/update',
+      //   { status: `haha! I have posted on your account!${Math.random()}` },
+      //   function(err, data, response) {
+      //     // return err ? console.error(err) : console.log('posted:', data, 'response:', response);
+      //   }
+      // );
 
       done(null, profile);
-
-      // Once we have a DB and a User model, we'll do something like:
-      // User.findOrCreate(..., function(err, user) {
-      //   if (err) { return done(err); }
-      //   done(null, user);
-      // });
     })
   );
 };
