@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
-import TweetsList from '../components/TweetsList';
+import TweetList from '../components/TweetList';
 
 const mapStateToProps = (state) => ({ tweets: state.tweets });
 
-const TweetListContainer = connect(mapStateToProps)(TweetsList);
+const TweetListContainer = connect(mapStateToProps)(TweetList);
 
 export default TweetListContainer;
