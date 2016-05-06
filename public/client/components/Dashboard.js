@@ -1,6 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import TweetListContainer from '../containers/TweetListContainer';
-import styles from '../styles/main.css';
 
 const Dashboard = () => (
   <main>

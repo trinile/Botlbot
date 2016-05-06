@@ -7,7 +7,7 @@ const TweetList = ({ tweets, onGetTweets }) => {
   function fetchTweets() {
     fetch('http://127.0.0.1:1337/generateDummy', { method: 'GET', mode: 'cors' })
     .then(result => result.json())
-    .then(result => {console.log(result); onGetTweets(result)})
+    .then(result => onGetTweets(result))
     .catch(err => console.error(err));
   }
   return (

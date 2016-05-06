@@ -27,7 +27,6 @@
   "dependencies": {
     "babel-loader": "^6.2.4",
     "connect-redis": "^3.0.2",
-    "deep-freeze": "0.0.1",
     "express-session": "^1.13.0",
     "passport": "^0.3.2",
     "passport-twitter": "^1.0.4",
@@ -49,6 +48,7 @@
     "babel-register": "^6.8.0",
     "chai": "^3.5.0",
     "css-loader": "^0.23.1",
+    "deep-freeze": "0.0.1",
     "dotenv": "^2.0.0",
     "eslint": "^2.9.0",
     "eslint-config-airbnb": "^8.0.0",

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
 import styles from '../styles/main.css';
 
 const Tweet = ({
@@ -34,5 +34,12 @@ const Tweet = ({
     </section>
   </article>
 );
+
+Tweet.propTypes = {
+  text: PropTypes.string,
+  retweet_count: PropTypes.number,
+  favorites_count: PropTypes.number,
+  user: PropTypes.object,
+};
 
 export default Tweet;

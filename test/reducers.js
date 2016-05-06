@@ -8,47 +8,23 @@ describe('Reducers', function(){
   describe('Tweets Reducers', function() {
     const stateBefore1 = [];
     const stateBefore2 = [
-      {
-        id: 0,
-        text: 'not empty in here',
-      },
+      { id: 0, text: 'not empty in here' },
     ];
     const action = {
       type: 'ADD_NEW_TWEETS',
       tweets: [
-        {
-          id: 1,
-          text: 'new tweet',
-        },
-        {
-          id: 2,
-          text: 'another tweet',
-        },
+        { id: 1, text: 'new tweet' },
+        { id: 2, text: 'another tweet' },
       ],
     };
     const stateAfter1 = [
-      {
-        id: 1,
-        text: 'new tweet',
-      },
-      {
-        id: 2,
-        text: 'another tweet',
-      },
+      { id: 1, text: 'new tweet' },
+      { id: 2, text: 'another tweet' },
     ];
     const stateAfter2 = [
-      {
-        id: 0,
-        text: 'not empty in here',
-      },
-      {
-        id: 1,
-        text: 'new tweet',
-      },
-      {
-        id: 2,
-        text: 'another tweet',
-      },
+      { id: 0, text: 'not empty in here' },
+      { id: 1, text: 'new tweet' },
+      { id: 2, text: 'another tweet' },
     ];
 
     before('calls deep freeze to ensure no mutations', function() {
