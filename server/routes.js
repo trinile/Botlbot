@@ -1,6 +1,7 @@
 var path = require('path');
 // var client = require('./db/redisClient.js');
 var User = require('./db/controllers/usersController.js');
+var Tweets = require('./db/controllers/tweetsController.js');
 
 var getTweets = require('./searchAlgo.js');
 const KEYS = {
@@ -64,6 +65,13 @@ module.exports = function(app, passport) {
 
   app.get('/generateDummy', function(req, res) {
     res.json(dummyTweets);
+  });
+
+  app.get('/retrieve', function(req, res) {
+    Tweets.retrieveTweets(req.user.id)
+      .then(function(reply) {
+        res.send(reply);
+      });
   });
 
   app.get('/', function(req, res) {
