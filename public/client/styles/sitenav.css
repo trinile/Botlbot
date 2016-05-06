@@ -1,4 +1,5 @@
 .sitenav {
+  border-style: solid;
   border-width: 2px;
   border-color: blue;
   background-color: rgba(20, 50, 100, 0.5);
@@ -8,8 +9,6 @@
 
 .brand {
   float: left;
-  transform: rotate(270deg);
-  height: 175px;
   width: 80px;
 }
 
