@@ -36,9 +36,9 @@ module.exports = function(app, passport, client) {
   // access was granted, the user will be logged in.  Otherwise,
   // authentication has failed.
   app.get('/auth/callback',
-    passport.authenticate('twitter', { 
+    passport.authenticate('twitter', {
       successRedirect: '/dashboard',
-      failureRedirect: '/' 
+      failureRedirect: '/'
     })
   );
 
@@ -47,9 +47,9 @@ module.exports = function(app, passport, client) {
     res.redirect('/');
   });
 
-  app.get('/dashboard', ensureAuthenticated, function(req, res) {
-    res.send('YOU DID IT');
-  });
+  // app.get('/dashboard', ensureAuthenticated, function(req, res) {
+  //   res.send('YOU DID IT');
+  // });
 
   app.get('/generate', ensureAuthenticated, function(req, res) {
     client.hmget('user:' + req.user.id, 'token', 'tokenSecret', function(err, reply) {
@@ -61,7 +61,11 @@ module.exports = function(app, passport, client) {
     res.json(dummyTweets);
   });
 
-  app.get('*', function(req, res) {
+  app.get('/', function(req, res) {
+    console.log(req.session);
+    res.sendFile(path.join(__dirname, '/../build/bundle.html'));
+  });
+  app.get('/*', ensureAuthenticated, function(req, res) {
     console.log(req.session);
     res.sendFile(path.join(__dirname, '/../build/bundle.html'));
   });
