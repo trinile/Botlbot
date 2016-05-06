@@ -6,6 +6,8 @@ const KEYS = {
   access_token_secret: process.env.ACCESS_TOKEN_SECRET,
 };
 
+var dummyTweets = require('./dummyTweets.js');
+
 var ensureAuthenticated = function(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
@@ -16,13 +18,6 @@ var ensureAuthenticated = function(req, res, next) {
   }
 };
 
-const dummyTweets = [
-  { status: 'Hey this is a dummy tweet' },
-  { status: 'guys check this out: http://www.theverge.com/2016/5/4/11585146/amazonkindleoasisreview' },
-  { status: 'hap 👏 py 👏 birth 👏 day' },
-  { status: 'wowwowwowwowwowwowowowowowowowowowowowowowowowowowowowowowowowowowowowowowoowowowowowowowowowowowowowowoowowowowowow' },
-  { status: 'balp' },
-];
 
 module.exports = function(app, passport, client) {
 
@@ -36,9 +31,9 @@ module.exports = function(app, passport, client) {
   // access was granted, the user will be logged in.  Otherwise,
   // authentication has failed.
   app.get('/auth/callback',
-    passport.authenticate('twitter', { 
+    passport.authenticate('twitter', {
       successRedirect: '/dashboard',
-      failureRedirect: '/' 
+      failureRedirect: '/'
     })
   );
 
@@ -47,9 +42,9 @@ module.exports = function(app, passport, client) {
     res.redirect('/');
   });
 
-  app.get('/dashboard', ensureAuthenticated, function(req, res) {
-    res.send('YOU DID IT');
-  });
+  // app.get('/dashboard', ensureAuthenticated, function(req, res) {
+  //   res.send('YOU DID IT');
+  // });
 
   app.get('/generate', ensureAuthenticated, function(req, res) {
     client.hmget('user:' + req.user.id, 'token', 'tokenSecret', function(err, reply) {
@@ -57,11 +52,15 @@ module.exports = function(app, passport, client) {
     });
   });
 
-  app.get('/generateDummy', ensureAuthenticated, function(req, res) {
+  app.get('/generateDummy', function(req, res) {
     res.json(dummyTweets);
   });
 
-  app.get('*', function(req, res) {
+  app.get('/', function(req, res) {
+    console.log(req.session);
+    res.sendFile(path.join(__dirname, '/../build/bundle.html'));
+  });
+  app.get('/*', ensureAuthenticated, function(req, res) {
     console.log(req.session);
     res.sendFile(path.join(__dirname, '/../build/bundle.html'));
   });

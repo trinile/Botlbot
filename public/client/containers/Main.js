@@ -1,53 +1,27 @@
-import React, { Component, PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import styles from '../styles/main.css';
-import Login from '../components/Login';
-import Logout from '../components/Logout';
-import { loginUser } from '../actions/Login';
-import { logoutUser } from '../actions/Logout';
-import injectTapEventPlugin from 'react-tap-event-plugin';
+import SiteNav from '../components/SiteNav';
 
-// Needed for onTouchTap
-// http://stackoverflow.com/a/34015469/988941
-injectTapEventPlugin();
+const Main = ({ isAuthenticated, children }) => (
+  <div>
+    <SiteNav isAuthenticated={isAuthenticated} />
+    {children}
+  </div>
+);
 
-class Main extends Component {
-  render() {
-    const { dispatch, isAuthenticated } = this.props;
-      return (
-        <div>
-        This is Main Page for Root
-        { !isAuthenticated && <Login
-           onLoginClick={ () => dispatch(loginUser()) }
-         />
-        }
-        { isAuthenticated &&
-          <Logout onLogoutClick={() => dispatch(logoutUser())} />
-        }
-        </div>
-
-      ); 
-  }
-};
-
-Main.PropTypes = {
-  dispatch: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired
+Main.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  children: PropTypes.object,
 };
 
 // These props come from the application's
 // state when it is started
 function mapStatetoProps(state) {
-  console.log('state ', state);
-  const { AuthReducer } = state;
-  const { isAuthenticated } = AuthReducer;
+  const { isAuthenticated } = state.AuthReducer;
 
   return {
-    isAuthenticated
+    isAuthenticated,
   };
-};
-
+}
 
 export default connect(mapStatetoProps)(Main);
-
-

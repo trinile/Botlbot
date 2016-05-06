@@ -1,0 +1,28 @@
+.sitenav {
+  border-style: solid;
+  border-width: 2px;
+  border-color: blue;
+  background-color: rgba(20, 50, 100, 0.5);
+  height: 75px;
+}
+
+
+.brand {
+  float: left;
+  width: 80px;
+}
+
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  display: inline-flex;
+  float: right;
+  margin-right: 5px;
+}
