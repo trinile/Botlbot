@@ -3,7 +3,7 @@ import Tweet from './Tweet';
 import styles from '../styles/main.css';
 
 
-const TweetsList = ({ tweets }) => (
+const TweetList = ({ tweets }) => (
   <div styles={styles['tweets-list']}>
     {tweets.map((t) => (
       <Tweet
@@ -14,8 +14,8 @@ const TweetsList = ({ tweets }) => (
   </div>
 );
 
-TweetsList.propTypes = {
-  tweets: React.PropTypes.arrayOf(React.PropTypes.element),
+TweetList.propTypes = {
+  tweets: PropTypes.arrayOf(React.PropTypes.element),
 };
 
-export default TweetsList;
+export default TweetList;
