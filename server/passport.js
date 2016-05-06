@@ -1,9 +1,10 @@
 var TwitterStrategy = require('passport-twitter').Strategy;
 var Twit = require('twit');
+var client = require('./db/redisClient.js');
 require('dotenv').config();
 
 
-module.exports = function(passport, client) {
+module.exports = function(passport) {
 
   // used to serialize the user for the session
   passport.serializeUser(function(user, done) {

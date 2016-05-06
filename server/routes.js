@@ -1,4 +1,5 @@
 var path = require('path');
+var client = require('./db/redisClient.js');
 
 var getTweets = require('./searchAlgo.js');
 const KEYS = {
@@ -19,7 +20,7 @@ var ensureAuthenticated = function(req, res, next) {
 };
 
 
-module.exports = function(app, passport, client) {
+module.exports = function(app, passport) {
 
   // Redirect the user to Twitter for authentication.  When complete, Twitter
   // will redirect the user back to the application at
