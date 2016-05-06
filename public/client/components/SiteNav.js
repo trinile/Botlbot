@@ -2,17 +2,17 @@ import React from 'react';
 import Link from 'react-router';
 import Login from '../components/Login';
 import Logout from '../components/Logout';
-import styles from '../styles/main.css';
+import styles from '../styles/sitenav.css';
 
 const SiteNav = ({ isAuthenticated }) => (
-  <nav>
+  <nav className={styles.sitenav}>
     <img
       src="http://res.publicdomainfiles.com/pdf_view/2/13494514811992.png"
       alt="bottle silhouette"
       styles={styles.brand}
     />
-    <ul styles={styles['nav-list']}>
-      <li>
+    <ul className={styles.ul}>
+      <li className={styles.li}>
         <Link
           to="/about"
           activeClassName="active-nav-link"
@@ -20,7 +20,7 @@ const SiteNav = ({ isAuthenticated }) => (
           About
         </Link>
       </li>
-      <li>
+      <li className={styles.li}>
         <Link
           to="/about"
           activeClassName="active-nav-link"
@@ -28,7 +28,7 @@ const SiteNav = ({ isAuthenticated }) => (
           Other Link
         </Link>
       </li>
-      <li>
+      <li className={styles.li}>
         { isAuthenticated ? <Logout /> : <Login /> }
       </li>
     </ul>
