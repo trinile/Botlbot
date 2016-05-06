@@ -1,4 +1,5 @@
 var Twit = require('twit');
+var Tweets = require('./db/controllers/tweetsController.js');
 require('dotenv').config();
 
 function tweetCleaner(tweet) {
@@ -14,7 +15,7 @@ function tweetCleaner(tweet) {
   };
 }
 
-function pullTweetsFromFeed(accessToken, secret, clientResponse) {
+function pullTweetsFromFeed(accessToken, secret, userID, clientResponse) {
   const T = new Twit({
     consumer_key: process.env.CONSUMER_KEY,
     consumer_secret: process.env.CONSUMER_SECRET,
@@ -39,7 +40,25 @@ function pullTweetsFromFeed(accessToken, secret, clientResponse) {
       // something like:
       // client.lpush('tweetlist:' + clientResponse.user.id, ...cleanTweets.slice(0, 20));
 
-    clientResponse.json(cleanTweets.slice(0, 20));
+    // clientResponse.json(cleanTweets.slice(0, 20));
+
+    var jsonTweets = cleanTweets.map(function(tweet) {
+      return JSON.stringify(tweet);
+    });
+
+    console.log('CLEAN TWEETS IS ARRAY?', Array.isArray(cleanTweets));
+
+    console.log('EACH TWEET IS STRING OR OBJECT?', typeof jsonTweets[3]);
+
+    Tweets.addTweets(userID, jsonTweets)
+      .then(function(reply) {
+        clientResponse.send('tweets added!');
+      })
+      .catch(function(err) {
+        console.error(err);
+      });
+
+
   });
 }
 

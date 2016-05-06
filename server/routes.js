@@ -54,7 +54,7 @@ module.exports = function(app, passport) {
     // });
     User.retrieveUser(req.user.id, 'token', 'tokenSecret')
       .then(function(reply) {
-        getTweets(reply[0], reply[1], res);
+        getTweets(reply[0], reply[1], req.user.id, res);
       })
       .catch(function(err) {
         console.error('you are bad at promises', err);
