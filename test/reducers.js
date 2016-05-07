@@ -2,8 +2,9 @@ import { expect } from 'chai';
 import deepFreeze from 'deep-freeze';
 
 import tweets from '../public/client/reducers/tweets';
+import authStatus from '../public/client/reducers/Auth'
 
-describe('Tweets Reducers', function(){
+describe('Tweets Reducers', function() {
 
   describe('Adding Tweets', function() {
     const stateBefore1 = [];
@@ -100,5 +101,18 @@ describe('Tweets Reducers', function(){
     it('Should not remove the trashed tweet from the state', function() {
       expect(tweets(stateBefore, action)).to.deep.equal(stateAfter);
     });
+  });
+});
+
+describe('Authentication Reducers', function() {
+  const loggedOutState = false;
+  const loggedInState = true;
+
+  it('Should successfully login', function() {
+    expect(authStatus(loggedOutState, { type: 'LOGIN_SUCCESS' })).to.be.true;
+  });
+
+  it('Should successfully logout', function() {
+    expect(authStatus(loggedInState, { type: 'LOGOUT_SUCCESS' })).to.be.false;
   });
 });
