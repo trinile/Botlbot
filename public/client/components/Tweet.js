@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import styles from '../styles/main.css';
+import styles from '../styles/tweet.css';
 
 const Tweet = ({
   tweet,
@@ -10,17 +10,16 @@ const Tweet = ({
     <h3>Tweet</h3>
     <section>
       <p>{tweet.text}</p>
-      <aside>
+      <div>
         {/* <Actions /> Not sure if this would work better as own component*/}
-        <span>{tweet.trashed ? 'trash' : tweet.posted ? 'posted' : 'nothing'}</span>
         <button onClick={postTweet}>Post</button>
         <span> </span>
         <button>Edit</button>
         <span> </span>
         <button onClick={trashTweet}>Trash</button>
-      </aside>
+      </div>
     </section>
-    <section>
+    <aside>
       <h4>At A Glance</h4>
       <ul>
         <li>Retweets: {tweet.retweets}</li>
@@ -28,7 +27,7 @@ const Tweet = ({
         <li>Tweeted by: {tweet.screenName}</li>
         <li>Followers: {tweet.followers}</li>
       </ul>
-    </section>
+    </aside>
   </article>
 );
 
