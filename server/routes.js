@@ -50,17 +50,15 @@ module.exports = function(app, passport) {
   // });
 
   app.get('/generate', ensureAuthenticated, function(req, res) {
-    // client.hmget('user:' + req.user.id, 'token', 'tokenSecret', function(err, reply) {
-    //   getTweets(reply[0], reply[1], res);
-    // });
+
     User.retrieveUser(req.user.id, 'token', 'tokenSecret')
       .then(function(reply) {
-        getTweets(reply[0], reply[1], req.user.id, res);
+        console.log('from retrieve users ==========', reply);
+        getTweets(reply[0].token, reply[0].tokenSecret, req.user.id, res);
       })
       .catch(function(err) {
-        console.error('you are bad at promises', err);
-      });
-
+        console.log('you are bad at promises ============', err);
+      })
   });
 
   app.get('/generateDummy', function(req, res) {
@@ -70,10 +68,20 @@ module.exports = function(app, passport) {
   app.get('/retrieve', function(req, res) {
     Tweets.retrieveTweets(req.user.id)
       .then(function(reply) {
-        res.send(reply);
+        res.send(reply.slice(reply.length - 10, reply.length - 1));
       });
   });
 
+  app.post('/postTweet', function(req, res) {
+    //TODO: post to Twitter
+    
+    //what is the tweet format being passed in????
+    // Tweets.addPostedTweet(tweet)
+    //   .then(function(reply) {
+    //     res.send('YAY you posted to database');
+    //   });
+
+  });
   app.get('/', function(req, res) {
     console.log(req.session);
     res.sendFile(path.join(__dirname, '/../build/bundle.html'));

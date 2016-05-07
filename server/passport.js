@@ -29,7 +29,13 @@ module.exports = function(passport) {
     function(token, tokenSecret, profile, done) {
       console.log('authentication is happening', profile.id);
       // Saves user, access token, and access token secret in redis hash at key user:twitterid
-      User.addUser(profile, token, tokenSecret);
+      User.addUser(profile, token, tokenSecret)
+        .then(function(res) {
+          console.log('adduser in passport ====================', res);
+        })
+        .catch(function(err) {
+          console.log('err in adding user in passport ==============', err);
+        })
 
       // var T = new Twit({
       //   consumer_key:         process.env.CONSUMER_KEY,
