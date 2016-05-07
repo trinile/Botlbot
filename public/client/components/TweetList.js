@@ -3,7 +3,7 @@ import Tweet from './Tweet';
 import styles from '../styles/main.css';
 
 
-const TweetList = ({ tweets, onGetTweets }) => {
+const TweetList = ({ tweets, onGetTweets, onPostTweet, onTrashTweet }) => {
   function fetchTweets() {
     fetch('http://127.0.0.1:1337/generateDummy', { method: 'GET', mode: 'cors' })
     .then(result => result.json())
@@ -17,7 +17,9 @@ const TweetList = ({ tweets, onGetTweets }) => {
         {tweets.map((t) => (
           <Tweet
             key={t.id_str}
-            {...t}
+            tweet={t}
+            postTweet={() => onPostTweet(t.id_str)}
+            trashTweet={() => onTrashTweet(t.id_str)}
           />
         ))}
       </div>
@@ -28,6 +30,8 @@ const TweetList = ({ tweets, onGetTweets }) => {
 TweetList.propTypes = {
   tweets: PropTypes.arrayOf(React.PropTypes.object),
   onGetTweets: PropTypes.func,
+  onPostTweet: PropTypes.func,
+  onTrashTweet: PropTypes.func,
 };
 
 export default TweetList;

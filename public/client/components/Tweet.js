@@ -2,44 +2,40 @@ import React, { PropTypes } from 'react';
 import styles from '../styles/main.css';
 
 const Tweet = ({
-  text,
-  retweet_count: retweets,
-  favorites_count: favorites,
-  user: {
-    screen_name: screenName,
-    followers_count: followers,
-  },
+  tweet,
+  postTweet,
+  trashTweet,
 }) => (
   <article className={styles.tweet}>
     <h3>Tweet</h3>
     <section>
-      <p>{text}</p>
+      <p>{tweet.text}</p>
       <aside>
         {/* <Actions /> Not sure if this would work better as own component*/}
-        <button>Post</button>
+        <span>{tweet.trashed ? 'trash' : tweet.posted ? 'posted' : 'nothing'}</span>
+        <button onClick={postTweet}>Post</button>
         <span> </span>
         <button>Edit</button>
         <span> </span>
-        <button>Trash</button>
+        <button onClick={trashTweet}>Trash</button>
       </aside>
     </section>
     <section>
       <h4>At A Glance</h4>
       <ul>
-        <li>Retweets: {retweets}</li>
-        <li>Favorited: {favorites}</li>
-        <li>Tweeted by: {screenName}</li>
-        <li>Followers: {followers}</li>
+        <li>Retweets: {tweet.retweets}</li>
+        <li>Favorited: {tweet.favorites}</li>
+        <li>Tweeted by: {tweet.screenName}</li>
+        <li>Followers: {tweet.followers}</li>
       </ul>
     </section>
   </article>
 );
 
 Tweet.propTypes = {
-  text: PropTypes.string,
-  retweet_count: PropTypes.number,
-  favorites_count: PropTypes.number,
-  user: PropTypes.object,
+  tweet: PropTypes.object,
+  postTweet: PropTypes.func,
+  trashTweet: PropTypes.func,
 };
 
 export default Tweet;
