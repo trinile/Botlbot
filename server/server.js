@@ -1,9 +1,10 @@
 var express = require('express');
 
 var session = require('express-session');
-var client = require('./db/redisClient.js');
+var client = require('./redis/redisClient.js');
 var RedisStore = require('connect-redis')(session);
 
+var db = require('./db/db.js');
 var passport = require('passport');
 require('dotenv').config();
 
