@@ -11,7 +11,7 @@ require('dotenv').config();
 // configure passport settings
 require('./passport.js')(passport);
 
-var app = express();
+module.exports = app = express();
 
 app.use(express.static(__dirname + '/../build/'));
 

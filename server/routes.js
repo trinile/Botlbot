@@ -74,9 +74,9 @@ module.exports = function(app, passport) {
   });
 
   app.post('/postTweet', function(req, res) {
-    //TODO: post to Twitter
-    
-    //what is the tweet format being passed in????
+    // TODO: post to Twitter
+
+    // what is the tweet format being passed in????
     // Tweets.addPostedTweet(tweet)
     //   .then(function(reply) {
     //     res.send('YAY you posted to database');

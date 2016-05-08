@@ -23,19 +23,18 @@ module.exports = {
   },
 
   retrieveUser: function(userId) {
-    //array can be any columns you wish to retrieve e.g. token, tokenSecret
-    var args = Array.prototype.slice.call(arguments, 1);
-    
+
     return db.knex('users')
       .where({ 'user_twitter_id': userId })
       .select();
-      //will return an array of users that matches this specific id. or empty []
+      // will return an array of users that matches this specific id. or empty []
   },
 
   deleteUser: function(userId) {
+    
     return db.knex('users')
       .where({ 'user_twitter_id': userId })
-      .del()
+      .del();
     // returns the number of rows affected by query
   }
-}
+};

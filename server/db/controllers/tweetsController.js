@@ -15,7 +15,6 @@ module.exports = {
       tweet_text: Tweet.text
     };
   });
-
     return db.knex('generatedtweets')
       .insert(tweetsArr);
       //returns a promise

@@ -50,7 +50,7 @@ db.knex.schema.hasTable('generatedtweets').then(function(exists) {
   if (!exists) {
     db.knex.schema.createTable('generatedtweets', function(table) {
       table.increments('bot_tweet_id').primary();
-      //TODO: have foreign key constraint to work
+      // TODO: have foreign key constraint to work
       table.integer('user_id'); //.unsigned().references('user_id').inTable('users');
       table.integer('retweet_count');
       table.integer('favorite_count');
@@ -66,4 +66,3 @@ db.knex.schema.hasTable('generatedtweets').then(function(exists) {
     })
   }
 });
-
