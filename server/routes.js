@@ -69,7 +69,7 @@ module.exports = function(app, passport) {
   app.get('/retrieve', function(req, res) {
     Tweets.retrieveTweets(req.user.id)
       .then(function(reply) {
-        res.send(reply.slice(reply.length - 10, reply.length - 1));
+        res.status(200).json(reply.slice(reply.length - 10, reply.length - 1));
       });
   });
 

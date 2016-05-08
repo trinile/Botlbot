@@ -7,6 +7,12 @@ module.exports = {
   bookshelf: require('bookshelf')(knex)
 };
 
+//DROP DATABASE IF IT EXISTS
+knex.raw('DROP DATABASE IF EXISTS botlbot_db');
+knex.raw('DROP DATABASE IF EXISTS botlbot_db_test');
+
+knex.raw('CREATE DATABASE botlbot_db');
+knex.raw('CREATE DATABASE botlbot_db_test');
 // module.exports = knex;
 
 //useful for debugging
