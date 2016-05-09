@@ -32,7 +32,7 @@ const common = {
   entry: {
     app: PATHS.app
   },
-
+  watch: true,
   resolve: {
     extensions: ['', '.js', '.jsx']
   },

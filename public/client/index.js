@@ -6,6 +6,19 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import Reducers from './reducers/index.js';
 import thunkMiddleware from 'redux-thunk';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
+const darkMuiTheme = getMuiTheme(darkBaseTheme);
+
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
+
+
 //TODO: CONFIGURE THE MIDDLEWARE API
 // import api from './middleware/api';
 
@@ -29,7 +42,12 @@ console.log('store ', store);
 console.log('state ', store.getState());
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router history={history} routes={Routes} />
-  </Provider>
+  <MuiThemeProvider muiTheme={darkMuiTheme}>
+    <Provider store={store}>
+      <Router history={history} routes={Routes} />
+    </Provider>
+  </MuiThemeProvider>
   , document.getElementById('root'));
+
+
+  

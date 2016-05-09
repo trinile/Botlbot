@@ -21,11 +21,6 @@ module.exports = {
   generatedTweet: GeneratedTweet
 };
 
-//for development -> will drop table if it exists
-
-db.knex.schema.dropTableIfExists('postedtweets');
-db.knex.schema.dropTableIfExists('generatedtweets');
-
 // table for Posted Tweets that User posts to twitter
 db.knex.schema.hasTable('postedtweets').then(function(exists) {
   if (!exists) {
@@ -63,6 +58,9 @@ db.knex.schema.hasTable('generatedtweets').then(function(exists) {
       table.timestamps();
     }).then(function(generatedTable) {
       console.log('Created table of Generated Tweets', generatedTable);
+    })
+    .catch(function(err) {
+      console.log('error in creating generated tweets');
     })
   }
 });

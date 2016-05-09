@@ -1,24 +1,31 @@
 module.exports = {
   test: {
     client: 'pg',
-    connection: 'postgres://localhost/botlbot_db',
-    migrations: {
-      directory: './server/db/migrations'
-    },
-    seeds: {
-      directory: './server/db/seeds/test'
+    connection: {
+      host: '127.0.0.1',
+      port: 5432,
+      database: 'botlbot_db_test',
+      migrations: {
+        tablename: 'migrations_test',
+        directory: __dirname + './server/db/migrations'
+      },
+      seeds: {
+        directory: __dirname + './server/db/seeds/test'
+      }
     }
   },
   development: {
     client: 'pg',
     connection: {
+      host: '127.0.0.1',
+      port: 5432,
       database: 'botlbot_db',
       migrations: {
         tableName: 'migrations',
-        directory: './server/db/migrations'
+        directory: __dirname + './server/db/migrations'
       },
       seeds: {
-      directory: './server/db/seeds/development'
+        directory: __dirname + './server/db/seeds/development'
       }
     }
   },

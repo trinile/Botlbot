@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 import styles from '../styles/tweet.css';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
 
 const Tweet = ({
   tweet,

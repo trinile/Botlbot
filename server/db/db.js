@@ -8,11 +8,28 @@ module.exports = {
 };
 
 //DROP DATABASE IF IT EXISTS
-knex.raw('DROP DATABASE IF EXISTS botlbot_db');
-knex.raw('DROP DATABASE IF EXISTS botlbot_db_test');
+// knex.raw('DROP DATABASE IF EXISTS botlbot_db')
+//   .then(function(dropped) {
+//     console.log('database dropped');
+//   });
+// // knex.raw('DROP DATABASE IF EXISTS botlbot_db_test');
 
-knex.raw('CREATE DATABASE botlbot_db');
-knex.raw('CREATE DATABASE botlbot_db_test');
+// knex.raw('CREATE DATABASE botlbot_db')
+//   .then(function(created) {
+//     console.log('botlbot_db created ------------>', created);
+//   })
+//   .catch(function(err) {
+//     console.error('error in creating database ------->', err);
+//   })
+
+// knex.raw('CREATE DATABASE botlbot_db_test')
+//   .then(function(created) {
+//     console.log('botlbot_db_test created ------------>', created);
+//   })
+//   .catch(function(err) {
+//     console.error('error in creating database_test ------->', err);
+//   })
+
 // module.exports = knex;
 
 //useful for debugging

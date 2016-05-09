@@ -5,6 +5,14 @@ var client = require('./redis/redisClient.js');
 var RedisStore = require('connect-redis')(session);
 
 var db = require('./db/db.js');
+
+db.knex.connection('postgres://localhost/boltbot_db');
+db.knex.raw('DROP DATABASE IF EXISTS botlbot_db');
+db.knex.raw('DROP DATABASE IF EXISTS botlbot_db_test');
+
+db.knex.raw('CREATE DATABASE botlbot_db');
+db.knex.raw('CREATE DATABASE botlbot_db_test');
+
 var passport = require('passport');
 require('dotenv').config();
 

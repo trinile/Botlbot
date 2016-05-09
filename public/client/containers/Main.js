@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import SiteNav from '../components/SiteNav';
+import AppBar from 'material-ui/AppBar';
 
 function testLogout() {
   fetch('/logout', { method: 'GET', credentials: 'same-origin' })
