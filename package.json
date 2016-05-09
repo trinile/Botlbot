@@ -27,10 +27,13 @@
   "dependencies": {
     "babel-loader": "^6.2.4",
     "bluebird": "^3.3.5",
+    "bookshelf": "^0.9.4",
     "connect-redis": "^3.0.2",
     "express-session": "^1.13.0",
+    "knex": "^0.11.1",
     "passport": "^0.3.2",
     "passport-twitter": "^1.0.4",
+    "pg": "^4.5.5",
     "react": "^15.0.2",
     "react-dom": "^15.0.2",
     "react-redux": "^4.4.5",

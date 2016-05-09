@@ -41,8 +41,9 @@ module.exports = function(app, passport) {
   );
 
   app.get('/logout', function(req, res) {
+    console.log(req)
     req.logout();
-    res.redirect('/');
+    res.status(202).send('foooo');
   });
 
   // app.get('/dashboard', ensureAuthenticated, function(req, res) {
