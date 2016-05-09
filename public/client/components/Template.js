@@ -1,21 +1,28 @@
 import React, { PropTypes } from 'react';
 
 const Template = ({
-  template = {garbage: 'balp'},
+  template,
   updateTemplate,
   trashTemplate
-}) => (
-  <article >
-    <h3>Template</h3>
-    <textarea onChange={updateTemplate}>{JSON.stringify(template)}</textarea>
-    <div>
-      <button onClick={trashTemplate}>Trash</button>
-    </div>
-  </article>
-);
+}) => {
+  let textarea;
+
+  return (
+    <article >
+      <h3>Template</h3>
+      <textarea ref={(node) => (textarea = node)} defaultValue={template}></textarea>
+      <div>
+        <button onClick={() => {textarea.value = ''; trashTemplate()}}>Trash</button>
+      </div>
+      <div>
+        <button onClick={() => updateTemplate(textarea.value)}>Save</button>
+      </div>
+    </article>
+  );
+};
 
 Template.propTypes = {
-  template: PropTypes.object,
+  template: PropTypes.string,
   updateTemplate: PropTypes.func,
   trashTemplate: PropTypes.func,
 };

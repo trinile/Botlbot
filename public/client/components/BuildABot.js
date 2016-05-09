@@ -1,10 +1,10 @@
 import React from 'react';
-import Template from './Template';
+import TemplateContainer from '../containers/TemplateContainer';
 
 const BuildABot = () => (
   <main>
     <h1>Build a bot!</h1>
-    <Template />
+    <TemplateContainer />
   </main>
 );
 

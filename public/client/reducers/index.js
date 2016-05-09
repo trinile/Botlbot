@@ -6,14 +6,14 @@ import authStatus from './Auth';
 import tweets from './tweets';
 import tweetsFilter from './tweetsFilter';
 import requestStatus from './requestStatus';
-import templates from './templates';
+import template from './template';
 
 const Reducers = combineReducers({
   authStatus,
   tweets,
   tweetsFilter,
   requestStatus,
-  templates,
+  template,
   routing: routerReducer,
 });
 
