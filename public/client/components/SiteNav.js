@@ -4,7 +4,7 @@ import Login from '../components/Login';
 import Logout from '../components/Logout';
 import styles from '../styles/sitenav.css';
 
-const SiteNav = ({ isAuthenticated }) => (
+const SiteNav = ({ isAuthenticated, onLoginClick, onLogoutClick }) => (
   <div>
     <nav className={styles.sitenav}>
       <img
@@ -14,7 +14,10 @@ const SiteNav = ({ isAuthenticated }) => (
       />
       <ul className={styles.ul}>
         <li className={styles.li}>
-          { isAuthenticated ? <Logout /> : <Login /> }
+          { isAuthenticated ? 
+            <Logout onLogoutClick={onLogoutClick}/> 
+            : <Login onLoginClick={onLoginClick} /> 
+          }
         </li>
         <li className={styles.li}>
           <Link
@@ -39,6 +42,8 @@ const SiteNav = ({ isAuthenticated }) => (
 
 SiteNav.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
+  onLoginClick: PropTypes.func,
+  onLogoutClick: PropTypes.func,
 };
 
 export default SiteNav;

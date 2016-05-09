@@ -10,17 +10,15 @@ const styles = {
   }
 };
 
-
-const Login = () => (
+const Login = ({onLoginClick}) => (
   <div>
   <RaisedButton
       label="LOGIN TO TWITTER"
+      href="http://127.0.0.1:1337/auth"
       labelColor="white"
       linkButton={true}
-      href="http://127.0.0.1:1337/auth"
       primary={true}
       style={styles.button}
-      icon={<FontIcon className="muidocs-icon-custom-github" />}
     />
   </div>
 );

@@ -18,19 +18,15 @@ export const requestLogin = () => (
   }
 );
 
-//  Following are action creaters
-//  return actions in object format { }
-
-const receiveLogin = (user) => (
+export const receiveLogin = () => (
   {
     type: LOGIN_SUCCESS,
     isFetching: false,
-    isAuthenticated: true,
-    id_token: user.id_token,
+    isAuthenticated: true
   }
 );
 
-const loginError = (message) => {
+export const loginError = (message) => {
   return (
     {
       type: LOGIN_FAILURE,
@@ -41,36 +37,24 @@ const loginError = (message) => {
   );
 };
 
-//authenticate
-//bound action creater 
-//CALL THE API TO GET A TOKEN AND DISPATCH ACTIONS ALONG THE WAY
-
-export function loginUser() {
-
-   return dispatch => {
-    // dispatch requestLogin to kickoff the call to the API
-    let config = {
-      method: 'GET'
-    };
-    dispatch(requestLogin());
-    return fetch('http://localhost/auth', config)
-      .then(response =>
-        response.json()
-        .then(user => ({ user, response }))
-      ).then(({ user, response }) =>  {
-        if (!response.ok) {
-          // If there was a problem, we want to
-          // dispatch the error condition
-          dispatch(loginError(user.message));
-          return Promise.reject(user);
-        }
-        else {
-          // If login was successful, set the token in local storage
-          localStorage.setItem('id_token', user.id_token);
-          
-          // Dispatch the success action
-          dispatch(receiveLogin(user));
-        }
-      }).catch(err => console.log("Error: ", err));
-  }
-};
+// loginUser not being used currently 
+// redirecting user to link instead of calling fetch.
+// export function loginUser() {
+//   console.log('logging in users ===============>');
+//    return dispatch => {
+//     let config = {
+//       method: 'GET',
+//       credentials: 'same-origin'
+//     };
+//     dispatch(requestLogin());
+//     return fetch('/auth', config)
+//       .then(response => {
+//         console.log(response);
+//         dispatch(receiveLogin());
+//       })
+//       .catch(err => {
+//         console.log('error in loggin in -----> ', err);
+//         dispatch(loginError(err));
+//       });
+//   }
+// };
