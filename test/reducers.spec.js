@@ -5,6 +5,7 @@ import deepFreeze from 'deep-freeze';
 
 import tweets from '../public/client/reducers/tweets';
 import authStatus from '../public/client/reducers/Auth';
+import templates from '../public/client/reducers/templates';
 
 describe('Tweets Reducers', function () {
 
@@ -116,5 +117,34 @@ describe('Authentication Reducers', function () {
 
   it('Should successfully logout', function () {
     expect(authStatus(loggedInState, { type: TYPE.LOGOUT_SUCCESS })).to.be.equal;
+  });
+});
+
+describe('Template Reducers', function() {
+  
+  describe('Updating a template', function() {
+
+    const afterState = 'This is my tweet template.';
+    const action = {
+      type: 'UPDATE_TEMPLATE',
+      template: 'This is my tweet template.'
+    };
+
+    it('Should update a template', function() {
+      expect(templates(null, action)).to.equal(afterState);
+    });
+  });
+
+  describe('Deleting a template', function() {
+
+    const beforeState = 'This is my tweet template.';
+    const afterState = '';
+    const action = {
+      type: 'TRASH_TEMPLATE'
+    };
+
+    it('Should delete a template', function() {
+      expect(templates(beforeState, action)).to.equal(afterState);
+    });
   });
 });
