@@ -21,7 +21,6 @@ export const requestLogout = () => {
 };
 
 export const receiveLogout = () => {
-  console.log('receivign logout -> success ->>>>>>>>');
   return (
     {
       type: LOGOUT_SUCCESS,
@@ -32,7 +31,6 @@ export const receiveLogout = () => {
 };
 
 //double check this function
-
 export const LogoutFailure = () => {
   return (
     {
@@ -49,10 +47,14 @@ export function logoutUser() {
     return fetch('/logout', { method: 'GET', credentials: 'same-origin'})
       .then(json => {
         console.log(json);
+        localStorage.removeItem('sessionID');
         dispatch(receiveLogout());
         dispatch(push('/'));
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        dispatch(LogoutFailure());
+      });
   };
 };
 

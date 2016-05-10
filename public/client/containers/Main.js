@@ -2,13 +2,11 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import SiteNav from '../components/SiteNav';
 import { logoutUser } from '../actions/Logout';
-import { loginUser } from '../actions/Login';
 
 const Main = ({ dispatch, isAuthenticated, children }) => (
   <div>
     <SiteNav 
-      isAuthenticated={isAuthenticated} 
-      onLoginClick={() => dispatch(loginUser())}
+      isAuthenticated={isAuthenticated}
       onLogoutClick={() => dispatch(logoutUser())}/>
     {children}
   </div>

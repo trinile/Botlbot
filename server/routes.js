@@ -34,21 +34,25 @@ module.exports = function(app, passport) {
   // access was granted, the user will be logged in.  Otherwise,
   // authentication has failed.
   app.get('/auth/callback',
-    passport.authenticate('twitter', {
-      successRedirect: '/dashboard',
-      failureRedirect: '/'
-    })
-  );
+    passport.authenticate('twitter', {failureRedirect: '/'}),
+      function(req, res) {
+        res.redirect('/dashboard');
+      })
 
   app.get('/logout', function(req, res) {
     console.log(req)
     req.logout();
+    res.clearCookie('test');
     res.status(202).send('foooo');
   });
 
   // app.get('/dashboard', ensureAuthenticated, function(req, res) {
   //   res.send('YOU DID IT');
   // });
+
+  app.get('/authUser', ensureAuthenticated, function(req, res) {
+    res.status(200).json({ authID: req.user.id })
+  });
 
   app.get('/generate', ensureAuthenticated, function(req, res) {
 

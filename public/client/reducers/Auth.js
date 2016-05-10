@@ -4,6 +4,7 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
 } from '../constants.js';
 
@@ -13,27 +14,29 @@ import {
 
 export default function authStatus(state = {
   isFetching: false,
-  isAuthenticated: false,
+  isAuthenticated: localStorage.getItem('authID') ? true: false,
   }, action) {
   switch (action.type) {
     case LOGIN_REQUEST: 
       return Object.assign({}, state, {
-        isFetching: true,
-        isAuthenticated: false,
+        isFetching: true
       });
     case LOGIN_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        isAuthenticated: true,
+        isAuthenticated: true
       });
     case LOGIN_FAILURE:
       return Object.assign({}, state, {
-        isFetching: false,
-        isAuthenticated: false,
+        isFetching: false
       })
+    case LOGOUT_REQUEST:
+      return Object.assign({}, state, {
+        isFetching: true
+      })  
     case LOGOUT_SUCCESS:
       return Object.assign({}, state, {
-        isFetching: true,
+        isFetching: false,
         isAuthenticated: false
       })
     default:

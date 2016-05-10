@@ -22,39 +22,29 @@ export const receiveLogin = () => (
   {
     type: LOGIN_SUCCESS,
     isFetching: false,
-    isAuthenticated: true
+    isAuthenticated: true,
   }
 );
 
-export const loginError = (message) => {
-  return (
-    {
-      type: LOGIN_FAILURE,
-      isFetching: false,
-      isAuthenticated: false,
-      message
-    }
-  );
-};
+export const loginError = (message) => (
+  {
+    type: LOGIN_FAILURE,
+    isFetching: false,
+    isAuthenticated: false,
+    message,
+  }
+);
 
-// loginUser not being used currently 
-// redirecting user to link instead of calling fetch.
-// export function loginUser() {
-//   console.log('logging in users ===============>');
-//    return dispatch => {
-//     let config = {
-//       method: 'GET',
-//       credentials: 'same-origin'
-//     };
-//     dispatch(requestLogin());
-//     return fetch('/auth', config)
-//       .then(response => {
-//         console.log(response);
-//         dispatch(receiveLogin());
-//       })
-//       .catch(err => {
-//         console.log('error in loggin in -----> ', err);
-//         dispatch(loginError(err));
-//       });
-//   }
-// };
+// LOGIN ACTION CREATOR
+export const authUser = () => {
+  return dispatch => {
+    dispatch(requestLogin());
+    return fetch('/authUser', { method: 'GET', credentials: 'same-origin'})
+      .then(res => res.json())
+      .then(json => {
+        localStorage.setItem('authID', json.authID);
+        dispatch(receiveLogin());
+      })
+      .catch(err => dispatch(loginError(err)));
+  };
+};

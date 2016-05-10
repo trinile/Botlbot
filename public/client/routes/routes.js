@@ -4,15 +4,12 @@ import Dashboard from '../containers/Dashboard';
 import MainContainer from '../containers/Main';
 import Splash from '../components/Splash';
 
-
 const Routes = (
-  <Route>
     <Route path="/" component={MainContainer}>
       <IndexRoute component={Splash} />
       <Route path="/about" component={Dashboard} />
-      <Route path="/dashboard" component={Dashboard}/>
+      <Route path="/dashboard" component={Dashboard} />
     </Route>
-  </Route>
 );
 
 export default Routes;

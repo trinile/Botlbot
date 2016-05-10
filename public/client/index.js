@@ -30,13 +30,8 @@ const createStoreWithMiddleware = applyMiddleware(
 let store = createStoreWithMiddleware(
   Reducers
 );
-
-// console.log('Reducers', Reducers);
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);
-
-console.log('store ', store);
-console.log('state ', store.getState());
 
 ReactDOM.render(
   <MuiThemeProvider muiTheme={darkMuiTheme}>

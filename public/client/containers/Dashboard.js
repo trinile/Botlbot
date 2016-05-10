@@ -1,20 +1,35 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import TweetListContainer from '../containers/TweetListContainer';
-import { receiveLogin } from '../actions/Login';
+import { receiveLogin, loginError, authUser } from '../actions/Login';
+// import { authUser } from '../actions/Login';
 
 class Dashboard extends React.Component {
 
-  componentWillMount() {
-    this.authUser();
-  }
-  componentWillReceiveProps(nextProps) {
-    this.authUser();
-  }
+  // authUser() {
+  //   const { dispatch, isAuthenticated } = this.props;
+  //   if (!isAuthenticated) {
+  //     fetch('/authUser', { method: 'GET', credentials: 'same-origin'})
+  //       .then(res => {
+  //         return res.json();
+  //       })
+  //       .then(json => {
+  //         localStorage.setItem('authID', json.authID);
+  //         dispatch(receiveLogin());
+  //       })
+  //       .catch(err => {
+  //         console.log(err)
+  //         dispatch(loginError(err));
+  //       });  
+  //   }
+  // }
 
-  authUser() {
+  componentWillMount() {
     const { dispatch, isAuthenticated } = this.props;
-      dispatch(receiveLogin());
+    if (!isAuthenticated) {
+      dispatch(authUser());
+    }
+    // this.authUser();
   }
 
   render() {
@@ -28,11 +43,14 @@ class Dashboard extends React.Component {
 }
 
 function mapStatetoProps(state) {
-  const { authStatus } = state;
-  const { isAuthenticated } = authStatus;
   return {
-    isAuthenticated
+    isAuthenticated: state.authStatus
   };
 }
 
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     authUser: () => dispatch(authUser())
+//   }
+// }
 export default connect(mapStatetoProps)(Dashboard);
