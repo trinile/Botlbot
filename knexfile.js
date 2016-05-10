@@ -19,11 +19,11 @@ module.exports = {
       max: 10
     },
     migrations: {
-      directory: './server/Postgres/migrations',
+      directory: './server/db/migrations',
       tableName: 'knex_migrations'
     },
     seeds: {
-      directory: './server/Postgres/seeds/test'
+      directory: './server/db/seeds/test'
     }
   },
 
@@ -37,11 +37,11 @@ module.exports = {
       max: 10
     },
     migrations: {
-      directory: './server/Postgres/migrations',
+      directory: './server/db/migrations',
       tableName: 'knex_migrations'
     },
     seeds: {
-      directory: './server/Postgres/seeds/development',
+      directory: './server/db/seeds/development',
     }
   },
 
