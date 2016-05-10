@@ -40,8 +40,10 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.4.0",
     "react-router-redux": "^4.0.4",
+    "react-tap-event-plugin": "^1.0.0",
     "redis": "^2.6.0-2",
     "redux": "^3.5.2",
+    "redux-logger": "^2.6.1",
     "redux-thunk": "^2.0.1"
   },
   "devDependencies": {
@@ -52,7 +54,7 @@
     "babel-preset-react-hmre": "^1.1.1",
     "babel-register": "^6.8.0",
     "chai": "^3.5.0",
-    "chai-http":"^2.0.1",
+    "chai-http": "^2.0.1",
     "css-loader": "^0.23.1",
     "deep-freeze": "0.0.1",
     "dotenv": "^2.0.0",
