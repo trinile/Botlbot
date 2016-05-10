@@ -1,21 +1,30 @@
 import React, { PropTypes } from 'react';
+import ContentEditable from 'react-contenteditable';
+import styles from '../styles/template.css';
 
 const Template = ({
   template,
   updateTemplate,
-  trashTemplate
+  trashTemplate,
+  saveTemplate
 }) => {
   let textarea;
 
   return (
     <article >
       <h3>Template</h3>
-      <textarea ref={(node) => (textarea = node)} defaultValue={template}></textarea>
+      <ContentEditable 
+        ref={(node) => (textarea = node)} 
+        html={template}
+        onChange={(e) => updateTemplate(e)}
+        className={styles.template}
+      >
+      </ContentEditable>
       <div>
-        <button onClick={() => {textarea.value = ''; trashTemplate()}}>Trash</button>
+        <button onClick={() => {textarea.html = ''; trashTemplate()}}>Trash</button>
       </div>
       <div>
-        <button onClick={() => updateTemplate(textarea.value)}>Save</button>
+        <button onClick={saveTemplate}>Save</button>
       </div>
     </article>
   );
