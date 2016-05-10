@@ -6,6 +6,8 @@ const template = (state = '', action) => {
       return '';
     case 'SAVE_TEMPLATE':
       return state; // WILL NEED TO BECOME ASYNC ACTION
+    case 'ADD_SOURCE':
+      return state + action.source;
     default:
       return state;
   }
