@@ -7,8 +7,6 @@ module.exports = {
   bookshelf: require('bookshelf')(knex)
 };
 
-// module.exports = knex;
-
 //useful for debugging
 process.stderr.on('data', function(data) {
   console.log(data);

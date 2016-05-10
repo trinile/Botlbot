@@ -21,17 +21,12 @@ module.exports = {
   generatedTweet: GeneratedTweet
 };
 
-//for development -> will drop table if it exists
-
-db.knex.schema.dropTableIfExists('postedtweets');
-db.knex.schema.dropTableIfExists('generatedtweets');
-
 // table for Posted Tweets that User posts to twitter
 db.knex.schema.hasTable('postedtweets').then(function(exists) {
   if (!exists) {
     db.knex.schema.createTable('postedtweets', function(table){
       table.increments('tweet_id').primary();
-      table.integer('user_id'); //.unsigned().references('user_id').inTable('users');
+      table.string('user_id'); //.unsigned().references('user_id').inTable('users');
       table.string('tweet_text');
       table.string('tweet_url');
       table.string('original_tweet_id');
@@ -50,8 +45,8 @@ db.knex.schema.hasTable('generatedtweets').then(function(exists) {
   if (!exists) {
     db.knex.schema.createTable('generatedtweets', function(table) {
       table.increments('bot_tweet_id').primary();
-      //TODO: have foreign key constraint to work
-      table.integer('user_id'); //.unsigned().references('user_id').inTable('users');
+      // TODO: have foreign key constraint to work
+      table.string('user_id'); //.unsigned().references('user_id').inTable('users');
       table.integer('retweet_count');
       table.integer('favorite_count');
       table.string('user_screen_name');
@@ -64,6 +59,8 @@ db.knex.schema.hasTable('generatedtweets').then(function(exists) {
     }).then(function(generatedTable) {
       console.log('Created table of Generated Tweets', generatedTable);
     })
+    .catch(function(err) {
+      console.log('error in creating generated tweets');
+    })
   }
 });
-

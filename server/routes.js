@@ -34,21 +34,25 @@ module.exports = function(app, passport) {
   // access was granted, the user will be logged in.  Otherwise,
   // authentication has failed.
   app.get('/auth/callback',
-    passport.authenticate('twitter', {
-      successRedirect: '/dashboard',
-      failureRedirect: '/'
-    })
-  );
+    passport.authenticate('twitter', {failureRedirect: '/'}),
+      function(req, res) {
+        res.redirect('/dashboard');
+      })
 
   app.get('/logout', function(req, res) {
     console.log(req)
     req.logout();
+    res.clearCookie('test');
     res.status(202).send('foooo');
   });
 
   // app.get('/dashboard', ensureAuthenticated, function(req, res) {
   //   res.send('YOU DID IT');
   // });
+
+  app.get('/authUser', ensureAuthenticated, function(req, res) {
+    res.status(200).json({ authID: req.user.id })
+  });
 
   app.get('/generate', ensureAuthenticated, function(req, res) {
 
@@ -69,14 +73,14 @@ module.exports = function(app, passport) {
   app.get('/retrieve', function(req, res) {
     Tweets.retrieveTweets(req.user.id)
       .then(function(reply) {
-        res.send(reply.slice(reply.length - 10, reply.length - 1));
+        res.status(200).json(reply.slice(reply.length - 10, reply.length - 1));
       });
   });
 
   app.post('/postTweet', function(req, res) {
-    //TODO: post to Twitter
-    
-    //what is the tweet format being passed in????
+    // TODO: post to Twitter
+
+    // what is the tweet format being passed in????
     // Tweets.addPostedTweet(tweet)
     //   .then(function(reply) {
     //     res.send('YAY you posted to database');

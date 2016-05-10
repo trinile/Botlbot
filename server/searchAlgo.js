@@ -42,23 +42,6 @@ function pullTweetsFromFeed(accessToken, secret, userID, clientResponse) {
 
     // clientResponse.json(cleanTweets.slice(0, 20));
 
-    // var jsonTweets = cleanTweets.map(function(tweet) {
-    //   return JSON.stringify(tweet);
-    // });
-
-    console.log('CLEAN TWEETS IS ARRAY?', Array.isArray(cleanTweets));
-    // console.log('clean tweets ============', cleanTweets);
-    // console.log('EACH TWEET IS STRING OR OBJECT?', typeof jsonTweets[3]);
-
-    // cleanTweets.forEach(function(tweet) {
-    //   Tweets.addTweet(userID, tweet)
-    //   .then(function(reply) {
-    //     console.log('tweet added to ------> ', reply);
-    //   })
-    //   .catch(function(err) {
-    //     console.log(err);
-    //   })
-    // });
     Tweets.addTweets(userID, cleanTweets)
     .then(function(reply) {
       console.log('clean tweetds adddded', reply);

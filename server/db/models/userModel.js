@@ -14,13 +14,10 @@ var User = db.bookshelf.Model.extend({
 
 module.exports = User;
 
-db.knex.schema.dropTableIfExists('users');
-
-db.knex.schema.hasTable('users').then(function(exists) {
+db.knex.schema.createTable('users').then(function(exists) {
   if (!exists) {
     db.knex.schema.createTable('users', function(table) {
-      table.increments('user_id').primary();
-      table.string('user_twitter_id').primary;
+      table.string('user_twitter_id').primary();
       table.string('token');
       table.string('tokenSecret');
       table.string('username');
@@ -35,5 +32,4 @@ db.knex.schema.hasTable('users').then(function(exists) {
     })
   }
 });
-
 

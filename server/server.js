@@ -5,6 +5,7 @@ var client = require('./redis/redisClient.js');
 var RedisStore = require('connect-redis')(session);
 
 var db = require('./db/db.js');
+
 var passport = require('passport');
 require('dotenv').config();
 
@@ -12,6 +13,8 @@ require('dotenv').config();
 require('./passport.js')(passport);
 
 var app = express();
+
+module.exports = app;
 
 app.use(express.static(__dirname + '/../build/'));
 

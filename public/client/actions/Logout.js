@@ -4,12 +4,13 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_FAILURE
 } from '../constants.js';
+import { push } from 'react-router-redux';
 
 //three possible states for logging out.
 //need three actions.
 //actions are useful if we call the API to log the user out.
 
-const requestLogout = () => {
+export const requestLogout = () => {
   return (
     {
       type: LOGOUT_REQUEST,
@@ -19,7 +20,7 @@ const requestLogout = () => {
   );
 };
 
-const receiveLogout = () => {
+export const receiveLogout = () => {
   return (
     {
       type: LOGOUT_SUCCESS,
@@ -30,8 +31,7 @@ const receiveLogout = () => {
 };
 
 //double check this function
-
-const LogoutFailure = () => {
+export const LogoutFailure = () => {
   return (
     {
       type: LOGOUT_FAILURE,
@@ -44,17 +44,22 @@ const LogoutFailure = () => {
 export function logoutUser() {
   return dispatch => {
     dispatch(requestLogout());
-    localStorage.removeItem('id_token');
-    dispatch(receiveLogout());
-    let config = {
-      method: 'GET',
-      mode: cors,
-      redirect: 'follow'
-    };
-    //get request to /logout path to log out user
-    fetch('http://127.0.0.1:1337/logout', config)
-    .then()
-    .catch();
-
+    return fetch('/logout', { method: 'GET', credentials: 'same-origin'})
+      .then(json => {
+        console.log(json);
+        localStorage.removeItem('sessionID');
+        dispatch(receiveLogout());
+        dispatch(push('/'));
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch(LogoutFailure());
+      });
   };
 };
+
+
+
+
+
+

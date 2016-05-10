@@ -5,17 +5,16 @@ module.exports = {
   addTweets: function(userID, Tweets) {
 
   var tweetsArr = Tweets.map(function(Tweet) {
-    return {
-      tweet_id_str: Tweet.id_str,
-      user_id: userID,
-      retweet_count: Tweet.retweet_count,
-      favorite_count: Tweet.favorite_count,
-      user_screen_name: Tweet.user.screen_name,
-      user_followers_count: Tweet.user.followers_count,
-      tweet_text: Tweet.text
-    };
-  });
-
+      return {
+        tweet_id_str: Tweet.id_str,
+        user_id: userID.toString(),
+        retweet_count: Tweet.retweet_count,
+        favorite_count: Tweet.favorite_count,
+        user_screen_name: Tweet.user.screen_name,
+        user_followers_count: Tweet.user.followers_count,
+        tweet_text: Tweet.text
+      }
+    });
     return db.knex('generatedtweets')
       .insert(tweetsArr);
       //returns a promise
@@ -23,14 +22,14 @@ module.exports = {
 
   retrieveTweets: function(userID) {
     return db.knex('generatedtweets')
-      .where({ user_id: userID })
-      .select();
-      // returns array of entries
+      .where({user_id: userID.toString() } )
+      .select()
+      //returns array of entries
   },
 
   addPostedTweet: function(tweet) {
     var posted = {
-      user_id: tweet.user_id,
+      user_id: tweet.user_id.toString(),
       retweet_count: 0,
       favorite_count: 0,
       original_tweet_id: tweet.tweet_id_str,

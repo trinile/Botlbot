@@ -1,16 +1,13 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import SiteNav from '../components/SiteNav';
+import { logoutUser } from '../actions/Logout';
 
-function testLogout() {
-  fetch('/logout', { method: 'GET', credentials: 'same-origin' })
-    .then(res => console.log(res))
-    .catch(err => console.log(err));
-}
-
-const Main = ({ isAuthenticated, children }) => (
+const Main = ({ dispatch, isAuthenticated, children }) => (
   <div>
-    <SiteNav isAuthenticated={isAuthenticated} />
+    <SiteNav 
+      isAuthenticated={isAuthenticated}
+      onLogoutClick={() => dispatch(logoutUser())}/>
     {children}
   </div>
 );
@@ -23,9 +20,15 @@ Main.propTypes = {
 // These props come from the application's
 // state when it is started
 function mapStatetoProps(state) {
+  const { authStatus } = state;
+  const { isAuthenticated } = authStatus;
   return {
-    isAuthenticated: state.authStatus,
+    isAuthenticated
   };
 }
 
-export default connect(mapStatetoProps)(Main);
+const MainContainer = connect(
+  mapStatetoProps
+)(Main);
+
+export default MainContainer;
