@@ -10,6 +10,11 @@ const styles = {
   }
 };
 
+/**
+* Login button component for User to authenticate via Twitter
+* User is directed to a link to be authenticated
+*/
+
 const Login = ({onLoginClick}) => (
   <div>
   <RaisedButton
