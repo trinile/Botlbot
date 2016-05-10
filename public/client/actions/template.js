@@ -10,3 +10,9 @@ export function trashTemplate() {
     type: 'TRASH_TEMPLATE'
   };
 }
+
+export function saveTemplate() {
+  return {
+    type: 'SAVE_TEMPLATE'
+  };
+}

@@ -4,6 +4,8 @@ const template = (state = '', action) => {
       return action.template;
     case 'TRASH_TEMPLATE':
       return '';
+    case 'SAVE_TEMPLATE':
+      return state; // WILL NEED TO BECOME ASYNC ACTION
     default:
       return state;
   }
