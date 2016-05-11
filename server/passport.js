@@ -27,33 +27,9 @@ module.exports = function(passport) {
     },
 
     function(token, tokenSecret, profile, done) {
-      console.log('authentication is happening', profile.id);
-      // Saves user, access token, and access token secret in redis hash at key user:twitterid
-      User.loginUser(profile, token, tokenSecret)
-        .then(function(res) {
-          console.log('adduser in passport ====================', res);
-        })
-        .catch(function(err) {
-          console.log('err in adding user in passport ==============', err);
-        })
-
-      // var T = new Twit({
-      //   consumer_key:         process.env.CONSUMER_KEY,
-      //   consumer_secret:      process.env.CONSUMER_SECRET,
-      //   access_token:         token,
-      //   access_token_secret:  tokenSecret,
-      //   timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests.
-      // });
-
-      // T.post(
-      //   'statuses/update',
-      //   { status: `haha! I have posted on your account!${Math.random()}` },
-      //   function(err, data, response) {
-      //     // return err ? console.error(err) : console.log('posted:', data, 'response:', response);
-      //   }
-      // );
-
-      done(null, profile);
+      User.login(profile, token, tokenSecret)
+        .then(() => done(null, profile))
+        .catch(err => console.log(err));
     })
   );
 };
