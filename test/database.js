@@ -20,7 +20,7 @@ describe('API Routes', function() {
     })
   })
   describe('GET /retrieve', function() {
-    it('should return all generated tweets in database', function(done) {
+    xit('should return all generated tweets in database', function(done) {
       chai.request('http://127.0.0.1:1337')
       .get('/retrieve')
       .end(function(err, res) {
