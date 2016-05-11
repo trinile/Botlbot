@@ -4,7 +4,7 @@ import { expect } from 'chai';
 
 const config = require('../knexfile.js');
 const knex = require('knex')(config.test);
-const User = require('../server/db/controllersUser');
+const User = require('../server/db/controllers/userController');
 
 describe('User', function() {
   beforeEach(function(done) {
@@ -27,7 +27,6 @@ describe('User', function() {
         'this is a token',
         'this is a tokensecret'
       ).then(response => {
-        expect(response).to.have.lengthOf(1);
         expect(response[0]).to.equal('12345');
         done(null, response);
       })
@@ -40,15 +39,14 @@ describe('User', function() {
         'this is a new token',
         'this is a different tokensecret')
       .then(() => User.getRecord('12345'))
-      .then((response) => {
-        const user = response[0];
+      .then((user) => {
         expect(user.user_twitter_id).to.equal('12345');
         expect(user.token).to.not.equal('this is a token');
         expect(user.token).to.equal('this is a new token');
         expect(user.tokenSecret).to.not.equal('this is a tokensecret');
         expect(user.tokenSecret).to.equal('this is a different tokensecret');
         expect(user.created_at).to.not.equal(user.updated_at);
-        done(null, response);
+        done(null, user);
       })
       .catch(err => done(err));
     });
@@ -61,10 +59,9 @@ describe('User', function() {
       };
 
       User.getRecord(newUser.profile.id)
-      .then(response => expect(response).to.have.lengthOf(0))
+      .then(response => expect(response).to.be.undefined)
+      .then(() => done())
       .catch(err => done(err));
-
-      done();
     });
 
     it('Should add a new user to the database', function(done) {
