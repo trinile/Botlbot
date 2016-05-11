@@ -1,0 +1,29 @@
+//configuration for JSDOC
+{
+  "tags": {
+      "allowUnknownTags": true, //if false, JSDOC finds a tag it doesnt recognize e.g. @foo, will log a warning.
+      "dictionaries": ["jsdoc", "closure"] //helps JSDOC interpret tags that it recognizes.
+        //dictionaries: jsdoc (built-in) and closure compiler tags (built-in)
+  },
+  "source": {
+      "include": ["./public/client/actions/login.js"], //CHANGE TO ARRAY OF FILES TO DOCUMENT
+      "includePattern": ".js$",
+      "excludePattern": "(node_modules/|docs)"
+  },
+  "plugins": [
+      "plugins/markdown", //converts markdown-formated text to HTML
+      "plugins/summarize" // summarizes plugin -> autogenerates a summary for each doclet
+  ],
+  "opts": {
+      // "template": "assets/template/docdash/",
+      "template": "node_modules/docdash",
+      "encoding": "utf8",
+      "destination": "JSDocs/",
+      "recurse": true,
+      "verbose": true
+  },
+  "templates": {
+      "cleverLinks": false, //if true, @link asdf will be rendered in normal font if 'asdf' is a URL.
+      "monospaceLinks": false //all link texts from @link tage will be rendered in monospace
+  }
+}
