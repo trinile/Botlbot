@@ -1,7 +1,7 @@
 var TwitterStrategy = require('passport-twitter').Strategy;
 var Twit = require('twit');
 // var client = require('./db/redisClient.js');
-var User = require('./db/controllers/usersController.js');
+var User = require('./db/controllers/userController.js');
 require('dotenv').config();
 
 
@@ -29,7 +29,7 @@ module.exports = function(passport) {
     function(token, tokenSecret, profile, done) {
       console.log('authentication is happening', profile.id);
       // Saves user, access token, and access token secret in redis hash at key user:twitterid
-      User.addUser(profile, token, tokenSecret)
+      User.loginUser(profile, token, tokenSecret)
         .then(function(res) {
           console.log('adduser in passport ====================', res);
         })

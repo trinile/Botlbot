@@ -1,6 +1,6 @@
 var path = require('path');
 // var client = require('./db/redisClient.js');
-var User = require('./db/controllers/usersController.js');
+var User = require('./db/controllers/userController.js');
 var Tweets = require('./db/controllers/tweetsController.js');
 
 var getTweets = require('./searchAlgo.js');

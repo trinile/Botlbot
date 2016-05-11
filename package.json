@@ -9,7 +9,6 @@
     "start": "webpack-dev-server --progress --inline --hot",
     "lint:": "eslint . --ext .js --ext .jsx .gitignore --cache",
     "generate-docs": "node_modules/.bin/jsdoc -c jsdoc.json"
-  }
   },
   "repository": {
     "type": "git",
@@ -29,12 +28,11 @@
   "dependencies": {
     "babel-loader": "^6.2.4",
     "bluebird": "^3.3.5",
-    "bookshelf": "^0.9.4",
     "connect-redis": "^3.0.2",
     "docdash": "^0.3.0",
     "express-session": "^1.13.0",
     "jsdoc": "^3.4.0",
-    "knex": "^0.11.1",
+    "knex": "^0.10.0",
     "material-ui": "^0.15.0",
     "passport": "^0.3.2",
     "passport-twitter": "^1.0.4",
