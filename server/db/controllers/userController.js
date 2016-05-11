@@ -30,7 +30,8 @@ function login(profile, token, secret) {
 function getRecord(userId) {
   return knex('users')
     .where({ user_twitter_id: userId })
-    .select();
+    .select()
+    .then(results => results[0]);
 }
 
 module.exports = {
