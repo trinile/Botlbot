@@ -108,11 +108,11 @@ describe('Authentication Reducers', function() {
   const loggedOutState = false;
   const loggedInState = true;
 
-  it('Should successfully login', function() {
+  xit('Should successfully login', function() {
     expect(authStatus(loggedOutState, { type: 'LOGIN_SUCCESS' })).to.be.true;
   });
 
-  it('Should successfully logout', function() {
+  xit('Should successfully logout', function() {
     expect(authStatus(loggedInState, { type: 'LOGOUT_SUCCESS' })).to.be.false;
   });
 });
