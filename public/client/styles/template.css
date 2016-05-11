@@ -1,8 +1,15 @@
 .template {
-  height: 5rem;
+  min-height: 5rem;
+  max-height: 10rem;
+  height: auto;
+  overflow: auto;
   width: 50%;
   padding: 0.5rem;
   margin: 0 auto;
   border-radius: 5px;
   background-color: white;
+}
+
+.template:focus {
+  outline: none;
 }
