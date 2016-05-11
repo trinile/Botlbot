@@ -8,7 +8,6 @@ exports.seed = function(knex, Promise) {
         token: 'this is a token',
         tokenSecret: 'this is a tokensecret',
         username: 'testuser',
-        email: 'test@something.horse',
         created_at: new Date(),
         updated_at: new Date(),
       });
