@@ -1,7 +1,8 @@
 // const User = require('../models/user.js');
 const knex = require('../db');
-
-
+/**
+*
+*/
 function loginUser(profile, token, secret) {
   return knex('users').where({
     user_twitter_id: profile.id
@@ -17,14 +18,22 @@ function loginUser(profile, token, secret) {
     }
     return knex('users').insert({
       user_twitter_id: profile.id,
-      username: profile.username,
       token: token,
       tokenSecret: secret,
-      email: 'flkdfj',
+      username: profile.username,
       updated_at: new Date(),
       created_at: new Date()
     }, 'user_twitter_id');
   });
 }
 
-module.exports.loginUser = loginUser;
+function getUserRecord(userId) {
+  return knex('users')
+    .where({ user_twitter_id: userId })
+    .select();
+}
+
+module.exports = {
+  loginUser: loginUser,
+  getUserRecord: getUserRecord
+};
