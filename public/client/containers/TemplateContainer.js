@@ -13,7 +13,7 @@ const update = debounce(
 
 const mapStateToProps = (state) => ({ template: state.template });
 const mapDispatchToProps = (dispatch) => ({
-  updateTemplate: (e) => {
+  updateTemplate: (e) => { // NOTE: this code is not currently used, I also removed the updateTemplate reducer
     let val = e.target.value;
     update(val, dispatch);
   },

@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react';
-import ContentEditable from 'react-contenteditable';
+import Chunk from './Chunk';
+import Popover from 'react-popover';
 import styles from '../styles/template.css';
 
 const Template = ({
   template,
-  updateTemplate,
+  // updateTemplate,
   trashTemplate,
   saveTemplate
 }) => {
@@ -12,13 +13,29 @@ const Template = ({
 
   return (
     <article >
+    <style>{`
+      .Popover-body {
+        display: inline-flex;
+        flex-direction: column;
+        padding: 2rem 4rem;
+        background: hsl(0, 0%, 27%);
+        color: white;
+        border-radius: 0.3rem;
+      }
+      .Popover-tipShape {
+        fill: hsl(0, 0%, 27%)
+      }`}
+    </style>
       <h3>Template</h3>
       <div 
         className={styles.template}
       >{
         template.map((item, index) => {
+          console.log(item);
           return (
-            <span key={index}>{item.source}</span>
+            <Popover key={index} isOpen={true} body={'wow!'} place={'below'} >
+              <Chunk item={item}/>
+            </Popover>
           )
         })
       }
