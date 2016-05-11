@@ -2,16 +2,22 @@ import React, { PropTypes } from 'react';
 import Tweet from './Tweet';
 import styles from '../styles/main.css';
 
+const style = {
+  display: 'inline-block'
+};
 
 const TweetList = ({ tweets, onGetTweets, onPostTweet, onTrashTweet }) => {
   function fetchTweets() {
     fetch('http://127.0.0.1:1337/generateDummy', { method: 'GET', mode: 'cors' })
     .then(result => result.json())
-    .then(result => onGetTweets(result))
+    .then(result => {
+      localStorage.setItem('tweets', JSON.stringify(result));
+      return onGetTweets(result);
+    })
     .catch(err => console.error(err));
   }
   return (
-    <div>
+    <div styles={style}>
       <button onClick={fetchTweets}>Get Tweeties</button>
       <div styles={styles['tweets-list']}>
         {tweets.map((t) => (

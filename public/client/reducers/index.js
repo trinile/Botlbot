@@ -11,6 +11,4 @@ const Reducers = combineReducers({
   routing: routerReducer,
 });
 
-// { LoginReducer: { LoginReducer: ..... , LogoutReducer, Routing::; }
-// console.log('Reducers ', Reducers.LoginReducer);
 export default Reducers;

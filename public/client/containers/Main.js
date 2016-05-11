@@ -3,12 +3,30 @@ import { connect } from 'react-redux';
 import SiteNav from '../components/SiteNav';
 import { logoutUser } from '../actions/Logout';
 
-const Main = ({ dispatch, isAuthenticated, children }) => (
-  <div>
-    <SiteNav 
+const style = {
+  sidebar: {
+    position:'fixed',
+    width: '30%',
+    float:'left',
+    height: '100%'
+  },
+  main: {
+    position:
+  }
+}
+
+const Main = ({ dispatch, isAuthenticated, main, sidebar }) => (
+  <div styles>
+    <SiteNav
+      styles={style}
       isAuthenticated={isAuthenticated}
       onLogoutClick={() => dispatch(logoutUser())}/>
-    {children}
+    <div className="Sidebar">
+      {sidebar}
+    </div>
+    <div className="Main">
+      {main}
+    </div>
   </div>
 );
 

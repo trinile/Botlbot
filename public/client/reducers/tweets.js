@@ -19,7 +19,7 @@ function tweet(state, action) {
   }
 }
 
-function tweets(state = [], action) {
+function tweets(state = JSON.parse(localStorage.getItem('tweets')) || [], action) {
   switch (action.type) {
     case 'ADD_NEW_TWEETS':
       return [
