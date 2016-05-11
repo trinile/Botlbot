@@ -24,7 +24,7 @@ const Source = ({
 );
 
 Source.propTypes = {
-  template: PropTypes.string
+  template: PropTypes.array
 };
 
 export default Source;

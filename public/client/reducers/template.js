@@ -1,13 +1,11 @@
-const template = (state = '', action) => {
+const template = (state = [], action) => {
   switch (action.type) {
-    case 'UPDATE_TEMPLATE':
-      return action.template;
     case 'TRASH_TEMPLATE':
-      return '';
+      return [];
     case 'SAVE_TEMPLATE':
       return state; // WILL NEED TO BECOME ASYNC ACTION
     case 'ADD_SOURCE':
-      return state + action.source;
+      return state.concat({source: action.source});
     default:
       return state;
   }

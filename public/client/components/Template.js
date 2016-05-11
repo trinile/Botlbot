@@ -13,15 +13,18 @@ const Template = ({
   return (
     <article >
       <h3>Template</h3>
-      <ContentEditable 
-        ref={(node) => (textarea = node)} 
-        html={template}
-        onChange={(e) => updateTemplate(e)}
+      <div 
         className={styles.template}
-      >
-      </ContentEditable>
+      >{
+        template.map((item, index) => {
+          return (
+            <span key={index}>{item.source}</span>
+          )
+        })
+      }
+      </div>
       <div>
-        <button onClick={() => {textarea.html = ''; trashTemplate()}}>Trash</button>
+        <button onClick={() => {trashTemplate()}}>Trash</button>
       </div>
       <div>
         <button onClick={saveTemplate}>Save</button>
@@ -31,7 +34,7 @@ const Template = ({
 };
 
 Template.propTypes = {
-  template: PropTypes.string,
+  template: PropTypes.array,
   updateTemplate: PropTypes.func,
   trashTemplate: PropTypes.func,
 };
