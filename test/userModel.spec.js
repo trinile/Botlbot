@@ -4,7 +4,7 @@ import { expect } from 'chai';
 
 const config = require('../knexfile.js');
 const knex = require('knex')(config.test);
-const userController = require('../server/db/controllers/userController');
+const User = require('../server/db/controllersUser');
 
 describe('User', function() {
   beforeEach(function(done) {
@@ -22,7 +22,7 @@ describe('User', function() {
   });
   describe('Login', function() {
     it('Should find existing user in the database', function(done) {
-      userController.loginUser(
+    User.login(
         { id: '12345', username: 'testuser' },
         'this is a token',
         'this is a tokensecret'
@@ -35,11 +35,11 @@ describe('User', function() {
     });
 
     it('Should update existing user\'s record on login', function(done) {
-      userController.loginUser(
+      User.login(
         { id: '12345', username: 'testuser' },
         'this is a new token',
         'this is a different tokensecret')
-      .then(() => userController.getUserRecord('12345'))
+      .then(() => User.getRecord('12345'))
       .then((response) => {
         const user = response[0];
         expect(user.user_twitter_id).to.equal('12345');
@@ -60,7 +60,7 @@ describe('User', function() {
         tokenSecret: 'tokensecret'
       };
 
-      userController.getUserRecord(newUser.profile.id)
+      User.getRecord(newUser.profile.id)
       .then(response => expect(response).to.have.lengthOf(0))
       .catch(err => done(err));
 
@@ -74,7 +74,7 @@ describe('User', function() {
         tokenSecret: 'tokensecret'
       };
 
-      userController.loginUser(
+      User.login(
         newUser.profile,
         newUser.token,
         newUser.tokensecret)
