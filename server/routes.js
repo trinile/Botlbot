@@ -1,17 +1,12 @@
-var path = require('path');
-// var client = require('./db/redisClient.js');
-var User = require('./db/controllers/userController.js');
-var Tweets = require('./db/controllers/tweetsController.js');
+const path = require('path');
+// const client = require('./db/redisClient.js');
+const User = require('./db/controllers/userController.js');
+const Tweets = require('./db/controllers/tweetsController.js');
+const getTweets = require('./searchAlgo.js');
+const dummyTweets = require('./dummyTweets.js');
+const helpers = require('./helpers');
 
-var getTweets = require('./searchAlgo.js');
-const KEYS = {
-  access_token: process.env.ACCESS_TOKEN,
-  access_token_secret: process.env.ACCESS_TOKEN_SECRET,
-};
-
-var dummyTweets = require('./dummyTweets.js');
-
-var ensureAuthenticated = function(req, res, next) {
+const ensureAuthenticated = function(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
@@ -20,7 +15,6 @@ var ensureAuthenticated = function(req, res, next) {
     // Return error content: res.jsonp(...) or redirect: res.redirect('/login')
   }
 };
-
 
 module.exports = function(app, passport) {
 
@@ -36,6 +30,7 @@ module.exports = function(app, passport) {
   app.get('/auth/callback',
     passport.authenticate('twitter', {failureRedirect: '/'}),
       function(req, res) {
+
         res.redirect('/dashboard');
       })
 
@@ -51,7 +46,7 @@ module.exports = function(app, passport) {
   // });
 
   app.get('/authUser', ensureAuthenticated, function(req, res) {
-    res.status(200).json({ authID: req.user.id })
+    res.status(200).json({ authID: req.user.id });
   });
 
   app.get('/generate', ensureAuthenticated, function(req, res) {
@@ -77,16 +72,14 @@ module.exports = function(app, passport) {
       });
   });
 
-  app.post('/postTweet', function(req, res) {
-    // TODO: post to Twitter
-
-    // what is the tweet format being passed in????
-    // Tweets.addPostedTweet(tweet)
-    //   .then(function(reply) {
-    //     res.send('YAY you posted to database');
-    //   });
-
+  app.post('/postTweet/:id', function(req, res) {
+    Tweets.joinTweetAndUserByTweetId(req.params.id)
+    .then(response => helpers.postTweet(response))
+    .then(data => Tweets.savePostedTweet(data))
+    .then((id) => res.status(201).send(id))
+    .catch(err => res.status(500).send(err));
   });
+
   app.get('/', function(req, res) {
     console.log(req.session);
     res.sendFile(path.join(__dirname, '/../build/bundle.html'));
