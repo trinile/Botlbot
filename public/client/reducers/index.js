@@ -8,6 +8,7 @@ import tweetsFilter from './tweetsFilter';
 import requestStatus from './requestStatus';
 import template from './template';
 import templateBuilder from './templateBuilder';
+import templateMenu from './templateMenu';
 
 const Reducers = combineReducers({
   authStatus,
@@ -16,6 +17,7 @@ const Reducers = combineReducers({
   requestStatus,
   template,
   templateBuilder,
+  templateMenu,
   routing: routerReducer,
 });
 
