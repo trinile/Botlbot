@@ -75,7 +75,8 @@ const common = {
         include: PATHS.app
       }
     ]
-  }
+  },
+  devtool: 'source-map'
 };
 
 
@@ -113,7 +114,7 @@ if(TARGET === 'start' || !TARGET) {
         save: true// --save
       })
     ],
-    devtool: 'eval-source-map'
+    devtool: 'source-map'
   });
 }
 

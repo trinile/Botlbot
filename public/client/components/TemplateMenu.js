@@ -1,19 +1,47 @@
 import React, { PropTypes } from 'react';
-import {Menu, FloatingActionButton, MenuItem} from 'material-ui';
+import { Menu, MenuItem, TextField, SelectField } from 'material-ui';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import menuTree from '../menuTree';
 
-// onItemTouchTap={addTemplateMenu}
-const TemplateMenu = ({
-  templateMenu,
-  navigateDown,
-  navigateUp
-}) => (
-  <Menu>
-    {
-      Object.keys(templateMenu
-        .reduce((menuTree, key) => menuTree[key], menuTree))
-        .map((item, index) => (
+var formatter = (templateMenu, navigateDown) => {
+  const currentLevel = templateMenu.reduce(function(menuTree, key){return menuTree[key];}, menuTree);
+  const menu = [];
+  if (currentLevel.leaf) {
+    for (var key in currentLevel) {
+      if (Array.isArray(currentLevel[key])) {
+        menu.push(
+          <SelectField 
+            children={currentLevel[key].map((item, index) => {
+              return (
+                <MenuItem 
+                  value={item} 
+                  primaryText={item} 
+                  key={index} 
+                  onTouchTap={(e) => {let temp = e; console.log(temp); e.preventDefault(); e.stopPropagation();}}
+                />
+              )
+            })}
+            hintText={key}
+            key={key}
+          />
+          // <TextField hintText={key} />
+        );
+      }
+      if (typeof currentLevel[key] === 'number') {
+        menu.push(
+          <TextField hintText={key} key={key} />
+        )
+      }
+      if (typeof currentLevel[key] === 'string') {
+        menu.push(
+          <TextField hintText={key} key={key} />
+        )
+      }
+    }
+  } else {
+    return (
+      <Menu children={Object.keys(currentLevel).map((item, index) => {
+        return (
           <MenuItem 
             value={item} 
             primaryText={item} 
@@ -21,19 +49,43 @@ const TemplateMenu = ({
             onTouchTap={() => navigateDown(item)}
           />
         )
-      )
-    }
-  </Menu>
-);
+      })} />
+    )
+  }
+
+  return (
+    <Menu>
+      {menu}
+    </Menu>
+  )
+};
+
+// onItemTouchTap={addTemplateMenu}
+const TemplateMenu = ({
+  templateMenu,
+  navigateDown,
+  navigateUp
+}) => {
+  return formatter(templateMenu, navigateDown)
+};
 
 TemplateMenu.propTypes = {
-//   template: PropTypes.array,
-  addTemplateMenu: PropTypes.func
+  templateMenu: PropTypes.arrayOf(PropTypes.string),
+  navigateDown: PropTypes.func,
+  navigateUp: PropTypes.func
 };
 
 export default TemplateMenu;
 
 
-/*<MenuItem value={'myFeed'} primaryText="My Feed" />
-<MenuItem value={'News'} primaryText="News" />
-<MenuItem value={'randomTweet'} primaryText="Random Tweet" />*/
+// Object.keys(templateMenu
+      //   .reduce((menuTree, key) => menuTree[key], menuTree))
+      //   .map((item, index) => (
+      //     <MenuItem 
+      //       value={item} 
+      //       primaryText={item} 
+      //       key={index} 
+      //       onTouchTap={() => navigateDown(item)}
+      //     />
+      //   )
+      // )

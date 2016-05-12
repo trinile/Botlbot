@@ -21,7 +21,11 @@ const Template = ({
         padding: 0.5rem;
         background: hsl(0, 0%, 27%);
         color: white;
+        width: auto;
         border-radius: 0.3rem;
+      }
+      .Popover-body > div {
+        width: auto !important;
       }
       .Popover-tipShape {
         fill: hsl(0, 0%, 27%)
@@ -35,7 +39,7 @@ const Template = ({
         item={{'Add!':true}}
         id={0}
         clickHandler={toggleAdding}
-        outsideClickHandler={() => {toggleStatus(); navigateOut();}}
+        outsideClickHandler={() => {toggleStatus(); setTimeout(navigateOut, 300);}}
         isOpen={status.isAdding && status.id === 0}
       />
     {
