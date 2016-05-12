@@ -10,7 +10,8 @@ const Template = ({
   saveTemplate,
   toggleEditing,
   toggleAdding,
-  toggleStatus
+  toggleStatus,
+  navigateOut
 }) => (
   <article >
     <style>{`
@@ -34,7 +35,7 @@ const Template = ({
         item={{'Add!':true}}
         id={0}
         clickHandler={toggleAdding}
-        outsideClickHandler={toggleStatus}
+        outsideClickHandler={() => {toggleStatus(); navigateOut();}}
         isOpen={status.isAdding && status.id === 0}
       />
     {
@@ -46,14 +47,14 @@ const Template = ({
               item={item}
               id={index}
               clickHandler={toggleEditing}
-              outsideClickHandler={toggleStatus}
+              outsideClickHandler={() => {toggleStatus(); navigateOut();}}
               isOpen={status.isEditing && status.id === index}
             />
             <Pop // + button
               item={{'Add!':true}}
               id={index + 1}
               clickHandler={toggleAdding}
-              outsideClickHandler={toggleStatus}
+              outsideClickHandler={() => {toggleStatus(); navigateOut();}}
               isOpen={status.isAdding && status.id === index + 1}
             />
           </span>

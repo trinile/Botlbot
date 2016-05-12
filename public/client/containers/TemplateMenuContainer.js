@@ -1,13 +1,12 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import TemplateMenu from '../components/TemplateMenu';
-import { navigateDown, navigateUp, navigateOut } from '../actions/templateMenu';
+import { navigateDown, navigateUp } from '../actions/templateMenu';
 
 const mapStateToProps = (state) => ({ templateMenu: state.templateMenu });
 const mapDispatchToProps = (dispatch) => ({
   navigateDown: (key) => dispatch(navigateDown(key)),
-  navigateUp: () => dispatch(navigateUp()),
-  navigateOut: () => dispatch(navigateOut())
+  navigateUp: () => dispatch(navigateUp())
 });
 
 const TemplateMenuContainer = connect(

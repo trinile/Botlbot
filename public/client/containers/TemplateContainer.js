@@ -2,8 +2,14 @@ import { connect } from 'react-redux';
 import Template from '../components/Template';
 import { trashTemplate, saveTemplate } from '../actions/template';
 import { toggleEditing, toggleAdding, toggleStatus } from '../actions/templateBuilder';
+import { navigateOut } from '../actions/templateMenu';
 
-const mapStateToProps = (state) => ({ template: state.template, templateBuilder: state.templateBuilder });
+const mapStateToProps = (state) => ({ 
+  template: state.template, 
+  templateBuilder: state.templateBuilder, 
+  templateMenu: state.templateMenu 
+});
+
 const mapDispatchToProps = (dispatch) => ({
   trashTemplate: () => {
     dispatch(trashTemplate());
@@ -19,6 +25,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   toggleStatus: () => {
     dispatch(toggleStatus());
+  },
+  navigateOut: () => {
+    dispatch(navigateOut());
   }
 });
 
