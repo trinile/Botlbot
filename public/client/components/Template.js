@@ -1,23 +1,21 @@
 import React, { PropTypes } from 'react';
-import Chunk from './Chunk';
-import Popover from 'react-popover';
+import Pop from './Pop';
+import SourceContainer from '../containers/SourceContainer';
 import styles from '../styles/template.css';
+// import { FlatButton } from 'material-ui';
 
 const Template = ({
   template,
   // updateTemplate,
   trashTemplate,
   saveTemplate
-}) => {
-  let textarea;
-
-  return (
-    <article >
+}) => (
+  <article >
     <style>{`
       .Popover-body {
         display: inline-flex;
         flex-direction: column;
-        padding: 2rem 4rem;
+        padding: 0.5rem;
         background: hsl(0, 0%, 27%);
         color: white;
         border-radius: 0.3rem;
@@ -26,29 +24,37 @@ const Template = ({
         fill: hsl(0, 0%, 27%)
       }`}
     </style>
-      <h3>Template</h3>
-      <div 
-        className={styles.template}
-      >{
-        template.map((item, index) => {
-          console.log(item);
-          return (
-            <Popover key={index} isOpen={true} body={'wow!'} place={'below'} >
-              <Chunk item={item}/>
-            </Popover>
-          )
-        })
-      }
-      </div>
-      <div>
-        <button onClick={() => {trashTemplate()}}>Trash</button>
-      </div>
-      <div>
-        <button onClick={saveTemplate}>Save</button>
-      </div>
-    </article>
-  );
-};
+    <h3>Template</h3>
+    <div 
+      className={styles.template}
+    >
+      <Pop
+        item={{'Add!':true}}
+      />
+    {
+      template.map((item, index) => {
+        console.log(item);
+        return (
+          <span key={index}>
+            <Pop 
+              item={item}
+            />
+            <Pop // + button
+              item={{'Add!':true}}
+            />
+          </span>
+        )
+      })
+    }
+    </div>
+    <div>
+      <button onClick={() => {trashTemplate()}}>Trash</button>
+    </div>
+    <div>
+      <button onClick={saveTemplate}>Save</button>
+    </div>
+  </article>
+);
 
 Template.propTypes = {
   template: PropTypes.array,
