@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import TemplateContainer from '../containers/TemplateContainer';
-// import Source from './Source';
-import SourceContainerWithContext from '../containers/SourceContainer';
+// import TemplateMenu from './TemplateMenu';
+import TemplateMenuContainerWithContext from '../containers/TemplateMenuContainer';
 
 const BuildABot = (props, context) => {
   console.log(context);
@@ -9,7 +9,7 @@ const BuildABot = (props, context) => {
   <main>
     <h1>Build a bot!</h1>
     <TemplateContainer />
-    {/*<SourceContainerWithContext />*/}
+    {/*<TemplateMenuContainerWithContext />*/}
   </main>
 )};
 

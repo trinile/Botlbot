@@ -1,15 +1,15 @@
 import React, { PropTypes } from 'react';
 import Chunk from './Chunk';
 import AddButton from './AddButton';
-import Source from './Source';
-import SourceContainerWithContext from '../containers/SourceContainer';
+import TemplateMenu from './TemplateMenu';
+import TemplateMenuContainerWithContext from '../containers/TemplateMenuContainer';
 import Popover from 'react-popover';
 
 const Pop = ({item, isOpen, id, clickHandler, outsideClickHandler}, {muiTheme, store}) => {
   return (
     <Popover 
       preferPlace='below'
-      body={<SourceContainerWithContext muiTheme={muiTheme} store={store} />}
+      body={<TemplateMenuContainerWithContext muiTheme={muiTheme} store={store} />}
       isOpen={isOpen}
       onOuterAction={outsideClickHandler}
     >

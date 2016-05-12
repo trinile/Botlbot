@@ -10,3 +10,16 @@ export function navigateUp() {
     type: 'NAVIGATE_UP'
   };
 }
+
+export function navigateOut() {
+  return {
+    type: 'NAVIGATE_OUT'
+  };
+}
+
+// export function addChunk(chunk) {
+//   return {
+//     type: 'ADD_CHUNK',
+//     chunk
+//   };
+// }

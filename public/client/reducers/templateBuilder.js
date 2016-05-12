@@ -6,13 +6,6 @@ const initialState = {
 
 const templateBuilder = (state = initialState, action) => {
   switch (action.type) {
-    // case 'ADD_CHUNK':
-    //   newTemplate = [].concat(
-    //     state.template.slice(0, action.id),
-    //     chunk,
-    //     state.template.slice(action.id));
-    //   newStatus = Object.assign({}, initialState.status);
-    //   return {template: newTemplate, status: newStatus};
     case 'TOGGLE_ADDING':
       return {isAdding: true, isEditing: false, id: action.id};
     case 'TOGGLE_EDITING':

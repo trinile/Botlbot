@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import Pop from './Pop';
-import SourceContainer from '../containers/SourceContainer';
+import TemplateMenuContainer from '../containers/TemplateMenuContainer';
 import styles from '../styles/template.css';
 
 const Template = ({
