@@ -1,4 +1,4 @@
-var db = require('../db.js');
+const knex = require('../db.js');
 
 function scrubFetchedTweet(tweet, userID) {
   return {
@@ -30,28 +30,38 @@ function scrubPostedTweet(tweet) {
 }
 
 function saveGeneratedTweets(userID, tweets) {
-  return db.knex('generatedtweets')
+  return knex('generatedtweets')
     .insert(tweets.map(t => scrubFetchedTweet(t, userID)));
 }
 
 function getGeneratedTweets(userID) {
-  return db.knex('generatedtweets')
+  return knex('generatedtweets')
     .where({ user_twitter_id: userID })
     .select();
 }
 
-function savePostedTweet(tweet) {
-  return db.knex('postedtweets')
-    .insert(scrubPostedTweet(tweet));
+function savePostedTweet(data) {
+  return knex('postedtweets')
+    .insert(scrubPostedTweet(data), 'retweet_id');
 }
 
 function deleteGeneratedTweet(tweet) {
-  return db.knex('generatedtweets')
+  return knex('generatedtweets')
     .where({ tweet_id_str: tweet.id_str })
     .del();
 }
 
+function joinTweetAndUserByTweetId(id) {
+  return knex('generatedtweets')
+    .join('users', 'users.user_twitter_id', '=', 'generatedtweets.user_twitter_id')
+    .where({ bot_tweet_id: id })
+    .select('users.token', 'users.tokenSecret', 'generatedtweets.tweet_text')
+    .then(response => response[0])
+    .catch(console.log);
+}
+
 module.exports = {
+  joinTweetAndUserByTweetId: joinTweetAndUserByTweetId,
   getGeneratedTweets: getGeneratedTweets,
   saveGeneratedTweets: saveGeneratedTweets,
   deleteGeneratedTweet: deleteGeneratedTweet,

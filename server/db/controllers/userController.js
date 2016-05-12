@@ -3,7 +3,7 @@ const knex = require('../db');
 /**
 *
 */
-function loginUser(profile, token, secret) {
+function login(profile, token, secret) {
   return knex('users').where({
     user_twitter_id: profile.id
   }).then(usr => {
@@ -27,13 +27,14 @@ function loginUser(profile, token, secret) {
   });
 }
 
-function getUserRecord(userId) {
+function getRecord(userId) {
   return knex('users')
     .where({ user_twitter_id: userId })
-    .select();
+    .select()
+    .then(results => results[0]);
 }
 
 module.exports = {
-  loginUser: loginUser,
-  getUserRecord: getUserRecord
+  login: login,
+  getRecord: getRecord
 };
