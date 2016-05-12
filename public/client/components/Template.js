@@ -2,13 +2,14 @@ import React, { PropTypes } from 'react';
 import Pop from './Pop';
 import SourceContainer from '../containers/SourceContainer';
 import styles from '../styles/template.css';
-// import { FlatButton } from 'material-ui';
 
 const Template = ({
-  template,
-  // updateTemplate,
+  templateBuilder: {status, template},
   trashTemplate,
-  saveTemplate
+  saveTemplate,
+  toggleEditing,
+  toggleAdding,
+  toggleStatus
 }) => (
   <article >
     <style>{`
@@ -30,6 +31,10 @@ const Template = ({
     >
       <Pop
         item={{'Add!':true}}
+        id={0}
+        clickHandler={toggleAdding}
+        outsideClickHandler={toggleStatus}
+        isOpen={status.isAdding && status.id === 0}
       />
     {
       template.map((item, index) => {
@@ -38,9 +43,17 @@ const Template = ({
           <span key={index}>
             <Pop 
               item={item}
+              id={index}
+              clickHandler={toggleEditing}
+              outsideClickHandler={toggleStatus}
+              isOpen={status.isEditing && status.id === index}
             />
             <Pop // + button
               item={{'Add!':true}}
+              id={index + 1}
+              clickHandler={toggleAdding}
+              outsideClickHandler={toggleStatus}
+              isOpen={status.isAdding && status.id === index + 1}
             />
           </span>
         )

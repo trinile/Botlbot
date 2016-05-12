@@ -2,9 +2,11 @@ import React, { PropTypes } from 'react';
 import {Menu, FloatingActionButton, MenuItem} from 'material-ui';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
-const Source = () => (
+const Source = ({
+  addSource
+}) => (
   <Menu 
-    // onItemTouchTap={addSource}
+    onItemTouchTap={addSource}
   >
     <MenuItem value={'myFeed'} primaryText="My Feed" />
     <MenuItem value={'News'} primaryText="News" />
@@ -12,9 +14,9 @@ const Source = () => (
   </Menu>
 );
 
-// Source.propTypes = {
+Source.propTypes = {
 //   template: PropTypes.array,
-//   addSource: PropTypes.func
-// };
+  addSource: PropTypes.func
+};
 
 export default Source;

@@ -30,7 +30,7 @@ const SourceContainerWithContext = React.createClass({
   },
 
   render: function() {
-    return (<Source />);
+    return (<SourceContainer />);
   }
 
   // constructor(props) {

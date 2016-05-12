@@ -5,22 +5,17 @@ import Source from './Source';
 import SourceContainerWithContext from '../containers/SourceContainer';
 import Popover from 'react-popover';
 
-const Pop = ({
-  item
-}, {
-  muiTheme, 
-  store
-}) => {
+const Pop = ({item, isOpen, id, clickHandler, outsideClickHandler}, {muiTheme, store}) => {
   return (
     <Popover 
       preferPlace='below'
       body={<SourceContainerWithContext muiTheme={muiTheme} store={store} />}
-      isOpen={true}
-      onOuterAction={() => {console.log('hi')}}
+      isOpen={isOpen}
+      onOuterAction={outsideClickHandler}
     >
       {item.source ?
-        <Chunk item={item} />
-        : <AddButton />
+        <Chunk item={item} onClick={() => clickHandler(id)} />
+        : <AddButton onClick={() => clickHandler(id)} />
       }
     </Popover>
 )}

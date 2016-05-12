@@ -3,8 +3,8 @@ import React, { PropTypes } from 'react';
 import {FloatingActionButton} from 'material-ui';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
-const AddButton = () => (
-  <FloatingActionButton mini={true}><ContentAdd/></FloatingActionButton>
+const AddButton = ({onClick}) => (
+  <FloatingActionButton onClick={onClick} mini={true}><ContentAdd/></FloatingActionButton>
 );
 
 export default AddButton;

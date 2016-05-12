@@ -2,12 +2,13 @@ import React, { PropTypes } from 'react';
 import styles from '../styles/chunk.css';
 
 const Chunk = ({
-  item
+  item,
+  onClick
 }) => {
   return (
     <span 
       className={styles.chunk}
-
+      onClick={onClick}
     >
       {item.source}
     </span>
