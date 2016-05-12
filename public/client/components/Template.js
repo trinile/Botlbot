@@ -4,7 +4,8 @@ import SourceContainer from '../containers/SourceContainer';
 import styles from '../styles/template.css';
 
 const Template = ({
-  templateBuilder: {status, template},
+  templateBuilder: status,
+  template,
   trashTemplate,
   saveTemplate,
   toggleEditing,
@@ -70,9 +71,12 @@ const Template = ({
 );
 
 Template.propTypes = {
-  template: PropTypes.array,
+  templateBuilder: PropTypes.object,
   updateTemplate: PropTypes.func,
   trashTemplate: PropTypes.func,
+  toggleEditing: PropTypes.func,
+  toggleAdding: PropTypes.func,
+  toggleStatus: PropTypes.func
 };
 
 export default Template;

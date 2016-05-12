@@ -29,11 +29,11 @@ const menuTree = {
     }
   },
 
-  Reaction: {
-    emoji: null,
-    casual: null,
-    boring: null
-  }
+  Reaction: [
+    'emoji',
+    'casual',
+    'boring'
+  ]
 };
 
 export default menuTree;

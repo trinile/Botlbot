@@ -6,7 +6,8 @@ import authStatus from './Auth';
 import tweets from './tweets';
 import tweetsFilter from './tweetsFilter';
 import requestStatus from './requestStatus';
-import { template, templateBuilder } from './template';
+import template from './template';
+import templateBuilder from './templateBuilder';
 
 const Reducers = combineReducers({
   authStatus,

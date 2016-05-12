@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 import Template from '../components/Template';
-import { trashTemplate, saveTemplate, toggleEditing, toggleAdding, toggleStatus } from '../actions/template';
+import { trashTemplate, saveTemplate } from '../actions/template';
+import { toggleEditing, toggleAdding, toggleStatus } from '../actions/templateBuilder';
 
-const mapStateToProps = (state) => ({ templateBuilder: state.templateBuilder });
+const mapStateToProps = (state) => ({ template: state.template, templateBuilder: state.templateBuilder });
 const mapDispatchToProps = (dispatch) => ({
   trashTemplate: () => {
     dispatch(trashTemplate());
