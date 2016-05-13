@@ -1,9 +1,9 @@
 const knex = require('../db.js');
-
+//cleans up data from API call to Twitter
 function scrubFetchedTweet(tweet, userID) {
   return {
     tweet_id_str: tweet.id_str,
-    user_id: userID,
+    user_twitter_id: userID,
     retweet_count: tweet.retweet_count,
     favorite_count: tweet.favorite_count,
     user_screen_name: tweet.user.screen_name,
@@ -11,7 +11,7 @@ function scrubFetchedTweet(tweet, userID) {
     tweet_text: tweet.text
   };
 }
-
+//cleans up data from post API call to Twitter
 function scrubPostedTweet(tweet) {
   return {
     user_twitter_id: tweet.user.id_str,
