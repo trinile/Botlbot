@@ -6,7 +6,7 @@ import { expect } from 'chai';
 const config = require('../knexfile.js');
 const knex = require('knex')(config.test);
 const Tweet = require('../server/db/controllers/tweetsController');
-const helpers = require('../server/helpers');
+const twit = require('../server/helpers');
 const twitterResponse = require('./sampleTwitterResponse');
 
 
@@ -44,7 +44,7 @@ describe('Tweet', function() {
         tokenSecret: 'ecbv7GmYnPjxZ96NRcXgtPwAZjcmPfGXubq3UPhx3P1qO',
       };
 
-      helpers.postTweet(join)
+      twit.post(join)
       .then(data => {
         expect(data).to.exist;
         expect(data).to.have.deep.property('user.id_str', '727615201575469056');

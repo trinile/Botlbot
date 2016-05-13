@@ -1,5 +1,4 @@
 const Twit = require('twit');
-const User = require('./db/controllers/userController');
 const Promise = require('bluebird');
 
 function createTwit(token, secret) {
@@ -12,7 +11,7 @@ function createTwit(token, secret) {
   }));
 }
 
-function postAsync(twit, status) {
+function postAsync(status, twit) {
   return new Promise(function(resolve, reject) {
     twit.post(
       'statuses/update',
@@ -26,11 +25,30 @@ function postAsync(twit, status) {
   });
 }
 
-function post(token, tokenSecret, status) {
+function getAsync(url, twit) {
+  return new Promise(function(resolve, reject) {
+    twit.get(
+      url,
+      { count: 200 },
+      function(err, data, response) {
+        if (err) reject(err);
+        // resolve({ data: data, response: response });
+        resolve(data);
+      }
+    );
+  });
+}
+
+function post(status, token, tokenSecret) {
   return createTwit(token, tokenSecret)
-  .then(twit => postAsync(twit, status))
+  .then(twit => postAsync(status, twit))
   .catch(err => console.log(err));
 }
 
+function get(url, token, tokenSecret) {
+  return createTwit(token, tokenSecret)
+  .then(twit => getAsync(url, twit))
+  .catch(err => console.log(err));
+}
 
-export default twit = { post: post };
+exports = { post: post, get: get };
