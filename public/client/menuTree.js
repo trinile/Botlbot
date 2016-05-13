@@ -7,16 +7,6 @@ const menuTree = {
     },
 
     Source: {
-      // randomWord: {
-      //   SelectField: {
-      //     children: ['adjective', 'adverb', 'noun', 'proper noun'],
-      //     hintText: 'Part of Speech'
-      //   },
-      //   TextField: {
-      //     length: 0
-      //   },
-      //   leaf: true
-      // },
       'random word': {
         'part of speech': ['adjective', 'adverb', 'noun', 'proper noun'],
         'min length': 0,
@@ -25,7 +15,7 @@ const menuTree = {
       },
       relatedWord: {
         relationship: ['synonym', 'antonym', 'rhyme'],
-        target: 0,
+        target: null,
         leaf: true
       },
       myFeed: {
@@ -56,6 +46,7 @@ const menuTree = {
         'casual',
         'boring'
       ],
+      target: null,
       leaf: true  
     }
   }
