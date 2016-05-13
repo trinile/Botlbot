@@ -39,7 +39,19 @@ const Template = ({
         item={{'Add!':true}}
         id={0}
         clickHandler={toggleAdding}
-        outsideClickHandler={() => {toggleStatus(); setTimeout(navigateOut, 300);}}
+        outsideClickHandler={(e) => {
+          console.log('======', e); 
+          let parent = e.target.parentNode;
+          let shouldToggle = true;
+          while(parent) {
+            if (parent.className === "noPropagation") {
+              shouldToggle = false;
+              break;
+            }
+            parent = parent.parentNode;
+          }
+          shouldToggle && toggleStatus();
+          shouldToggle && setTimeout(navigateOut, 300);}}
         isOpen={status.isAdding && status.id === 0}
       />
     {
@@ -51,7 +63,7 @@ const Template = ({
               item={item}
               id={index}
               clickHandler={toggleEditing}
-              outsideClickHandler={() => {toggleStatus(); navigateOut();}}
+              outsideClickHandler={(e) => {e.persist(); console.log('poo', e); toggleStatus(); navigateOut();}}
               isOpen={status.isEditing && status.id === index}
             />
             <Pop // + button

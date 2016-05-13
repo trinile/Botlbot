@@ -11,19 +11,24 @@ var formatter = (templateMenu, navigateDown) => {
       if (Array.isArray(currentLevel[key])) {
         menu.push(
           <SelectField 
-            children={currentLevel[key].map((item, index) => {
-              return (
-                <MenuItem 
-                  value={item} 
-                  primaryText={item} 
-                  key={index} 
-                  onTouchTap={(e) => {let temp = e; console.log(temp); e.preventDefault(); e.stopPropagation();}}
-                />
-              )
-            })}
             hintText={key}
             key={key}
-          />
+            onChange={(e) => {}}
+            value={'some part of state'}
+          >
+            {
+              currentLevel[key].map((item, index) => {
+                return (
+                  <MenuItem 
+                    className={"noPropagation"}
+                    value={item} 
+                    primaryText={item} 
+                    key={index} 
+                  />
+                )
+              })
+            }
+          </SelectField>
           // <TextField hintText={key} />
         );
       }

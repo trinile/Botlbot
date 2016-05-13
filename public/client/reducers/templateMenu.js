@@ -12,11 +12,3 @@ const templateMenu = (state = ['Root'], action) => {
 };
 
 export default templateMenu;
-
-    // case 'ADD_CHUNK':
-    //   newTemplate = [].concat(
-    //     state.template.slice(0, action.id),
-    //     chunk,
-    //     state.template.slice(action.id));
-    //   newStatus = Object.assign({}, initialState.status);
-    // return {template: newTemplate, status: newStatus};
