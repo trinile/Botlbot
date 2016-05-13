@@ -2,11 +2,14 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import TemplateMenu from '../components/TemplateMenu';
 import { navigateDown, navigateUp } from '../actions/templateMenu';
+import { updateChunk, setChunkType } from '../actions/chunk';
 
-const mapStateToProps = (state) => ({ templateMenu: state.templateMenu });
+const mapStateToProps = (state) => ({ templateMenu: state.templateMenu, chunkInProgress: state.chunkInProgress });
 const mapDispatchToProps = (dispatch) => ({
   navigateDown: (key) => dispatch(navigateDown(key)),
-  navigateUp: () => dispatch(navigateUp())
+  navigateUp: () => dispatch(navigateUp()),
+  updateChunk: (key, value) => dispatch(updateChunk(key, value)),
+  setChunkType: (chunkType) => dispatch(setChunkType(chunkType))
 });
 
 const TemplateMenuContainer = connect(

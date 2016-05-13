@@ -40,7 +40,6 @@ const Template = ({
         id={0}
         clickHandler={toggleAdding}
         outsideClickHandler={(e) => {
-          console.log('======', e); 
           let parent = e.target.parentNode;
           let shouldToggle = true;
           while(parent) {
@@ -56,14 +55,14 @@ const Template = ({
       />
     {
       template.map((item, index) => {
-        console.log(item);
         return (
           <span key={index}>
             <Pop 
               item={item}
               id={index}
               clickHandler={toggleEditing}
-              outsideClickHandler={(e) => {e.persist(); console.log('poo', e); toggleStatus(); navigateOut();}}
+              // TODO: make this outsideClickHandler be like the above one
+              outsideClickHandler={(e) => {toggleStatus(); navigateOut();}}
               isOpen={status.isEditing && status.id === index}
             />
             <Pop // + button

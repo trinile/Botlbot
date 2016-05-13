@@ -1,77 +1,92 @@
 import React, { PropTypes } from 'react';
 import { Menu, MenuItem, TextField, SelectField } from 'material-ui';
-import ContentAdd from 'material-ui/svg-icons/content/add';
+import AddButton from './AddButton';
 import menuTree from '../menuTree';
 
-var formatter = (templateMenu, navigateDown) => {
+var formatter = ({templateMenu, chunkInProgress, navigateDown, setChunkType, updateChunk}) => {
   const currentLevel = templateMenu.reduce(function(menuTree, key){return menuTree[key];}, menuTree);
   const menu = [];
   if (currentLevel.leaf) {
-    for (var key in currentLevel) {
+    for (let key in currentLevel) {
       if (Array.isArray(currentLevel[key])) {
         menu.push(
           <SelectField 
+            // autoWidth={true}
+            style={{'width': '13.5rem', 'marginLeft': '1.5rem'}}
             hintText={key}
             key={key}
-            onChange={(e) => {}}
-            value={'some part of state'}
+            onChange={(e, index, value) => {updateChunk(key, value)}}
+            value={chunkInProgress.params ? chunkInProgress.params[key] : null}
           >
             {
-              currentLevel[key].map((item, index) => {
+              currentLevel[key].map((value, index) => {
                 return (
                   <MenuItem 
+                    style={{'width': 'auto'}}
                     className={"noPropagation"}
-                    value={item} 
-                    primaryText={item} 
+                    value={value} 
+                    primaryText={value} 
                     key={index} 
                   />
                 )
               })
             }
           </SelectField>
-          // <TextField hintText={key} />
         );
       }
       if (typeof currentLevel[key] === 'number') {
         menu.push(
-          <TextField hintText={key} key={key} />
+          <TextField 
+            style={{'width': '6rem', 'marginLeft': '1.5rem'}}
+            floatingLabelText={key} 
+            type={'number'} 
+            key={key} 
+            onChange={(e) => updateChunk(key, e.target.value)}/>
         )
       }
       if (typeof currentLevel[key] === 'string') {
         menu.push(
-          <TextField hintText={key} key={key} />
+          <TextField 
+            multiLine={key === 'content'}
+            style={{'width': 'auto'}}
+            floatingLabelText={key} 
+            key={key} 
+            onChange={(e) => updateChunk(key, e.target.value)}/>
         )
       }
     }
   } else {
     return (
-      <Menu children={Object.keys(currentLevel).map((item, index) => {
-        return (
-          <MenuItem 
-            value={item} 
-            primaryText={item} 
-            key={index} 
-            onTouchTap={() => navigateDown(item)}
-          />
-        )
+      <Menu 
+        autoWidth={true}
+        children={Object.keys(currentLevel).map((item, index) => {
+          return (
+            <MenuItem 
+              value={item} 
+              primaryText={item} 
+              key={index} 
+              onTouchTap={() => {navigateDown(item); setChunkType(item)}}
+            />
+          )
       })} />
     )
   }
 
   return (
-    <Menu>
+    <Menu autoWidth={true}>
       {menu}
+      <div style={{display: 'flex', justifyContent: 'space-around'}}>
+        <AddButton icon={'back'} />
+        <AddButton icon={'cancel'} />
+        <AddButton icon={'save'} />
+      </div>
     </Menu>
   )
 };
 
 // onItemTouchTap={addTemplateMenu}
-const TemplateMenu = ({
-  templateMenu,
-  navigateDown,
-  navigateUp
-}) => {
-  return formatter(templateMenu, navigateDown)
+const TemplateMenu = (props) => {
+  return formatter(props)
 };
 
 TemplateMenu.propTypes = {
