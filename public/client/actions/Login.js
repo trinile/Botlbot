@@ -3,6 +3,8 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
 } from '../constants.js';
+import fetch from 'isomorphic-fetch';
+
 
 /**
 * Action-creators to handle Login Flow
@@ -60,7 +62,7 @@ export const receiveLogin = () => (
 * @property { Boolean } isAuthenticated - false
 * @property { string } isFetching - true
 */ 
-export const logininError = (message) => (
+export const loginError = (message) => (
   {
     type: LOGIN_FAILURE,
     isFetching: false,
@@ -79,10 +81,13 @@ export const logininError = (message) => (
 export const authUser = () => {
   return dispatch => {
     dispatch(requestLogin());
-    return fetch('/authUser', { method: 'GET', credentials: 'same-origin' })
+    return fetch('http://127.0.0.1:1337/authUser', { method: 'GET', credentials: 'same-origin' })
       .then(res => res.json())
       .then(json => {
         localStorage.setItem('authID', json.authID);
+        // if (!json.ok) {
+          // dispatch(loginError(err));
+        // }
         dispatch(receiveLogin());
       })
       .catch(err => dispatch(loginError(err)));

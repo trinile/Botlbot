@@ -5,7 +5,7 @@ import {
   LOGOUT_FAILURE
 } from '../constants.js';
 import { push } from 'react-router-redux';
-
+import fetch from 'isomorphic-fetch';
 //three possible states for logging out.
 //need three actions.
 //actions are useful if we call the API to log the user out.

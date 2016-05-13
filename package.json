@@ -31,6 +31,7 @@
     "connect-redis": "^3.0.2",
     "docdash": "^0.3.0",
     "express-session": "^1.13.0",
+    "isomorphic-fetch": "^2.2.1",
     "jsdoc": "^3.4.0",
     "knex": "^0.10.0",
     "material-ui": "^0.15.0",

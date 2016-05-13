@@ -1,33 +1,42 @@
 import React, { PropTypes } from 'react';
 import Tweet from './Tweet';
 import styles from '../styles/main.css';
+import EditTweet from './EditTweet';
 
 const style = {
-  display: 'inline-block'
+  position: 'fixed',
+  width: '100%',
+  'textAlign':'center',
 };
 
-const TweetList = ({ tweets, onGetTweets, onPostTweet, onTrashTweet }) => {
-  function fetchTweets() {
-    fetch('http://127.0.0.1:1337/generateDummy', { method: 'GET', mode: 'cors' })
-    .then(result => result.json())
-    .then(result => {
-      localStorage.setItem('tweets', JSON.stringify(result));
-      return onGetTweets(result);
-    })
-    .catch(err => console.error(err));
-  }
+const TweetList = ({ 
+  tweets, 
+  onRequestEdit,
+  cancelEditTweet,
+  onPostTweet, 
+  onTrashTweet, 
+  onEditTweet }) => {
+
   return (
-    <div styles={style}>
-      <button onClick={fetchTweets}>Get Tweeties</button>
-      <div styles={styles['tweets-list']}>
-        {tweets.map((t) => (
-          <Tweet
-            key={t.id_str}
-            tweet={t}
-            postTweet={() => onPostTweet(t.id_str)}
-            trashTweet={() => onTrashTweet(t.id_str)}
+    <div>
+      <div style={styles['tweets-list']}>
+        {tweets.map((t, index) => (
+          t.editing === true 
+          ? <EditTweet 
+          key={index}
+          tweet={t} 
+          postTweet={() => onPostTweet(t.tweet_id_str)} 
+          cancelEdit={() => cancelEditTweet(t.tweet_id_str)}
+          editTweet={() => onEditTweet(t.tweet_id_str, t.tweet_text)}
           />
-        ))}
+          : <Tweet
+            key={index}
+            tweet={t}
+            postTweet={() => onPostTweet(t.tweet_id_str)}
+            trashTweet={() => onTrashTweet(t.tweet_id_str)}
+            requestEdit={() => onRequestEdit(t.tweet_id_str)}
+            />
+          ))}
       </div>
     </div>
   );
@@ -38,6 +47,10 @@ TweetList.propTypes = {
   onGetTweets: PropTypes.func,
   onPostTweet: PropTypes.func,
   onTrashTweet: PropTypes.func,
+  onEditTweet: PropTypes.func,
+  onRequestEdit: PropTypes.func,
+  cancelEditTweet: PropTypes.func,
 };
+
 
 export default TweetList;
