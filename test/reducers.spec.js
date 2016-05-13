@@ -5,7 +5,8 @@ import deepFreeze from 'deep-freeze';
 
 import tweets from '../public/client/reducers/tweets';
 import authStatus from '../public/client/reducers/Auth';
-import templates from '../public/client/reducers/templates';
+// import templates from '../public/client/reducers/templates';
+import chunkInProgress from '../public/client/reducers/chunkInProgress';
 
 describe('Tweets Reducers', function () {
 
@@ -120,7 +121,7 @@ describe('Authentication Reducers', function () {
   });
 });
 
-describe('Template Reducers', function() {
+xdescribe('Template Reducers', function() {
   
   describe('Updating a template', function() {
 
@@ -145,6 +146,36 @@ describe('Template Reducers', function() {
 
     it('Should delete a template', function() {
       expect(templates(beforeState, action)).to.equal(afterState);
+    });
+  });
+});
+
+describe('Chunk Reducers', function() {
+  
+  describe('Setting a chunkType', function() {
+
+    const afterState = {chunkType: 'random word', params: null};
+    const action = {
+      type: 'SET_CHUNK_TYPE',
+      chunkType: 'random word'
+    };
+
+    it('Should set a chunkType', function() {
+      expect(chunkInProgress(undefined, action)).to.eql(afterState);
+    });
+  });
+
+  describe('Updating params', function() {
+
+    const beforeState = {chunkType: 'random word', params: null};
+    const afterState = {chunkType: 'random word', params: {length: 5}};
+    const action = {
+      type: 'UPDATE_CHUNK',
+      param: {length: 5}
+    };
+
+    it('Should update a chunk will null params', function() {
+      expect(chunkInProgress(beforeState, action)).to.eql(afterState);
     });
   });
 });

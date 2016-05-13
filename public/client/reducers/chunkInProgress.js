@@ -6,13 +6,18 @@
     //   newStatus = Object.assign({}, initialState.status);
     // return {template: newTemplate, status: newStatus};
 
-const chunkInProgress = (state = {}, action) => {
+const chunkInProgress = (state = {chunkType: null, params: null}, action) => {
   switch (action.type) {
+    case 'SET_CHUNK_TYPE':
+      return {chunkType: action.chunkType, params: null};
     case 'UPDATE_CHUNK':
-      let newChunk = Object.assign({}, state);
-      newChunk[action[chunkType]][action[key]] = action[value];
+      let newParams = Object.assign({}, state.params, action.param);
+      let newChunk = Object.assign({}, state, {params: newParams});
       return newChunk;
+      // return {chunkType: state.chunkType, params: {...state.params, ...action.param}};
     default:
       return state;
   }
+};
 
+export default chunkInProgress;
