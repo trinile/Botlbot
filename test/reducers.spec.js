@@ -1,18 +1,20 @@
+import * as TYPE from '../public/client/constants';
+
 import { expect } from 'chai';
 import deepFreeze from 'deep-freeze';
 
 import tweets from '../public/client/reducers/tweets';
-import authStatus from '../public/client/reducers/Auth'
+import authStatus from '../public/client/reducers/Auth';
 
-describe('Tweets Reducers', function() {
+describe('Tweets Reducers', function () {
 
-  describe('Adding Tweets', function() {
+  describe('Adding Tweets', function () {
     const stateBefore1 = [];
     const stateBefore2 = [
       { id_str: 0, text: 'not empty in here', posted: false, trashed: false },
     ];
     const action = {
-      type: 'ADD_NEW_TWEETS',
+      type: TYPE.ADD_NEW_TWEETS,
       tweets: [
         { id_str: 1, text: 'new tweet' },
         { id_str: 2, text: 'another tweet' },
@@ -50,7 +52,7 @@ describe('Tweets Reducers', function() {
       { id_str: 2, text: 'another tweet', posted: false, trashed: false },
     ];
     const action = {
-      type: 'POST_TWEET',
+      type: TYPE.POST_TWEET,
       id: 1,
     };
     const stateAfter = [
@@ -80,7 +82,7 @@ describe('Tweets Reducers', function() {
       { id_str: 2, text: 'another tweet', posted: false, trashed: false },
     ];
     const action = {
-      type: 'TRASH_TWEET',
+      type: TYPE.TRASH_TWEET,
       id: 2,
     };
     const stateAfter = [
@@ -89,30 +91,30 @@ describe('Tweets Reducers', function() {
       { id_str: 2, text: 'another tweet', posted: false, trashed: true },
     ];
 
-    before('calls deep freeze to ensure no mutations', function() {
+    before('calls deep freeze to ensure no mutations', function () {
       deepFreeze(stateBefore);
       deepFreeze(action);
     });
 
-    it('Should toggle a tweet as trashed', function() {
+    it('Should toggle a tweet as trashed', function () {
       expect(tweets(stateBefore, action)).to.have.deep.property('[2].trashed', true);
     });
 
-    it('Should not remove the trashed tweet from the state', function() {
+    it('Should not remove the trashed tweet from the state', function () {
       expect(tweets(stateBefore, action)).to.deep.equal(stateAfter);
     });
   });
 });
 
-describe('Authentication Reducers', function() {
-  const loggedOutState = false;
-  const loggedInState = true;
+describe('Authentication Reducers', function () {
+  const loggedOutState = { isAuthenticated: false, isFetching: false };
+  const loggedInState = { isAuthenticated: true, isFetching: false };
 
-  xit('Should successfully login', function() {
-    expect(authStatus(loggedOutState, { type: 'LOGIN_SUCCESS' })).to.be.true;
+  it('Should successfully login', function () {
+    expect(authStatus(loggedOutState, { type: TYPE.LOGIN_SUCCESS })).to.be.equal;
   });
 
-  xit('Should successfully logout', function() {
-    expect(authStatus(loggedInState, { type: 'LOGOUT_SUCCESS' })).to.be.false;
+  it('Should successfully logout', function () {
+    expect(authStatus(loggedInState, { type: TYPE.LOGOUT_SUCCESS })).to.be.equal;
   });
 });
