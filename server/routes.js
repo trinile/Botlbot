@@ -2,7 +2,7 @@ const path = require('path');
 // const client = require('./db/redisClient.js');
 const User = require('./db/controllers/userController.js');
 const Tweets = require('./db/controllers/tweetsController.js');
-const pullTweetsFromFeed = require('./searchAlgo.js');
+const getTweets = require('./templateControllers/myFeed');
 const dummyTweets = require('./dummyTweets.js');
 const helpers = require('./helpers');
 
@@ -54,14 +54,11 @@ module.exports = function(app, passport) {
 
   //call to TWITTER TO GET TWEEETS
   app.get('/generate', ensureAuthenticated, function(req, res) {
-    User.getRecord(req.user.id)
-      .then(function(reply) {
-        console.log('from retrieve users ==========', reply);
-        pullTweetsFromFeed(reply.token, reply.tokenSecret, req.user.id, res);
-      })
-      .catch(function(err) {
-        console.log('you are bad at promises ============', err);
-      })
+    getTweets(req.user.id)
+    .then(tweets => res.status(200).json(tweets))
+    .catch(function(err) {
+      console.log('you are bad at promises ============', err);
+    });
   });
 
   app.get('/generateDummy', function(req, res) {
