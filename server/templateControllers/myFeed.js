@@ -1,4 +1,5 @@
 const twit = require('../helpers').twit;
+const User = require('../db/controllers/userController');
 
 function relativeRank(tweet) {
   return (
@@ -12,7 +13,7 @@ function compareRank(a, b) {
 }
 
 function topTwentyTweets(tweets, n) {
-  n = n === undefined ? 20 : n;
+  n = n || 20;
   return tweets.sort(compareRank).slice(0, n);
 }
 
@@ -22,9 +23,10 @@ function fetchFromFeed(token, tokenSecret) {
   .catch(err => console.log(err));
 }
 
-function myTopTwentyFeed(token, tokenSecret, n) {
-  return fetchFromFeed(token, tokenSecret)
-  .then(topTwentyTweets)
+function myTopTwentyFeed(n, id) {
+  return User.getTokens(id)
+  .then(auth => fetchFromFeed(auth.token, auth.tokenSecret))
+  .then(tweets => topTwentyTweets(tweets, n))
   .catch(err => console.log(err));
 }
 
