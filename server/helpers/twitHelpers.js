@@ -51,4 +51,4 @@ function get(url, token, tokenSecret) {
   .catch(err => console.log(err));
 }
 
-exports = { post: post, get: get };
+module.exports = { post: post, get: get };
