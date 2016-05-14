@@ -1,21 +1,7 @@
 const twit = require('../helpers').twit;
+const tweets = require('../helpers').tweets;
 const User = require('../db/controllers/userController');
 
-function relativeRank(tweet) {
-  return (
-    ((tweet.retweet_count * 10) + tweet.favorite_count) /
-    (tweet.user.followers_count || 1) // prevent division by 0;
-  );
-}
-
-function compareRank(a, b) {
-  return relativeRank(a) - relativeRank(b);
-}
-
-function topTwentyTweets(tweets, n) {
-  n = n || 20;
-  return tweets.sort(compareRank).slice(0, n);
-}
 
 function fetchFromFeed(token, tokenSecret) {
   return twit.get('/statuses/home_timeline', token, tokenSecret)
@@ -26,7 +12,7 @@ function fetchFromFeed(token, tokenSecret) {
 function myTopTwentyFeed(id, n) {
   return User.getTokens(id)
   .then(auth => fetchFromFeed(auth.token, auth.tokenSecret))
-  .then(tweets => topTwentyTweets(tweets, n))
+  .then(results => tweets.filterTopN(results, n))
   .catch(err => console.log(err));
 }
 
