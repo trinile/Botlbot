@@ -1,9 +1,23 @@
 import React, { PropTypes } from 'react';
-import { Menu, MenuItem, TextField, SelectField } from 'material-ui';
+import { Menu, MenuItem, TextField, SelectField, Subheader } from 'material-ui';
 import AddButton from './AddButton';
 import menuTree from '../menuTree';
 
-var formatter = ({templateMenu, chunkInProgress, navigateDown, setChunkType, updateChunk}) => {
+
+
+const formatter = ({
+  templateMenu, 
+  chunkInProgress,
+  templateBuilder, 
+  navigateDown, 
+  navigateUp, 
+  navigateOut,
+  toggleStatus,
+  setChunkType, 
+  updateChunk, 
+  addChunk,
+  editChunk
+}) => {
   const currentLevel = templateMenu.reduce(function(menuTree, key){return menuTree[key];}, menuTree);
   const menu = [];
   if (currentLevel.leaf) {
@@ -13,7 +27,7 @@ var formatter = ({templateMenu, chunkInProgress, navigateDown, setChunkType, upd
           <SelectField 
             // autoWidth={true}
             style={{'width': '13.5rem', 'marginLeft': '1.5rem'}}
-            hintText={key}
+            floatingLabelText={key}
             key={key}
             onChange={(e, index, value) => {updateChunk(key, value)}}
             value={chunkInProgress.params ? chunkInProgress.params[key] : null}
@@ -57,9 +71,9 @@ var formatter = ({templateMenu, chunkInProgress, navigateDown, setChunkType, upd
     }
   } else {
     return (
-      <Menu 
-        autoWidth={true}
-        children={Object.keys(currentLevel).map((item, index) => {
+      <Menu autoWidth={true}>
+        <Subheader>{templateMenu[templateMenu.length - 1] === 'Root' ? '' : templateMenu[templateMenu.length - 1]}</Subheader>
+        {Object.keys(currentLevel).map((item, index) => {
           return (
             <MenuItem 
               value={item} 
@@ -68,23 +82,33 @@ var formatter = ({templateMenu, chunkInProgress, navigateDown, setChunkType, upd
               onTouchTap={() => {navigateDown(item); setChunkType(item)}}
             />
           )
-      })} />
+        })}
+        <div style={{display: 'flex', justifyContent: 'space-around'}}>
+          <AddButton icon={'back'} onClick={navigateUp} disabled={templateMenu.length === 1}/>
+          <AddButton icon={'cancel'} onClick={() => {toggleStatus(); setTimeout(navigateOut, 300);}} />
+        </div>
+      </Menu>
     )
   }
 
   return (
     <Menu autoWidth={true}>
+      <Subheader>{templateMenu[templateMenu.length - 1] === 'Root' ? '' : templateMenu[templateMenu.length - 1]}</Subheader>
       {menu}
       <div style={{display: 'flex', justifyContent: 'space-around'}}>
-        <AddButton icon={'back'} />
-        <AddButton icon={'cancel'} />
-        <AddButton icon={'save'} />
+        <AddButton icon={'back'} onClick={navigateUp} />
+        <AddButton icon={'cancel'} onClick={() => {toggleStatus(); setTimeout(navigateOut, 300);}} />
+        <AddButton icon={'save'} onClick={() => {
+          templateBuilder.isAdding && addChunk(templateBuilder.id, chunkInProgress); 
+          templateBuilder.isEditing && editChunk(templateBuilder.id, chunkInProgress); 
+          toggleStatus(); 
+          setTimeout(navigateOut, 300);
+        }} />
       </div>
     </Menu>
   )
 };
 
-// onItemTouchTap={addTemplateMenu}
 const TemplateMenu = (props) => {
   return formatter(props)
 };
@@ -96,16 +120,3 @@ TemplateMenu.propTypes = {
 };
 
 export default TemplateMenu;
-
-
-// Object.keys(templateMenu
-      //   .reduce((menuTree, key) => menuTree[key], menuTree))
-      //   .map((item, index) => (
-      //     <MenuItem 
-      //       value={item} 
-      //       primaryText={item} 
-      //       key={index} 
-      //       onTouchTap={() => navigateDown(item)}
-      //     />
-      //   )
-      // )

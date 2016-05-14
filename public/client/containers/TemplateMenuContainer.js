@@ -1,23 +1,31 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import TemplateMenu from '../components/TemplateMenu';
-import { navigateDown, navigateUp } from '../actions/templateMenu';
+import { navigateDown, navigateUp, navigateOut } from '../actions/templateMenu';
 import { updateChunk, setChunkType } from '../actions/chunk';
+import { addChunk, editChunk } from '../actions/template';
+import { toggleStatus } from '../actions/templateBuilder';
 
-const mapStateToProps = (state) => ({ templateMenu: state.templateMenu, chunkInProgress: state.chunkInProgress });
+const mapStateToProps = (state) => ({ 
+  templateMenu: state.templateMenu, 
+  chunkInProgress: state.chunkInProgress, 
+  templateBuilder: state.templateBuilder 
+});
 const mapDispatchToProps = (dispatch) => ({
   navigateDown: (key) => dispatch(navigateDown(key)),
   navigateUp: () => dispatch(navigateUp()),
+  navigateOut: () => dispatch(navigateOut()),
+  toggleStatus: () => dispatch(toggleStatus()),
   updateChunk: (key, value) => dispatch(updateChunk(key, value)),
-  setChunkType: (chunkType) => dispatch(setChunkType(chunkType))
+  setChunkType: (chunkType) => dispatch(setChunkType(chunkType)),
+  addChunk: (id, chunk) => dispatch(addChunk(id, chunk)),
+  editChunk: (id, chunk) => dispatch(editChunk(id, chunk))
 });
 
 const TemplateMenuContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(TemplateMenu);
-
-// TemplateMenuContainer.contextTypes = { context: PropTypes.object };
 
 const TemplateMenuContainerWithContext = React.createClass({
   
@@ -33,19 +41,6 @@ const TemplateMenuContainerWithContext = React.createClass({
   render: function() {
     return (<TemplateMenuContainer />);
   }
-
-  // constructor(props) {
-  //   super(props);
-  //   // this.childContextTypes = {
-  //   //   context: PropTypes.object
-
-  // getChildContext() {
-  //   return {context: this.props.context};
-  // }
-
-  // render() {
-  //   return (<TemplateMenuContainer />);
-  // }
 
 });
 

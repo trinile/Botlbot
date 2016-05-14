@@ -13,7 +13,7 @@ const Pop = ({item, isOpen, id, clickHandler, outsideClickHandler}, {muiTheme, s
       isOpen={isOpen}
       onOuterAction={outsideClickHandler}
     >
-      {item.source 
+      {item.chunkType 
         ? <Chunk item={item} onClick={() => clickHandler(id)} />
         : <AddButton onClick={() => clickHandler(id)} />
       }

@@ -2,7 +2,10 @@ import React, { PropTypes } from 'react';
 import styles from '../styles/chunk.css';
 
 const Chunk = ({
-  item,
+  item: {
+    chunkType,
+    params
+  },
   onClick
 }) => {
   return (
@@ -10,7 +13,7 @@ const Chunk = ({
       className={styles.chunk}
       onClick={onClick}
     >
-      {item.source}
+      {chunkType}{params.keyword ? ': ' + params.keyword : ''}{params.content ? ': ' + params.content : ''}
     </span>
   );
 };

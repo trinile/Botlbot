@@ -3,6 +3,20 @@ import Pop from './Pop';
 import TemplateMenuContainer from '../containers/TemplateMenuContainer';
 import styles from '../styles/template.css';
 
+const clickOut = (e, toggleStatus, navigateOut) => {
+  let parent = e.target.parentNode;
+  let shouldToggle = true;
+  while(parent) {
+    if (parent.className === "noPropagation") {
+      shouldToggle = false;
+      break;
+    }
+    parent = parent.parentNode;
+  }
+  shouldToggle && toggleStatus();
+  shouldToggle && setTimeout(navigateOut, 300);
+};
+
 const Template = ({
   templateBuilder: status,
   template,
@@ -39,37 +53,25 @@ const Template = ({
         item={{'Add!':true}}
         id={0}
         clickHandler={toggleAdding}
-        outsideClickHandler={(e) => {
-          let parent = e.target.parentNode;
-          let shouldToggle = true;
-          while(parent) {
-            if (parent.className === "noPropagation") {
-              shouldToggle = false;
-              break;
-            }
-            parent = parent.parentNode;
-          }
-          shouldToggle && toggleStatus();
-          shouldToggle && setTimeout(navigateOut, 300);}}
+        outsideClickHandler={(e) => clickOut(e, toggleStatus, navigateOut)}
         isOpen={status.isAdding && status.id === 0}
       />
     {
       template.map((item, index) => {
         return (
           <span key={index}>
-            <Pop 
+            <Pop // this is the chunk
               item={item}
               id={index}
               clickHandler={toggleEditing}
-              // TODO: make this outsideClickHandler be like the above one
-              outsideClickHandler={(e) => {toggleStatus(); navigateOut();}}
+              outsideClickHandler={(e) => clickOut(e, toggleStatus, navigateOut)}
               isOpen={status.isEditing && status.id === index}
             />
-            <Pop // + button
+            <Pop // this is the + button
               item={{'Add!':true}}
               id={index + 1}
               clickHandler={toggleAdding}
-              outsideClickHandler={() => {toggleStatus(); navigateOut();}}
+              outsideClickHandler={(e) => clickOut(e, toggleStatus, navigateOut)}
               isOpen={status.isAdding && status.id === index + 1}
             />
           </span>
