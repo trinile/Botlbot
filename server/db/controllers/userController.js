@@ -43,5 +43,6 @@ function getTokens(userId) {
 
 module.exports = {
   login: login,
-  getRecord: getRecord
+  getRecord: getRecord,
+  getTokens: getTokens
 };
