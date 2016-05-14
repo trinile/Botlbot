@@ -1,7 +1,11 @@
 const Promise = require('bluebird');
 const chunkHandler = {
-  'my feed': require('./myFeed'),
-  text: require('./text'),
+  'my feed': function(params, userId, n) {
+    return require('./myFeed')(id, n);
+  },
+  text: function(params, userId, n) {
+    return require('./text')(params.content, n);
+  },
 };
 
 function zip(arrays) {
@@ -12,6 +16,6 @@ function zip(arrays) {
   return result;
 }
 
-function parseTemplate(template, userId) {
-  return zip(Promise.all(template.map(chunk => chunkHandler[chunk.type](chunk.params, userId))));
+function parseTemplate(template, userId, n) {
+  return zip(Promise.all(template.map(chunk => chunkHandler[chunk.type](chunk.params, userId, n))));
 }
