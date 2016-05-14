@@ -12,6 +12,13 @@ export function toggleAdding(id) {
   };
 }
 
+export function toggleSelecting(id) {
+  return {
+    type: 'TOGGLE_SELECTING',
+    id
+  };
+}
+
 export function toggleStatus() {
   return {
     type: 'TOGGLE_STATUS'

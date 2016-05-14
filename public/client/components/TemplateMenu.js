@@ -17,6 +17,7 @@ import menuTree from '../menuTree';
 const formatter = ({
   templateMenu, 
   chunkInProgress,
+  chunkIDCounter,
   templateBuilder, 
   navigateDown, 
   navigateUp, 
@@ -26,7 +27,8 @@ const formatter = ({
   updateChunk, 
   addChunk,
   editChunk,
-  deleteChunk
+  deleteChunk,
+  incrementCounter
 }) => {
   const currentLevel = templateMenu.reduce(function(menuTree, key){return menuTree[key];}, menuTree);
   const menu = [];
@@ -121,8 +123,12 @@ const formatter = ({
           : <AddButton icon={'cancel'} onClick={() => {toggleStatus(); setTimeout(navigateOut, 300);}} />
         }
         <AddButton icon={'save'} onClick={() => {
-          templateBuilder.isAdding && addChunk(templateBuilder.id, chunkInProgress); 
-          templateBuilder.isEditing && editChunk(templateBuilder.id, chunkInProgress); 
+          if (templateBuilder.isAdding) {
+            addChunk(templateBuilder.id, chunkInProgress, chunkIDCounter); 
+            incrementCounter();
+          } else {
+            templateBuilder.isEditing && editChunk(templateBuilder.id, chunkInProgress); 
+          }
           toggleStatus(); 
           setTimeout(navigateOut, 300);
         }} />

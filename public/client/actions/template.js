@@ -10,25 +10,26 @@ export function saveTemplate() {
   };
 }
 
-export function addChunk(id, chunk) {
+export function addChunk(index, chunk, id) {
   return {
     type: 'ADD_CHUNK',
-    id,
-    chunk
+    index,
+    chunk,
+    id
   };
 }
 
-export function editChunk(id, chunk) {
+export function editChunk(index, chunk) {
   return {
     type: 'EDIT_CHUNK',
-    id,
+    index,
     chunk
   };
 }
 
-export function deleteChunk(id) {
+export function deleteChunk(index) {
   return {
     type: 'DELETE_CHUNK',
-    id
+    index
   };
 }
