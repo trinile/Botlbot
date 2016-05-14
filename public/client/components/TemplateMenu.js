@@ -64,7 +64,9 @@ const formatter = ({
             floatingLabelText={key} 
             type={'number'} 
             key={key} 
-            onChange={(e) => updateChunk(key, e.target.value)}/>
+            onChange={(e) => updateChunk(key, e.target.value)}
+            value={chunkInProgress.params ? chunkInProgress.params[key] : null}
+          />
         )
       }
       if (typeof currentLevel[key] === 'string') {
@@ -74,7 +76,9 @@ const formatter = ({
             style={{'width': 'auto'}}
             floatingLabelText={key} 
             key={key} 
-            onChange={(e) => updateChunk(key, e.target.value)}/>
+            onChange={(e) => updateChunk(key, e.target.value)}
+            value={chunkInProgress.params ? chunkInProgress.params[key] : null}
+          />
         )
       }
     }

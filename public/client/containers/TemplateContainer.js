@@ -3,11 +3,12 @@ import Template from '../components/Template';
 import { trashTemplate, saveTemplate } from '../actions/template';
 import { toggleEditing, toggleAdding, toggleStatus } from '../actions/templateBuilder';
 import { navigateOut, startAtLeaf } from '../actions/templateMenu';
+import { loadParams } from '../actions/chunk';
 
 const mapStateToProps = (state) => ({ 
   template: state.template, 
   templateBuilder: state.templateBuilder, 
-  templateMenu: state.templateMenu 
+  templateMenu: state.templateMenu
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -31,6 +32,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   startAtLeaf: (chunkType) => {
     dispatch(startAtLeaf(chunkType));
+  },
+  loadParams: (chunkType, params) => {
+    dispatch(loadParams(chunkType, params));
   }
 });
 

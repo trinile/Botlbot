@@ -26,7 +26,8 @@ const Template = ({
   toggleAdding,
   toggleStatus,
   navigateOut,
-  startAtLeaf
+  startAtLeaf,
+  loadParams
 }) => (
   <article >
     <style>{`
@@ -64,7 +65,11 @@ const Template = ({
             <Pop // this is the chunk
               item={item}
               id={index}
-              clickHandler={() => { toggleEditing(index); startAtLeaf(item.chunkType); }}
+              clickHandler={() => { 
+                toggleEditing(index); 
+                startAtLeaf(item.chunkType); 
+                loadParams(item.chunkType, template[index].params);
+              }}
               outsideClickHandler={(e) => clickOut(e, toggleStatus, navigateOut)}
               isOpen={status.isEditing && status.id === index}
             />

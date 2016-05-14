@@ -11,3 +11,11 @@ export function updateChunk(key, value) {
     param: {[key]: value}
   };
 }
+
+export function loadParams(chunkType, params) {
+  return {
+    type: 'LOAD_PARAMS',
+    chunkType,
+    params
+  };
+}
