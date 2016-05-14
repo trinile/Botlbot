@@ -4,7 +4,7 @@ import TemplateMenu from '../components/TemplateMenu';
 import { navigateDown, navigateUp, navigateOut } from '../actions/templateMenu';
 import { updateChunk, setChunkType } from '../actions/chunk';
 import { addChunk, editChunk, deleteChunk } from '../actions/template';
-import { toggleStatus } from '../actions/templateBuilder';
+import { toggleStatus, toggleSelecting } from '../actions/templateBuilder';
 import { incrementCounter } from '../actions/chunkIDCounter';
 
 const mapStateToProps = (state) => ({ 
@@ -18,6 +18,7 @@ const mapDispatchToProps = (dispatch) => ({
   navigateUp: () => dispatch(navigateUp()),
   navigateOut: () => dispatch(navigateOut()),
   toggleStatus: () => dispatch(toggleStatus()),
+  toggleSelecting: () => dispatch(toggleSelecting()),
   updateChunk: (key, value) => dispatch(updateChunk(key, value)),
   setChunkType: (chunkType) => dispatch(setChunkType(chunkType)),
   addChunk: (index, chunk, id) => dispatch(addChunk(index, chunk, id)),

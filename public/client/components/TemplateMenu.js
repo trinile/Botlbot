@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import { Menu, MenuItem, TextField, SelectField, Subheader } from 'material-ui';
+import { Menu, MenuItem, TextField, SelectField, FlatButton, Subheader } from 'material-ui';
 import AddButton from './AddButton';
 import menuTree from '../menuTree';
 
@@ -23,6 +23,7 @@ const formatter = ({
   navigateUp, 
   navigateOut,
   toggleStatus,
+  toggleSelecting,
   setChunkType, 
   updateChunk, 
   addChunk,
@@ -81,6 +82,17 @@ const formatter = ({
             key={key} 
             onChange={(e) => updateChunk(key, e.target.value)}
             value={chunkInProgress.params ? chunkInProgress.params[key] : null}
+          />
+        )
+      }
+      if (key === 'target') {
+        menu.push(
+          <FlatButton 
+            // secondary={true}
+            backgroundColor={'gray'}
+            label={'select a target'} 
+            key={key} 
+            onClick={toggleSelecting}
           />
         )
       }

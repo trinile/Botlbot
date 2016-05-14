@@ -12,10 +12,9 @@ export function toggleAdding(id) {
   };
 }
 
-export function toggleSelecting(id) {
+export function toggleSelecting() {
   return {
-    type: 'TOGGLE_SELECTING',
-    id
+    type: 'TOGGLE_SELECTING'
   };
 }
 
