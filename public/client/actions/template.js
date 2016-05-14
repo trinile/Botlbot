@@ -13,7 +13,15 @@ export function saveTemplate() {
 export function addChunk(id, chunk) {
   return {
     type: 'ADD_CHUNK',
-    chunk,
-    id
+    id,
+    chunk
+  };
+}
+
+export function editChunk(id, chunk) {
+  return {
+    type: 'EDIT_CHUNK',
+    id,
+    chunk
   };
 }

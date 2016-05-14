@@ -4,7 +4,18 @@ const template = (state = [], action) => {
       return [];
     case 'SAVE_TEMPLATE':
       return state; // WILL NEED TO BECOME ASYNC ACTION
-    // ADD CASE UPDATE_TEMPLATE that takes in a complete chunkinprogress
+    case 'ADD_CHUNK':
+      return [
+        ...state.slice(0, action.id),
+        action.chunk,
+        ...state.slice(action.id)
+      ];
+    case 'EDIT_CHUNK':
+      return [
+        ...state.slice(0, action.id),
+        action.chunk,
+        ...state.slice(action.id + 1)
+      ];
     default:
       return state;
   }

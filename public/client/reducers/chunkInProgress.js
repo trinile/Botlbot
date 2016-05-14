@@ -14,7 +14,6 @@ const chunkInProgress = (state = {chunkType: null, params: null}, action) => {
       let newParams = Object.assign({}, state.params, action.param);
       let newChunk = Object.assign({}, state, {params: newParams});
       return newChunk;
-      // return {chunkType: state.chunkType, params: {...state.params, ...action.param}};
     default:
       return state;
   }
