@@ -3,6 +3,41 @@ import { Menu, MenuItem, TextField, SelectField, Subheader } from 'material-ui';
 import AddButton from './AddButton';
 import menuTree from '../menuTree';
 
+// This function reconstructs the path through the menuTree
+// that leads to a particular chunktype.
+// Intended for when a user clicks to edit an existing template chunk.
+
+const reconstructBreadcrumbs = (chunkType) => {
+  const breadcrumbs = ['Root'];
+  
+  const helper = (key) => {
+    for (let k in key) {
+      if (k === chunkType) {
+        breadcrumbs.push(k);
+        return true;
+      } else if (key[k].leaf) {
+        continue;
+      }
+      breadcrumbs.push(k);
+      if(helper(key[k])) {
+        return breadcrumbs;
+      }
+      breadcrumbs.splice(breadcrumbs.length - 1, 1);
+    };
+  };
+
+  helper(menuTree.Root);
+  return breadcrumbs;
+};
+
+// This function determines what you see in the menu.
+// If you are at a leaf of the menu tree, it figures out what components
+// are appropriate to render based on the data type stored at each key.
+  // an array creates a SelectField (menu) with the array values as options
+  // a string creates a text field
+    // and the special 'content' key produces a multiline text field
+  // a number creates a text field that only accepts numbers
+  // a null creates a button that lets users select a target for the chunk
 
 
 const formatter = ({
