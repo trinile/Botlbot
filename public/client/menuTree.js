@@ -13,16 +13,13 @@ const menuTree = {
         'max length': 0,
         leaf: true
       },
-      relatedWord: {
+      'related word': {
         relationship: ['synonym', 'antonym', 'rhyme'],
         target: null,
         leaf: true
       },
-      myFeed: {
-        keyword: '',
-        leaf: true
-      },
-      'random tweet': {
+      'twitter': {
+        'from where': ['my feed', 'random tweet'],
         keyword: '',
         leaf: true
       },
