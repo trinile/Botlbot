@@ -13,6 +13,9 @@ const AddButton = ({onClick, icon, disabled}) => {
   if(icon === 'cancel') {
     return <FloatingActionButton style={{transform: 'scale(0.80, 0.80)'}} onClick={onClick} mini={true} disabled={disabled}><ContentClear/></FloatingActionButton>
   }
+  if(icon === 'delete') {
+    return <FloatingActionButton style={{transform: 'scale(0.80, 0.80)'}} backgroundColor={'rgba(255, 0, 0, 0.45)'} onClick={onClick} mini={true} disabled={disabled}><ContentClear/></FloatingActionButton>
+  }
   if(icon === 'save') {
     return <FloatingActionButton style={{transform: 'scale(0.80, 0.80)'}} onClick={onClick} mini={true} disabled={disabled}><ActionDone/></FloatingActionButton>
   }

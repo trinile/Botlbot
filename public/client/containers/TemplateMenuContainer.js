@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import TemplateMenu from '../components/TemplateMenu';
 import { navigateDown, navigateUp, navigateOut } from '../actions/templateMenu';
 import { updateChunk, setChunkType } from '../actions/chunk';
-import { addChunk, editChunk } from '../actions/template';
+import { addChunk, editChunk, deleteChunk } from '../actions/template';
 import { toggleStatus } from '../actions/templateBuilder';
 
 const mapStateToProps = (state) => ({ 
@@ -19,7 +19,8 @@ const mapDispatchToProps = (dispatch) => ({
   updateChunk: (key, value) => dispatch(updateChunk(key, value)),
   setChunkType: (chunkType) => dispatch(setChunkType(chunkType)),
   addChunk: (id, chunk) => dispatch(addChunk(id, chunk)),
-  editChunk: (id, chunk) => dispatch(editChunk(id, chunk))
+  editChunk: (id, chunk) => dispatch(editChunk(id, chunk)),
+  deleteChunk: (id) => dispatch(deleteChunk(id))
 });
 
 const TemplateMenuContainer = connect(

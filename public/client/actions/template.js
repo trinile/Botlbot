@@ -25,3 +25,10 @@ export function editChunk(id, chunk) {
     chunk
   };
 }
+
+export function deleteChunk(id) {
+  return {
+    type: 'DELETE_CHUNK',
+    id
+  };
+}

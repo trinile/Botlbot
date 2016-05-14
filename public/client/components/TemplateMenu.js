@@ -25,7 +25,8 @@ const formatter = ({
   setChunkType, 
   updateChunk, 
   addChunk,
-  editChunk
+  editChunk,
+  deleteChunk
 }) => {
   const currentLevel = templateMenu.reduce(function(menuTree, key){return menuTree[key];}, menuTree);
   const menu = [];
@@ -110,7 +111,15 @@ const formatter = ({
       {menu}
       <div style={{display: 'flex', justifyContent: 'space-around'}}>
         <AddButton icon={'back'} onClick={navigateUp} />
-        <AddButton icon={'cancel'} onClick={() => {toggleStatus(); setTimeout(navigateOut, 300);}} />
+        {
+          templateBuilder.isEditing 
+          ? <AddButton icon={'delete'} onClick={() => {
+              deleteChunk(templateBuilder.id);
+              toggleStatus(); 
+              setTimeout(navigateOut, 300);}} 
+            />
+          : <AddButton icon={'cancel'} onClick={() => {toggleStatus(); setTimeout(navigateOut, 300);}} />
+        }
         <AddButton icon={'save'} onClick={() => {
           templateBuilder.isAdding && addChunk(templateBuilder.id, chunkInProgress); 
           templateBuilder.isEditing && editChunk(templateBuilder.id, chunkInProgress); 
