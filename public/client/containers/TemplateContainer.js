@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import Template from '../components/Template';
 import { trashTemplate, saveTemplate } from '../actions/template';
 import { toggleEditing, toggleAdding, toggleStatus } from '../actions/templateBuilder';
-import { navigateOut } from '../actions/templateMenu';
+import { navigateOut, startAtLeaf } from '../actions/templateMenu';
 
 const mapStateToProps = (state) => ({ 
   template: state.template, 
@@ -28,6 +28,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   navigateOut: () => {
     dispatch(navigateOut());
+  },
+  startAtLeaf: (chunkType) => {
+    dispatch(startAtLeaf(chunkType));
   }
 });
 

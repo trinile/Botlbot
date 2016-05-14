@@ -1,34 +1,8 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import { Menu, MenuItem, TextField, SelectField, Subheader } from 'material-ui';
 import AddButton from './AddButton';
 import menuTree from '../menuTree';
 
-// This function reconstructs the path through the menuTree
-// that leads to a particular chunktype.
-// Intended for when a user clicks to edit an existing template chunk.
-
-const reconstructBreadcrumbs = (chunkType) => {
-  const breadcrumbs = ['Root'];
-  
-  const helper = (key) => {
-    for (let k in key) {
-      if (k === chunkType) {
-        breadcrumbs.push(k);
-        return true;
-      } else if (key[k].leaf) {
-        continue;
-      }
-      breadcrumbs.push(k);
-      if(helper(key[k])) {
-        return breadcrumbs;
-      }
-      breadcrumbs.splice(breadcrumbs.length - 1, 1);
-    };
-  };
-
-  helper(menuTree.Root);
-  return breadcrumbs;
-};
 
 // This function determines what you see in the menu.
 // If you are at a leaf of the menu tree, it figures out what components

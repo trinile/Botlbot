@@ -16,3 +16,10 @@ export function navigateOut() {
     type: 'NAVIGATE_OUT'
   };
 }
+
+export function startAtLeaf(chunkType) {
+  return {
+    type: 'START_AT_LEAF',
+    chunkType
+  };
+}
