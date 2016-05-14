@@ -23,7 +23,7 @@ function fetchFromFeed(token, tokenSecret) {
   .catch(err => console.log(err));
 }
 
-function myTopTwentyFeed(n, id) {
+function myTopTwentyFeed(id, n) {
   return User.getTokens(id)
   .then(auth => fetchFromFeed(auth.token, auth.tokenSecret))
   .then(tweets => topTwentyTweets(tweets, n))
