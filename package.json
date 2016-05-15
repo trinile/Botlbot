@@ -31,9 +31,11 @@
     "connect-redis": "^3.0.2",
     "docdash": "^0.3.0",
     "express-session": "^1.13.0",
+    "isomorphic-fetch": "^2.2.1",
     "jsdoc": "^3.4.0",
     "knex": "^0.10.0",
     "material-ui": "^0.15.0",
+    "nock": "^8.0.0",
     "passport": "^0.3.2",
     "passport-twitter": "^1.0.4",
     "pg": "^4.5.5",
@@ -46,6 +48,8 @@
     "redis": "^2.6.0-2",
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
+    "redux-mock-store": "^1.0.2",
+    "redux-persist": "^3.1.1",
     "redux-thunk": "^2.0.1"
   },
   "devDependencies": {

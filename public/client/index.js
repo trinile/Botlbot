@@ -12,6 +12,8 @@ import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import { localStorageLoad, localStorageDump } from './middleware/localStorage';
+import {persistStore, autoRehydrate } from 'redux-persist';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -22,14 +24,20 @@ const loggerMiddleware = createLogger();
 const pathMiddleware = routerMiddleware(browserHistory);
 
 const createStoreWithMiddleware = applyMiddleware(
+  // localStorageLoad,
   thunkMiddleware, 
   loggerMiddleware, 
+  // localStorageDump,
   pathMiddleware
 )(createStore);
 
 let store = createStoreWithMiddleware(
   Reducers
 );
+
+store.dispatch({
+  type: 'INIT'
+});
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);
 

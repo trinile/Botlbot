@@ -42,7 +42,7 @@ function pullTweetsFromFeed(accessToken, secret, userID, clientResponse) {
 
     // clientResponse.json(cleanTweets.slice(0, 20));
 
-    Tweets.addTweets(userID, cleanTweets)
+    Tweets.saveGeneratedTweets(userID, cleanTweets)
     .then(function(reply) {
       console.log('clean tweetds adddded', reply);
       clientResponse.send('TWEETS ADDED --------');
@@ -50,7 +50,6 @@ function pullTweetsFromFeed(accessToken, secret, userID, clientResponse) {
     .catch(function(err) {
       console.log(err);
     })
-
   });
 }
 

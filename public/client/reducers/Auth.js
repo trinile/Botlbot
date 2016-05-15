@@ -14,32 +14,32 @@ import {
 
 export default function authStatus(state = {
   isFetching: false,
-  isAuthenticated: localStorage.getItem('authID') ? true: false,
+  isAuthenticated: localStorage.getItem('authID') ? true: false
   }, action) {
   switch (action.type) {
-    case LOGIN_REQUEST: 
+    case LOGIN_REQUEST:
       return Object.assign({}, state, {
-        isFetching: true
+        isFetching: true,
       });
     case LOGIN_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        isAuthenticated: true
+        isAuthenticated: true,
       });
     case LOGIN_FAILURE:
       return Object.assign({}, state, {
-        isFetching: false
-      })
+        isFetching: false,
+      });
     case LOGOUT_REQUEST:
       return Object.assign({}, state, {
-        isFetching: true
-      })  
+        isFetching: true,
+      });
     case LOGOUT_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        isAuthenticated: false
-      })
+        isAuthenticated: false,
+      });
     default:
       return state;
   }
-}
+};

@@ -2,7 +2,7 @@ const path = require('path');
 // const client = require('./db/redisClient.js');
 const User = require('./db/controllers/userController.js');
 const Tweets = require('./db/controllers/tweetsController.js');
-const getTweets = require('./searchAlgo.js');
+const pullTweetsFromFeed = require('./searchAlgo.js');
 const dummyTweets = require('./dummyTweets.js');
 const helpers = require('./helpers');
 
@@ -49,12 +49,15 @@ module.exports = function(app, passport) {
     res.status(200).json({ authID: req.user.id });
   });
 
+  app.post('/postTweet', function(req, res) {
+    res.status(201);
+  });
+  //call to TWITTER TO GET TWEEETS
   app.get('/generate', ensureAuthenticated, function(req, res) {
-
-    User.retrieveUser(req.user.id, 'token', 'tokenSecret')
+    User.getRecord(req.user.id)
       .then(function(reply) {
         console.log('from retrieve users ==========', reply);
-        getTweets(reply[0].token, reply[0].tokenSecret, req.user.id, res);
+        pullTweetsFromFeed(reply.token, reply.tokenSecret, req.user.id, res);
       })
       .catch(function(err) {
         console.log('you are bad at promises ============', err);
@@ -63,6 +66,17 @@ module.exports = function(app, passport) {
 
   app.get('/generateDummy', function(req, res) {
     res.json(dummyTweets);
+  });
+
+  app.get('/getgenerate', function (req, res) {
+    Tweets.getGeneratedTweets(req.user.id)
+      .then(function (reply) {
+        reply.map (function(tweet, index) {
+          return tweet['page'] = Math.floor(index / 5 ) + 1;
+        })
+        res.json(reply.slice(reply.length - 10, reply.length - 1));
+      });
+
   });
 
   app.get('/retrieve', function(req, res) {
