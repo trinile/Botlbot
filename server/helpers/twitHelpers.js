@@ -25,11 +25,11 @@ function postAsync(status, twit) {
   });
 }
 
-function getAsync(url, twit) {
+function getAsync(url, twit, params) {
   return new Promise(function(resolve, reject) {
     twit.get(
       url,
-      { count: 200 },
+      Object.assign({}, { count: 200 }, params),
       function(err, data, response) {
         if (err) reject(err);
         // resolve({ data: data, response: response });
@@ -45,10 +45,20 @@ function post(status, token, tokenSecret) {
   .catch(err => console.log(err));
 }
 
-function get(url, token, tokenSecret) {
+function get(url, token, tokenSecret, params) {
   return createTwit(token, tokenSecret)
-  .then(twit => getAsync(url, twit))
+  .then(twit => getAsync(url, twit, params))
   .catch(err => console.log(err));
 }
 
-module.exports = { post: post, get: get };
+function formatQuery(keywords) {
+  return {
+    q: keywords.split(' ').join(' OR ')
+  };
+}
+
+module.exports = {
+  post: post,
+  get: get,
+  formatQuery: formatQuery
+};
