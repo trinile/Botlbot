@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import Template from '../components/Template';
 import { trashTemplate, saveTemplate } from '../actions/template';
-import { toggleEditing, toggleAdding, toggleStatus } from '../actions/templateBuilder';
+import { toggleEditing, toggleAdding, toggleSelecting, toggleStatus } from '../actions/templateBuilder';
 import { navigateOut, startAtLeaf } from '../actions/templateMenu';
-import { loadParams } from '../actions/chunk';
+import { loadParams, updateChunk } from '../actions/chunk';
 
 const mapStateToProps = (state) => ({ 
   template: state.template, 
@@ -24,6 +24,9 @@ const mapDispatchToProps = (dispatch) => ({
   toggleAdding: (index) => {
     dispatch(toggleAdding(index));
   },
+  toggleSelecting: () => {
+    dispatch(toggleSelecting());
+  },
   toggleStatus: () => {
     dispatch(toggleStatus());
   },
@@ -35,6 +38,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   loadParams: (chunkType, params) => {
     dispatch(loadParams(chunkType, params));
+  },
+  updateChunk: (key, value) => {
+    dispatch(updateChunk(key, value));
   }
 });
 

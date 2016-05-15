@@ -24,10 +24,12 @@ const Template = ({
   saveTemplate,
   toggleEditing,
   toggleAdding,
+  toggleSelecting,
   toggleStatus,
   navigateOut,
   startAtLeaf,
-  loadParams
+  loadParams,
+  updateChunk
 }) => (
   <article >
     <style>{`
@@ -54,9 +56,9 @@ const Template = ({
       <Pop
         item={{'Add!':true}}
         id={0}
-        clickHandler={toggleAdding}
+        clickHandler={() => {if (!status.isSelecting) toggleAdding(0)}}
         outsideClickHandler={(e) => clickOut(e, toggleStatus, navigateOut)}
-        isOpen={status.isAdding && status.id === 0}
+        isOpen={!status.isSelecting && status.isAdding && status.id === 0}
       />
     {
       template.map((item, index) => {
@@ -66,19 +68,24 @@ const Template = ({
               item={item}
               id={index}
               clickHandler={() => { 
-                toggleEditing(index); 
-                startAtLeaf(item.chunkType); 
-                loadParams(item.chunkType, template[index].params);
+                if(status.isSelecting) {
+                  toggleSelecting();
+                  updateChunk('target', template[index].id);
+                } else {
+                  toggleEditing(index); 
+                  startAtLeaf(item.chunkType); 
+                  loadParams(item.chunkType, template[index].params);
+                }
               }}
               outsideClickHandler={(e) => clickOut(e, toggleStatus, navigateOut)}
-              isOpen={status.isEditing && status.id === index}
+              isOpen={!status.isSelecting && status.isEditing && status.id === index}
             />
             <Pop // this is the + button
               item={{'Add!':true}}
               id={index + 1}
-              clickHandler={toggleAdding}
+              clickHandler={() => {if (!status.isSelecting) toggleAdding(index + 1)}}
               outsideClickHandler={(e) => clickOut(e, toggleStatus, navigateOut)}
-              isOpen={status.isAdding && status.id === index + 1}
+              isOpen={!status.isSelecting && status.isAdding && status.id === index + 1}
             />
           </span>
         )

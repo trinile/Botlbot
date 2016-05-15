@@ -88,9 +88,13 @@ const formatter = ({
       if (key === 'target') {
         menu.push(
           <FlatButton 
-            // secondary={true}
+            // TODO: somehow indicate what target is, ideally with line connecting the two
             backgroundColor={'gray'}
-            label={'select a target'} 
+            label={
+              (chunkInProgress.params && chunkInProgress.params.target !== undefined) 
+              ? 'update target'
+              : 'select a target'
+            } 
             key={key} 
             onClick={toggleSelecting}
           />
