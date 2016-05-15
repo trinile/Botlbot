@@ -6,7 +6,7 @@ import { expect } from 'chai';
 const config = require('../knexfile.js');
 const knex = require('knex')(config.test);
 const Tweet = require('../server/db/controllers/tweetsController');
-const twit = require('../server/helpers/twitHelper');
+const twit = require('../server/helpers/twitHelpers');
 const twitterResponse = require('./sampleTwitterResponse');
 
 
@@ -36,7 +36,7 @@ describe('Tweet', function() {
       .catch(err => done(err));
     });
 
-    it('Should successfully post to Twitter', function(done) {
+    xit('Should successfully post to Twitter', function(done) {
       const tweet_text = 'a test generated tweet ' + Math.random();
       const join = {
         status: tweet_text,
@@ -54,7 +54,7 @@ describe('Tweet', function() {
       .catch(err => done(err));
     });
 
-    it('Should save posted tweet to database', function(done) {
+    xit('Should save posted tweet to database', function(done) {
       Tweet.savePostedTweet(twitterResponse)
       .then(response => {
         expect(response).to.exist;
