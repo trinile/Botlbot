@@ -1,7 +1,7 @@
 function relativeRank(tweet) {
   return (
     ((tweet.retweet_count * 10) + tweet.favorite_count) /
-    (tweet.user.followers_count || 1) // prevent division by 0;
+    (Math.log(tweet.user.followers_count) || Math.log(1)) // prevent division by 0;
   );
 }
 
