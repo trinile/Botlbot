@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import Template from '../components/Template';
-import { trashTemplate, saveTemplate } from '../actions/template';
 import { toggleEditing, toggleAdding, toggleSelecting, toggleStatus } from '../actions/templateBuilder';
 import { navigateOut, startAtLeaf } from '../actions/templateMenu';
 import { loadParams, updateChunk } from '../actions/chunk';
@@ -12,12 +11,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  trashTemplate: () => {
-    dispatch(trashTemplate());
-  },
-  saveTemplate: () => {
-    dispatch(saveTemplate());
-  },
   toggleEditing: (index) => {
     dispatch(toggleEditing(index));
   }, 

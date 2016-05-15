@@ -33,3 +33,10 @@ export function deleteChunk(index) {
     index
   };
 }
+
+export function updateName(name) {
+  return {
+    type: 'UPDATE_NAME',
+    name
+  };
+}

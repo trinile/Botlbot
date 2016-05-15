@@ -5,23 +5,27 @@ const template = (state = [], action) => {
     case 'SAVE_TEMPLATE':
       return state; // WILL NEED TO BECOME ASYNC ACTION
     case 'ADD_CHUNK':
-      return [
+      return Object.assign([], [
         ...state.slice(0, action.index),
         Object.assign({}, action.chunk, {id: action.id}),
         ...state.slice(action.index)
-      ];
+      ], {name: state.name});
     case 'EDIT_CHUNK':
-      return [
+      return Object.assign([], [
         ...state.slice(0, action.index),
         // this keeps the chunk's ID attribute intact
         Object.assign({}, state[action.index], action.chunk),
         ...state.slice(action.index + 1)
-      ];
+      ], {name: state.name});
     case 'DELETE_CHUNK':
-      return [
+      return Object.assign([], [
         ...state.slice(0, action.index),
         ...state.slice(action.index + 1)
-      ];
+      ], {name: state.name});
+    case 'UPDATE_NAME':
+      let namedTemplate = [...state];
+      namedTemplate.name = action.name;
+      return namedTemplate;
     default:
       return state;
   }

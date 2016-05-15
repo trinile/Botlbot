@@ -20,8 +20,6 @@ const clickOut = (e, toggleStatus, navigateOut) => {
 const Template = ({
   templateBuilder: status,
   template,
-  trashTemplate,
-  saveTemplate,
   toggleEditing,
   toggleAdding,
   toggleSelecting,
@@ -91,12 +89,6 @@ const Template = ({
         )
       })
     }
-    </div>
-    <div>
-      <button onClick={() => {trashTemplate()}}>Trash</button>
-    </div>
-    <div>
-      <button onClick={saveTemplate}>Save</button>
     </div>
   </article>
 );
