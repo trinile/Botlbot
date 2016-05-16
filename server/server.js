@@ -6,8 +6,10 @@ var RedisStore = require('connect-redis')(session);
 var bodyParser = require('body-parser');
 var db = require('./db/db.js');
 
+var bodyParser = require('body-parser');
 var passport = require('passport');
 require('dotenv').config();
+
 
 // configure passport settings
 require('./passport.js')(passport);
@@ -36,9 +38,10 @@ app.use(session({
   saveUninitialized: true
 }));
 
-
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(bodyParser.json());
 
 // routes
 require('./routes.js')(app, passport);
