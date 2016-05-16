@@ -30,7 +30,6 @@ module.exports = function(app, passport) {
   app.get('/auth/callback',
     passport.authenticate('twitter', {failureRedirect: '/'}),
       function(req, res) {
-
         res.redirect('/dashboard');
       })
 
@@ -52,6 +51,7 @@ module.exports = function(app, passport) {
   app.post('/postTweet', function(req, res) {
     res.status(201);
   });
+
   //call to TWITTER TO GET TWEEETS
   app.get('/generate', ensureAuthenticated, function(req, res) {
     User.getRecord(req.user.id)
@@ -68,15 +68,18 @@ module.exports = function(app, passport) {
     res.json(dummyTweets);
   });
 
+// call when dashboard is loaded -> retrieves data from database
   app.get('/getgenerate', function (req, res) {
-    Tweets.getGeneratedTweets(req.user.id)
+    console.log('req.user.id ---------->', req.user.id);
+    Tweets.getTweets(req.user.id, 'generatedtweets')
       .then(function (reply) {
-        reply.map (function(tweet, index) {
-          return tweet['page'] = Math.floor(index / 5 ) + 1;
-        })
-        res.json(reply.slice(reply.length - 10, reply.length - 1));
+        // TODO: how to paginate tweets 
+        // reply.map (function(tweet, index) {
+        //   return tweet['page'] = Math.floor(index / 5 ) + 1;
+        // })
+        //only retrieving 9 files for dev purposes
+        res.json(reply.slice(reply.length - 21, reply.length - 1).reverse());
       });
-
   });
 
   app.get('/retrieve', function(req, res) {
@@ -86,13 +89,47 @@ module.exports = function(app, passport) {
       });
   });
 
-  app.post('/postTweet/:id', function(req, res) {
+  app.put('/edittweet/:id', function (req, res) {
+    console.log('req-body-text ---------->', req.params.id, '------>', req.body);
+    Tweets.modifyTweetText(req.params.id, req.body.text)
+    .then((status) => res.status(201).send(status))
+    .catch(err => res.status(500).send(err));
+  });
+
+  app.post('/posttweet/:id', function(req, res) {
     Tweets.joinTweetAndUserByTweetId(req.params.id)
     .then(response => helpers.postTweet(response))
     .then(data => Tweets.savePostedTweet(data))
-    .then((id) => res.status(201).send(id))
-    .catch(err => res.status(500).send(err));
+    // using bot_tweet_id to modify generatedtweets table to show as 'posted'
+    .then(id => Tweets.modifyTweetStatus(req.params.id, 'posted'))
+    .then(status => res.status(201).send(status))
+    .catch(err => res.status(500).send(err))
+  })
+  
+  app.get('/getposted', function(req, res) {
+    // pass in user id
+    Tweets.getTweets(req.user.id, 'posted')
+    // send back tweets in reverse order (most recent first)
+    .then(reply => res.status(200).json(reply.reverse()))
+    .catch(err => res.status(500).send(err))
+  })
+
+  // create route for scheduling
+  app.post('/scheduletweet/:id', function(req, res) {
+    console.log(req.body);
+    Tweets.scheduleTweet(req.params.id, req.body.schedule)
+    .then(reply => res.status(201).send(reply))
+    .catch(err => res.status(500).send(err))
+  })
+  // trash tweet on client side does not delete from generated tables. 
+  // set up worker to clear out database periodically
+  app.put('/trashtweet/:id', function(req, res) {
+    Tweets.modifyTweetStatus(req.params.id, 'trashed')
+    .then(status => res.status(201).send(status))
+    .catch(err => res.status(500).send(err))
   });
+
+
 
   app.get('/', function(req, res) {
     console.log(req.session);
@@ -102,5 +139,4 @@ module.exports = function(app, passport) {
     console.log(req.session);
     res.sendFile(path.join(__dirname, '/../build/bundle.html'));
   });
-
 };

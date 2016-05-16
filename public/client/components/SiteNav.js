@@ -15,18 +15,18 @@ const SiteNav = ({ isAuthenticated, onLogoutClick }) => (
     <FlatButton
       linkButton={true}
       label="About"
-      href="/"
-    />
+      containerElement={<Link to="/about" />}
+      />
     <FlatButton
       linkButton={true}
       label="Home"
-      href="/"
+      containerElement={<Link to="/" />}
     />
     <FlatButton 
+      linkButton={true}
       label="Dashboard" 
-      href="/dashboard"
-      linkButton={true}>
-    </FlatButton>
+      containerElement={<Link to="/dashboard" />}
+    />
     <FlatButton>
     {isAuthenticated ? <Logout onLogoutClick={onLogoutClick}/> : <Login /> 
     }

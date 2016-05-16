@@ -15,7 +15,8 @@ const TweetList = ({
   cancelEditTweet,
   onPostTweet, 
   onTrashTweet, 
-  onEditTweet }) => {
+  onEditTweet,
+  onScheduleTweet }) => {
 
   return (
     <div>
@@ -25,16 +26,17 @@ const TweetList = ({
           ? <EditTweet 
           key={index}
           tweet={t} 
-          postTweet={() => onPostTweet(t.tweet_id_str)} 
-          cancelEdit={() => cancelEditTweet(t.tweet_id_str)}
-          editTweet={() => onEditTweet(t.tweet_id_str, t.tweet_text)}
+          postTweet={() => onPostTweet(t.bot_tweet_id)} 
+          cancelEdit={() => cancelEditTweet(t.bot_tweet_id)}
+          editTweet={() => onEditTweet(t.bot_tweet_id, t.tweet_text)}
           />
           : <Tweet
             key={index}
             tweet={t}
-            postTweet={() => onPostTweet(t.tweet_id_str)}
-            trashTweet={() => onTrashTweet(t.tweet_id_str)}
-            requestEdit={() => onRequestEdit(t.tweet_id_str)}
+            postTweet={() => onPostTweet(t.bot_tweet_id)}
+            trashTweet={() => onTrashTweet(t.bot_tweet_id)}
+            requestEdit={() => onRequestEdit(t.bot_tweet_id)}
+            scheduleTweet={() => onScheduleTweet(t.bot_tweet_id, t.schedule)}
             />
           ))}
       </div>
@@ -50,6 +52,7 @@ TweetList.propTypes = {
   onEditTweet: PropTypes.func,
   onRequestEdit: PropTypes.func,
   cancelEditTweet: PropTypes.func,
+  onScheduleTweet: PropTypes.func,
 };
 
 

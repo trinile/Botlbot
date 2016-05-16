@@ -13,12 +13,12 @@ class Dashboard extends React.Component {
     if (!isAuthenticated) {
       dispatch(authUser());
     }
-    dispatch(getTweetsAsync());
+      dispatch(getTweetsAsync());
   }
 
   render() {
     return (
-        <TweetListContainer filter="SHOW_VALID" />
+      <TweetListContainer filter="SHOW_VALID" />
     );
   }
 }

@@ -7,7 +7,7 @@ const style = {
   //commenting out sidebar styling for later
   // sidebar: {
   //   //click efffect is gone with position set to fixed**********
-  //   // position:'fixed',
+  //   position:'fixed',
   //   minWidth: '15rem',
   //   background: 'blue',
   //   display: 'flex',
@@ -15,13 +15,13 @@ const style = {
   //   height: '100%',
   //   padding: '10px',
   // },
-  // main: {
-  //   position: 'relative',
-  //   minWidth: '30rem',
-  //   display: 'flex',
-  //   'justifyContent':'flex-end',
-  //   overflow: 'hidden'
-  // }
+//   main: {
+//     position: 'relative',
+//     minWidth: '30rem',
+//     display: 'flex',
+//     'justifyContent':'flex-end',
+//     overflow: 'hidden'
+//   }
 }
 
 const Main = ({ dispatch, isAuthenticated, main, sidebar }) => (
