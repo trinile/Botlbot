@@ -1,4 +1,5 @@
 module.exports = {
   twit: require('./twitHelpers'),
-  tweets: require('./tweetsHelpers')
+  tweets: require('./tweetsHelpers'),
+  emoji: require('./emoji')
 };

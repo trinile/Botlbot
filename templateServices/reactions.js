@@ -1,4 +1,4 @@
-const emoji = require('./helpers/emoji');
+const emoji = require('./helpers/').emoji;
 const _ = require('lodash');
 
 function randomValue(array) {
