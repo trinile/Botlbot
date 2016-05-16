@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import Paper from 'material-ui/Paper';
-import Menu from 'material-ui/Menu';
-import MenuItem from 'material-ui/MenuItem';
+import { List, ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import { Link } from 'react-router';
@@ -25,15 +24,24 @@ const style = {
 };
 
 const SideMenu = () => (
-  <Drawer open={true} style={style.drawer}>
-  <MenuItem primaryText="Dashboard" containerElement={<Link to="/dashboard" />}/>
-  <MenuItem primaryText="Build a Bot" containerElement={<Link to="/build"/>} />
-  <MenuItem primaryText="Edit Templates" containerElement={<Link to="/template" />}/>
-  <MenuItem primaryText="Posted Tweets" containerElement={<Link to="/postedtweets" />}/>
-  <MenuItem primaryText="Scheduled Tweets" containerElement={<Link to="/scheduled/:id "/>}/>
-  <MenuItem primaryText="Recently Trashed" containerElement={<Link to="/recentlytrashed" />}/>
-  <Divider/>
-  <MenuItem primaryText="Logout" />
+  <Drawer docked={true} style={style.drawer}>
+    <List>
+      <ListItem primaryText="Dashboard" containerElement={<Link to="/dashboard" />}/>
+      <ListItem primaryText="Build a Bot" containerElement={<Link to="/build"/>} />
+      <ListItem 
+        primaryText="Edit Templates" 
+        containerElement={<Link to="/template" />}
+        primaryTogglesNestedList={true}
+        nestedItems={[
+          <ListItem primaryText='Default' />
+        ]}
+      />
+      <ListItem primaryText="Posted Tweets" containerElement={<Link to="/postedtweets" />}/>
+      <ListItem primaryText="Scheduled Tweets" containerElement={<Link to="/scheduled/:id "/>}/>
+      <ListItem primaryText="Recently Trashed" containerElement={<Link to="/recentlytrashed" />}/>
+      <Divider/>
+      <ListItem primaryText="Logout" />
+    </List>
   </Drawer>
 );
 // const SideMenu = () => (
