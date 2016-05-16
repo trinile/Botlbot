@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 import TweetList from '../components/TweetList';
 import { addTweets, postTweet, trashTweet, requestEdit, editTweet, cancelEditTweet} from '../actions/tweets';
-import { postTweetAsync, getTweetsAsync } from '../actions/tweets.js';
+import { postTweetAsync, getTweetsAsync, editTweetAsync, trashTweetAsync, scheduleTweetAsync } from '../actions/tweets.js';
 import { tweetsFilter } from '../actions/TweetsFilter';
 //function that takes in tweet and filter action
 
@@ -12,11 +12,11 @@ const filterTweets = (tweets, filter) => {
     case 'SHOW_ALL':
       return tweets;
     case 'SHOW_VALID':
-      return tweets.filter(t => t.status === 'available');
+      return tweets.filter(t => t.tweet_status === 'available');
     case 'SHOW_POSTED':
-      return tweets.filter(t => t.status === 'posted');
+      return tweets.filter(t => t.tweet_status === 'posted');
     case 'SHOW_TRASHED':
-      return tweets.filter(t => t.status === 'trashed');
+      return tweets.filter(t => t.tweet_status === 'trashed');
     default:
       return tweets;
   }
@@ -35,7 +35,8 @@ class TweetListContainer extends React.Component {
       onTrashTweet, 
       getValidTweets, 
       editTweet, 
-      onRequestEdit } = this.props;
+      onRequestEdit,
+      onScheduleTweet } = this.props;
     return (
       <TweetList 
       tweets={tweets} 
@@ -44,6 +45,7 @@ class TweetListContainer extends React.Component {
       cancelEditTweet={cancelEditTweet}
       onEditTweet={editTweet}
       onTrashTweet={onTrashTweet}
+      onScheduleTweet={onScheduleTweet}
       // getValidTweets={getValidTweets}
       />
     ) 
@@ -57,7 +59,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(tweetsFilter(ownProps.filter));
   },
   editTweet: (id, tweet_text) => {
-    dispatch(editTweet(id, tweet_text));
+    dispatch(editTweetAsync(id, tweet_text));
   },
   cancelEditTweet: (id) => {
     console.log('eddddddittttt tweet');
@@ -70,7 +72,11 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(postTweetAsync(id));
   },
   onTrashTweet: (id) => {
-    dispatch(trashTweet(id));
+    dispatch(trashTweetAsync(id));
+  },
+  onScheduleTweet: (id, schedule) => {
+    console.log('innnnnnnnnnnn schedule');
+    dispatch(scheduleTweetAsync(id, schedule))
   },
 });
 

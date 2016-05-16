@@ -8,17 +8,16 @@ import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import createLogger from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { localStorageLoad, localStorageDump } from './middleware/localStorage';
-import {persistStore, autoRehydrate } from 'redux-persist';
-
+// import {persistStore, autoRehydrate } from 'redux-persist';
+// import {lightBlue500, lightBlue700, grey800, blueGrey50 ,purple100, fullBlack } from 'material-ui/styles/colors';
+import { fade } from 'material-ui/utils/colorManipulator';
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
-const darkMuiTheme = getMuiTheme(darkBaseTheme);
 
 const loggerMiddleware = createLogger();
 const pathMiddleware = routerMiddleware(browserHistory);
@@ -35,14 +34,35 @@ let store = createStoreWithMiddleware(
   Reducers
 );
 
-store.dispatch({
-  type: 'INIT'
+// store.dispatch({
+//   type: 'INIT'
+// });
+
+ //placeholder for when we want to change the custom styling of mui theme 
+const muiTheme = getMuiTheme({
+  palette: {
+    // primary1Color: lightBlue500,
+    // primary2Color: lightBlue700,
+    // primary3Color: lightBlue700,
+    // accent1Color: purple100,
+    // canvasColor: blueGrey50,
+    // // disabledColor: fade(darkBlack, 0.3),
+    // pickerHeaderColor: lightBlue500,
+    // // clockCircleColor: fade(darkBlack, 0.07),
+    // shadowColor: fullBlack
+  },
+  appBar: {
+    height: 50,
+  },
 });
+
+
+
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);
 
 ReactDOM.render(
-  <MuiThemeProvider muiTheme={darkMuiTheme}>
+  <MuiThemeProvider muiTheme={muiTheme}>
     <Provider store={store}>
       <Router history={history} routes={Routes} />
     </Provider>

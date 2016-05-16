@@ -25,8 +25,11 @@ const Tweet = ({
   postTweet,
   trashTweet,
   requestEdit,
+  scheduleTweet,
 }) => {
+  const scheduleRequest = function() {
 
+  }
   return (
     <Card style={style.main}>
       <CardHeader
@@ -50,7 +53,7 @@ const Tweet = ({
         <FlatButton label="POST" onTouchTap={postTweet} />
         <FlatButton label="TRASH" onClick={trashTweet} />
         <FlatButton label="EDIT" onClick={requestEdit} />
-        <SchedulePopOver/>
+        <SchedulePopOver tweet={tweet} onSchedule={scheduleTweet} />
       </CardActions>
     </Card>
   );
@@ -60,6 +63,7 @@ Tweet.propTypes = {
   tweet: PropTypes.object,
   postTweet: PropTypes.func,
   trashTweet: PropTypes.func,
+  scheduleTweet: PropTypes.func,
 };
 
 export default Tweet;

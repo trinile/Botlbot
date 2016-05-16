@@ -16,8 +16,10 @@ export const PAGE_FITLER = 'PAGE_FILTER';
 //paths
 
 export const POST_TWEET = 'POST_TWEET';
+export const POSTED_TWEETS = 'POSTED_TWEETS';
 export const ADD_NEW_TWEETS = 'ADD_NEW_TWEETS';
 export const TRASH_TWEET = 'TRASH_TWEET';
 export const EDIT_TWEET_REQUEST = 'EDIT_TWEET_REQUEST';
 export const EDIT_TWEET = 'EDIT_TWEET';
 export const CANCEL_EDIT_TWEET = 'CANCEL_EDIT_TWEET';
+export const SCHEDULE_TWEET = 'SCHEDULE_TWEET';
