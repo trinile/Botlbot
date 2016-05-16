@@ -133,10 +133,12 @@ export function editTweetAsync(id, tweet_text) {
         'Content-Type': 'application/json',
         // "Content-type": "application/x-www-form-urlencoded; charset=UTF-8" 
       },
+      mode: 'cors',
       credentials: 'same-origin',
       body: { text: tweet_text },
       })
       .then(res => {
+        console.log('response ----------> ', res);
         if (res.status === 201) {
           dispatch(fetchSuccess());
           dispatch(editTweet(id, tweet_text));

@@ -19,6 +19,7 @@ exports.up = function(knex, Promise) {
   }).createTable('generatedtweets', function(table) {
     table.increments('bot_tweet_id').primary();
     table.string('user_twitter_id').references('user_twitter_id').inTable('users');
+    table.string('tweet_status').defaultTo('available');
     table.integer('retweet_count');
     table.integer('favorite_count');
     table.string('user_screen_name');
