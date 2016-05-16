@@ -32,7 +32,7 @@ const menuTree = {
         leaf: true
       },
       wordlist: {
-        list: [''],
+        list: null,
         leaf: true
       }
     },

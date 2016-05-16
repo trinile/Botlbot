@@ -13,7 +13,6 @@ import menuTree from '../menuTree';
   // a number creates a text field that only accepts numbers
   // a null creates a button that lets users select a target for the chunk
 
-
 const formatter = ({
   templateMenu, 
   chunkInProgress,
@@ -39,11 +38,11 @@ const formatter = ({
         menu.push(
           <SelectField 
             // autoWidth={true}
-            style={{'width': '13.5rem', 'marginLeft': '1.5rem'}}
+            style={{'width': '10rem'}}
             floatingLabelText={key}
             key={key}
             onChange={(e, index, value) => {updateChunk(key, value)}}
-            value={chunkInProgress.params ? chunkInProgress.params[key] : null}
+            value={chunkInProgress.params ? chunkInProgress.params[key] : 0}
           >
             {
               currentLevel[key].map((value, index) => {
@@ -64,7 +63,7 @@ const formatter = ({
       if (typeof currentLevel[key] === 'number') {
         menu.push(
           <TextField 
-            style={{'width': '6rem', 'marginLeft': '1.5rem'}}
+            style={{'width': '6rem'}}
             floatingLabelText={key} 
             type={'number'} 
             key={key} 
@@ -99,6 +98,45 @@ const formatter = ({
             onClick={toggleSelecting}
           />
         )
+      }
+      if (key === 'list') {
+        if (chunkInProgress.params && chunkInProgress.params.list.length > 0) {
+          let list = chunkInProgress.params.list;
+          list.map((item, index) => {
+            if (item.length >= 1) {
+              menu.push(
+                <TextField 
+                  style={{'width': 'auto'}}
+                  floatingLabelText={'list item'} 
+                  key={index} 
+                  onChange={(e) => {
+                    e.target.value === ''
+                    ? updateChunk(key, [...list.slice(0, index), ...list.slice(index + 1)])
+                    : updateChunk(key, [...list.slice(0, index), e.target.value, ...list.slice(index + 1)])
+                  }}
+                  value={item}
+                />
+              )
+            }
+          });
+          menu.push(
+            <TextField 
+              style={{'width': 'auto'}}
+              floatingLabelText={'list item'} 
+              key={list.length}
+              onChange={(e) => updateChunk(key, [...list, e.target.value])}
+            />
+          )
+        } else {
+          menu.push(
+            <TextField 
+              style={{'width': 'auto'}}
+              floatingLabelText={'list item'} 
+              key={0} 
+              onChange={(e) => updateChunk(key, [e.target.value])}
+            />
+          )
+        }
       }
     }
   } else {
@@ -153,9 +191,24 @@ const formatter = ({
   )
 };
 
-const TemplateMenu = (props) => {
-  return formatter(props)
-};
+// const TemplateMenu = (props) => {
+//   return formatter(props)
+// };
+
+class TemplateMenu extends Component {
+  // constructor(props) {
+  //   super(props);
+  // }
+  // componentDidUpdate () {
+  //   console.log(currentInput);
+  //   console.log('REFS ARE', Object.keys(this.refs));
+  //   this.refs[currentInput] && this.refs[currentInput].focus();
+  // }
+
+  render() {
+    return formatter.call(this, this.props);
+  }
+}
 
 TemplateMenu.propTypes = {
   templateMenu: PropTypes.arrayOf(PropTypes.string),

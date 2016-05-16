@@ -13,7 +13,7 @@ const Routes = (
       <Route path="/about" components={{main: Dashboard}}/>
       <Route path="/dashboard" components={{main: Dashboard, sidebar: SideMenu}} />
       <Route path="/postedTweets" components={{main: PostedTweets, sidebar: SideMenu}}/>
-      <Route path="/build" component={BuildABot} />
+      <Route path="/build" components={{main: BuildABot}} />
     </Route>
 );
 

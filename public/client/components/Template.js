@@ -39,6 +39,9 @@ const Template = ({
         color: white;
         width: auto;
         border-radius: 0.3rem;
+        max-width: 10rem;
+        max-height: 25rem;
+        overflow: auto;
       }
       .Popover-body > div {
         width: auto !important;
