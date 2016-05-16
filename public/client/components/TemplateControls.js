@@ -15,7 +15,7 @@ const TemplateControls = ({
     />
     <br/>
     <br/>
-    <RaisedButton label={'Save'} onMouseUp={saveTemplate} />
+    <RaisedButton label={'Save'} onMouseUp={() => saveTemplate(template)} />
     <br/>
     <br/>
     <RaisedButton label={'Trash'} onMouseUp={trashTemplate} />

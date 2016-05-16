@@ -37,24 +37,3 @@ export function postTweet(id) {
     id,
   };
 }
-// id is generated tweet ID
-export const postTweetAsync = (id) => {
-  return dispatch => {
-    dispatch(postRequest(id));
-    return fetch('/postTweet/' + id, { method: 'POST', credentials: 'same-origin' })
-      .then(res => {
-        // if successful
-        //COMMENT OUT conditional to test success
-        // if (res.status === 201) {
-          dispatch(postSuccess());
-          dispatch(postTweet(id));
-        // }
-        // if (res.status === 404) {
-        //   dispatch(postFailure(res.status));
-        // }
-      })
-      .catch(err => {
-        dispatch(postFailure(err));
-      });
-  };
-};
