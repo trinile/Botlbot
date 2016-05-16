@@ -25,7 +25,8 @@ exports.up = function(knex, Promise) {
     table.string('user_screen_name');
     table.string('user_followers_count');
     table.string('tweet_text');
-    table.string('tweet_id_str').unique();
+    table.string('tweet_id_str');
+    table.string('bot_tweet_body');
     table.timestamps(true, true);
   });
 };

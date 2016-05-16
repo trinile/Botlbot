@@ -1,6 +1,6 @@
-const twit = require('../helpers').twit;
-const tweets = require('../helpers').tweets;
-const User = require('../db/controllers/userController');
+const twit = require('./helpers').twit;
+const tweets = require('./helpers').tweets;
+const User = require('../server/db/controllers/userController');
 
 
 function fetchFromFeed(token, tokenSecret) {

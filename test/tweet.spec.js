@@ -6,7 +6,7 @@ import { expect } from 'chai';
 const config = require('../knexfile.js');
 const knex = require('knex')(config.test);
 const Tweet = require('../server/db/controllers/tweetsController');
-const twit = require('../server/helpers/twitHelpers');
+const twit = require('../templateServices/helpers/twitHelpers');
 const twitterResponse = require('./sampleTwitterResponse');
 
 

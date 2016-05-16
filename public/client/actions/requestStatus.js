@@ -30,10 +30,3 @@ export function fetchFailure(message) {
     message,
   };
 }
-
-export function postTweet(id) {
-  return {
-    type: POST_TWEET,
-    id,
-  };
-}

@@ -4,9 +4,9 @@ import { expect } from 'chai';
 import * as sinon from 'sinon';
 const config = require('../knexfile.js');
 const knex = require('knex')(config.test);
-const text = require('../server/templateControllers/text');
-const myFeed = require('../server/templateControllers/myFeed');
-const keywordTweets = require('../server/templateControllers/tweetsByKeyword');
+const text = require('../templateServices/text');
+const myFeed = require('../templateServices/myFeed');
+const keywordTweets = require('../templateServices/tweetsByKeyword');
 const twitterResponse = require('./sampleTwitterResponse');
 
 describe('Template Service', function() {

@@ -1,6 +1,6 @@
-const twit = require('../helpers').twit;
-const User = require('../db/controllers/userController');
-const tweets = require('../helpers').tweets;
+const twit = require('./helpers').twit;
+const User = require('../server/db/controllers/userController');
+const tweets = require('./helpers').tweets;
 
 function fetchByKeywords(token, tokenSecret, query) {
   return twit.get('/search/tweets', token, tokenSecret, query)
