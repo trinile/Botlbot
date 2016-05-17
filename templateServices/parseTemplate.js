@@ -14,7 +14,11 @@ function zip(arrays) {
 }
 
 function parseTemplate(template, userId, n) {
-  return zip(Promise.all(template.map(chunk => chunkHandler[chunk.type](chunk.params, userId, n))));
+  return (
+    Promise.all(template.map(chunk => chunkHandler[chunk.type](chunk.params, userId, n)))
+    .then(zip)
+    .catch(err => err)
+  );
 }
 
 module.exports = parseTemplate;
