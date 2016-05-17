@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import TweetListContainer from '../containers/TweetListContainer';
 import { authUser } from '../actions/Login';
 import { getTweetsAsync } from '../actions/tweets';
+import { getTemplateNamesAsync } from '../actions/template';
 import SideMenu from '../components/SideMenu';
 
 class Dashboard extends React.Component {
@@ -14,6 +15,7 @@ class Dashboard extends React.Component {
       dispatch(authUser());
     }
     dispatch(getTweetsAsync());
+    dispatch(getTemplateNamesAsync());
   }
 
   render() {

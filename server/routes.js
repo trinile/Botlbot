@@ -5,6 +5,7 @@ const User = require('./db/controllers/userController.js');
 const getTweetsFromFeed = require('../templateServices/myFeed');
 const Tweets = require('./db/controllers/tweetsController');
 const twit = require('../templateServices/helpers').twit;
+const Templates = require('./db/controllers/templatesController');
 
 const ensureAuthenticated = function(req, res, next) {
   if (req.isAuthenticated()) {
@@ -33,7 +34,6 @@ module.exports = function(app, passport) {
   );
 
   app.get('/logout', function(req, res) {
-    console.log(req)
     req.logout();
     res.clearCookie('test');
     res.status(202).send('foooo');
@@ -100,9 +100,42 @@ module.exports = function(app, passport) {
     .catch(err => res.status(500).send(err))
   });
 
-  app.post('/buildTemplate', function(req, res) {
-    console.log('HEY LOOK HERE', req.body);
-    req.body ? res.status(201).send('you did it') : res.status(400).send('you didn\'t do it');
+  app.post('/templates', function(req, res) {
+    console.log('POSTED TO /TEMPLATES', req.body);
+    console.log('USER ID IS', req.user.id);
+    Templates.saveTemplate(req.body, req.user.id)
+      .then(res.status(201).send('you posted it'))
+      .catch((err) => res.status(400).send(`you dint post it: ${err}`));
+  });
+
+  app.put('/templates/:id', function(req, res) {
+    console.log('PUTTED TO /TEMPLATES/:id', req.params.id);
+    Templates.updateTemplate(req.params.id, req.body)
+      .then(t => res.status(201).json(t))
+      .catch(err => res.status(400).send(`you dint put it ${err}`));
+  });
+
+  app.get('/templates/:id', function(req, res) {
+    console.log('GETTED TO /TEMPLATES/:id', req.params.id);
+    Templates.getTemplate(req.params.id)
+      .then(t => res.status(200).json(t))
+      .catch((err) => res.status(400).send(`you dint got it: ${err}`));
+  });
+
+  app.delete('/templates/:id', function(req, res) {
+    console.log('DELETED AT /TEMPLATES/:id', req.params.id);
+    Templates.deleteTemplate(req.params.id, req.user.id)
+      .then(t => res.status(201).send('you deleted it'))
+      .catch((err) => res.status(400).send(`you dint delete it: ${err}`));
+  });
+
+  app.get('/templates', function(req, res) {
+    console.log('GETTED TO /TEMPLATES');
+    // console.log(req.user.id);
+    // Templates.getTemplateNames(req.user.id)
+    Templates.getTemplateNames('727615201575469056')
+      .then(t => res.status(200).json(t))
+      .catch(err => res.status(400).send(`you failed to get names: ${err}`));
   });
 
   app.get('/', function(req, res) {

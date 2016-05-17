@@ -23,18 +23,25 @@ const style = {
   }
 };
 
-const SideMenu = () => (
-  <Drawer docked={true} style={style.drawer}>
+
+const SideMenu = ({ templateIDs }) => (
+  <Drawer docked={true} style={style.drawer} zDepth={0} >
     <List>
       <ListItem primaryText="Dashboard" containerElement={<Link to="/dashboard" />}/>
       <ListItem primaryText="Build a Bot" containerElement={<Link to="/build"/>} />
       <ListItem 
         primaryText="Edit Templates" 
-        containerElement={<Link to="/template" />}
         primaryTogglesNestedList={true}
-        nestedItems={[
-          <ListItem primaryText='Default' />
-        ]}
+        disabled={templateIDs.length === 0}
+        style={templateIDs.length === 0 ? {color: 'lightgray'} : {}}
+        nestedItems={ templateIDs.map((t, index) => {
+          return (
+            <ListItem 
+              primaryText={t.name} 
+              containerElement={<Link to={`/edit/${templateIDs[index].template_id}`} />}
+            />
+          );
+        })}
       />
       <ListItem primaryText="Posted Tweets" containerElement={<Link to="/postedtweets" />}/>
       <ListItem primaryText="Scheduled Tweets" containerElement={<Link to="/scheduled/:id "/>}/>
@@ -44,20 +51,5 @@ const SideMenu = () => (
     </List>
   </Drawer>
 );
-// const SideMenu = () => (
-//     <Paper style={style.menu}>
-//       <Menu style={style.menu}>
-//         <MenuItem primaryText="Dashboard" containerElement={<Link to="/dashboard" />}/>
-//         <MenuItem primaryText="Build a Bot" containerElement={<Link to="/build" />}/>
-//         <MenuItem primaryText="Bot Templates" containerElement={<Link to="/template" />}/>
-//         <MenuItem primaryText="Posted Tweets" containerElement={<Link to="/postedtweets" />}/>
-//         <MenuItem primaryText="Recently Trashed" containerElement={<Link to="/recentlytrashed" />}/>
-//         <Divider/>
-//         <MenuItem primaryText="Logout" />
-
-//       </Menu>
-//     </Paper>
-// );
-
 
 export default SideMenu;

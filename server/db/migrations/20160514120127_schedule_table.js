@@ -10,7 +10,7 @@ exports.up = function(knex, Promise) {
     }),
     knex.schema.createTable('templates', function(table) {
       table.increments('template_id').primary();
-      table.string('template');
+      table.jsonb('template');
       table.string('name');
       table.boolean('active');
       table.string('user_twitter_id').references('user_twitter_id').inTable('users');
