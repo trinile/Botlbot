@@ -5,7 +5,8 @@ import {
   postTemplateAsync, 
   editTemplateAsync, 
   deleteTemplateAsync,
-  trashTemplate, 
+  getTemplateNamesAsync, 
+  trashTemplate,
   updateName } from '../actions/template';
 
 const mapStateToProps = (state) => ({
@@ -16,6 +17,7 @@ const mapDispatchToProps = (dispatch) => ({
   saveTemplate: (template) => dispatch(postTemplateAsync(template)),
   updateTemplate: (template) => dispatch(editTemplateAsync(template)),
   deleteTemplate: (template) => dispatch(deleteTemplateAsync(template)),
+  getTemplateNames: () => dispatch(getTemplateNamesAsync()),
   trashTemplate: () => dispatch(trashTemplate()),
   updateName: (name) => dispatch(updateName(name))
 });

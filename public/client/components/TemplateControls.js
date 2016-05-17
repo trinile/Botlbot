@@ -8,6 +8,7 @@ const TemplateControls = ({
   saveTemplate, 
   updateTemplate,
   deleteTemplate,
+  getTemplateNames,
   updateName
 }) => (
   <span className={styles.templatecontrols}>
@@ -18,7 +19,14 @@ const TemplateControls = ({
     />
     <br/>
     <br/>
-    <RaisedButton label={'Save'} disabled={template.length === 0 || template.name === undefined || template.name === ''} onMouseUp={() => saveTemplate(template)} />
+    <RaisedButton 
+      label={'Save'} 
+      disabled={template.length === 0 || template.name === undefined || template.name === ''} 
+      onMouseUp={() => {
+        saveTemplate(template)
+          .then(res => getTemplateNames());
+      }} 
+    />
     <br/>
     <br/>
     <RaisedButton label={'Trash'} disabled={template.length === 0} onMouseUp={trashTemplate} />

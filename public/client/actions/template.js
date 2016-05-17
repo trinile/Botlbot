@@ -43,6 +43,20 @@ export function updateName(name) {
   };
 }
 
+export function loadTemplate(template) {
+  return {
+    type: 'LOAD_TEMPLATE',
+    template
+  };
+}
+
+export function loadIDs(ids) {
+  return {
+    type: 'LOAD_IDS',
+    ids
+  };
+}
+
 export function postTemplateAsync(template) {
   return dispatch => {
     let data = JSON.stringify({
@@ -64,7 +78,6 @@ export function postTemplateAsync(template) {
         console.log(res);
         if (res.status === 201) {
           dispatch(fetchSuccess());
-          // dispatch(postTweet(id));
         }
         else {
           dispatch(fetchFailure(res.status));
@@ -98,7 +111,6 @@ export function editTemplateAsync(template) {
         console.log('PUTTED!', res);
         if (res.status === 201) {
           dispatch(fetchSuccess());
-          // dispatch(postTweet(id));
         }
         else {
           dispatch(fetchFailure(res.status));
@@ -121,7 +133,6 @@ export function deleteTemplateAsync(template) {
         console.log('DELETED!', res);
         if (res.status === 201) {
           dispatch(fetchSuccess());
-          // dispatch(postTweet(id));
         }
         else {
           dispatch(fetchFailure(res.status));
@@ -142,9 +153,9 @@ export function getTemplateAsync(template) {
     })
       .then(res => {
         console.log(res);
-        if (res.status === 201) {
+        if (res.status === 200) {
           dispatch(fetchSuccess());
-          // dispatch(postTweet(id));
+          // dispatch(loadTemplate(res));
         }
         else {
           dispatch(fetchFailure(res.status));
@@ -163,15 +174,10 @@ export function getTemplateNamesAsync() {
       method: 'GET', 
       credentials: 'same-origin'
     })
+      .then(res => res.json())
       .then(res => {
-        console.log(res);
-        if (res.status === 201) {
-          dispatch(fetchSuccess());
-          // dispatch(postTweet(id));
-        }
-        else {
-          dispatch(fetchFailure(res.status));
-        }
+        dispatch(fetchSuccess());
+        dispatch(loadIDs(res));
       })
       .catch(err => {
         dispatch(fetchFailure(err));

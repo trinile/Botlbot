@@ -36,7 +36,7 @@ function getTemplateNames(userId) {
   return knex('templates')
     .where({user_twitter_id: userId})
     .select('template_id', 'name')
-    .orderBy('name', 'desc');
+    .orderBy('name');
 }
 
 module.exports = {
