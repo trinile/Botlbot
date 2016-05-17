@@ -5,9 +5,10 @@ import {
   postTemplateAsync, 
   editTemplateAsync, 
   deleteTemplateAsync,
-  getTemplateNamesAsync, 
+  // getTemplateNamesAsync, 
   trashTemplate,
   updateName } from '../actions/template';
+import { push } from 'react-router-redux';
 
 const mapStateToProps = (state) => ({
   template: state.template
@@ -17,9 +18,10 @@ const mapDispatchToProps = (dispatch) => ({
   saveTemplate: (template) => dispatch(postTemplateAsync(template)),
   updateTemplate: (template) => dispatch(editTemplateAsync(template)),
   deleteTemplate: (template) => dispatch(deleteTemplateAsync(template)),
-  getTemplateNames: () => dispatch(getTemplateNamesAsync()),
+  // getTemplateNames: () => dispatch(getTemplateNamesAsync()),
   trashTemplate: () => dispatch(trashTemplate()),
-  updateName: (name) => dispatch(updateName(name))
+  updateName: (name) => dispatch(updateName(name)),
+  redirectToDashboard: () => dispatch(push('/dashboard'))
 });
 
 const TemplateControlsContainer = connect(

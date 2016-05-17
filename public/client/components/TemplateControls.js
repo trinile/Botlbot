@@ -8,8 +8,9 @@ const TemplateControls = ({
   saveTemplate, 
   updateTemplate,
   deleteTemplate,
-  getTemplateNames,
-  updateName
+  // getTemplateNames,
+  updateName,
+  redirectToDashboard
 }) => (
   <span className={styles.templatecontrols}>
     <TextField 
@@ -25,7 +26,8 @@ const TemplateControls = ({
       onMouseUp={() => {
         if(template.id !== undefined) {
           updateTemplate(template)
-          .then(res => getTemplateNames());
+          // .then(res => getTemplateNames())
+          .then(() => redirectToDashboard());
         } else {
           saveTemplate(template)
             .then(res => getTemplateNames());
@@ -50,7 +52,8 @@ const TemplateControls = ({
             disabled={template.length === 0} 
             onMouseUp={() => {
               deleteTemplate(template.id)
-                .then(res => getTemplateNames());
+                // .then(res => getTemplateNames())
+                .then(() => redirectToDashboard());
             }}
           />
           </span>
