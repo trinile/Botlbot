@@ -30,7 +30,7 @@ const SideMenu = () => (
       <ListItem primaryText="Build a Bot" containerElement={<Link to="/build"/>} />
       <ListItem 
         primaryText="Edit Templates" 
-        containerElement={<Link to="/template" />}
+        containerElement={<Link to="/edit" />}
         primaryTogglesNestedList={true}
         nestedItems={[
           <ListItem primaryText='Default' />

@@ -51,7 +51,7 @@ export function postTemplateAsync(template) {
     });
     console.log(data);
     dispatch(fetchRequest());
-    return fetch('http://127.0.0.1:1337/buildTemplate/', {
+    return fetch('http://127.0.0.1:1337/templates/', {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
