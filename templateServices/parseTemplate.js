@@ -1,11 +1,8 @@
 const Promise = require('bluebird');
 const chunkHandler = {
-  'my feed': function(params, userId, n) {
-    return require('./myFeed')(id, n);
-  },
-  text: function(params, userId, n) {
-    return require('./text')(params.content, n);
-  },
+  'my feed': (params, userId, n) => require('./myFeed')(userId, n),
+  text: (params, userId, n) => require('./text')(params.content, n),
+  reaction: (keyword) => require('./reactions')(keyword),
 };
 
 function zip(arrays) {
@@ -19,3 +16,5 @@ function zip(arrays) {
 function parseTemplate(template, userId, n) {
   return zip(Promise.all(template.map(chunk => chunkHandler[chunk.type](chunk.params, userId, n))));
 }
+
+module.exports = parseTemplate;
