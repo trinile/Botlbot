@@ -3,7 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 import Dashboard from '../containers/Dashboard';
 import MainContainer from '../containers/Main';
 import BuildABot from '../components/BuildABot';
-import EditABot from '../components/EditABot';
+import EditABotContainer from '../containers/EditABotContainer';
 import Splash from '../components/Splash';
 // import SideMenu from '../components/SideMenu';
 import SideMenuContainer from '../containers/SideMenuContainer';
@@ -16,7 +16,7 @@ const Routes = (
       <Route path="/dashboard" components={{main: Dashboard, sidebar: SideMenuContainer}} />
       <Route path="/postedTweets" components={{main: PostedTweets, sidebar: SideMenuContainer}}/>
       <Route path="/build" components={{main: BuildABot, sidebar: SideMenuContainer}} />
-      <Route path="/edit/:id" components={{main: EditABot, sidebar: SideMenuContainer}} />
+      <Route path="/edit/:id" components={{main: EditABotContainer, sidebar: SideMenuContainer}} />
     </Route>
 );
 

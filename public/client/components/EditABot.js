@@ -6,20 +6,26 @@ import { loadHighestId } from '../actions/chunkIDCounter';
 import styles from '../styles/template.css';
 
 class EditABot extends Component {
+  constructor(props) {
+    super(props);
+  }
 
-  // I KNOW THIS IS BAD, OK?
   componentWillMount() {
-    this.context.store.dispatch(getTemplateAsync(this.props.params.id));
+    // this.context.store.dispatch(getTemplateAsync(this.props.params.id));
+    this.props.getTemplate(this.props.params.id);
   }
 
   componentWillReceiveProps(newprops) {
-    console.log(newprops.params.id);
-    this.context.store.dispatch(getTemplateAsync(newprops.params.id));
+    console.log('TEMPLATE ID IS', newprops.params.id);
+    console.log('store IS', this.context.store);
+    // this.context.store.dispatch(getTemplateAsync(newprops.params.id));
+    this.props.params.id !== newprops.params.id && this.props.getTemplate(newprops.params.id);
   }
 
   componentDidUpdate() {
     // FIX THIS
     // this.context.store.dispatch(loadHighestId(this.context.store.template));
+    this.props.loadHighestId(this.props.template);
   }
 
   render() {
