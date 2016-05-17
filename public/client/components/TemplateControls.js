@@ -18,10 +18,10 @@ const TemplateControls = ({
     />
     <br/>
     <br/>
-    <RaisedButton label={'Save'} onMouseUp={() => saveTemplate(template)} />
+    <RaisedButton label={'Save'} disabled={template.length === 0 || template.name === undefined || template.name === ''} onMouseUp={() => saveTemplate(template)} />
     <br/>
     <br/>
-    <RaisedButton label={'Trash'} onMouseUp={trashTemplate} />
+    <RaisedButton label={'Trash'} disabled={template.length === 0} onMouseUp={trashTemplate} />
   </span>
 );
 
