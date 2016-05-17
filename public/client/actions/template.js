@@ -43,10 +43,10 @@ export function updateName(name) {
   };
 }
 
-export function loadTemplate(template) {
+export function loadTemplate(wholeTemplate) {
   return {
     type: 'LOAD_TEMPLATE',
-    template
+    wholeTemplate
   };
 }
 
@@ -144,22 +144,23 @@ export function deleteTemplateAsync(template) {
   };
 }
 
-export function getTemplateAsync(template) {
+export function getTemplateAsync(id) {
   return dispatch => {
     dispatch(fetchRequest());
-    return fetch('http://127.0.0.1:1337/templates/' + template.id, {
+    return fetch('http://127.0.0.1:1337/templates/' + id, {
       method: 'GET', 
       credentials: 'same-origin'
     })
+      .then(res => res.json())
       .then(res => {
         console.log(res);
-        if (res.status === 200) {
-          dispatch(fetchSuccess());
-          // dispatch(loadTemplate(res));
-        }
-        else {
-          dispatch(fetchFailure(res.status));
-        }
+        // if (res.status === 200) {
+        dispatch(fetchSuccess());
+        dispatch(loadTemplate(res));
+        // }
+        // else {
+        //   dispatch(fetchFailure(res.status));
+        // }
       })
       .catch(err => {
         dispatch(fetchFailure(err));

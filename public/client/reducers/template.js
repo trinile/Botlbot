@@ -26,6 +26,11 @@ const template = (state = [], action) => {
       let namedTemplate = [...state];
       namedTemplate.name = action.name;
       return namedTemplate;
+    case 'LOAD_TEMPLATE':
+      let newTemplate = action.wholeTemplate[0].template;
+      newTemplate.name = action.wholeTemplate[0].name;
+      newTemplate.id = action.wholeTemplate[0].id;
+      return newTemplate;
     default:
       return state;
   }
