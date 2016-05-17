@@ -3,11 +3,10 @@ import TemplateContainer from '../containers/TemplateContainer';
 import TemplateControlsContainer from '../containers/TemplateControlsContainer';
 import styles from '../styles/template.css';
 
-
-const BuildABot = (props, context) => {
+const EditABot = (props, context) => {
   return (
   <main>
-    <h1 className={styles.title}>Build a bot!</h1>
+    <h1 className={styles.title}>Edit an existing bot!</h1>
     <div className={styles.container}>
       <TemplateContainer />
       <TemplateControlsContainer />
@@ -15,8 +14,8 @@ const BuildABot = (props, context) => {
   </main>
 )};
 
-BuildABot.contextTypes = {
+EditABot.contextTypes = {
   store: PropTypes.object,
   muiTheme: PropTypes.object
 }
-export default BuildABot;
+export default EditABot;

@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import Pop from './Pop';
 import TemplateMenuContainer from '../containers/TemplateMenuContainer';
 import styles from '../styles/template.css';
+import { Paper } from 'material-ui';
 
 const clickOut = (e, toggleStatus, navigateOut) => {
   let parent = e.target.parentNode;
@@ -29,13 +30,13 @@ const Template = ({
   loadParams,
   updateChunk
 }) => (
-  <article >
+  <article>
     <style>{`
       .Popover-body {
         display: inline-flex;
         flex-direction: column;
         padding: 0.5rem;
-        background: hsl(0, 0%, 27%);
+        background: hsl(0, 0%, 93%);
         color: white;
         width: auto;
         border-radius: 0.3rem;
@@ -47,11 +48,11 @@ const Template = ({
         width: auto !important;
       }
       .Popover-tipShape {
-        fill: hsl(0, 0%, 27%)
+        fill: hsl(0, 0%, 93%)
       }`}
     </style>
-    <h3>Template</h3>
-    <div 
+    <Paper 
+      zdepth={2}
       className={styles.template}
     >
       <Pop
@@ -92,7 +93,7 @@ const Template = ({
         )
       })
     }
-    </div>
+    </Paper>
   </article>
 );
 
