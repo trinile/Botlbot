@@ -36,7 +36,7 @@ const Template = ({
         display: inline-flex;
         flex-direction: column;
         padding: 0.5rem;
-        background: hsl(0, 0%, 27%);
+        background: hsl(0, 0%, 93%);
         color: white;
         width: auto;
         border-radius: 0.3rem;
@@ -48,7 +48,7 @@ const Template = ({
         width: auto !important;
       }
       .Popover-tipShape {
-        fill: hsl(0, 0%, 27%)
+        fill: hsl(0, 0%, 93%)
       }`}
     </style>
     <Paper 
