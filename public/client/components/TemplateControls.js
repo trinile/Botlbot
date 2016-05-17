@@ -23,13 +23,39 @@ const TemplateControls = ({
       label={'Save'} 
       disabled={template.length === 0 || template.name === undefined || template.name === ''} 
       onMouseUp={() => {
-        saveTemplate(template)
+        if(template.id !== undefined) {
+          updateTemplate(template)
           .then(res => getTemplateNames());
+        } else {
+          saveTemplate(template)
+            .then(res => getTemplateNames());
+        }
       }} 
     />
     <br/>
     <br/>
-    <RaisedButton label={'Trash'} disabled={template.length === 0} onMouseUp={trashTemplate} />
+    <RaisedButton 
+      label={'Clear'} 
+      disabled={template.length === 0} 
+      onMouseUp={trashTemplate} 
+    />
+    {
+      template.id !== undefined &&
+        (
+          <span>
+          <br />
+          <br />
+          <RaisedButton 
+            label={'Delete'} 
+            disabled={template.length === 0} 
+            onMouseUp={() => {
+              deleteTemplate(template.id)
+                .then(res => getTemplateNames());
+            }}
+          />
+          </span>
+        )
+    }
   </span>
 );
 

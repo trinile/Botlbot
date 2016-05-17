@@ -25,7 +25,7 @@ const style = {
 
 
 const SideMenu = ({ templateIDs }) => (
-  <Drawer docked={true} style={style.drawer}>
+  <Drawer docked={true} style={style.drawer} zDepth={0} >
     <List>
       <ListItem primaryText="Dashboard" containerElement={<Link to="/dashboard" />}/>
       <ListItem primaryText="Build a Bot" containerElement={<Link to="/build"/>} />

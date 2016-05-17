@@ -122,10 +122,10 @@ export function editTemplateAsync(template) {
   };
 }
 
-export function deleteTemplateAsync(template) {
+export function deleteTemplateAsync(templateID) {
   return dispatch => {
     dispatch(fetchRequest());
-    return fetch('http://127.0.0.1:1337/templates/' + template.id, {
+    return fetch('http://127.0.0.1:1337/templates/' + templateID, {
       method: 'DELETE', 
       credentials: 'same-origin'
     })
