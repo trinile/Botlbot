@@ -134,7 +134,6 @@ export function deleteTemplateAsync(templateID) {
       .then(res => {
         console.log('DELETED!', res);
         if (res.status === 201) {
-          dispatch(deleteTemplate());
           dispatch(fetchSuccess());
         }
         else {

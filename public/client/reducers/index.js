@@ -12,6 +12,7 @@ import templateMenu from './templateMenu';
 import templateIDs from './templateIDs';
 import chunkIDCounter from './chunkIDCounter';
 import chunkInProgress from './chunkInProgress';
+import snack from './snack';
 
 const Reducers = combineReducers({
   authStatus,
@@ -24,6 +25,7 @@ const Reducers = combineReducers({
   templateIDs,
   chunkIDCounter,
   chunkInProgress,
+  snack,
   routing: routerReducer,
 });
 

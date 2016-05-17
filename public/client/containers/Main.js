@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import SiteNav from '../components/SiteNav';
+import SnackContainer from '../containers/SnackContainer';
 import { logoutUser } from '../actions/Logout';
 
 const style = {
@@ -33,6 +34,7 @@ const Main = ({ dispatch, isAuthenticated, main, sidebar }) => (
         onLogoutClick={() => dispatch(logoutUser())}
       />
       {main}
+      <SnackContainer />
     </div>
   </div>
 );

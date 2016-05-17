@@ -8,6 +8,7 @@ import {
   // getTemplateNamesAsync, 
   trashTemplate,
   updateName } from '../actions/template';
+import { setSnackMessage } from '../actions/snack';
 import { push } from 'react-router-redux';
 
 const mapStateToProps = (state) => ({
@@ -21,6 +22,7 @@ const mapDispatchToProps = (dispatch) => ({
   // getTemplateNames: () => dispatch(getTemplateNamesAsync()),
   trashTemplate: (id) => dispatch(trashTemplate(id)),
   updateName: (name) => dispatch(updateName(name)),
+  setSnackMessage: (message) => dispatch(setSnackMessage(message)),
   redirectToDashboard: () => dispatch(push('/dashboard'))
 });
 

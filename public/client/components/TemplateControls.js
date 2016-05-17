@@ -10,6 +10,7 @@ const TemplateControls = ({
   deleteTemplate,
   // getTemplateNames,
   updateName,
+  setSnackMessage,
   redirectToDashboard
 }) => (
   <span className={styles.templatecontrols}>
@@ -25,16 +26,24 @@ const TemplateControls = ({
       disabled={template.length === 0 || template.name === undefined || template.name === ''} 
       onMouseUp={() => {
         if(template.id !== undefined) {
+          console.log('UPDATING, SHOULD SHOW SNACK');
+          setSnackMessage(`Updating template '${template.name}'...`);
           updateTemplate(template)
           // .then(res => getTemplateNames())
-          .then(() => redirectToDashboard());
+          .then(() => setSnackMessage(`Updated template '${template.name}'!`))
+          .then(() => redirectToDashboard())
+          .catch((err) => setSnackMessage('Couldn\'t update template...'));
         } else {
+          console.log('SAVING, SHOULD SHOW SNACK');
+          setSnackMessage(`Saving template '${template.name}'...`);
           saveTemplate(template)
             // .then(res => getTemplateNames());
+            .then(() => setSnackMessage(`Saved template '${template.name}'!`))
             .then(() => {
               trashTemplate();
               redirectToDashboard();
-            });
+            })
+            .catch((err) => setSnackMessage('Couldn\'t save template...'));
         }
       }} 
     />
@@ -57,9 +66,13 @@ const TemplateControls = ({
           <RaisedButton 
             label={'Delete'}  
             onMouseUp={() => {
+              console.log('DELETING, SHOULD SHOW SNACK');
+              setSnackMessage(`Deleting template '${template.name}'...`);
               deleteTemplate(template.id)
                 // .then(res => getTemplateNames())
-                .then(() => redirectToDashboard());
+                .then(() => setSnackMessage(`Deleted template '${template.name}!'`))
+                .then(() => redirectToDashboard())
+                .catch((err) => setSnackMessage('Couldn\'t delete template...'));
             }}
           />
           </span>
