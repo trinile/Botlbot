@@ -1,8 +1,9 @@
 import { fetchRequest, fetchSuccess, fetchFailure } from './requestStatus';
 
-export function trashTemplate() {
+export function trashTemplate(id) {
   return {
-    type: 'TRASH_TEMPLATE'
+    type: 'TRASH_TEMPLATE',
+    id
   };
 }
 
@@ -77,6 +78,7 @@ export function postTemplateAsync(template) {
       .then(res => {
         console.log(res);
         if (res.status === 201) {
+          dispatch(saveTemplate());
           dispatch(fetchSuccess());
         }
         else {
@@ -132,6 +134,7 @@ export function deleteTemplateAsync(templateID) {
       .then(res => {
         console.log('DELETED!', res);
         if (res.status === 201) {
+          dispatch(deleteTemplate());
           dispatch(fetchSuccess());
         }
         else {

@@ -1,7 +1,9 @@
 const template = (state = [], action) => {
   switch (action.type) {
     case 'TRASH_TEMPLATE':
-      return [];
+      let clearedTemplate = [];
+      clearedTemplate.id = action.id;
+      return clearedTemplate;
     case 'SAVE_TEMPLATE':
     case 'DELETE_TEMPLATE':
       return state;

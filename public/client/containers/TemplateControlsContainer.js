@@ -19,7 +19,7 @@ const mapDispatchToProps = (dispatch) => ({
   updateTemplate: (template) => dispatch(editTemplateAsync(template)),
   deleteTemplate: (template) => dispatch(deleteTemplateAsync(template)),
   // getTemplateNames: () => dispatch(getTemplateNamesAsync()),
-  trashTemplate: () => dispatch(trashTemplate()),
+  trashTemplate: (id) => dispatch(trashTemplate(id)),
   updateName: (name) => dispatch(updateName(name)),
   redirectToDashboard: () => dispatch(push('/dashboard'))
 });

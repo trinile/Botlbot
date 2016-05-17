@@ -30,7 +30,11 @@ const TemplateControls = ({
           .then(() => redirectToDashboard());
         } else {
           saveTemplate(template)
-            .then(res => getTemplateNames());
+            // .then(res => getTemplateNames());
+            .then(() => {
+              trashTemplate();
+              redirectToDashboard();
+            });
         }
       }} 
     />
@@ -39,7 +43,10 @@ const TemplateControls = ({
     <RaisedButton 
       label={'Clear'} 
       disabled={template.length === 0} 
-      onMouseUp={trashTemplate} 
+      onMouseUp={() => {
+        console.log('TEMPLATE ID IS', template.id);
+        trashTemplate(template.id);
+      }}
     />
     {
       template.id !== undefined &&
@@ -48,8 +55,7 @@ const TemplateControls = ({
           <br />
           <br />
           <RaisedButton 
-            label={'Delete'} 
-            disabled={template.length === 0} 
+            label={'Delete'}  
             onMouseUp={() => {
               deleteTemplate(template.id)
                 // .then(res => getTemplateNames())
