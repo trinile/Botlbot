@@ -6,6 +6,8 @@ const TemplateControls = ({
   template, 
   trashTemplate, 
   saveTemplate, 
+  updateTemplate,
+  deleteTemplate,
   updateName
 }) => (
   <span className={styles.templatecontrols}>

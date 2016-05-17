@@ -110,6 +110,21 @@ module.exports = function(app, passport) {
     req.body ? res.status(201).send('you putted it') : res.status(400).send('you didn\'t put it');
   });
 
+  app.get('/templates/:id', function(req, res) {
+    console.log('GETTED TO /TEMPLATES/:id', req.params.id);
+    res.status(200).send('you got it');
+  });
+
+  app.delete('/templates/:id', function(req, res) {
+    console.log('DELETED AT /TEMPLATES/:id', req.params.id);
+    res.status(201).send('you deleted it');
+  });
+
+  app.get('/templates', function(req, res) {
+    console.log('GETTED TO /TEMPLATES');
+    res.status(200).send('you got those names!');
+  });
+
   app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, '/../build/bundle.html'));
   });

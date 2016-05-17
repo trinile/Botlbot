@@ -75,3 +75,106 @@ export function postTemplateAsync(template) {
       });
   };
 }
+
+export function editTemplateAsync(template) {
+  return dispatch => {
+    let data = JSON.stringify({
+      template,
+      name: template.name,
+      id: template.id
+    });
+    console.log(data);
+    dispatch(fetchRequest());
+    return fetch('http://127.0.0.1:1337/templates/' + template.id, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }, 
+      method: 'PUT', 
+      credentials: 'same-origin',
+      body: data
+    })
+      .then(res => {
+        console.log('PUTTED!', res);
+        if (res.status === 201) {
+          dispatch(fetchSuccess());
+          // dispatch(postTweet(id));
+        }
+        else {
+          dispatch(fetchFailure(res.status));
+        }
+      })
+      .catch(err => {
+        dispatch(fetchFailure(err));
+      });
+  };
+}
+
+export function deleteTemplateAsync(template) {
+  return dispatch => {
+    dispatch(fetchRequest());
+    return fetch('http://127.0.0.1:1337/templates/' + template.id, {
+      method: 'DELETE', 
+      credentials: 'same-origin'
+    })
+      .then(res => {
+        console.log('DELETED!', res);
+        if (res.status === 201) {
+          dispatch(fetchSuccess());
+          // dispatch(postTweet(id));
+        }
+        else {
+          dispatch(fetchFailure(res.status));
+        }
+      })
+      .catch(err => {
+        dispatch(fetchFailure(err));
+      });
+  };
+}
+
+export function getTemplateAsync(template) {
+  return dispatch => {
+    dispatch(fetchRequest());
+    return fetch('http://127.0.0.1:1337/templates/' + template.id, {
+      method: 'GET', 
+      credentials: 'same-origin'
+    })
+      .then(res => {
+        console.log(res);
+        if (res.status === 201) {
+          dispatch(fetchSuccess());
+          // dispatch(postTweet(id));
+        }
+        else {
+          dispatch(fetchFailure(res.status));
+        }
+      })
+      .catch(err => {
+        dispatch(fetchFailure(err));
+      });
+  };
+}
+
+export function getTemplateNamesAsync() {
+  return dispatch => {
+    dispatch(fetchRequest());
+    return fetch('http://127.0.0.1:1337/templates/', {
+      method: 'GET', 
+      credentials: 'same-origin'
+    })
+      .then(res => {
+        console.log(res);
+        if (res.status === 201) {
+          dispatch(fetchSuccess());
+          // dispatch(postTweet(id));
+        }
+        else {
+          dispatch(fetchFailure(res.status));
+        }
+      })
+      .catch(err => {
+        dispatch(fetchFailure(err));
+      });
+  };
+}
