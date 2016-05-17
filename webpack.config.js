@@ -50,11 +50,15 @@ const common = {
       }
     ],
     loaders: [
+      // { 
+      //   test: /\.css$/, 
+      //   loaders: ["style", "css"]
+      // },
       {
         // Test expects a RegExp! Note the slashes!
         test: /\.css$/,
         //css?modules enables module spec for css-loader
-        loaders: ['style', 'css?modules'],
+        loaders: ['style','css?modules'],
         // Include accepts either a path or an array of paths.
         include: PATHS.styles
       },
@@ -71,7 +75,8 @@ const common = {
         include: PATHS.app
       }
     ]
-  }
+  },
+  devtool: 'source-map'
 };
 
 
@@ -109,7 +114,7 @@ if(TARGET === 'start' || !TARGET) {
         save: true// --save
       })
     ],
-    devtool: 'eval-source-map'
+    devtool: 'source-map'
   });
 }
 

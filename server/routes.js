@@ -129,7 +129,10 @@ module.exports = function(app, passport) {
     .catch(err => res.status(500).send(err))
   });
 
-
+  app.post('/buildTemplate', function(req, res) {
+    console.log('HEY LOOK HERE', req.body);
+    req.body ? res.status(201).send('you did it') : res.status(400).send('you didn\'t do it');
+  });
 
   app.get('/', function(req, res) {
     console.log(req.session);

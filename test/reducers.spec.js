@@ -5,6 +5,8 @@ import deepFreeze from 'deep-freeze';
 
 import tweets from '../public/client/reducers/tweets';
 import authStatus from '../public/client/reducers/Auth';
+// import templates from '../public/client/reducers/templates';
+import chunkInProgress from '../public/client/reducers/chunkInProgress';
 
 describe('Tweets Reducers', function () {
 
@@ -116,5 +118,64 @@ describe('Authentication Reducers', function () {
 
   it('Should successfully logout', function () {
     expect(authStatus(loggedInState, { type: TYPE.LOGOUT_SUCCESS })).to.be.equal;
+  });
+});
+
+xdescribe('Template Reducers', function() {
+  
+  describe('Updating a template', function() {
+
+    const afterState = 'This is my tweet template.';
+    const action = {
+      type: 'UPDATE_TEMPLATE',
+      template: 'This is my tweet template.'
+    };
+
+    it('Should update a template', function() {
+      expect(templates(null, action)).to.equal(afterState);
+    });
+  });
+
+  describe('Deleting a template', function() {
+
+    const beforeState = 'This is my tweet template.';
+    const afterState = '';
+    const action = {
+      type: 'TRASH_TEMPLATE'
+    };
+
+    it('Should delete a template', function() {
+      expect(templates(beforeState, action)).to.equal(afterState);
+    });
+  });
+});
+
+describe('Chunk Reducers', function() {
+  
+  describe('Setting a chunkType', function() {
+
+    const afterState = {chunkType: 'random word', params: null};
+    const action = {
+      type: 'SET_CHUNK_TYPE',
+      chunkType: 'random word'
+    };
+
+    it('Should set a chunkType', function() {
+      expect(chunkInProgress(undefined, action)).to.eql(afterState);
+    });
+  });
+
+  describe('Updating params', function() {
+
+    const beforeState = {chunkType: 'random word', params: null};
+    const afterState = {chunkType: 'random word', params: {length: 5}};
+    const action = {
+      type: 'UPDATE_CHUNK',
+      param: {length: 5}
+    };
+
+    it('Should update a chunk will null params', function() {
+      expect(chunkInProgress(beforeState, action)).to.eql(afterState);
+    });
   });
 });
