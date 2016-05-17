@@ -100,9 +100,14 @@ module.exports = function(app, passport) {
     .catch(err => res.status(500).send(err))
   });
 
-  app.post('/buildTemplate', function(req, res) {
-    console.log('HEY LOOK HERE', req.body);
-    req.body ? res.status(201).send('you did it') : res.status(400).send('you didn\'t do it');
+  app.post('/templates', function(req, res) {
+    console.log('POSTED TO /TEMPLATES', req.body);
+    req.body ? res.status(201).send('you posted it') : res.status(400).send('you didn\'t post it');
+  });
+
+  app.put('/templates/:id', function(req, res) {
+    console.log('PUTTED TO /TEMPLATES/:id', req.params.id);
+    req.body ? res.status(201).send('you putted it') : res.status(400).send('you didn\'t put it');
   });
 
   app.get('/', function(req, res) {

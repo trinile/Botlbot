@@ -1,12 +1,12 @@
 const menuTree = {
   // change these key names to be pretty strings like 'related word'
   Root: {
-    Text: {
+    text: {
       content: '',
       leaf: true
     },
 
-    Source: {
+    source: {
       'random word': {
         'part of speech': ['adjective', 'adverb', 'noun', 'proper noun'],
         'min length': 0,
@@ -37,7 +37,7 @@ const menuTree = {
       }
     },
 
-    Reaction: {
+    reaction: {
       type: [
         'emoji',
         'casual',
