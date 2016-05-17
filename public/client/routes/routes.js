@@ -5,7 +5,6 @@ import MainContainer from '../containers/Main';
 import BuildABot from '../components/BuildABot';
 import EditABotContainer from '../containers/EditABotContainer';
 import Splash from '../components/Splash';
-// import SideMenu from '../components/SideMenu';
 import SideMenuContainer from '../containers/SideMenuContainer';
 import PostedTweets from '../containers/PostedTweets';
 
