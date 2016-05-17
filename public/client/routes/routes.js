@@ -16,7 +16,7 @@ const Routes = (
       <Route path="/dashboard" components={{main: Dashboard, sidebar: SideMenuContainer}} />
       <Route path="/postedTweets" components={{main: PostedTweets, sidebar: SideMenuContainer}}/>
       <Route path="/build" components={{main: BuildABot, sidebar: SideMenuContainer}} />
-      <Route path="/edit" components={{main: EditABot, sidebar: SideMenuContainer}} />
+      <Route path="/edit/:id" components={{main: EditABot, sidebar: SideMenuContainer}} />
     </Route>
 );
 
