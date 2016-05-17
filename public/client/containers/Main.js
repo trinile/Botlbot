@@ -26,13 +26,12 @@ const style = {
 
 const Main = ({ dispatch, isAuthenticated, main, sidebar }) => (
   <div>
-    <SiteNav
-      isAuthenticated={isAuthenticated}
-      onLogoutClick={() => dispatch(logoutUser())}/>
-    <div className="SideBar" id="1" /*style={style.sidebar}*/>
-      {sidebar}
-    </div>
+    {sidebar}
     <div className="Main" id="2" /*style={style.main}*/>
+      <SiteNav
+        isAuthenticated={isAuthenticated}
+        onLogoutClick={() => dispatch(logoutUser())}
+      />
       {main}
     </div>
   </div>

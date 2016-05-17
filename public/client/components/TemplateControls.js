@@ -1,5 +1,6 @@
 import React from 'react';
 import { RaisedButton, TextField } from 'material-ui';
+import styles from '../styles/template.css';
 
 const TemplateControls = ({
   template, 
@@ -7,7 +8,7 @@ const TemplateControls = ({
   saveTemplate, 
   updateName
 }) => (
-  <div>
+  <span className={styles.templatecontrols}>
     <TextField 
       hintText={'Name for your template'} 
       onChange={(e) => updateName(e.target.value)}
@@ -19,7 +20,7 @@ const TemplateControls = ({
     <br/>
     <br/>
     <RaisedButton label={'Trash'} onMouseUp={trashTemplate} />
-  </div>
+  </span>
 );
 
 export default TemplateControls;
