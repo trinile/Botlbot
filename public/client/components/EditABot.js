@@ -2,18 +2,24 @@ import React, { PropTypes, Component } from 'react';
 import TemplateContainer from '../containers/TemplateContainer';
 import TemplateControlsContainer from '../containers/TemplateControlsContainer';
 import { getTemplateAsync } from '../actions/template';
+import { loadHighestId } from '../actions/chunkIDCounter';
 import styles from '../styles/template.css';
 
 class EditABot extends Component {
 
+  // I KNOW THIS IS BAD, OK?
   componentWillMount() {
     this.context.store.dispatch(getTemplateAsync(this.props.params.id));
   }
 
   componentWillReceiveProps(newprops) {
-    // I KNOW THIS IS BAD, OK?
     console.log(newprops.params.id);
     this.context.store.dispatch(getTemplateAsync(newprops.params.id));
+  }
+
+  componentDidUpdate() {
+    // FIX THIS
+    // this.context.store.dispatch(loadHighestId(this.context.store.template));
   }
 
   render() {

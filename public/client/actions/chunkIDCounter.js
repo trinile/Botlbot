@@ -4,9 +4,9 @@ export const incrementCounter = () => {
   };
 };
 
-export const loadHighestId = (id) => {
+export const loadHighestId = (template) => {
   return {
     type: 'LOAD_HIGHEST_ID',
-    id
+    template
   };
 };

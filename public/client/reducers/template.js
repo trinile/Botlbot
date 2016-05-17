@@ -29,7 +29,7 @@ const template = (state = [], action) => {
     case 'LOAD_TEMPLATE':
       let newTemplate = action.wholeTemplate[0].template;
       newTemplate.name = action.wholeTemplate[0].name;
-      newTemplate.id = action.wholeTemplate[0].id;
+      newTemplate.id = action.wholeTemplate[0].template_id;
       return newTemplate;
     default:
       return state;
