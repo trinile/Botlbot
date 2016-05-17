@@ -2,18 +2,7 @@ var Twit = require('twit');
 var Tweets = require('./db/controllers/tweetsController.js');
 require('dotenv').config();
 
-function tweetCleaner(tweet) {
-  return {
-    retweet_count: (tweet.retweet_count || 1),
-    favorite_count: (tweet.favorite_count || 1),
-    user: {
-      screen_name: tweet.user.screen_name,
-      followers_count: (tweet.user.followers_count || 1),
-    },
-    text: tweet.text,
-    id_str: tweet.id_str,
-  };
-}
+
 
 function pullTweetsFromFeed(accessToken, secret, userID, clientResponse) {
   const T = new Twit({
@@ -29,12 +18,7 @@ function pullTweetsFromFeed(accessToken, secret, userID, clientResponse) {
       return acc;
     }, []);
 
-    cleanTweets.sort(function(a, b) {
-      return (
-        ((a.retweet_count * 10 + a.favorite_count) / a.user.followers_count) -
-        ((b.retweet_count * 10 + b.favorite_count) / b.user.followers_count)
-      );
-    });
+
 
     // IN THE FUTURE: this should write tweets to db instead of just sending them to client
       // something like:

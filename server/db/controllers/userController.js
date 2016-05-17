@@ -34,7 +34,15 @@ function getRecord(userId) {
     .then(results => results[0]);
 }
 
+function getTokens(userId) {
+  return knex('users')
+    .where({ user_twitter_id: userId })
+    .select('token', 'tokenSecret')
+    .then(results => results[0]);
+}
+
 module.exports = {
   login: login,
-  getRecord: getRecord
+  getRecord: getRecord,
+  getTokens: getTokens
 };

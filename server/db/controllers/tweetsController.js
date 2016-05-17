@@ -1,9 +1,9 @@
 const knex = require('../db.js');
-//cleans up data from API call to Twitter
-function scrubFetchedTweet(tweet, userID) {
+
+function scrubFetchedTweet(tweet, userId)  {
   return {
     tweet_id_str: tweet.id_str,
-    user_twitter_id: userID,
+    user_twitter_id: userId,
     retweet_count: tweet.retweet_count,
     favorite_count: tweet.favorite_count,
     user_screen_name: tweet.user.screen_name,
@@ -34,19 +34,18 @@ function saveGeneratedTweets(userID, tweets) {
     .insert(tweets.map(t => scrubFetchedTweet(t, userID)));
 }
 
-function getTweets(userID, table) {
-  return knex(table)
-    .where({ 
-      user_twitter_id: userID, 
-      tweet_status: 'available',
-    })
+function getGeneratedTweets(userID) {
+  return knex('generatedtweets')
+    .where({ user_twitter_id: userID, tweet_status: 'available' })
     .select();
 }
-// function getGeneratedTweets(userID) {
-//   return knex('generatedtweets')
-//     .where({ user_twitter_id: userID })
-//     .select();
-// }
+
+function getPostedTweets(userID) {
+  return knex('postedtweets')
+    .where({ user_twitter_id: userID })
+    .select();
+}
+
 function savePostedTweet(data) {
   return knex('postedtweets')
     .insert(scrubPostedTweet(data), 'retweet_id'); //previous return: 'retweet_id'
@@ -98,18 +97,19 @@ function joinTweetAndUserByTweetId(id) {
   return knex('generatedtweets')
     .join('users', 'users.user_twitter_id', '=', 'generatedtweets.user_twitter_id')
     .where({ bot_tweet_id: id })
-    .select('users.token', 'users.tokenSecret', 'generatedtweets.tweet_text')
+    .select('users.token', 'users.tokenSecret', 'generatedtweets.user_screen_name')
     .then(response => response[0])
     .catch(console.log);
 }
 
 module.exports = {
-  joinTweetAndUserByTweetId: joinTweetAndUserByTweetId,
-  getTweets: getTweets,
-  saveGeneratedTweets: saveGeneratedTweets,
-  deleteGeneratedTweet: deleteGeneratedTweet,
-  savePostedTweet: savePostedTweet,
-  modifyTweetStatus: modifyTweetStatus,
-  modifyTweetText: modifyTweetText,
-  scheduleTweet: scheduleTweet,
+  joinTweetAndUserByTweetId,
+  getGeneratedTweets,
+  saveGeneratedTweets,
+  deleteGeneratedTweet,
+  getPostedTweets,
+  savePostedTweet,
+  modifyTweetStatus,
+  modifyTweetText,
+  scheduleTweet,
 };

@@ -61,7 +61,7 @@ export const receiveLogin = () => (
 * @property { string } type - LOGIN_FAILURE
 * @property { Boolean } isAuthenticated - false
 * @property { string } isFetching - true
-*/ 
+*/
 export const loginError = (message) => (
   {
     type: LOGIN_FAILURE,
@@ -81,7 +81,7 @@ export const loginError = (message) => (
 export const authUser = () => {
   return dispatch => {
     dispatch(requestLogin());
-    return fetch('http://127.0.0.1:1337/authUser', { method: 'GET', credentials: 'same-origin' })
+    return fetch('http://127.0.0.1:1337/authenticate', { method: 'GET', credentials: 'same-origin' })
       .then(res => res.json())
       .then(json => {
         localStorage.setItem('authID', json.authID);
