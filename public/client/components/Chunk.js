@@ -13,7 +13,15 @@ const Chunk = ({
       className={styles.chunk}
       onClick={onClick}
     >
-      {chunkType}{params.keyword ? ': ' + params.keyword : ''}{params.content ? ': ' + params.content : ''}
+      {chunkType}{
+        params && params.keyword ? `: ${params.keyword}` : ''
+      }{
+        params && params.content ? `: ${params.content}` : ''
+      }{
+        params && params.type ? `: ${params.type}` : ''
+      }{
+        params && params.list ? `: ${params.list[0]}...` : ''
+      }
     </span>
   );
 };

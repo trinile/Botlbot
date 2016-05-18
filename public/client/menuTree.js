@@ -18,8 +18,10 @@ const menuTree = {
         target: null,
         leaf: true
       },
-      'twitter': {
-        'from where': ['my feed', 'random tweet'],
+      'my feed': {
+        leaf: true
+      },
+      'random tweet': {
         keyword: '',
         leaf: true
       },
