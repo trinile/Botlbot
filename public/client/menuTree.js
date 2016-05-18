@@ -9,8 +9,7 @@ const menuTree = {
     source: {
       'random word': {
         'part of speech': ['adjective', 'adverb', 'noun', 'proper noun'],
-        'min length': 0,
-        'max length': 0,
+        length: 0,
         leaf: true
       },
       'related word': {
@@ -18,8 +17,10 @@ const menuTree = {
         target: null,
         leaf: true
       },
-      'twitter': {
-        'from where': ['my feed', 'random tweet'],
+      'my feed': {
+        leaf: true
+      },
+      'random tweet': {
         keyword: '',
         leaf: true
       },
