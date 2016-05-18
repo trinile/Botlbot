@@ -13,7 +13,7 @@ app.post('/queue/templates/', function(req, res) {
   res.status(201);
 });
 
-app.post('/generate/users/:uid/templates/:tid', function(req, res) {
+app.post('/generate/users/:uid/templates/:tid', function (req, res) {
   console.log('got your post')
   queue.processNext(req.params.tid, req.params.uid, res);
 });

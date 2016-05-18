@@ -43,6 +43,13 @@ function getGeneratedTweets(userID, page) {
     .offset(page * 5)
     .limit(5);
 }
+//generated tweets (schedule_id) and scheduledtweets (schedule_id, schedule_time)
+function getScheduledTweets(userID) {
+  return knex('generatedtweets')
+  .where({ user_twitter_id: userID, tweet_status: 'scheduled' })
+  .innerJoin('scheduledtweets', 'generatedtweets.schedule_id', 'scheduledtweets.schedule_id')
+  .select(/*'generatedtweets.*', 'scheduletweets.scheduled_time'*/);
+}
 
 function getPostedTweets(userID) {
   return knex('postedtweets')
@@ -109,10 +116,44 @@ function joinTweetAndUserByTweetId(id) {
     .catch(console.log);
 }
 
+var moment = require('moment');
+// const currentDate = moment();
+// var last = '2016-05-17 17:03:08-07';
+// console.log(moment(last).isValid());
+
+// console.log(moment(last).add(24, 'hours').isBefore(currentDate));
+// const currentDate = new Date();
+// const hours = currentDate.getHours();
+// const hours = currentDate.getMinutes();
+
+function deleteGeneratedTweets() {
+  var currentDate = moment();
+  knex.select('created_at', 'bot_tweet_id')
+  .from('generatedtweets')
+  .then(function(dates) {
+    console.log('dates ------->', dates);
+    dates.forEach(function(date) {
+      if (moment(date.created_at).add(24, 'hours').isBefore(currentDate)) {
+        //delete tweets from database that are more than 24 hours old
+        knex.table('generatedtweets')
+        .where({'bot_tweet_id': date.bot_tweet_id })
+        .del();
+      }
+    return dates;
+    })
+  })
+};
+
+function postScheduledTweets() {
+  //do a lookup of each scheduled tweet
+  
+}
+
 module.exports = {
   joinTweetAndUserByTweetId,
   getGeneratedTweets,
   saveGeneratedTweets,
+  getScheduledTweets,
   deleteGeneratedTweet,
   getPostedTweets,
   savePostedTweet,

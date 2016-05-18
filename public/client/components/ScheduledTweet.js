@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react';
 import styles from '../styles/tweet.css';
-import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import Paper from 'material-ui/Paper';
 import Dialog from 'material-ui/Dialog';
 import SchedulePopOver from './Scheduler';
+import { push } from 'react-router-redux';
 
 const style = {
   main: {
@@ -14,31 +15,25 @@ const style = {
   },
   paper: {
     border: '1px #ddd',
-    'border-radius': '4px',
+    borderRadius: '4px',
     padding: '10px',
     color: 'green',
   },
 };
 
-const Tweet = ({
-  tweet,
-  postTweet,
-  trashTweet,
-  requestEdit,
-  scheduleTweet,
+const ScheduledTweet = ({
+  tweet
 }) => {
-  const scheduleRequest = function() {
-
-  }
   return (
     <Card style={style.main}>
       <CardHeader
-        title="Bot Generated Tweet"
-        subtitle="Created on " `${tweet.created_at}`
+        title="SCHEDULED FOR "
+        subtitle={tweet.updated_at}
         avatar="http://lorempixel.com/100/100/nature/"
       />
-      <CardTitle title="Tweet Text: " subtitle="Below is content generated for tweet" />
-      <CardText style={style.paper} dangerouslySetInnerHTML={{__html: tweet.bot_tweet_body}}>
+      <CardTitle title="tweet Text: " subtitle="Below is content generated for tweet" />
+      <CardText style={style.paper}>
+      {tweet.tweet_text}
       </CardText>
       <Paper href="/linktooriginaltwittercontent" style={style.paper}>
         <ul>
@@ -49,11 +44,12 @@ const Tweet = ({
         </ul>
       </Paper>
       <CardActions>
-        <FlatButton label="POST" onTouchTap={postTweet} />
-        <FlatButton label="TRASH" onTouchTap={trashTweet} />
-        <FlatButton label="EDIT" onTouchTap={requestEdit} />
+        <FlatButton label="POST NOW" onTouchTap={postTweet} />
+        <FlatButton label="TRASH" onClick={trashTweet} />
+        <FlatButton label="EDIT" onClick={requestEdit} />
         <SchedulePopOver tweet={tweet} onSchedule={scheduleTweet} />
       </CardActions>
+      <CardTitle title="STATUS" subtitle="scheduled for "/>
     </Card>
   );
 };
@@ -63,7 +59,6 @@ Tweet.propTypes = {
   postTweet: PropTypes.func,
   trashTweet: PropTypes.func,
   scheduleTweet: PropTypes.func,
-  requestEdit: PropTypes.func,
 };
 
-export default Tweet;
+export default ScheduledTweet;

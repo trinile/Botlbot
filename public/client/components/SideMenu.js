@@ -47,9 +47,8 @@ const SideMenu = ({ templateIDs }) => (
           );
         })}
       />
-      <ListItem primaryText="Posted Tweets" containerElement={<Link to="/postedtweets" />}/>
-      <ListItem primaryText="Scheduled Tweets" containerElement={<Link to="/scheduled/:id "/>}/>
-      <ListItem primaryText="Recently Trashed" containerElement={<Link to="/recentlytrashed" />}/>
+      <ListItem primaryText="Posted Tweets" containerElement={<Link to="/posted" />}/>
+      <ListItem primaryText="Scheduled Tweets" containerElement={<Link to="/scheduled"/>}/>
       <Divider/>
       <ListItem primaryText="Logout" />
     </List>
