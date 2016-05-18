@@ -29,7 +29,7 @@ const menuTree = {
         leaf: true
       },
       emoji: {
-        type: ['trendy', 'people', 'nature', 'happy', 'unhappy'],
+        keyword: '',
         leaf: true
       },
       wordlist: {
@@ -38,15 +38,15 @@ const menuTree = {
       }
     },
 
-    reaction: {
-      type: [
-        'emoji',
-        'casual',
-        'boring'
-      ],
-      target: null,
-      leaf: true
-    }
+    // reaction: {
+    //   type: [
+    //     'emoji',
+    //     'casual',
+    //     'boring'
+    //   ],
+    //   target: null,
+    //   leaf: true
+    // }
   }
 };
 

@@ -3,7 +3,8 @@ const chunkHandler = {
   'my feed': (params, userId, n) => require('./myFeed')(userId, n),
   'random tweet': (params, userId, n) => require('./tweetsByKeyword')(userId, params.keyword, n),
   text: (params, userId, n) => require('./text')(params.content, n),
-  reaction: (params, userId, n) => require('./reactions')(keyword),
+  emoji: (params, userId, n) => require('./emoji')(params.keyword, n),
+  news: (params, userId, n) => require('./newsService')(params.keyword, n)
 };
 
 function zip(arrays) {

@@ -27,6 +27,7 @@ exports.up = function(knex, Promise) {
     table.string('tweet_text');
     table.string('tweet_id_str');
     table.string('bot_tweet_body');
+    table.string('news_headline');
     table.timestamps(true, true);
   });
 };

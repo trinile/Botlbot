@@ -15,13 +15,13 @@ function fixForDb(userId, tweet) {
       user_screen_name: tweet[source].user.screen_name,
       user_followers_count: tweet[source].user.followers_count,
       tweet_text: tweet[source].text,
-      bot_tweet_body: tweet.reduce((str, c, i) => `${str} ${i === source ? url : c}`),
+      bot_tweet_body: tweet.reduce((str, c, i) => `${str} ${i === source ? url : c}`, ''),
     };
   }
   return {
     user_twitter_id: userId,
     news_headline: tweet[source].headline,
-    bot_tweet_body: tweet.reduce((str, c, i) => `${str} ${i === source ? tweet[source].url : c}`),
+    bot_tweet_body: tweet.reduce((str, c, i) => `${str} ${i === source ? tweet[source]['news_url'] : c}`, ''),
   };
 }
 

@@ -6,7 +6,7 @@ function randomValue(array) {
 }
 
 function getIndexCache(keyword) {
-  return emoji.indexCache[keyword];
+  return emoji.indexCache[keyword] || emoji.indexCache.poop;
 }
 
 const getEmoji = _.flow(getIndexCache, randomValue, (i) => emoji.list[i])
@@ -21,4 +21,8 @@ function formatUnicodeForHTML(unicode) {
 
 const getEmojiUnicode = _.flow(getEmoji, getUnicodeFromEmoji, formatUnicodeForHTML);
 
-module.exports = getEmojiUnicode;
+function getEmojiUnicodeNTimes(keyword, n) {
+  return _.range(1, n).map(() => getEmojiUnicode(keyword));
+}
+
+module.exports = getEmojiUnicodeNTimes;
