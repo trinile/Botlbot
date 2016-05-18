@@ -3,7 +3,7 @@ const snack = (state = {open: false, message: ''}, action) => {
     case 'SET_SNACK_MESSAGE':
       return { message: action.message, open: true };
     case 'CLOSE_SNACK':
-      return {open: false, message: null};
+      return {open: false, message: ''};
     default:
       return state;
   }

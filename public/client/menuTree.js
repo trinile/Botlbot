@@ -9,8 +9,7 @@ const menuTree = {
     source: {
       'random word': {
         'part of speech': ['adjective', 'adverb', 'noun', 'proper noun'],
-        'min length': 0,
-        'max length': 0,
+        length: 0,
         leaf: true
       },
       'related word': {
