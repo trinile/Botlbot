@@ -4,6 +4,8 @@ function fixForDb(userId, tweet) {
     return {
       user_twitter_id: userId,
       bot_tweet_body: tweet.join(' '),
+      updated_at: new Date(),
+      created_at: new Date()
     };
   } else if (tweet[source].id_str) {
     const url = `https://www.twitter.com/${tweet[source].user.screen_name}/status/${tweet[source].id_str}`;
@@ -16,12 +18,16 @@ function fixForDb(userId, tweet) {
       user_followers_count: tweet[source].user.followers_count,
       tweet_text: tweet[source].text,
       bot_tweet_body: tweet.reduce((str, c, i) => `${str} ${i === source ? url : c}`, ''),
+      updated_at: new Date(),
+      created_at: new Date()
     };
   }
   return {
     user_twitter_id: userId,
     news_headline: tweet[source].headline,
     bot_tweet_body: tweet.reduce((str, c, i) => `${str} ${i === source ? tweet[source]['news_url'] : c}`, ''),
+    updated_at: new Date(),
+    created_at: new Date()
   };
 }
 

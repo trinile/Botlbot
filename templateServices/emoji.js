@@ -15,14 +15,18 @@ function getUnicodeFromEmoji(emoji) {
   return emoji.data.unicode;
 }
 
-function formatUnicodeForHTML(unicode) {
-  return `&#x${unicode};`;
-}
 
-const getEmojiUnicode = _.flow(getEmoji, getUnicodeFromEmoji, formatUnicodeForHTML);
+// function formatUnicodeForHTML(unicode) {
+//   // return `&#x${unicode};`;
+//   // return `\\u${emoji.findSurrogatePair(unicode).join('\\u')}`;
+//   return '\\u' + emoji.findSurrogatePair(unicode).join('\\u');
+//   // return '\\u{' + unicode + '}';
+// }
+
+const getEmojiUnicode = _.flow(getEmoji, getUnicodeFromEmoji, emoji.emojiFromUnicode);
 
 function getEmojiUnicodeNTimes(keyword, n) {
-  return _.range(1, n).map(() => getEmojiUnicode(keyword));
+  return _.range(n).map(() => getEmojiUnicode(keyword));
 }
 
 module.exports = getEmojiUnicodeNTimes;
