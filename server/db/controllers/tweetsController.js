@@ -37,7 +37,9 @@ function saveGeneratedTweets(tweets) {
 function getGeneratedTweets(userID) {
   return knex('generatedtweets')
     .where({ user_twitter_id: userID, tweet_status: 'available' })
-    .select();
+    .select()
+    .orderBy('updated_at', 'desc')
+    .limit(20);
 }
 
 function getPostedTweets(userID) {
