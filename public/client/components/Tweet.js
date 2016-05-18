@@ -33,13 +33,12 @@ const Tweet = ({
   return (
     <Card style={style.main}>
       <CardHeader
-        title="Bot Generated Tweet" 
+        title="Bot Generated Tweet"
         subtitle={tweet.updated_at}
         avatar="http://lorempixel.com/100/100/nature/"
       />
       <CardTitle title="Tweet Text: " subtitle="Below is content generated for tweet" />
-      <CardText style={style.paper}>
-      {tweet.tweet_text}
+      <CardText style={style.paper} dangerouslySetInnerHTML={{__html: tweet.bot_tweet_body}}>
       </CardText>
       <Paper href="/linktooriginaltwittercontent" style={style.paper}>
         <ul>
