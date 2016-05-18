@@ -1,19 +1,21 @@
 const Promise = require('bluebird');
 require('isomorphic-fetch');
+const _ = require('lodash');
 const API_KEY = process.env.WORDNIK_KEY;
 
-const getRandomWord = (params) => {
-  let include = params.partOfSpeech;
-  let length = params.length + '';
-  return fetch(`http://api.wordnik.com:80/v4/words.json/randomWord?hasDictionaryDef=true&includePartOfSpeech=${include}&minCorpusCount=10000&maxCorpusCount=-1&minDictionaryCount=3&maxDictionaryCount=-1&minLength=${length || '-1'}&maxLength=${length || '-1'}&api_key=${WORDNIK_KEY}`)
+const getRandomWords = (params, n) => {
+  const include = params['part of speech'];
+  const length = params.length;
+  return fetch(`http://api.wordnik.com:80/v4/words.json/randomWords?hasDictionaryDef=true&includePartOfSpeech=${include}&minCorpusCount=10000&maxCorpusCount=-1&minDictionaryCount=3&maxDictionaryCount=-1&minLength=${length || '-1'}&maxLength=${length || '-1'}&limit=${n}&api_key=${API_KEY}`)
     .then((response) => response.json())
-    .then((response) => response.word)
+    .then((response) => response.map(obj => obj.word))
     .catch((err) => {
       console.error(err);
-      return '';
+      return _.range(n).map(i => "platypus");
     });
 };
 
+module.exports = getRandomWords;
 
 /* 
 http://api.wordnik.com:80/v4/words.json/

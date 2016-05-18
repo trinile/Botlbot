@@ -22,7 +22,7 @@ function formatUnicodeForHTML(unicode) {
 const getEmojiUnicode = _.flow(getEmoji, getUnicodeFromEmoji, formatUnicodeForHTML);
 
 function getEmojiUnicodeNTimes(keyword, n) {
-  return _.range(1, n).map(() => getEmojiUnicode(keyword));
+  return _.range(n).map(() => getEmojiUnicode(keyword));
 }
 
 module.exports = getEmojiUnicodeNTimes;

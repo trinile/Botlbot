@@ -1,10 +1,12 @@
 const Promise = require('bluebird');
 const chunkHandler = {
-  'my feed': (params, userId, n) => require('./myFeed')(userId, n),
+  'random word': (params, userId, n) => require('./randomWord')(params, n),
   'random tweet': (params, userId, n) => require('./tweetsByKeyword')(userId, params.keyword, n),
-  text: (params, userId, n) => require('./text')(params.content, n),
+  'my feed': (params, userId, n) => require('./myFeed')(userId, n),
+  news: (params, userId, n) => require('./newsService')(params.keyword, n),
   emoji: (params, userId, n) => require('./emoji')(params.keyword, n),
-  news: (params, userId, n) => require('./newsService')(params.keyword, n)
+  text: (params, userId, n) => require('./text')(params.content, n),
+  wordlist: (params, userId, n) => require('./wordlist')(params.list, n)
 };
 
 function zip(arrays) {
