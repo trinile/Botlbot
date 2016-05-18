@@ -1,0 +1,35 @@
+.bottle {
+  width: 10rem;
+  height: 8rem;
+  position: absolute;
+}
+
+.gear {
+  width: 2.5rem;
+  height: 2.5rem;
+  top: 3.3rem;
+  left: 1.5rem;
+  animation: clockwise 10s linear infinite;
+  position: absolute;
+  z-index: 10;
+}
+
+.littlegear {
+  width: 1.5rem;
+  height: 1.5rem;
+  top: 2.3rem;
+  left: 3.5rem;
+  animation: counterclockwise 10s linear infinite;
+  position: absolute;
+  z-index: 10;
+}
+
+@keyframes clockwise {
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(360deg);}
+}
+
+@keyframes counterclockwise {
+  0% {transform: rotate(360deg);}
+  100% {transform: rotate(0deg);}
+}

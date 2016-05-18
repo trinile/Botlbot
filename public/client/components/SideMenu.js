@@ -6,6 +6,7 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 import { Link } from 'react-router';
 import FlatButton from 'material-ui/FlatButton';
 import Drawer from 'material-ui/Drawer';
+import Logo from './Logo';
 
 const style = {
   menuItem: {
@@ -27,6 +28,9 @@ const style = {
 const SideMenu = ({ templateIDs }) => (
   <Drawer docked={true} style={style.drawer} zDepth={0} >
     <List>
+      <ListItem disabled={true}>
+        <Logo />
+      </ListItem>
       <ListItem primaryText="Dashboard" containerElement={<Link to="/dashboard" />}/>
       <ListItem primaryText="Build a Bot" containerElement={<Link to="/build"/>} />
       <ListItem 
