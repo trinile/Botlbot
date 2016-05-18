@@ -29,9 +29,9 @@ function scrubPostedTweet(tweet) {
   };
 }
 
-function saveGeneratedTweets(userID, tweets) {
+function saveGeneratedTweets(tweets) {
   return knex('generatedtweets')
-    .insert(tweets.map(t => scrubFetchedTweet(t, userID)));
+    .insert(tweets);
 }
 
 function getGeneratedTweets(userID) {

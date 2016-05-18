@@ -45,7 +45,7 @@ const menuTree = {
         'boring'
       ],
       target: null,
-      leaf: true  
+      leaf: true
     }
   }
 };
