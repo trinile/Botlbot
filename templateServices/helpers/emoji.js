@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 const _ = require('lodash');
-
 const parsed = JSON.parse(fs.readFileSync(__dirname + '/emoji.json', 'utf8'));
 const formatEmoji = (data, name) => ({ name, data });
 
@@ -15,7 +14,26 @@ const indexCache = list.reduce((kw, e, i) => {
   return kw;
 }, {});
 
+const emojiMap = _.reduce(
+  require('./emojiMap'), 
+  (memo, value, key) => { memo[value[2]] = key; return memo; }, 
+  {}
+);
+
+// function findSurrogatePair(point) {
+//   // assumes point > 0xffff
+//   var offset = parseInt(point, 16) - 0x10000,
+//       lead = 0xd800 + (offset >> 10),
+//       trail = 0xdc00 + (offset & 0x3ff);
+//   return [lead.toString(16), trail.toString(16)];
+// }
+
+function emojiFromUnicode(unicode) {
+  return emojiMap[unicode] || '🌚';
+}
+
 module.exports = {
   list,
-  indexCache
+  indexCache,
+  emojiFromUnicode
 };
