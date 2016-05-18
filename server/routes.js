@@ -6,6 +6,7 @@ const getTweetsFromFeed = require('../templateServices/myFeed');
 const Tweets = require('./db/controllers/tweetsController');
 const twit = require('../templateServices/helpers').twit;
 const Templates = require('./db/controllers/templatesController');
+require('isomorphic-fetch');
 
 const ensureAuthenticated = function(req, res, next) {
   if (req.isAuthenticated()) {
@@ -43,16 +44,6 @@ module.exports = function(app, passport) {
     res.status(200).json({ authID: req.user.id });
   });
 
-  //call to TWITTER TO GET TWEEETS
-  app.get('/getandsave', ensureAuthenticated, function(req, res) {
-    getTweetsFromFeed(req.user.id)
-    .then(tweets => Tweets.saveGeneratedTweets(req.user.id, tweets))
-    .then(() => res.status(200).send('success!'))
-    .catch(function(err) {
-      console.log('you are bad at promises ============', err);
-    });
-  });
-
 // call when dashboard is loaded -> retrieves data from database
   app.get('/tweets/generated', function (req, res) {
     Tweets.getGeneratedTweets(req.user.id)
@@ -76,13 +67,13 @@ module.exports = function(app, passport) {
   app.post('/tweets/:id', function(req, res) {
     Tweets.joinTweetAndUserByTweetId(req.params.id)
     .then(response => twit.post(
-      `${response.tweet_text} https://www.twitter.com/${response.user_screen_name}/status/${response.tweet_id_str}`,
+      response.bot_tweet_body,
       response.token, response.tokenSecret))
     .then(data => Tweets.savePostedTweet(data))
     // using bot_tweet_id to modify generatedtweets table to show as 'posted'
     .then(id => Tweets.modifyTweetStatus(req.params.id, 'posted'))
     .then(status => res.status(201).send(status))
-    .catch(err => res.status(500).send(err))
+    .catch(err => res.status(500).send(err));
   });
 
   // create route for scheduling
@@ -90,21 +81,26 @@ module.exports = function(app, passport) {
     console.log(req.body);
     Tweets.scheduleTweet(req.params.id, req.body.schedule)
     .then(reply => res.status(201).send(reply))
-    .catch(err => res.status(500).send(err))
-  })
+    .catch(err => res.status(500).send(err));
+  });
   // trash tweet on client side does not delete from generated tables.
   // set up worker to clear out database periodically
   app.put('/trashtweet/:id', function(req, res) {
     Tweets.modifyTweetStatus(req.params.id, 'trashed')
     .then(status => res.status(201).send(status))
-    .catch(err => res.status(500).send(err))
+    .catch(err => res.status(500).send(err));
   });
 
   app.post('/templates', function(req, res) {
     console.log('POSTED TO /TEMPLATES', req.body);
     console.log('USER ID IS', req.user.id);
     Templates.saveTemplate(req.body, req.user.id)
-      .then(res.status(201).send('you posted it'))
+      .then(id => { res.status(201).send('you posted it'); return id; })
+      .then(id => fetch(`http://127.0.0.1:8558/generate/users/${req.user.id}/templates/${id}`, 
+        {
+          method: 'POST',
+          credentials: 'same-origin'
+        }))
       .catch((err) => res.status(400).send(`you dint post it: ${err}`));
   });
 
