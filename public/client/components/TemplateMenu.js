@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import { Menu, MenuItem, TextField, SelectField, FlatButton, Subheader } from 'material-ui';
+import { Menu, MenuItem, TextField, SelectField, FlatButton } from 'material-ui';
 import AddButton from './AddButton';
 import menuTree from '../menuTree';
 
@@ -142,7 +142,7 @@ const formatter = ({
   } else {
     return (
       <Menu autoWidth={true}>
-        <Subheader>{templateMenu[templateMenu.length - 1] === 'Root' ? '' : templateMenu[templateMenu.length - 1]}</Subheader>
+        <p style={{color: 'gray', marginLeft: '0.8rem', marginTop: '-0.2rem', marginBottom: '0.1rem'}}>{templateMenu[templateMenu.length - 1] === 'Root' ? '' : templateMenu[templateMenu.length - 1]}</p>
         {Object.keys(currentLevel).map((item, index) => {
           return (
             <MenuItem 
@@ -163,7 +163,7 @@ const formatter = ({
 
   return (
     <Menu autoWidth={true}>
-      <Subheader>{templateMenu[templateMenu.length - 1] === 'Root' ? '' : templateMenu[templateMenu.length - 1]}</Subheader>
+      <p style={{color: 'gray', marginLeft: '0.8rem', marginTop: '-0.2rem', marginBottom: '0.1rem'}}>{templateMenu[templateMenu.length - 1] === 'Root' ? '' : templateMenu[templateMenu.length - 1]}</p>
       {menu}
       <div style={{display: 'flex', justifyContent: 'space-around'}}>
         <AddButton icon={'back'} onClick={navigateUp} />
