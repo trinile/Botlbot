@@ -62,7 +62,8 @@ function modifyTweetStatus(bot_tweet_id, status) {
     .where({ bot_tweet_id: bot_tweet_id })
     .update({
       tweet_status: status,
-    }, 'tweet_status')
+      updated_at: new Date(),
+    }, 'tweet_status');
 }
 
 function modifyTweetText(bot_tweet_id, tweet_text) {
@@ -70,7 +71,8 @@ function modifyTweetText(bot_tweet_id, tweet_text) {
     .where({ bot_tweet_id: bot_tweet_id })
     .update({
       tweet_text: tweet_text,
-    }, 'bot_tweet_id')
+      updated_at: new Date(),
+    }, 'bot_tweet_id');
 }
 
 //schedule tweet controller
@@ -88,6 +90,7 @@ function scheduleTweet(bot_tweet_id, scheduleTime) {
       .update({
         schedule_id: id[0],
         tweet_status: 'scheduled',
+        updated_at: new Date(),
       }, 'tweet_status')
   })
   .catch(err => console.log(err));
@@ -97,7 +100,7 @@ function joinTweetAndUserByTweetId(id) {
   return knex('generatedtweets')
     .join('users', 'users.user_twitter_id', '=', 'generatedtweets.user_twitter_id')
     .where({ bot_tweet_id: id })
-    .select('users.token', 'users.tokenSecret', 'generatedtweets.user_screen_name')
+    .select('users.token', 'users.tokenSecret', 'generatedtweets.bot_tweet_body')
     .then(response => response[0])
     .catch(console.log);
 }

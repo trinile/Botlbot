@@ -7,7 +7,8 @@ function saveTemplate(template, userId) {
       name: template.name,
       user_twitter_id: userId,
       active: true
-    });
+    }, 'template_id')
+    .then(result => result[0]);
 }
 
 function updateTemplate(templateId, template) {
