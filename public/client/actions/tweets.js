@@ -17,11 +17,11 @@ export function requestEdit(id) {
     id,
   };
 }
-export function editTweet(id, tweet_text) {
+export function editTweet(id, bot_tweet_body) {
   return {
     type: EDIT_TWEET,
     id,
-    tweet_text,
+    bot_tweet_body,
   };
 }
 

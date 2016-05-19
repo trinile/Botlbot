@@ -24,12 +24,12 @@ const TweetList = ({
         {tweets.map((t, index) => {
           if (t.editing === true) {
             return <EditTweet 
-                key={index}
-                tweet={t} 
-                postTweet={() => onPostTweet(t.bot_tweet_id)} 
-                cancelEdit={() => cancelEditTweet(t.bot_tweet_id)}
-                editTweet={() => onEditTweet(t.bot_tweet_id, t.tweet_text)}
-                />
+              key={index}
+              tweet={t} 
+              postTweet={() => onPostTweet(t.bot_tweet_id)} 
+              cancelEdit={() => cancelEditTweet(t.bot_tweet_id)}
+              editTweet={() => onEditTweet(t.bot_tweet_id, t.bot_tweet_body)}
+              />
           } else if (t.tweet_status === 'available') {
             return <Tweet
               key={index}

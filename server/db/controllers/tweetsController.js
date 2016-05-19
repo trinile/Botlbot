@@ -77,11 +77,11 @@ function modifyTweetStatus(bot_tweet_id, status) {
     }, 'tweet_status');
 }
 
-function modifyTweetText(bot_tweet_id, tweet_text) {
+function modifyTweetText(bot_tweet_id, bot_tweet_body) {
   return knex('generatedtweets')
     .where({ bot_tweet_id: bot_tweet_id })
     .update({
-      tweet_text: tweet_text,
+      bot_tweet_body: bot_tweet_body,
       updated_at: new Date(),
     }, 'bot_tweet_id');
 }
