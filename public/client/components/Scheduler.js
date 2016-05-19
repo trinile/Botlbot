@@ -1,5 +1,4 @@
 import React from 'react';
-// import RaisedButton from 'material-ui/RaisedButton';
 import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
@@ -8,7 +7,7 @@ import moment from 'moment';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Schedule from 'material-ui/svg-icons/action/schedule';
 
-const styles = {
+const style = {
   h3: {
     marginTop: 20,
     fontWeight: 400,
@@ -18,6 +17,11 @@ const styles = {
   },
   block2: {
     margin: 10,
+  },
+  button: {
+    boxShadow: '0px',
+    border: '0px',
+    backgroundColor: '',
   },
 };
 
@@ -94,14 +98,16 @@ export default class SchedulePopOver extends React.Component {
           onTouchTap={this.handleTouchTap.bind(this)}
           label={this.state.label}
           mini={true}
+          backgroundColor="#879C87"
+          style={style.button}
         >
         <Schedule/>
         </FloatingActionButton>
         <Popover
           open={this.state.open}
           anchorEl={this.state.anchorEl}
-          anchorOrigin={{horizontal:"right",vertical:"top"}}
-          targetOrigin={{horizontal:"left",vertical:"top"}}
+          anchorOrigin={{horizontal:'right',vertical:'top'}}
+          targetOrigin={{horizontal:'left',vertical:'top'}}
 
           onRequestClose={this.handleRequestClose.bind(this)}
         >
