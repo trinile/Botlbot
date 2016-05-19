@@ -77,9 +77,7 @@ export function scheduledTweets(scheduledtweets) {
 //this should probably be called when dashboard mounts and user is authenticated
 //makes a call to api to retrieve most current tweets in database
 
-export function getTweetsAsync(page) {
-  console.log('CLIENT SIDE PAGE IS', page);
-  page = page || 0;
+export function getTweetsAsync() {
   return dispatch => {
     dispatch(fetchRequest());
     return fetch('/tweets/generated?page=' + page,
@@ -87,7 +85,7 @@ export function getTweetsAsync(page) {
       .then(result => result.json())
       .then(result => {
         console.log('result ----> ', result);
-        localStorage.setItem('tweets', JSON.stringify(result));
+        // localStorage.setItem('tweets', JSON.stringify(result));
         return dispatch(addTweets(result));
       })
       .catch(err => {
@@ -104,8 +102,8 @@ export function getPostedTweetsAsync() {
       .then(result => result.json())
       .then(result => {
         console.log('result ----> ', result);
-        localStorage.setItem('postedtweets', JSON.stringify(result));
-        return dispatch(postedTweets( result.reverse() ));
+        // localStorage.setItem('postedtweets', JSON.stringify(result));
+        return dispatch(postedTweets(result.reverse()));
       })
       .catch(err => {
         console.error(err);
@@ -114,6 +112,23 @@ export function getPostedTweetsAsync() {
   };
 }
 
+export function getScheduledTweetsAsync() {
+  return dispatch => {
+    dispatch(fetchRequest());
+    return fetch('http://127.0.0.1:1337/tweets/scheduled', 
+      { method: 'GET', credentials: 'same-origin' })
+      .then(result => result.json())
+      .then(result => {
+        console.log('result ----> ', result);
+        // localStorage.setItem('scheduledtweets', JSON.stringify(result));
+        return dispatch(scheduledTweets(result.reverse()));
+      })
+      .catch(err => {
+        console.error(err);
+        dispatch(fetchFailure(err));
+      });
+  }; 
+}
 // id is generated tweet ID
 export function postTweetAsync(id) {
   return dispatch => {
@@ -133,26 +148,8 @@ export function postTweetAsync(id) {
   };
 }
 
-export function getScheduledTweetsAsync() {
-  return dispatch => {
-    dispatch(fetchRequest());
-    return fetch('http://127.0.0.1:1337/tweets/scheduled', 
-      { method: 'GET', credentials: 'same-origin' })
-      .then(result => result.json())
-      .then(result => {
-        // console.log('result ----> ', result);
-        localStorage.setItem('scheduledtweets', JSON.stringify(result));
-        return dispatch(scheduledTweets(result.reverse()));
-        // return result;
-      })
-      .catch(err => {
-        console.error(err);
-        dispatch(fetchFailure(err));
-      });
-  }; 
-}
-
-export function editTweetAsync(id, tweet_text) {
+export function editTweetAsync(id, bot_tweet_body) {
+  console.log('tweeet editing ------->', bot_tweet_body);
   return dispatch => {
     dispatch(fetchRequest());
     return fetch('/tweets/' + id, {
@@ -163,13 +160,13 @@ export function editTweetAsync(id, tweet_text) {
       },
       mode: 'cors',
       credentials: 'same-origin',
-      body: JSON.stringify({ text: tweet_text }),
+      body: JSON.stringify({ text: bot_tweet_body }),
     })
     .then(res => {
       console.log('response ----------> ', res);
       if (res.status === 201) {
         dispatch(fetchSuccess());
-        dispatch(editTweet(id, tweet_text));
+        dispatch(editTweet(id, bot_tweet_body));
       } else if (res.status === 500) {
         dispatch(fetchFailure(res.status));
       }
@@ -184,11 +181,7 @@ export function scheduleTweetAsync(id, schedule) {
   console.log('IN SCHEDULE TWEET ASYNC _----->di ---------> ', id, schedule);
   return dispatch => {
     dispatch(fetchRequest());
-<<<<<<< HEAD
     return fetch('/scheduletweet/' + id,
-=======
-    return fetch('http://127.0.0.1:1337/tweets/schedule/' + id,
->>>>>>> updating posttweets and schedule tweets
       { method: 'POST',
       headers: {
         'Accept': 'application/json',
