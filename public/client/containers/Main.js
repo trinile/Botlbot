@@ -28,7 +28,7 @@ const style = {
 const Main = ({ dispatch, isAuthenticated, main, sidebar }) => (
   <div>
     {sidebar}
-    <div className="Main" id="2" /*style={style.main}*/>
+    <div className="Main" id="2" style={{marginLeft: '266px'}}/*style={style.main}*/>
       <SiteNav
         isAuthenticated={isAuthenticated}
         onLogoutClick={() => dispatch(logoutUser())}

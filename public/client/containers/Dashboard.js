@@ -5,6 +5,7 @@ import { authUser } from '../actions/Login';
 import { getTweetsAsync } from '../actions/tweets';
 import { getTemplateNamesAsync } from '../actions/template';
 import SideMenu from '../components/SideMenu';
+import DashboardControlsContainer from '../containers/DashboardControlsContainer';
 
 class Dashboard extends React.Component {
 
@@ -20,7 +21,10 @@ class Dashboard extends React.Component {
 
   render() {
     return (
-      <TweetListContainer filter="SHOW_VALID" />
+      <div>
+        <DashboardControlsContainer />
+        <TweetListContainer filter="SHOW_VALID" />
+      </div>
     );
   }
 }

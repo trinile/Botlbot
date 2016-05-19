@@ -55,7 +55,7 @@ function tweets(state = /*JSON.parse(localStorage.getItem('tweets')) || */[], ac
   switch (action.type) {
     case ADD_NEW_TWEETS:
       return [
-        ...state,
+        // ...state,
         ...tweet(null, action),
       ];
     case POST_TWEET:
