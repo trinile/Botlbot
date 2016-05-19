@@ -11,8 +11,6 @@ import thunkMiddleware from 'redux-thunk';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import { localStorageLoad, localStorageDump } from './middleware/localStorage';
-// import {persistStore, autoRehydrate } from 'redux-persist';
 // import {lightBlue500, lightBlue700, grey800, blueGrey50 ,purple100, fullBlack } from 'material-ui/styles/colors';
 import { fade } from 'material-ui/utils/colorManipulator';
 // Needed for onTouchTap
@@ -23,20 +21,14 @@ const loggerMiddleware = createLogger();
 const pathMiddleware = routerMiddleware(browserHistory);
 
 const createStoreWithMiddleware = applyMiddleware(
-  // localStorageLoad,
   thunkMiddleware, 
   loggerMiddleware, 
-  // localStorageDump,
   pathMiddleware
 )(createStore);
 
 let store = createStoreWithMiddleware(
   Reducers
 );
-
-// store.dispatch({
-//   type: 'INIT'
-// });
 
  //placeholder for when we want to change the custom styling of mui theme 
 const muiTheme = getMuiTheme({
@@ -55,8 +47,6 @@ const muiTheme = getMuiTheme({
     height: 50,
   },
 });
-
-
 
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);
