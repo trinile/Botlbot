@@ -25,8 +25,8 @@ export default class PostedTweet extends React.Component {
       expanded: false,
     });
   }
-  handleExpandChange(expanded){
-    this.setState({expanded: expanded});
+  handleExpandChange(expanded) {
+    this.setState({ expanded: expanded });
   }
   handleExpand(){
     this.setState( {expanded: true} );

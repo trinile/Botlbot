@@ -5,6 +5,8 @@ import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
 import moment from 'moment';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import Schedule from 'material-ui/svg-icons/action/schedule';
 
 const styles = {
   h3: {
@@ -88,10 +90,13 @@ export default class SchedulePopOver extends React.Component {
   render() {
     return (
       <div>
-        <FlatButton
+        <FloatingActionButton
           onTouchTap={this.handleTouchTap.bind(this)}
           label={this.state.label}
-        />
+          mini={true}
+        >
+        <Schedule/>
+        </FloatingActionButton>
         <Popover
           open={this.state.open}
           anchorEl={this.state.anchorEl}

@@ -22,7 +22,7 @@ function tweet(state, action) {
       ));
     case SCHEDULED_TWEETS:
       return action.scheduledtweets.map(t => (
-        Object.assign({}, t), { tweet_status: 'scheduled_in_db' }
+        Object.assign({}, t, { tweet_status: 'scheduled_in_db' })
       ));
     case POST_TWEET:
       if (state.bot_tweet_id === action.id) {
@@ -65,8 +65,7 @@ function tweets(state = /*JSON.parse(localStorage.getItem('tweets')) || */[], ac
     case POSTED_TWEETS:
     case SCHEDULED_TWEETS:
       return [
-        // ...state,
-        ...tweet(null, action),
+        ...tweet(state, action)
       ];
     case POST_TWEET:
     case TRASH_TWEET:
