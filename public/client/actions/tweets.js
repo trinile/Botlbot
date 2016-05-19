@@ -68,10 +68,12 @@ export function postedTweets(tweets) {
 //this should probably be called when dashboard mounts and user is authenticated
 //makes a call to api to retrieve most current tweets in database
 
-export function getTweetsAsync() {
+export function getTweetsAsync(page) {
+  console.log('CLIENT SIDE PAGE IS', page);
+  page = page || 0;
   return dispatch => {
     dispatch(fetchRequest());
-    return fetch('http://127.0.0.1:1337/tweets/generated',
+    return fetch('http://127.0.0.1:1337/tweets/generated?page=' + page,
       { method: 'GET', credentials: 'same-origin' })
       .then(result => result.json())
       .then(result => {

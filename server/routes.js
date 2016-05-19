@@ -46,7 +46,8 @@ module.exports = function(app, passport) {
 
 // call when dashboard is loaded -> retrieves data from database
   app.get('/tweets/generated', function (req, res) {
-    Tweets.getGeneratedTweets(req.user.id)
+    console.log('REQ.QUERY.PAGE IS', JSON.stringify(req.query.page));
+    Tweets.getGeneratedTweets(req.user.id, req.query.page)
     .then(results => res.status(200).json(results))
     .catch(err => res.status(500).send(err));
   });
