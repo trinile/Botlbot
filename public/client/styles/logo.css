@@ -1,13 +1,13 @@
 .bottle {
-  width: 10rem;
-  height: 8rem;
+  width: 9rem;
+  height: 4rem;
   position: absolute;
 }
 
 .gear {
   width: 2.5rem;
   height: 2.5rem;
-  top: 3.3rem;
+  top: 1.4rem;
   left: 1.5rem;
   animation: clockwise 10s linear infinite;
   position: absolute;
@@ -17,7 +17,7 @@
 .littlegear {
   width: 1.5rem;
   height: 1.5rem;
-  top: 2.3rem;
+  top: 0.4rem;
   left: 3.5rem;
   animation: counterclockwise 10s linear infinite;
   position: absolute;
