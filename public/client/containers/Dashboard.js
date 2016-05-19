@@ -4,6 +4,7 @@ import TweetListContainer from '../containers/TweetListContainer';
 import { authUser } from '../actions/Login';
 import { getTweetsAsync } from '../actions/tweets';
 import { getTemplateNamesAsync } from '../actions/template';
+import { resetPage } from '../actions/page';
 import SideMenu from '../components/SideMenu';
 import DashboardControlsContainer from '../containers/DashboardControlsContainer';
 
@@ -15,6 +16,7 @@ class Dashboard extends React.Component {
     if (!isAuthenticated) {
       dispatch(authUser());
     }
+    dispatch(resetPage());
     dispatch(getTweetsAsync());
     dispatch(getTemplateNamesAsync());
   }
