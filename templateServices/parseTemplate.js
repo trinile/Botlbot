@@ -1,8 +1,9 @@
 const Promise = require('bluebird');
 const chunkHandler = {
-  'random word': (params, userId, n) => require('./randomWord')(params, n),
   'random tweet': (params, userId, n) => require('./tweetsByKeyword')(userId, params.keyword, n),
   'my feed': (params, userId, n) => require('./myFeed')(userId, n),
+  'random word': (params, userId, n) => require('./randomWord')(params, n),
+  'related word': (params, userId, n) => require('./relatedWord')(params, n),
   news: (params, userId, n) => require('./newsService')(params.keyword, n),
   emoji: (params, userId, n) => require('./emoji')(params.keyword, n),
   text: (params, userId, n) => require('./text')(params.content, n),

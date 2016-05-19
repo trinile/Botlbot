@@ -14,7 +14,8 @@ const menuTree = {
       },
       'related word': {
         relationship: ['synonym', 'antonym', 'rhyme'],
-        target: null,
+        // target: null,
+        keyword: '',
         leaf: true
       },
       'my feed': {

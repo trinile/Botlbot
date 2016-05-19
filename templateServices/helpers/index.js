@@ -3,4 +3,5 @@ module.exports = {
   tweets: require('./tweetsHelpers'),
   emoji: require('./emoji'),
   fixForDb: require('./fixForDb'),
+  normalizeArray: require('./normalizeArrays'),
 };
