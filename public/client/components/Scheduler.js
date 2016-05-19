@@ -58,27 +58,29 @@ export default class SchedulePopOver extends React.Component {
       open: true,
       anchorEl: event.currentTarget,
     });
-  };
+  }
 
   handleClickTime(event) {
     event.preventDefault();
+    event.stopPropagation();
+    console.log('EVENT CLICK TARGET ', event.target);
     this.setState({
       time: event.target.innerText,
     });
-
   }
+
   handleRequestClose() {
     this.setState({
       open: false,
     });
-  };
-
+  }
   handleCancel() {
     this.setState({
       time: '',
       open: false,
-    })
+    });
   }
+
   handleConfirm(event) {
     const { onSchedule, tweet } = this.props;
     event.preventDefault();
@@ -115,14 +117,14 @@ export default class SchedulePopOver extends React.Component {
             <Menu
             onBlur={this.handleCancel.bind(this)}
             >
-            <MenuItem primaryText="Schedule" onTouchTap={this.handleConfirm.bind(this)}/>
-            <MenuItem primaryText="Cancel" onTouchTap={this.handleCancel.bind(this)}/>
+              <MenuItem key={1} primaryText="Schedule" onTouchTap={this.handleConfirm.bind(this)}/>
+              <MenuItem key={2} primaryText="Cancel" onTouchTap={this.handleCancel.bind(this)}/>
             </Menu>
           : <Menu>
-            <MenuItem primaryText="1 hour" onTouchTap={this.handleClickTime.bind(this)}/>
-            <MenuItem primaryText="3 hours" onTouchTap={this.handleClickTime.bind(this)}/>
-            <MenuItem primaryText="6 hours" onTouchTap={this.handleClickTime.bind(this)}/>
-            <MenuItem primaryText="12 hours" onTouchTap={this.handleClickTime.bind(this)}/>
+              <MenuItem key={3} primaryText="1 hour" onTouchTap={this.handleClickTime.bind(this)}/>
+              <MenuItem key={4} primaryText="3 hours" onTouchTap={this.handleClickTime.bind(this)}/>
+              <MenuItem key={5} primaryText="6 hours" onTouchTap={this.handleClickTime.bind(this)}/>
+              <MenuItem key={6} primaryText="12 hours" onTouchTap={this.handleClickTime.bind(this)}/>
           </Menu> }
         </Popover>
       </div>

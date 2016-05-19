@@ -1,9 +1,8 @@
 import React, { PropTypes } from 'react';
 import styles from '../styles/tweet.css';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import Paper from 'material-ui/Paper';
-import Dialog from 'material-ui/Dialog';
 import SchedulePopOver from './Scheduler';
 import { push } from 'react-router-redux';
 
@@ -25,13 +24,13 @@ const ScheduledTweet = ({
   tweet
 }) => {
   return (
+    const time = () => { return 'Scheduled for ' + moment(tweet.scheduled_time).calendar()};
     <Card style={style.main}>
       <CardHeader
-        title="SCHEDULED FOR "
+        title="SCHEDULED"
         subtitle={tweet.updated_at}
         avatar="http://lorempixel.com/100/100/nature/"
       />
-      <CardTitle title="tweet Text: " subtitle="Below is content generated for tweet" />
       <CardText style={style.paper}>
       {tweet.tweet_text}
       </CardText>
@@ -54,7 +53,7 @@ const ScheduledTweet = ({
   );
 };
 
-Tweet.propTypes = {
+ScheduledTweet.propTypes = {
   tweet: PropTypes.object,
   postTweet: PropTypes.func,
   trashTweet: PropTypes.func,

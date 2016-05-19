@@ -9,12 +9,7 @@ class PostedTweetsContainer extends React.Component {
     const { dispatch } = this.props;
     dispatch(getPostedTweetsAsync());
   }
-
-  // componentWiUnmount() {
-  //   const tweets: state.tweets,
-
-  // }
-
+  
   render() {
     return (
       <main>

@@ -141,6 +141,7 @@ module.exports = function(app, passport) {
     console.log('GETTED TO /TEMPLATES');
     // console.log(req.user.id);
     Templates.getTemplateNames(req.user.id)
+    // Templates.getTemplateNames('727615201575469056')
       .then(t => res.status(200).json(t))
       .catch(err => res.status(400).send(`you failed to get names: ${err}`));
   });

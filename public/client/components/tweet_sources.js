@@ -49,8 +49,8 @@ export const NewsSource = ({tweet}) => {
         <h4 style={style.text}>{tweet.news_headline}</h4>
         <Launch tweet={tweet}/>
     </Paper>
-  )
-}
+  );
+};
 
 export const TweetSource = ({tweet}) => {
   return (
@@ -71,5 +71,5 @@ export const TweetSource = ({tweet}) => {
         <div>Followers: {tweet.user_followers_count}</div>
       </div>
     </Paper>
-  )
+  );
 }

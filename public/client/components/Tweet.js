@@ -11,14 +11,15 @@ import { NewsSource, TweetSource } from './tweet_sources';
 const style = {
   main: {
     margin: '16px 32px 16px 0',
-    width: '40%',
-    float: 'right',
+    minWidth: '400px',
+    maxWidth: '500px',
     padding: '5px',
     background: 'white',
   },
   tweet: {
     backgroundColor: 'white',
     position: 'relative',
+    textAlign: 'left',
   },
   buttons: {
     position: 'relative',
@@ -34,6 +35,10 @@ const style = {
     padding: '',
     width: '100%',
   },
+  scheduled: {
+    fill: 'red',
+    color: 'red',
+  },
 };
 
 const Tweet = ({
@@ -43,7 +48,13 @@ const Tweet = ({
   requestEdit,
   scheduleTweet,
 }) => {
-    const time = () => { return 'Generated ' + moment(tweet.created_at).fromNow()};
+    const time = () => { 
+      return tweet.scheduled_time
+      ? 'Scheduled for ' + moment(tweet.scheduled_time).calendar()
+      : 'Generated ' + moment(tweet.created_at).fromNow() };
+    const getUrl = () => {
+      return 'http://twitter.com/' + tweet.user_screen_name + '/status/...'
+    }
   return (
     <Card style={style.main}>
       <CardHeader
@@ -55,13 +66,16 @@ const Tweet = ({
         <Trash tweet={tweet} trashTweet={trashTweet}/>
       </CardHeader>
       <CardText style={style.tweet}>
-        {tweet.bot_tweet_body}
+        {tweet.tweet_id_str 
+        ? <p>{getUrl()}</p>
+        : <p>{tweet.bot_tweet_body}</p>
+        }
 
         {tweet.news_headline
         ? <NewsSource tweet={tweet} />
         : null
         }
-      
+
         {tweet.tweet_id_str
           ? <TweetSource tweet={tweet}/>
           : null
@@ -69,7 +83,10 @@ const Tweet = ({
       </CardText>
       <CardActions style={style.buttons}>
         <Post tweet={tweet} postTweet={postTweet}/>
-        <Schedule tweet={tweet} scheduleTweet={scheduleTweet}/>
+        {tweet.scheduled_time
+        ? <Schedule style={style.scheduled} tweet={tweet} scheduleTweet={scheduleTweet}/>
+        : <Schedule tweet={tweet} scheduleTweet={scheduleTweet}/>
+        }
         <Edit tweet={tweet} requestEdit={requestEdit} />
       </CardActions>
     </Card>
