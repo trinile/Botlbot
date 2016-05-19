@@ -20,6 +20,8 @@ const emojiMap = _.reduce(
   {}
 );
 
+const keys = Object.keys(emojiMap);
+
 // function findSurrogatePair(point) {
 //   // assumes point > 0xffff
 //   var offset = parseInt(point, 16) - 0x10000,
@@ -29,7 +31,7 @@ const emojiMap = _.reduce(
 // }
 
 function emojiFromUnicode(unicode) {
-  return emojiMap[unicode] || '🌚';
+  return emojiMap[unicode] || emojiMap[keys[Math.floor(keys.length * Math.random())]];
 }
 
 module.exports = {

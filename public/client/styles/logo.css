@@ -7,7 +7,7 @@
 .gear {
   width: 2.5rem;
   height: 2.5rem;
-  top: 1.4rem;
+  top: 1.25rem;
   left: 1.5rem;
   animation: clockwise 10s linear infinite;
   position: absolute;
@@ -17,7 +17,7 @@
 .littlegear {
   width: 1.5rem;
   height: 1.5rem;
-  top: 0.4rem;
+  top: 0.25rem;
   left: 3.5rem;
   animation: counterclockwise 10s linear infinite;
   position: absolute;

@@ -2,6 +2,7 @@
 require('dotenv').config();
 var request = require('request');
 var Promise = require('Promise');
+var normalizeArray = require('./helpers').normalizeArray;
 
 //establish date range for news lookup (one week ago)
 const getBeginDate = (days) => {
@@ -19,16 +20,6 @@ const getBeginDate = (days) => {
   return beginDate.getFullYear().toString() + month + day;
 };
 
-function newsRepeater(articles, n) {
-  if (articles.length > n) return articles.slice(0, n);
-  if (articles.length === 0) return new Array(n);
-  if (articles.length === n) return articles;
-  while (articles.length < n) {
-    articles = articles.concat(articles);
-  }
-  return newsRepeater(articles, n);
-}
-
 function getNewsArticlesByKeyword(keyword, n) {
   const url = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
   return new Promise(function(resolve, reject) {
@@ -45,7 +36,7 @@ function getNewsArticlesByKeyword(keyword, n) {
           return { 'news_url': article.web_url, headline: article.headline.main }
         });
       // console.log('articles ------->', articles);
-        resolve(newsRepeater(articles, n));
+        resolve(normalizeArray(articles, n));
       }
     );
   });
