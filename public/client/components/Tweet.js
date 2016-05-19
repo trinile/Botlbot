@@ -13,6 +13,7 @@ const style = {
     margin: '16px 32px 16px 0',
     minWidth: '400px',
     maxWidth: '500px',
+    // flexGrow: '0',
     padding: '5px',
     background: 'white',
   },

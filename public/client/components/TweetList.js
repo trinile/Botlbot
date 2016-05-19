@@ -6,8 +6,8 @@ import PostedTweet from './PostedTweet';
 
 const style = {
   display: 'flex',
-  justifyContent: 'flex-start',
-  flexFlow: 'row wrap',
+  justifyContent: 'space-around',
+  flexFlow: 'column wrap',
 };
 
 const TweetList = ({
