@@ -34,12 +34,14 @@ function saveGeneratedTweets(tweets) {
     .insert(tweets);
 }
 
-function getGeneratedTweets(userID) {
+function getGeneratedTweets(userID, page) {
+  console.log(page);
   return knex('generatedtweets')
     .where({ user_twitter_id: userID, tweet_status: 'available' })
     .select()
     .orderBy('updated_at', 'desc')
-    .limit(20);
+    .offset(page * 5)
+    .limit(5);
 }
 
 function getPostedTweets(userID) {
