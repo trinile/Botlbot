@@ -151,7 +151,7 @@ module.exports = function(app, passport) {
     Tweets.deleteGeneratedTweets()
     .then(response => res.status(201).send(response))
     .catch(err => res.status(500).send(err))
-  })
+  });
 
   app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, '/../build/bundle.html'));
