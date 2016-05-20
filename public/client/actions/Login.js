@@ -81,7 +81,7 @@ export const loginError = (message) => (
 export const authUser = () => {
   return dispatch => {
     dispatch(requestLogin());
-    return fetch('http://127.0.0.1:1337/authenticate', { method: 'GET', credentials: 'same-origin' })
+    return fetch('/authenticate', { method: 'GET', credentials: 'same-origin' })
       .then(res => res.json())
       .then(json => {
         localStorage.setItem('authID', json.authID);

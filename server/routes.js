@@ -97,7 +97,7 @@ module.exports = function(app, passport) {
     console.log('USER ID IS', req.user.id);
     Templates.saveTemplate(req.body, req.user.id)
       .then(id => { res.status(201).send('you posted it'); return id; })
-      .then(id => fetch(`http://127.0.0.1:8558/generate/users/${req.user.id}/templates/${id}`, 
+      .then(id => fetch(`${req.ip}:8558/generate/users/${req.user.id}/templates/${id}`,
         {
           method: 'POST',
           credentials: 'same-origin'
@@ -109,6 +109,11 @@ module.exports = function(app, passport) {
     console.log('PUTTED TO /TEMPLATES/:id', req.params.id);
     Templates.updateTemplate(req.params.id, req.body)
       .then(t => res.status(201).json(t))
+      .then(() => fetch(`${req.ip}:8558/generate/users/${req.user.id}/templates/${req.params.id}`,
+        {
+          method: 'POST',
+          credentials: 'same-origin'
+        }))
       .catch(err => res.status(400).send(`you dint put it ${err}`));
   });
 
