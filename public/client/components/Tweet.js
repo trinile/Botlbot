@@ -1,24 +1,13 @@
 import React, { PropTypes } from 'react';
-import styles from '../styles/tweet.css';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import style from '../styles/tweet.js';
+import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
-import Dialog from 'material-ui/Dialog';
 import SchedulePopOver from './Scheduler';
-
-const style = {
-  main: {
-    margin: '16px 32px 16px 0',
-    width: '50%',
-    float: 'right'
-  },
-  paper: {
-    border: '1px #ddd',
-    'border-radius': '4px',
-    padding: '10px',
-    color: 'green',
-  }
-};
+import moment from 'moment';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import {Trash, Post, Edit, Launch, Schedule} from './TweetButtons';
+import { NewsSource, TweetSource } from './tweet_sources';
+import Settings from 'material-ui/svg-icons/action/settings';
 
 const Tweet = ({
   tweet,
@@ -27,32 +16,46 @@ const Tweet = ({
   requestEdit,
   scheduleTweet,
 }) => {
-  const scheduleRequest = function() {
-
-  }
+    const time = () => { 
+      return tweet.scheduled_time
+      ? 'Scheduled for ' + moment.unix(tweet.scheduled_time).calendar()
+      : 'Generated ' + moment(tweet.created_at).fromNow() };
+    const getUrl = () => {
+      return 'http://twitter.com/' + tweet.user_screen_name + '/status/...'
+    }
   return (
     <Card style={style.main}>
       <CardHeader
         title="Bot Generated Tweet"
-        subtitle={tweet.updated_at}
-        avatar="http://lorempixel.com/100/100/nature/"
-      />
-      <CardTitle title="Tweet Text: " subtitle="Below is content generated for tweet" />
-      <CardText style={style.paper} dangerouslySetInnerHTML={{__html: tweet.bot_tweet_body}}>
+        subtitle={time()}
+        avatar={<Settings style={style.avatar}/>}
+        style={style.header}
+      >
+        <Trash tweet={tweet} trashTweet={trashTweet}/>
+      </CardHeader>
+      <CardText style={style.tweet}>
+        {tweet.tweet_id_str 
+        ? <p>{getUrl()}</p>
+        : <p>{tweet.bot_tweet_body}</p>
+        }
+
+        {tweet.news_headline
+        ? <NewsSource tweet={tweet} />
+        : null
+        }
+
+        {tweet.tweet_id_str
+          ? <TweetSource tweet={tweet}/>
+          : null
+        }
       </CardText>
-      <Paper href="/linktooriginaltwittercontent" style={style.paper}>
-        <ul>
-          <li>Retweets: {tweet.retweet_count}</li>
-          <li>Favorited: {tweet.favorite_count}</li>
-          <li>Tweeted by: {tweet.user_screen_name}</li>
-          <li>Followers: {tweet.followers_count}</li>
-        </ul>
-      </Paper>
-      <CardActions>
-        <FlatButton label="POST" onTouchTap={postTweet} />
-        <FlatButton label="TRASH" onClick={trashTweet} />
-        <FlatButton label="EDIT" onClick={requestEdit} />
-        <SchedulePopOver tweet={tweet} onSchedule={scheduleTweet} />
+      <CardActions style={style.buttons}>
+        <Post tweet={tweet} postTweet={postTweet}/>
+        {tweet.scheduled_time
+        ? <Schedule style={style.scheduled} tweet={tweet} scheduleTweet={scheduleTweet}/>
+        : <Schedule tweet={tweet} scheduleTweet={scheduleTweet}/>
+        }
+        <Edit tweet={tweet} requestEdit={requestEdit} />
       </CardActions>
     </Card>
   );
@@ -63,6 +66,7 @@ Tweet.propTypes = {
   postTweet: PropTypes.func,
   trashTweet: PropTypes.func,
   scheduleTweet: PropTypes.func,
+  requestEdit: PropTypes.func,
 };
 
 export default Tweet;

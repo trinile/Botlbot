@@ -20,12 +20,12 @@ class Dashboard extends React.Component {
     dispatch(getTweetsAsync());
     dispatch(getTemplateNamesAsync());
   }
-
+  
   render() {
     return (
       <div>
         <DashboardControlsContainer />
-        <TweetListContainer filter="SHOW_VALID" />
+        <TweetListContainer filter="SHOW_AVAILABLE" />
       </div>
     );
   }

@@ -2,15 +2,23 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import Login from '../components/Login';
 import Logout from '../components/Logout';
-import styles from '../styles/sitenav.css';
 import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
 import Dashboard from '../containers/Dashboard';
 
+const style = {
+  title: {
+    fontFamily: 'Roboto, sans-serif',
+    // fontSize: '1.5em',
+  },
+  toolbar: {
+    backgroundColor: 'rgb(167, 184, 193)',
+  }
+}
 const SiteNav = ({ isAuthenticated, onLogoutClick }) => (
-  <Toolbar>
-  <ToolbarTitle text="BOTLBOT APP"/>
+  <Toolbar style={style.toolbar}>
+  <ToolbarTitle text="Botlbot" style={style.title} />
   <ToolbarGroup>
     <FlatButton
       linkButton={true}
@@ -42,11 +50,3 @@ SiteNav.propTypes = {
 };
 
 export default SiteNav;
-
-/*
-    // <nav>
-    //   <img
-    //     src="http://res.publicdomainfiles.com/pdf_view/2/13494514811992.png"
-    //     alt="bottle silhouette"
-    //     className={styles.brand}
-*/

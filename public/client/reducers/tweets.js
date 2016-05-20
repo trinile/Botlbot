@@ -1,6 +1,7 @@
 import {
   ADD_NEW_TWEETS,
   POSTED_TWEETS,
+  SCHEDULED_TWEETS,
   POST_TWEET,
   TRASH_TWEET,
   EDIT_TWEET_REQUEST,
@@ -10,11 +11,18 @@ import {
 } from '../constants.js';
 
 function tweet(state, action) {
-  console.log('calling action ------>');
   switch (action.type) {
     case ADD_NEW_TWEETS:
       return action.tweets.map(t => (
         Object.assign({}, t)
+      ));
+    case POSTED_TWEETS:
+      return action.postedtweets.map(t => (
+        Object.assign({}, t, { tweet_status: 'posted_in_db' })
+      ));
+    case SCHEDULED_TWEETS:
+      return action.scheduledtweets.map(t => (
+        Object.assign({}, t, { tweet_status: 'scheduled_in_db' })
       ));
     case POST_TWEET:
       if (state.bot_tweet_id === action.id) {
@@ -54,9 +62,10 @@ function tweets(state = /*JSON.parse(localStorage.getItem('tweets')) || */[], ac
   console.log('in tweets state reducer');
   switch (action.type) {
     case ADD_NEW_TWEETS:
+    case POSTED_TWEETS:
+    case SCHEDULED_TWEETS:
       return [
-        // ...state,
-        ...tweet(null, action),
+        ...tweet(null, action)
       ];
     case POST_TWEET:
     case TRASH_TWEET:
@@ -69,4 +78,5 @@ function tweets(state = /*JSON.parse(localStorage.getItem('tweets')) || */[], ac
       return state;
   }
 }
+
 export default tweets;

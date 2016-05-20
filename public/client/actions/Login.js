@@ -85,9 +85,6 @@ export const authUser = () => {
       .then(res => res.json())
       .then(json => {
         localStorage.setItem('authID', json.authID);
-        // if (!json.ok) {
-          // dispatch(loginError(err));
-        // }
         dispatch(receiveLogin());
       })
       .catch(err => dispatch(loginError(err)));

@@ -17,6 +17,7 @@ export const PAGE_FITLER = 'PAGE_FILTER';
 
 export const POST_TWEET = 'POST_TWEET';
 export const POSTED_TWEETS = 'POSTED_TWEETS';
+export const SCHEDULED_TWEETS = 'SCHEDULED_TWEETS';
 export const ADD_NEW_TWEETS = 'ADD_NEW_TWEETS';
 export const TRASH_TWEET = 'TRASH_TWEET';
 export const EDIT_TWEET_REQUEST = 'EDIT_TWEET_REQUEST';

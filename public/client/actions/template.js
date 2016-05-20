@@ -179,6 +179,7 @@ export function getTemplateNamesAsync() {
     })
       .then(res => res.json())
       .then(res => {
+        console.log('response ------->', res);
         dispatch(fetchSuccess());
         dispatch(loadIDs(res));
       })

@@ -1,4 +1,5 @@
 const knex = require('../db.js');
+const moment = require('moment');
 
 function scrubFetchedTweet(tweet, userId)  {
   return {
@@ -44,6 +45,13 @@ function getGeneratedTweets(userID, page) {
     .limit(5);
 }
 
+function getScheduledTweets(userID) {
+  return knex('generatedtweets')
+  .where({ user_twitter_id: userID, tweet_status: 'scheduled' })
+  .innerJoin('scheduledtweets', 'generatedtweets.schedule_id', 'scheduledtweets.schedule_id')
+  .select();
+}
+
 function getPostedTweets(userID) {
   return knex('postedtweets')
     .where({ user_twitter_id: userID })
@@ -52,7 +60,7 @@ function getPostedTweets(userID) {
 
 function savePostedTweet(data) {
   return knex('postedtweets')
-    .insert(scrubPostedTweet(data), 'retweet_id'); //previous return: 'retweet_id'
+    .insert(scrubPostedTweet(data), 'retweet_id');
 }
 
 function deleteGeneratedTweet(tweet) {
@@ -70,34 +78,75 @@ function modifyTweetStatus(bot_tweet_id, status) {
     }, 'tweet_status');
 }
 
-function modifyTweetText(bot_tweet_id, tweet_text) {
+function modifyTweetText(bot_tweet_id, bot_tweet_body) {
   return knex('generatedtweets')
     .where({ bot_tweet_id: bot_tweet_id })
     .update({
-      tweet_text: tweet_text,
+      bot_tweet_body: bot_tweet_body,
       updated_at: new Date(),
     }, 'bot_tweet_id');
 }
 
-//schedule tweet controller
-//insert new entry into scheduledtweets table
-//update schedule_id in generated tweets and change status to 'scheduled'
 function scheduleTweet(bot_tweet_id, scheduleTime) {
-  console.log('time of schedule ------> ', scheduleTime);
+
+  return knex('generatedtweets')
+    .where({ bot_tweet_id: bot_tweet_id })
+    .select('schedule_id')
+    .then(id => { 
+      // console.log('id of schedule tweet ------> ', id);
+      if (id[0].schedule_id === null) {
+        // console.log('ID IS NULL--------->')
+        return knex('scheduledtweets')
+        .insert({scheduled_time: scheduleTime }, 'schedule_id')
+        .then(id => { 
+          return knex('generatedtweets')
+            .where({ bot_tweet_id: bot_tweet_id })
+            .update({
+                schedule_id: id[0],
+                tweet_status: 'scheduled',
+                updated_at: new Date(),
+              }, 'tweet_status')  
+        })
+      } else {
+        // console.log("UPDATE SCHEDULE!!!!");
+        return knex('scheduledtweets')
+        .where({ schedule_id : id[0].schedule_id })
+        .update({
+          scheduled_time: scheduleTime
+        }, 'schedule_id');
+      }
+    })
+    .catch(err => console.log(err));
+};
+
+function deleteGeneratedTweets() {
+  const currentDate = moment();
+  return knex.select('created_at', 'bot_tweet_id')
+  .from('generatedtweets')
+  .then(function(dates) {
+    console.log('dates ------->', dates);
+    dates.forEach(function(date) {
+      if (moment(date.created_at).add(24, 'hours').isBefore(currentDate)) {
+        //delete tweets from database that are more than 24 hours old
+        knex.table('generatedtweets')
+        .where({'bot_tweet_id': date.bot_tweet_id })
+        .del();
+      }
+    return dates;
+    });
+  });
+};
+
+// UNFINISHED -------> MOVE TO SERVICE  
+function findReadyTweets() {
+  var nextFifteen = moment().add('15', 'minutes').format('X'); 
+  var fifteenAgo = moment().subtract('15', 'minutes').format('X');//unix timestamp
+  // console.log(moment.unix(fifteen).calendar());
   return knex('scheduledtweets')
-  .insert({ scheduled_time: scheduleTime }, 'schedule_id')
-  .then(function (id) {
-    console.log(id);
-    console.log(typeof id);
-    return knex('generatedtweets')
-      .where({ bot_tweet_id: bot_tweet_id })
-      .update({
-        schedule_id: id[0],
-        tweet_status: 'scheduled',
-        updated_at: new Date(),
-      }, 'tweet_status')
-  })
-  .catch(err => console.log(err));
+  .whereBetween('scheduled_time', [fifteenAgo, nextFifteen])
+  .innerJoin('generatedtweets', 'scheduledtweets.schedule_id', 'generatedtweets.schedule_id')
+  .select('scheduledtweets.schedule_id', 'generatedtweets.bot_tweet_id', 'generatedtweets.user_twitter_id')
+  .catch(console.log);
 }
 
 function joinTweetAndUserByTweetId(id) {
@@ -113,6 +162,7 @@ module.exports = {
   joinTweetAndUserByTweetId,
   getGeneratedTweets,
   saveGeneratedTweets,
+  getScheduledTweets,
   deleteGeneratedTweet,
   getPostedTweets,
   savePostedTweet,

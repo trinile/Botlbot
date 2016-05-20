@@ -7,6 +7,7 @@ import {
   CANCEL_EDIT_TWEET,
   POSTED_TWEETS,
   SCHEDULE_TWEET,
+  SCHEDULED_TWEETS,
 } from '../constants.js';
 import { fetchRequest, fetchSuccess, fetchFailure } from './requestStatus';
 
@@ -58,12 +59,20 @@ export function scheduleTweet(id, schedule) {
     schedule
   }
 }
-export function postedTweets(tweets) {
+export function postedTweets(postedtweets) {
   return {
     type: POSTED_TWEETS,
     postedtweets,
   }
 }
+
+export function scheduledTweets(scheduledtweets) {
+  return {
+    type: SCHEDULED_TWEETS,
+    scheduledtweets,
+  };
+};
+
 //set into local storage
 //this should probably be called when dashboard mounts and user is authenticated
 //makes a call to api to retrieve most current tweets in database
@@ -86,7 +95,7 @@ export function getTweetsAsync(page) {
         dispatch(fetchFailure(err));
       });
   };
-};
+}
 
 export function getPostedTweetsAsync() {
   return dispatch => {
@@ -96,7 +105,7 @@ export function getPostedTweetsAsync() {
       .then(result => {
         console.log('result ----> ', result);
         localStorage.setItem('postedtweets', JSON.stringify(result));
-        return result;
+        return dispatch(postedTweets(result));
       })
       .catch(err => {
         console.error(err);
@@ -122,6 +131,23 @@ export function postTweetAsync(id) {
         dispatch(fetchFailure(err));
       });
   };
+}
+
+export function getScheduledTweetsAsync() {
+  return dispatch => {
+    dispatch(fetchRequest());
+    return fetch('/tweets/scheduled', 
+      { method: 'GET', credentials: 'same-origin' })
+      .then(result => result.json())
+      .then(result => {
+        // console.log('result ----> ', result);
+        return dispatch(scheduledTweets(result));
+      })
+      .catch(err => {
+        console.error(err);
+        dispatch(fetchFailure(err));
+      });
+  }; 
 }
 
 export function editTweetAsync(id, tweet_text) {
@@ -156,9 +182,9 @@ export function scheduleTweetAsync(id, schedule) {
   console.log('IN SCHEDULE TWEET ASYNC _----->di ---------> ', id, schedule);
   return dispatch => {
     dispatch(fetchRequest());
-    return fetch('/scheduletweet/' + id,
+    return fetch('/tweets/schedule/' + id,
       { method: 'POST',
-      header: {
+      headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },

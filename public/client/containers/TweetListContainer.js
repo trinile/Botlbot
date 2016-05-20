@@ -11,10 +11,12 @@ const filterTweets = (tweets, filter) => {
   switch(filter) {
     case 'SHOW_ALL':
       return tweets;
-    case 'SHOW_VALID':
+    case 'SHOW_AVAILABLE':
       return tweets.filter(t => t.tweet_status === 'available');
     case 'SHOW_POSTED':
-      return tweets.filter(t => t.tweet_status === 'posted');
+      return tweets.filter(t => t.tweet_status === 'posted_in_db');
+    case 'SHOW_SCHEDULED':
+      return tweets.filter(t => t.tweet_status === 'scheduled_in_db');
     case 'SHOW_TRASHED':
       return tweets.filter(t => t.tweet_status === 'trashed');
     default:
@@ -24,19 +26,20 @@ const filterTweets = (tweets, filter) => {
 class TweetListContainer extends React.Component {
 
   componentWillMount() {
-
     this.props.filterTweets();
   }
 
   render() {
-    const {tweets, 
+    const {
+      tweets,
       onPostTweet, 
-      cancelEditTweet, 
+      cancelEditTweet,
       onTrashTweet, 
       getValidTweets, 
       editTweet, 
       onRequestEdit,
-      onScheduleTweet } = this.props;
+      onScheduleTweet,
+       } = this.props;
     return (
       <TweetList 
       tweets={tweets} 
@@ -46,7 +49,6 @@ class TweetListContainer extends React.Component {
       onEditTweet={editTweet}
       onTrashTweet={onTrashTweet}
       onScheduleTweet={onScheduleTweet}
-      // getValidTweets={getValidTweets}
       />
     ) 
   }
@@ -58,11 +60,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   filterTweets: () => {
     dispatch(tweetsFilter(ownProps.filter));
   },
-  editTweet: (id, tweet_text) => {
-    dispatch(editTweetAsync(id, tweet_text));
+  editTweet: (id, bot_tweet_body) => {
+    dispatch(editTweetAsync(id, bot_tweet_body));
   },
   cancelEditTweet: (id) => {
-    console.log('eddddddittttt tweet');
     dispatch(cancelEditTweet(id));
   },
   onRequestEdit: (id) => {
@@ -76,7 +77,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
   onScheduleTweet: (id, schedule) => {
     console.log('innnnnnnnnnnn schedule');
-    dispatch(scheduleTweetAsync(id, schedule))
+    dispatch(scheduleTweetAsync(id, schedule));
   },
 });
 

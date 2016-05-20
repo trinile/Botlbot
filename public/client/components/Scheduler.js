@@ -1,13 +1,13 @@
 import React from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
 import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
-import SelectField from 'material-ui/SelectField';
-import Dialog from 'material-ui/Dialog';
+import moment from 'moment';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import Schedule from 'material-ui/svg-icons/action/schedule';
 
-const styles = {
+const style = {
   h3: {
     marginTop: 20,
     fontWeight: 400,
@@ -18,26 +18,25 @@ const styles = {
   block2: {
     margin: 10,
   },
+  button: {
+    boxShadow: '0px',
+    border: '0px',
+    backgroundColor: '',
+  },
 };
 
 function setTime(time) {
   var times = {
-  'Morning': {min: 8, max:12 }, 
-  'Afternoon': {min:12, max:17}, 
-  'Evening': {min: 17, max: 21}, 
-  'Night': { min: 21, max: 24 }
+    '1 hour': new moment().add(1, 'hour').format('X'),
+    '3 hours': new moment().add(3, 'hour').format('X'),
+    '6 hours': new moment().add(6, 'hour').format('X'),
+    '12 hours': new moment().add(12, 'hour').format('X'),
   };
-
-  // console.log(times[time].min);
-  //generate a random time to schedule 
-  var randomTime = Math.floor(Math.random() * (times[time].max - times[time].min + 1) + times[time].min);
-  
-  //add to time 30 (8.5 = 8:30 AM, 15.5 = 3:30 PM )
-   if (Math.floor(Math.random()*2) === 1) {
-    return randomTime.toString() + ':30'
-   } else {
-    return randomTime.toString() + ':00'
-   }
+  console.log(times[time]);
+  console.log(typeof times[time]);
+  // formats: Tue May 17 2016 17:33:26 GMT-0700 (PDT)
+  //formats UNIX timestamp: '1463763702'
+  return times[time];
 };
 
 export default class SchedulePopOver extends React.Component {
@@ -61,27 +60,29 @@ export default class SchedulePopOver extends React.Component {
       open: true,
       anchorEl: event.currentTarget,
     });
-  };
+  }
 
   handleClickTime(event) {
     event.preventDefault();
+    event.stopPropagation();
+    console.log('EVENT CLICK TARGET ', event.target);
     this.setState({
       time: event.target.innerText,
     });
-
   }
+
   handleRequestClose() {
     this.setState({
       open: false,
     });
-  };
-
+  }
   handleCancel() {
     this.setState({
       time: '',
       open: false,
-    })
+    });
   }
+
   handleConfirm(event) {
     const { onSchedule, tweet } = this.props;
     event.preventDefault();
@@ -97,15 +98,20 @@ export default class SchedulePopOver extends React.Component {
   render() {
     return (
       <div>
-        <FlatButton
+        <FloatingActionButton
           onTouchTap={this.handleTouchTap.bind(this)}
           label={this.state.label}
-        />
+          mini={true}
+          backgroundColor="#89bdd3"
+          style={style.button}
+        >
+        <Schedule/>
+        </FloatingActionButton>
         <Popover
           open={this.state.open}
           anchorEl={this.state.anchorEl}
-          anchorOrigin={{horizontal:"right",vertical:"top"}}
-          targetOrigin={{horizontal:"left",vertical:"top"}}
+          anchorOrigin={{horizontal:'right',vertical:'top'}}
+          targetOrigin={{horizontal:'left',vertical:'top'}}
 
           onRequestClose={this.handleRequestClose.bind(this)}
         >
@@ -113,14 +119,14 @@ export default class SchedulePopOver extends React.Component {
             <Menu
             onBlur={this.handleCancel.bind(this)}
             >
-            <MenuItem primaryText="Schedule" onTouchTap={this.handleConfirm.bind(this)}/>
-            <MenuItem primaryText="Cancel" onClick={this.handleCancel.bind(this)}/>
+              <MenuItem key={1} primaryText="Schedule" onTouchTap={this.handleConfirm.bind(this)}/>
+              <MenuItem key={2} primaryText="Cancel" onTouchTap={this.handleCancel.bind(this)}/>
             </Menu>
           : <Menu>
-            <MenuItem primaryText="Morning" onClick={this.handleClickTime.bind(this)}/>
-            <MenuItem primaryText="Afternoon" onClick={this.handleClickTime.bind(this)}/>
-            <MenuItem primaryText="Evening"  onClick={this.handleClickTime.bind(this)}/>
-            <MenuItem primaryText="Night" onClick={this.handleClickTime.bind(this)}/>
+              <MenuItem key={3} primaryText="1 hour" onTouchTap={this.handleClickTime.bind(this)}/>
+              <MenuItem key={4} primaryText="3 hours" onTouchTap={this.handleClickTime.bind(this)}/>
+              <MenuItem key={5} primaryText="6 hours" onTouchTap={this.handleClickTime.bind(this)}/>
+              <MenuItem key={6} primaryText="12 hours" onTouchTap={this.handleClickTime.bind(this)}/>
           </Menu> }
         </Popover>
       </div>
