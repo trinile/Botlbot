@@ -7,7 +7,6 @@ import {
   CANCEL_EDIT_TWEET,
   POSTED_TWEETS,
   SCHEDULE_TWEET,
-  SCHEDULED_TWEETS,
 } from '../constants.js';
 import { fetchRequest, fetchSuccess, fetchFailure } from './requestStatus';
 
@@ -17,11 +16,11 @@ export function requestEdit(id) {
     id,
   };
 }
-export function editTweet(id, bot_tweet_body) {
+export function editTweet(id, tweet_text) {
   return {
     type: EDIT_TWEET,
     id,
-    bot_tweet_body,
+    tweet_text,
   };
 }
 
@@ -59,20 +58,12 @@ export function scheduleTweet(id, schedule) {
     schedule
   }
 }
-export function postedTweets(postedtweets) {
+export function postedTweets(tweets) {
   return {
     type: POSTED_TWEETS,
     postedtweets,
   }
 }
-
-export function scheduledTweets(scheduledtweets) {
-  return {
-    type: SCHEDULED_TWEETS,
-    scheduledtweets,
-  };
-};
-
 //set into local storage
 //this should probably be called when dashboard mounts and user is authenticated
 //makes a call to api to retrieve most current tweets in database
@@ -97,27 +88,10 @@ export function getTweetsAsync(page) {
   };
 };
 
-export function getPostedTweetsAsync() {
-  return dispatch => {
-    dispatch(fetchRequest());
-    return fetch('/tweets/posted', { method: 'GET', credentials: 'same-origin'})
-      .then(result => result.json())
-      .then(result => {
-        console.log('result ----> ', result);
-        // localStorage.setItem('postedtweets', JSON.stringify(result));
-        return dispatch(postedTweets(result.reverse()));
-      })
-      .catch(err => {
-        console.error(err);
-        dispatch(fetchFailure(err));
-      });
-  };
-}
-
 export function getScheduledTweetsAsync() {
   return dispatch => {
     dispatch(fetchRequest());
-    return fetch('http://127.0.0.1:1337/tweets/scheduled', 
+    return fetch('/tweets/scheduled', 
       { method: 'GET', credentials: 'same-origin' })
       .then(result => result.json())
       .then(result => {
@@ -131,6 +105,24 @@ export function getScheduledTweetsAsync() {
       });
   }; 
 }
+
+export function getPostedTweetsAsync() {
+  return dispatch => {
+    dispatch(fetchRequest());
+    return fetch('/tweets/posted', { method: 'GET', credentials: 'same-origin'})
+      .then(result => result.json())
+      .then(result => {
+        console.log('result ----> ', result);
+        localStorage.setItem('postedtweets', JSON.stringify(result));
+        return result;
+      })
+      .catch(err => {
+        console.error(err);
+        dispatch(fetchFailure(err));
+      });
+  };
+}
+
 // id is generated tweet ID
 export function postTweetAsync(id) {
   return dispatch => {
@@ -150,8 +142,7 @@ export function postTweetAsync(id) {
   };
 }
 
-export function editTweetAsync(id, bot_tweet_body) {
-  console.log('tweeet editing ------->', bot_tweet_body);
+export function editTweetAsync(id, tweet_text) {
   return dispatch => {
     dispatch(fetchRequest());
     return fetch('/tweets/' + id, {
@@ -162,13 +153,13 @@ export function editTweetAsync(id, bot_tweet_body) {
       },
       mode: 'cors',
       credentials: 'same-origin',
-      body: JSON.stringify({ text: bot_tweet_body }),
+      body: JSON.stringify({ text: tweet_text }),
     })
     .then(res => {
       console.log('response ----------> ', res);
       if (res.status === 201) {
         dispatch(fetchSuccess());
-        dispatch(editTweet(id, bot_tweet_body));
+        dispatch(editTweet(id, tweet_text));
       } else if (res.status === 500) {
         dispatch(fetchFailure(res.status));
       }
@@ -185,7 +176,7 @@ export function scheduleTweetAsync(id, schedule) {
     dispatch(fetchRequest());
     return fetch('/scheduletweet/' + id,
       { method: 'POST',
-      headers: {
+      header: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
