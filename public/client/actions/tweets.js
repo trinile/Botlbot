@@ -105,7 +105,7 @@ export function getPostedTweetsAsync() {
       .then(result => {
         console.log('result ----> ', result);
         localStorage.setItem('postedtweets', JSON.stringify(result));
-        return dispatch(postedTweets( result.reverse() ));
+        return dispatch(postedTweets(result));
       })
       .catch(err => {
         console.error(err);
@@ -141,8 +141,7 @@ export function getScheduledTweetsAsync() {
       .then(result => result.json())
       .then(result => {
         // console.log('result ----> ', result);
-        // localStorage.setItem('scheduledtweets', JSON.stringify(result));
-        return dispatch(scheduledTweets(result.reverse()));
+        return dispatch(scheduledTweets(result));
       })
       .catch(err => {
         console.error(err);
