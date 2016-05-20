@@ -46,13 +46,53 @@
 
 ### File Structure
   ***See [FileStructure.md](linktoFileStructure)
-### Installing Dependencies
-  **
-From within the root directory:
 
+### Installing Dependencies
+  ***From within the root directory:***
+
+1. Install Dependencies
 ```sh
 npm install
 ```
+2. Run Webpack Build
+```sh
+npm run build
+```
+3. Move `bundle.html` into `\build` directory. 
+  1. This bundle.html references bundle.js from webpack.
+
+4. Run servers (TODO: create NPM run-dev command to run all servers in background)
+
+  1. Run file server
+  ```sh 
+  node server/server.js
+  ```
+  1. Run Template Services 
+  ```sh
+  node templateServices/server.js
+  ```
+  1. Run Postgres SQL server 
+  
+  1. Run Redis Server to use redis-conf file
+  ```sh
+  redis-server server/redis/redis-conf
+  ```
+
+5. Create DATABASE in Postgres
+  1. In postgres create databases botlbot_db and botlbot_db_test;
+```sql
+  CREATE DATABASE boltbot_db; 
+  CREATE DATABASE botlbot_db_test;
+```
+  1. From within root directory, run migrations to create tables.
+```sh
+  knex migrate: latest 
+``` 
+  OR 
+```sh
+  node_modules/.bin/knex migrate:latest
+```
+
 ### Tasks 
 
 ## Architecture
