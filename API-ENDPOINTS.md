@@ -8,8 +8,8 @@
 |[Get Generated Tweets](#get-tweetsgenerated)|GET /tweets/generated|
 |[Get Scheduled Tweets](#get-tweetsscheduled)|GET /tweets/scheduled|
 |[Get Posted Tweets](#get-tweetsposted)|GET /tweets/posted|
-|[Modify Tweet](#put-tweets:id)|PUT /tweets/:id|
-|[Post Tweet](#post-tweets:id)|POST /tweets/:id|
+|[Modify Tweet](#put-tweets)|PUT /tweets/:id|
+|[Post Tweet](#post-tweets)|POST /tweets/:id|
 |[Schedule Tweet](#post-scheduletweets)|POST /tweets/schedule/:id|
 |[Trash Tweet](#delete-tweet)|DELETE /tweets/:id|
 |[Get Templates](#get-templates)|GET /templates|
