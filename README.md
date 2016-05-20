@@ -57,7 +57,7 @@ npm install
 
 ## Architecture
 ### High Level Architecture
- ![Architecture](http://i65.tinypic.com/x5zfjo.jpg)
+ ![Architecture](http://i66.tinypic.com/xm7oxz.jpg)
 ### Database Schema
  ![Schema](http://i64.tinypic.com/2agt0yb.jpg)
 
