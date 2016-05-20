@@ -28,13 +28,12 @@ const ScheduledTweet = ({
     <Card style={style.main}>
       <CardHeader
         title="SCHEDULED"
-        subtitle={tweet.updated_at}
+        subtitle={time()}
         avatar="http://lorempixel.com/100/100/nature/"
       />
       <CardText style={style.paper}>
       {tweet.tweet_text}
       </CardText>
-      <Paper href="/linktooriginaltwittercontent" style={style.paper}>
         <ul>
           <li>Retweets: {tweet.retweet_count}</li>
           <li>Favorited: {tweet.favorite_count}</li>

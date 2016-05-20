@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-// import styles from '../styles/tweet.css';
+import style from '../styles/tweet.js';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
 import SchedulePopOver from './Scheduler';
@@ -7,40 +7,7 @@ import moment from 'moment';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import {Trash, Post, Edit, Launch, Schedule} from './TweetButtons';
 import { NewsSource, TweetSource } from './tweet_sources';
-
-const style = {
-  main: {
-    margin: '16px 32px 16px 0',
-    minWidth: '400px',
-    maxWidth: '500px',
-    // flexGrow: '0',
-    padding: '5px',
-    background: 'white',
-  },
-  tweet: {
-    backgroundColor: 'white',
-    position: 'relative',
-    textAlign: 'left',
-  },
-  buttons: {
-    position: 'relative',
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'space-around',
-    backgroundColor: '#879C87',
-    padding: '',
-  },
-  header: {
-    display: 'flex',
-    justifyContent: 'space-around',
-    padding: '',
-    width: '100%',
-  },
-  scheduled: {
-    fill: 'red',
-    color: 'red',
-  },
-};
+import Settings from 'material-ui/svg-icons/action/settings';
 
 const Tweet = ({
   tweet,
@@ -61,7 +28,7 @@ const Tweet = ({
       <CardHeader
         title="Bot Generated Tweet"
         subtitle={time()}
-        avatar="http://lorempixel.com/100/100/nature/"
+        avatar={<Settings style={style.avatar}/>}
         style={style.header}
       >
         <Trash tweet={tweet} trashTweet={trashTweet}/>

@@ -19,8 +19,8 @@ const style = {
   launch: {
     display: 'inline-block',
     boxShadow: '0px',
-    fill: 'black',
-    color: 'black',
+    fill: '#6A7C86',
+    color: '#6A7C86',
   },
 };
 
@@ -30,7 +30,7 @@ export const Cancel = ({ tweet, cancelEdit }) => {
     mini={true}
     onTouchTap={cancelEdit}
     style={style.icon}
-    backgroundColor="#879C87"
+    backgroundColor="#89bdd3"
     > 
       <CancelIcon />
     </FloatingActionButton> 
@@ -43,7 +43,7 @@ export const Save = ({ tweet, editTweet }) => {
     mini={true}
     onTouchTap={editTweet}
     style={style.icon}
-    backgroundColor="#879C87"
+    backgroundColor="#89bdd3"
     > 
       <SaveIcon />
     </FloatingActionButton> 
@@ -66,7 +66,7 @@ export const Post = ({tweet, postTweet}) => {
     linkButton={true}
     onTouchTap={postTweet}
     style={style.icon}
-    backgroundColor="#879C87"
+    backgroundColor="#89bdd3"
   >
     <Publish />
   </FloatingActionButton>
@@ -78,7 +78,7 @@ export const Edit = ({tweet, requestEdit}) => {
     <FloatingActionButton
     mini={true}
     onTouchTap={requestEdit}
-    backgroundColor="#879C87"
+    backgroundColor="#89bdd3"
     style={style.icon}
     >
       <EditIcon/>

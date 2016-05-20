@@ -100,7 +100,7 @@ export default class SchedulePopOver extends React.Component {
           onTouchTap={this.handleTouchTap.bind(this)}
           label={this.state.label}
           mini={true}
-          backgroundColor="#879C87"
+          backgroundColor="#89bdd3"
           style={style.button}
         >
         <Schedule/>

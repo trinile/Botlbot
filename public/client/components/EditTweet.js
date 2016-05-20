@@ -1,45 +1,12 @@
 import React, { PropTypes } from 'react';
-import styles from '../styles/tweet.css';
+import style from '../styles/tweet.js';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import { Save, Cancel, Trash } from './TweetButtons';
 import { NewsSource, TweetSource } from './tweet_sources';
-
+import Settings from 'material-ui/svg-icons/action/settings';
 import moment from 'moment';
-
-const style = {
-  main: {
-    margin: '16px 32px 16px 0',
-    width: '40%',
-    float: 'right',
-    padding: '5px',
-    background: 'white',
-  },
-  paper: {
-    border: '1px #ddd',
-    'border-radius': '4px',
-    padding: '10px',
-    color: 'green',
-  },
-  header: {
-    display: 'flex',
-    justifyContent: 'space-around',
-    padding: '',
-    width: '100%',
-  },
-  tweet: {
-    backgroundColor: 'white',
-  },
-  buttons: {
-    position: 'relative',
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'space-around',
-    backgroundColor: '#879C87',
-    padding: '',
-  },
-};
 
 class EditTweet extends React.Component {
   
@@ -61,12 +28,12 @@ class EditTweet extends React.Component {
         <CardHeader
           title="EDITING Generated Tweet" 
           subtitle={this.getTime.bind(this)()}
-          avatar="http://lorempixel.com/100/100/nature/"
+          avatar={<Settings style={style.avatar}/>}
           style={style.header}
         >
         <Trash tweet={tweet} trashTweet={trashTweet}/>
         </CardHeader>
-        <CardText styles={styles.paper}>
+        <CardText style={style.paper}>
         <TextField 
           fullWidth={true} 
           id={tweet.bot_tweet_id.toString()} 

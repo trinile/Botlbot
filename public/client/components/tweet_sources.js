@@ -1,44 +1,10 @@
 import React, { PropTypes } from 'react';
-import styles from '../styles/tweet.css';
+import style from '../styles/tweet.js';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Repeat from 'material-ui/svg-icons/av/repeat';
 import Favorite from 'material-ui/svg-icons/action/favorite';
 import { Launch } from './TweetButtons';
 import Paper from 'material-ui/Paper';
-
-const style = {
-  news: {
-    display: 'flex',
-    borderRadius: '4px',
-    justifyContent: 'space-around',
-    color: '#879C87',
-    paddingLeft: '10px',
-    margin: '10px',
-  },
-  div: {
-    position: 'relative',
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'space-around',
-    padding: '5px',
-  },
-  text: {
-    width: '80%',
-    display: 'inline-block',
-  },
-  align: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  paper: {
-    borderRadius: '4px',
-    boxShadowing: '',
-    padding: '5px',
-    margin: '10px',
-    color: '#879C87',
-    position: 'relative',
-  },
-};
 
 export const NewsSource = ({tweet}) => {
   return (
@@ -55,7 +21,7 @@ export const NewsSource = ({tweet}) => {
 export const TweetSource = ({tweet}) => {
   return (
     <Paper
-    style={style.paper}
+    style={style.tweetsource}
     zDepth={1}
     > 
       <div style={style.div}>
@@ -63,8 +29,8 @@ export const TweetSource = ({tweet}) => {
         <Launch tweet={tweet}/>
       </div>
       <div style={style.div}>
-        <div style={style.align}><Repeat style={style.retweet} /> {tweet.retweet_count} </div>
-        <div style={style.align}><Favorite style={style.favorite} /> {tweet.favorite_count}</div>
+        <div style={style.align}><Repeat style={style.tweetIcon} /> {tweet.retweet_count} </div>
+        <div style={style.align}><Favorite style={style.tweetIcon} /> {tweet.favorite_count}</div>
       </div>
       <div style={style.div}>
         <div>{tweet.user_screen_name}</div>
