@@ -65,7 +65,7 @@ function tweets(state = /*JSON.parse(localStorage.getItem('tweets')) || */[], ac
     case POSTED_TWEETS:
     case SCHEDULED_TWEETS:
       return [
-        ...tweet(state, action)
+        ...tweet(null, action)
       ];
     case POST_TWEET:
     case TRASH_TWEET:
