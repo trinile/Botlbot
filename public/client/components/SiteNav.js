@@ -12,7 +12,7 @@ const style = {
     // fontSize: '1.5em',
   },
   toolbar: {
-    backgroundColor: 'rgb(167, 184, 193)',
+    backgroundColor: '#89bdd3',
   }
 }
 const SiteNav = ({ isAuthenticated, onLogoutClick }) => (
