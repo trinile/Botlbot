@@ -10,8 +10,6 @@ const Logout = ({onLogoutClick}) => (
   <RaisedButton
       onClick={onLogoutClick}
       label="LOGOUT"
-      backgroundColor="black"
-      labelColor="white"
       linkButton={true}
     />
   </div>
