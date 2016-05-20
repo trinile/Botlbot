@@ -142,7 +142,9 @@ const formatter = ({
   } else {
     return (
       <Menu autoWidth={true}>
-        <p style={{color: 'gray', marginLeft: '0.8rem', marginTop: '-0.2rem', marginBottom: '0.1rem'}}>{templateMenu[templateMenu.length - 1] === 'Root' ? '' : templateMenu[templateMenu.length - 1]}</p>
+        <p style={{color: 'gray', marginLeft: '0.6rem', marginTop: '-0.2rem', marginBottom: '0.1rem', fontFamily: 'Roboto, sans-serif'}}>
+          {templateMenu[templateMenu.length - 1] === 'Root' ? '' : templateMenu[templateMenu.length - 1]}
+        </p>
         {Object.keys(currentLevel).map((item, index) => {
           return (
             <MenuItem 
@@ -163,7 +165,9 @@ const formatter = ({
 
   return (
     <Menu autoWidth={true}>
-      <p style={{color: 'gray', marginLeft: '0.8rem', marginTop: '-0.2rem', marginBottom: '0.1rem'}}>{templateMenu[templateMenu.length - 1] === 'Root' ? '' : templateMenu[templateMenu.length - 1]}</p>
+      <p style={{color: 'gray', marginLeft: '0.6rem', marginTop: '-0.2rem', marginBottom: '0.1rem', fontFamily: 'Roboto, sans-serif'}}>
+        {templateMenu[templateMenu.length - 1] === 'Root' ? '' : templateMenu[templateMenu.length - 1]}
+      </p>
       {menu}
       <div style={{display: 'flex', justifyContent: 'space-around'}}>
         <AddButton icon={'back'} onClick={navigateUp} />
