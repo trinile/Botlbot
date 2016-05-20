@@ -10,14 +10,15 @@ const Logout = ({onLogoutClick}) => (
   <RaisedButton
       onClick={onLogoutClick}
       label="LOGOUT"
+      backgroundColor="black"
       labelColor="white"
       linkButton={true}
-      primary={true}
     />
   </div>
 );
 
 Logout.propTypes = {
-  onLogoutClick:PropTypes.func
+  onLogoutClick:PropTypes.func,
 };
+
 export default Logout;

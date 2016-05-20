@@ -1,5 +1,4 @@
 import React from 'react';
-// import styles from '../styles/main.css';
 import RaisedButton from 'material-ui/RaisedButton';
 import ActionAndroid from 'material-ui/svg-icons/action/android';
 import FontIcon from 'material-ui/FontIcon';
@@ -11,12 +10,12 @@ import FontIcon from 'material-ui/FontIcon';
 
 const Login = ({onLoginClick}) => (
   <div>
-  <RaisedButton
+    <RaisedButton
       label="LOGIN"
       href="/auth"
-      labelColor="white"
       linkButton={true}
-      primary={true}
+      backgroundColor="black"
+      labelColor="white"
     />
   </div>
 );
