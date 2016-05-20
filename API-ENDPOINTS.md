@@ -31,7 +31,8 @@ Logs out user from session and clears out cookies.
 Request sent when user loads up dashboard and retrieves generated tweets to display.
 
 ```
-## Example Response
+### Example Response
+Returns json
 ```json
  [ 
    { 
@@ -50,14 +51,15 @@ Request sent when user loads up dashboard and retrieves generated tweets to disp
     "updated_at":"2016-05-19T20:59:02.873Z",
     "schedule_id":null
     },
-    ...
+    //...
   ]
 ```
 ## `GET /tweets/scheduled`
 Request sent when user loads up scheduled tweets page to display tweets to be posted later.
 
-## Example Response
-```json
+### Example Response
+Returns json.
+```json 
  [ 
    { 
     "bot_tweet_id":51,
@@ -76,13 +78,13 @@ Request sent when user loads up scheduled tweets page to display tweets to be po
     "schedule_id":17,
     "scheduled_time": "2016-05-20T01:49:37.148Z"
     },
-    ...
+    // ...
   ]
 ```
 ## `GET /tweets/posted`
 Request sent when user loads up scheduled tweets page to display history of posted bot tweets.
 
-## Example Response
+### Example Response
 ```json
  [ 
    { 
@@ -96,7 +98,7 @@ Request sent when user loads up scheduled tweets page to display history of post
     "created_at":"2016-05-19T01:20:52.000Z",
     "updated_at":"2016-05-19T01:20:52.580Z"
     },
-    ...
+    // ...
   ]
 ```
 
@@ -104,13 +106,13 @@ Request sent when user loads up scheduled tweets page to display history of post
 Request sent when User edits a generated tweet.
 Id param refers to tweet ID.
 
-## Example Body Request
+### Example Body Request
 ```json
   {
     "tweet": "Please edit bot_tweet_body"
   }
 ```
-## Example Response
+### Example Response
 returns bot_tweet_id of the edited tweet
 ```array
   [185]
@@ -120,23 +122,23 @@ returns bot_tweet_id of the edited tweet
 Request sent when User approves and posts generated tweet to Twitter. 
 Id params refers to tweet ID.
 
-## Example Response 
+### Example Response 
 return retweet_id
 ```array
   [12]
 ```
 ## `POST /tweets/schedule/:id`
 Request sent when User schedules a tweet to be posted later. Modifies the tweet's tweet_status to 'scheduled' and creates an 
-entry in the scheduledtweets table with scheduled_time.
+entry in the scheduledtweets table with scheduled_time in UNIX time format.
 
-## Example Body Request
+### Example Body Request
 ```json
 {
-  schedule: 'Tue May 17 2016 17:33:26 GMT-0700 (PDT)'
+  schedule: '1463763702'
 }
 ```
 
-## Example Response
+### Example Response
 Returns array of tweet_status.
 ```json
   ["scheduled"]
@@ -145,7 +147,7 @@ Returns array of tweet_status.
 Request sent when User trashes generated tweet. Modifies tweet's tweet_status to 'trashed'.
 Id params refers to bot_tweet_id.
 
-## Example Response
+### Example Response
 Returns array of tweet_status.
 ```json
   ["trashed"]
@@ -153,7 +155,7 @@ Returns array of tweet_status.
 ## `GET /templates`
 When User loads dashboard to retrieve template IDs from database.
 
-## Example Response 
+### Example Response 
 Returns an array of User's templates with IDs and names.
 ```json
 [
@@ -165,14 +167,14 @@ Returns an array of User's templates with IDs and names.
     "name": "My Emojis",
     "template_id": 1
   }
-  ...
+  // ...
 ]
 ```
 
 ## `GET /templates/:id`
 Request sent when user selects template to display.
 
-## Example Response
+### Example Response
 ```json
 {   
   "template_id": 3,
@@ -184,9 +186,29 @@ Request sent when user selects template to display.
 ```
 ## `POST /templates/:id`
 Request sent when User saves template.
+Id params refers to bot_tweet_id.
 
+### Example Response 
+Returns retweet_id
+```array
+  [12]
+```
 ## `PUT /templates/:id`
 Request sent when User edits template.
-Id Params refers to template ID
+Id params refers to template ID
 
+### Example Response 
+Returns template name that was updated. 
+
+```json
+  ['Updated Template Name']
+```
 ## `DELETE /templates/:id`
+Request sent when User deletes template.
+Id params refers to template ID.
+
+### Example Response
+Confirms deletion.
+```
+'you deleted it'
+```
