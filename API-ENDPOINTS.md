@@ -13,10 +13,10 @@
 |[Schedule Tweet](#post-tweetsscheduleid)|POST /tweets/schedule/:id|
 |[Trash Tweet](#delete-tweetsid)|DELETE /tweets/:id|
 |[Get Templates](#get-templates)|GET /templates|
-|[Get Template](#get-templates)|GET /templates/:id|
-|[Post Template](#post-templates)|POST /templates/:id|
-|[Edit Template](#put-templates)|PUT /templates/:id|
-|[Delete Template](#delete-template)|DELETE /templates/:id|
+|[Get Template](#get-templatesid)|GET /templates/:id|
+|[Post Template](#post-templatesid)|POST /templates/:id|
+|[Edit Template](#put-templatesid)|PUT /templates/:id|
+|[Delete Template](#delete-templatesid)|DELETE /templates/:id|
 
 ## `GET /authenticate`
 Redirects back to server after acquiring access token, tokenSecret, and userID after User approves OAuth permission through Twitter.
