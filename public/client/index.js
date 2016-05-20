@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Routes from './routes/routes';
 import Reducers from './reducers/index.js';
 import { createStore, applyMiddleware } from 'redux';
-import { browserHistory, Router } from 'react-router';
+import { browserHistory } from 'react-router';
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import createLogger from 'redux-logger';
@@ -54,7 +54,7 @@ const history = syncHistoryWithStore(browserHistory, store);
 ReactDOM.render(
   <MuiThemeProvider muiTheme={muiTheme}>
     <Provider store={store}>
-      <Router history={history} routes={Routes} />
+      <Routes history={history}/>
     </Provider>
   </MuiThemeProvider>
   , document.getElementById('root')

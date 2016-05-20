@@ -24,6 +24,32 @@
   z-index: 10;
 }
 
+.bigbottle {
+  width: 45rem;
+  height: 20rem;
+  position: absolute;
+}
+
+.biggear {
+  width: 12.5rem;
+  height: 12.5rem;
+  top: 6.25rem;
+  left: 7.5rem;
+  animation: clockwise 10s linear infinite;
+  position: absolute;
+  z-index: 10;
+}
+
+.biglittlegear {
+  width: 7.5rem;
+  height: 7.5rem;
+  top: 1.25rem;
+  left: 17.5rem;
+  animation: counterclockwise 10s linear infinite;
+  position: absolute;
+  z-index: 10;
+}
+
 @keyframes clockwise {
   0% {transform: rotate(0deg);}
   100% {transform: rotate(360deg);}
