@@ -9,23 +9,15 @@ import Drawer from 'material-ui/Drawer';
 import Logo from './Logo';
 
 const style = {
-  menuItem: {
-    // width: '100%',
-    // border: '1px black',
-
-  },
   menu: {
     margin: '16px 32px 16px 0',
-    // padding: '10px',
-    // width: '100%',
   },
   drawer: {
     top: '100px'
   }
 };
 
-
-const SideMenu = ({ templateIDs }) => (
+const SideMenu = ({ templateIDs, onLogoutClick }) => (
   <Drawer docked={true} style={style.drawer} zDepth={0} >
     <List>
       <ListItem disabled={true}>
@@ -50,7 +42,7 @@ const SideMenu = ({ templateIDs }) => (
       <ListItem primaryText="Posted Tweets" containerElement={<Link to="/posted" />}/>
       <ListItem primaryText="Scheduled Tweets" containerElement={<Link to="/scheduled"/>}/>
       <Divider/>
-      <ListItem primaryText="Logout" />
+      <ListItem primaryText="Logout" onTouchTap={onLogoutClick}/>
     </List>
   </Drawer>
 );
