@@ -183,7 +183,7 @@ export function scheduleTweetAsync(id, schedule) {
   console.log('IN SCHEDULE TWEET ASYNC _----->di ---------> ', id, schedule);
   return dispatch => {
     dispatch(fetchRequest());
-    return fetch('/scheduletweet/' + id,
+    return fetch('/tweets/schedule/' + id,
       { method: 'POST',
       headers: {
         'Accept': 'application/json',
