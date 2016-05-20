@@ -35,7 +35,7 @@ const Tweet = ({
       </CardHeader>
       <CardText style={style.tweet}>
         {tweet.tweet_id_str 
-        ? <p>{getUrl()}</p>
+        ? <p>{tweet.bot_tweet_body.replace(/https?:\/\/[\S]+\b/, getUrl())}</p>
         : <p>{tweet.bot_tweet_body}</p>
         }
 
