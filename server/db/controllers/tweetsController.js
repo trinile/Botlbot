@@ -87,19 +87,35 @@ function modifyTweetText(bot_tweet_id, bot_tweet_body) {
 }
 
 function scheduleTweet(bot_tweet_id, scheduleTime) {
-  return knex('scheduledtweets')
-  .insert({ scheduled_time: scheduleTime }, 'schedule_id')
-  .then(function (id) {
-    return knex('generatedtweets')
-      .where({ bot_tweet_id: bot_tweet_id })
-      .update({
-        schedule_id: id[0],
-        tweet_status: 'scheduled',
-        updated_at: new Date(),
-      }, 'tweet_status')
-  })
-  .catch(err => console.log(err));
-}
+  return knex('generatedtweets')
+    .where({ bot_tweet_id: bot_tweet_id })
+    .select('schedule_id')
+    .then(id => { 
+      // console.log('id of schedule tweet ------> ', id);
+      if (id[0].schedule_id === null) {
+        // console.log('ID IS NULL--------->')
+        return knex('scheduledtweets')
+        .insert({scheduled_time: scheduleTime }, 'schedule_id')
+        .then(id => { 
+          return knex('generatedtweets')
+            .where({ bot_tweet_id: bot_tweet_id })
+            .update({
+                schedule_id: id[0],
+                tweet_status: 'scheduled',
+                updated_at: new Date(),
+              }, 'tweet_status')  
+        })
+      } else {
+        // console.log("UPDATE SCHEDULE!!!!");
+        return knex('scheduledtweets')
+        .where({ schedule_id : id[0].schedule_id })
+        .update({
+          scheduled_time: scheduleTime
+        }, 'schedule_id');
+      }
+    })
+    .catch(err => console.log(err));
+};
 
 function joinTweetAndUserByTweetId(id) {
   return knex('generatedtweets')

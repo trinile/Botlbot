@@ -27,14 +27,16 @@ const style = {
 
 function setTime(time) {
   var times = {
-    '1 hour': new moment().add(1, 'hour'),
-    '3 hours': new moment().add(3, 'hour'),
-    '6 hours': new moment().add(6, 'hour'),
-    '12 hours': new moment().add(12, 'hour'),
+    '1 hour': new moment().add(1, 'hour').format('X'),
+    '3 hours': new moment().add(3, 'hour').format('X'),
+    '6 hours': new moment().add(6, 'hour').format('X'),
+    '12 hours': new moment().add(12, 'hour').format('X'),
   };
-  // console.log(times[time]._d);
+  console.log(times[time]);
+  console.log(typeof times[time]);
   // formats: Tue May 17 2016 17:33:26 GMT-0700 (PDT)
-  return times[time]._d;
+  //formats UNIX timestamp: '1463763702'
+  return times[time];
 };
 
 export default class SchedulePopOver extends React.Component {

@@ -18,7 +18,7 @@ const Tweet = ({
 }) => {
     const time = () => { 
       return tweet.scheduled_time
-      ? 'Scheduled for ' + moment(tweet.scheduled_time).calendar()
+      ? 'Scheduled for ' + moment().unix(tweet.scheduled_time.calendar()
       : 'Generated ' + moment(tweet.created_at).fromNow() };
     const getUrl = () => {
       return 'http://twitter.com/' + tweet.user_screen_name + '/status/...'
