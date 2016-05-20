@@ -32,6 +32,9 @@ const Template = ({
 }) => (
   <article>
     <style>{`
+      .Popover {
+        z-index: 1400;
+      }
       .Popover-body {
         display: inline-flex;
         flex-direction: column;
@@ -43,6 +46,7 @@ const Template = ({
         max-width: 10rem;
         max-height: 30rem;
         overflow: auto;
+        z-index: 1400;
       }
       .Popover-body > div {
         width: auto !important;

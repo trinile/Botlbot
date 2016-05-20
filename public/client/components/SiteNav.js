@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import Login from '../components/Login';
 import Logout from '../components/Logout';
 import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
@@ -13,31 +12,25 @@ const style = {
     // fontSize: '1.5em',
   },
   toolbar: {
-    backgroundColor: 'rgb(167, 184, 193)',
+    backgroundColor: '#89bdd3',
   }
 }
 const SiteNav = ({ isAuthenticated, onLogoutClick }) => (
   <Toolbar style={style.toolbar}>
-  <ToolbarTitle text="Botlbot" style={style.title} />
+  <ToolbarTitle text="botlbot" style={style.title}/>
   <ToolbarGroup>
     <FlatButton
       linkButton={true}
       label="About"
-      containerElement={<Link to="/about" />}
+      containerElement={<a href="https://github.com/Sabine-Sardine/botlbot/" target="_blank" />}
       />
     <FlatButton
       linkButton={true}
       label="Home"
       containerElement={<Link to="/" />}
     />
-    <FlatButton 
-      linkButton={true}
-      label="Dashboard" 
-      containerElement={<Link to="/dashboard" />}
-    />
     <FlatButton>
-    {isAuthenticated ? <Logout onLogoutClick={onLogoutClick}/> : <Login /> 
-    }
+      <Logout onLogoutClick={onLogoutClick}/>
     </FlatButton>
   </ToolbarGroup>
   </Toolbar>

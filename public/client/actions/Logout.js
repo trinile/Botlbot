@@ -4,7 +4,7 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_FAILURE
 } from '../constants.js';
-import { push } from 'react-router-redux';
+import { replace } from 'react-router-redux';
 import fetch from 'isomorphic-fetch';
 //three possible states for logging out.
 //need three actions.
@@ -49,7 +49,7 @@ export function logoutUser() {
         console.log(json);
         localStorage.removeItem('sessionID');
         dispatch(receiveLogout());
-        dispatch(push('/'));
+        dispatch(replace('/'));
       })
       .catch(err => {
         console.log(err);

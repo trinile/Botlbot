@@ -13,7 +13,8 @@ const style = {
     margin: '16px 32px 16px 0',
   },
   drawer: {
-    top: '100px'
+    top: '100px',
+    zIndex: '1'
   }
 };
 

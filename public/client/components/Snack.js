@@ -7,6 +7,7 @@ const Snack = ({ snack, closeSnack }) => (
     message={snack.message}
     autoHideDuration={5000}
     onRequestClose={closeSnack}
+    style={{fontFamily: 'Roboto, sans-serif'}}
   />
 );
 

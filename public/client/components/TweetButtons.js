@@ -4,7 +4,7 @@ import LaunchIcon from 'material-ui/svg-icons/action/launch';
 import Delete from 'material-ui/svg-icons/action/delete';
 // import Schedule from 'material-ui/svg-icons/action/schedule';
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
-import Publish from 'material-ui/svg-icons/editor/publish';
+import Send from 'material-ui/svg-icons/content/send';
 import SaveIcon from 'material-ui/svg-icons/content/save';
 import CancelIcon from 'material-ui/svg-icons/content/clear';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
@@ -68,7 +68,7 @@ export const Post = ({tweet, postTweet}) => {
     style={style.icon}
     backgroundColor="#89bdd3"
   >
-    <Publish />
+    <Send />
   </FloatingActionButton>
   );
 };
@@ -103,12 +103,12 @@ export const Trash = ({tweet, trashTweet}) => {
 export const Launch = ({tweet}) => {
   return (
     <FloatingActionButton 
-    mini={true}
-    linkButton={true} 
-    href={tweet.bot_tweet_body} 
-    style={style.icon}
-    backgroundColor="white"
-    iconStyle={style.launch}
+      mini={true}
+      linkButton={true} 
+      href={tweet.bot_tweet_body.match(/https?[\S]+\b/)[0]} 
+      style={style.icon}
+      backgroundColor="white"
+      iconStyle={style.launch}
     >
     <LaunchIcon/>
   </FloatingActionButton>

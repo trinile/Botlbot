@@ -34,10 +34,9 @@ const Tweet = ({
         <Trash tweet={tweet} trashTweet={trashTweet}/>
       </CardHeader>
       <CardText style={style.tweet}>
-        {tweet.tweet_id_str 
-        ? <p>{getUrl()}</p>
-        : <p>{tweet.bot_tweet_body}</p>
-        }
+        { tweet.tweet_id_str && (<p>{tweet.bot_tweet_body.replace(/https?:\/\/[\S]+\b/, getUrl())}</p>) }
+        { !tweet.tweet_id_str && tweet.news_headline && (<p>{tweet.bot_tweet_body.replace(/https?:\/\/[\S]+\b/, 'nytimes.com/...')}</p>) }
+        { !tweet.tweet_id_str && !tweet.news_headline && (<p>{tweet.bot_tweet_body}</p>) }
 
         {tweet.news_headline
         ? <NewsSource tweet={tweet} />
