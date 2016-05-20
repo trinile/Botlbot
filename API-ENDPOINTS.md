@@ -3,34 +3,30 @@
 #### Private End Points
 |Description|Endpoint|
 |---|---|
-|[Login OAuth](#get-auth)|GET /auth|
+|[Login OAuth](#get-authenticate)|GET /authenticate|
 |[Logout User](#get-logout)|GET /logout|
 |[Get Generated Tweets](#get-tweetsgenerated)|GET /tweets/generated|
 |[Get Scheduled Tweets](#get-tweetsscheduled)|GET /tweets/scheduled|
 |[Get Posted Tweets](#get-tweetsposted)|GET /tweets/posted|
 |[Modify Tweet](#put-tweetsid)|PUT /tweets/:id|
 |[Post Tweet](#post-tweetsid)|POST /tweets/:id|
-|[Schedule Tweet](#post-scheduletweetsid)|POST /tweets/schedule/:id|
-|[Trash Tweet](#delete-tweetid)|DELETE /tweets/:id|
+|[Schedule Tweet](#post-tweetsscheduleid)|POST /tweets/schedule/:id|
+|[Trash Tweet](#delete-tweetsid)|DELETE /tweets/:id|
 |[Get Templates](#get-templates)|GET /templates|
 |[Get Template](#get-templates)|GET /templates/:id|
-|[Post Template](#post-template)|POST /templates/:id|
-|[Edit Template](#put-template)|PUT /templates/:id|
+|[Post Template](#post-templates)|POST /templates/:id|
+|[Edit Template](#put-templates)|PUT /templates/:id|
 |[Delete Template](#delete-template)|DELETE /templates/:id|
 
-## `GET /auth/`
-
+## `GET /authenticate`
 Redirects back to server after acquiring access token, tokenSecret, and userID after User approves OAuth permission through Twitter.
 
-### Example Request
-
-## `GET /logout/`
+## `GET /logout`
 Logs out user from session and clears out cookies.
 
 ## `GET /tweets/generated`
 Request sent when user loads up dashboard and retrieves generated tweets to display.
 
-```
 ### Example Response
 Returns json
 ```json
@@ -134,7 +130,7 @@ entry in the scheduledtweets table with scheduled_time in UNIX time format.
 ### Example Body Request
 ```json
 {
-  schedule: '1463763702'
+  "schedule": "1463763702"
 }
 ```
 
@@ -201,7 +197,7 @@ Id params refers to template ID
 Returns template name that was updated. 
 
 ```json
-  ['Updated Template Name']
+  ["Updated Template Name"]
 ```
 ## `DELETE /templates/:id`
 Request sent when User deletes template.
@@ -210,5 +206,5 @@ Id params refers to template ID.
 ### Example Response
 Confirms deletion.
 ```
-'you deleted it'
+"you deleted it"
 ```
