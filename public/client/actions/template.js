@@ -66,7 +66,7 @@ export function postTemplateAsync(template) {
     });
     console.log(data);
     dispatch(fetchRequest());
-    return fetch('http://127.0.0.1:1337/templates/', {
+    return fetch('/templates/', {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -100,7 +100,7 @@ export function editTemplateAsync(template) {
     });
     console.log(data);
     dispatch(fetchRequest());
-    return fetch('http://127.0.0.1:1337/templates/' + template.id, {
+    return fetch('/templates/' + template.id, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -127,7 +127,7 @@ export function editTemplateAsync(template) {
 export function deleteTemplateAsync(templateID) {
   return dispatch => {
     dispatch(fetchRequest());
-    return fetch('http://127.0.0.1:1337/templates/' + templateID, {
+    return fetch('/templates/' + templateID, {
       method: 'DELETE', 
       credentials: 'same-origin'
     })
@@ -149,7 +149,7 @@ export function deleteTemplateAsync(templateID) {
 export function getTemplateAsync(id) {
   return dispatch => {
     dispatch(fetchRequest());
-    return fetch('http://127.0.0.1:1337/templates/' + id, {
+    return fetch('/templates/' + id, {
       method: 'GET', 
       credentials: 'same-origin'
     })
@@ -173,7 +173,7 @@ export function getTemplateAsync(id) {
 export function getTemplateNamesAsync() {
   return dispatch => {
     dispatch(fetchRequest());
-    return fetch('http://127.0.0.1:1337/templates/', {
+    return fetch('/templates/', {
       method: 'GET', 
       credentials: 'same-origin'
     })

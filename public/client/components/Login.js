@@ -13,7 +13,7 @@ const Login = ({onLoginClick}) => (
   <div>
   <RaisedButton
       label="LOGIN"
-      href="http://127.0.0.1:1337/auth"
+      href="/auth"
       labelColor="white"
       linkButton={true}
       primary={true}

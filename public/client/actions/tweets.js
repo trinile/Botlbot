@@ -73,7 +73,7 @@ export function getTweetsAsync(page) {
   page = page || 0;
   return dispatch => {
     dispatch(fetchRequest());
-    return fetch('http://127.0.0.1:1337/tweets/generated?page=' + page,
+    return fetch('/tweets/generated?page=' + page,
       { method: 'GET', credentials: 'same-origin' })
       .then(result => result.json())
       .then(result => {
@@ -91,7 +91,7 @@ export function getTweetsAsync(page) {
 export function getPostedTweetsAsync() {
   return dispatch => {
     dispatch(fetchRequest());
-    return fetch('http://127.0.0.1:1337/tweets/posted', { method: 'GET', credentials: 'same-origin'})
+    return fetch('/tweets/posted', { method: 'GET', credentials: 'same-origin'})
       .then(result => result.json())
       .then(result => {
         console.log('result ----> ', result);
@@ -109,7 +109,7 @@ export function getPostedTweetsAsync() {
 export function postTweetAsync(id) {
   return dispatch => {
     dispatch(fetchRequest());
-    return fetch('http://127.0.0.1:1337/tweets/' + id, { method: 'POST', credentials: 'same-origin' })
+    return fetch('/tweets/' + id, { method: 'POST', credentials: 'same-origin' })
       .then(res => {
         if (res.status === 201) {
           dispatch(fetchSuccess());
@@ -127,7 +127,7 @@ export function postTweetAsync(id) {
 export function editTweetAsync(id, tweet_text) {
   return dispatch => {
     dispatch(fetchRequest());
-    return fetch('http://127.0.0.1:1337/tweets/' + id, {
+    return fetch('/tweets/' + id, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
@@ -156,7 +156,7 @@ export function scheduleTweetAsync(id, schedule) {
   console.log('IN SCHEDULE TWEET ASYNC _----->di ---------> ', id, schedule);
   return dispatch => {
     dispatch(fetchRequest());
-    return fetch('http://127.0.0.1:1337/scheduletweet/' + id,
+    return fetch('/scheduletweet/' + id,
       { method: 'POST',
       header: {
         'Accept': 'application/json',
@@ -182,7 +182,7 @@ export function scheduleTweetAsync(id, schedule) {
 export function trashTweetAsync(id) {
   return dispatch => {
     dispatch(fetchRequest());
-    return fetch('http://127.0.0.1:1337/tweets/' + id, { method: 'DELETE', credentials: 'same-origin'})
+    return fetch('/tweets/' + id, { method: 'DELETE', credentials: 'same-origin'})
       .then(res => {
         if (res.status === 201) {
           dispatch(fetchSuccess());
