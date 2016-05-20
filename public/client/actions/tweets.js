@@ -77,7 +77,9 @@ export function scheduledTweets(scheduledtweets) {
 //this should probably be called when dashboard mounts and user is authenticated
 //makes a call to api to retrieve most current tweets in database
 
-export function getTweetsAsync() {
+export function getTweetsAsync(page) {
+  console.log('CLIENT SIDE PAGE IS', page);
+  page = page || 0;
   return dispatch => {
     dispatch(fetchRequest());
     return fetch('/tweets/generated?page=' + page,
@@ -85,7 +87,7 @@ export function getTweetsAsync() {
       .then(result => result.json())
       .then(result => {
         console.log('result ----> ', result);
-        // localStorage.setItem('tweets', JSON.stringify(result));
+        localStorage.setItem('tweets', JSON.stringify(result));
         return dispatch(addTweets(result));
       })
       .catch(err => {
@@ -93,7 +95,7 @@ export function getTweetsAsync() {
         dispatch(fetchFailure(err));
       });
   };
-}
+};
 
 export function getPostedTweetsAsync() {
   return dispatch => {
