@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import style from '../styles/tweet.js';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
-import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import { Save, Cancel, Trash } from './TweetButtons';
 import { NewsSource, TweetSource } from './tweet_sources';
@@ -18,11 +17,11 @@ class EditTweet extends React.Component {
 
   getTime() {
     const { tweet } = this.props;
-    return 'Generated ' + moment(tweet.created_at).fromNow()
+    return `Generated ${moment(tweet.created_at).fromNow()}`
   }
 
   render() {
-    const { tweet, editTweet, trashTweet, cancelEdit } = this.props;
+    const { tweet, editTweet, trashTweet, cancelEdit, setSnackMessage } = this.props;
     return (
       <Card style={style.main}>
         <CardHeader
@@ -31,7 +30,11 @@ class EditTweet extends React.Component {
           avatar={<Settings style={style.avatar}/>}
           style={style.header}
         >
-        <Trash tweet={tweet} trashTweet={trashTweet}/>
+        <Trash
+          tweet={tweet}
+          trashTweet={trashTweet}
+          setSnackMessage={setSnackMessage}
+        />
         </CardHeader>
         <CardText style={style.paper}>
         <TextField 
@@ -42,7 +45,7 @@ class EditTweet extends React.Component {
           rows={1} 
           rowsMax={4}
           onBlur={this.onChangeText.bind(this)}
-          >
+        >
         </TextField>
         {tweet.news_headline
         ? <NewsSource tweet={tweet} />
@@ -55,8 +58,13 @@ class EditTweet extends React.Component {
         }
         </CardText>
         <CardActions style={style.buttons}>
-          <Cancel tweet={tweet} cancelEdit={cancelEdit}/>
-          <Save tweet={tweet} editTweet={editTweet}/>
+          <Cancel 
+            tweet={tweet} 
+            cancelEdit={cancelEdit}/>
+          <Save 
+            tweet={tweet} 
+            editTweet={editTweet}
+            setSnackMessage={setSnackMessage}/>
         </CardActions>
       </Card>
     );
@@ -67,6 +75,8 @@ EditTweet.propTypes = {
   tweet: PropTypes.object,
   editTweet: PropTypes.func,
   cancelEdit: PropTypes.func,
+  setSnackMessage: PropTypes.func,
+  trashTweet: PropTypes.func,
 };
 
 export default EditTweet;

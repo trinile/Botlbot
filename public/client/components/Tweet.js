@@ -1,11 +1,8 @@
 import React, { PropTypes } from 'react';
 import style from '../styles/tweet.js';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
-import Paper from 'material-ui/Paper';
-import SchedulePopOver from './Scheduler';
 import moment from 'moment';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import {Trash, Post, Edit, Launch, Schedule} from './TweetButtons';
+import { Trash, Post, Edit, Schedule } from './TweetButtons';
 import { NewsSource, TweetSource } from './tweet_sources';
 import Settings from 'material-ui/svg-icons/action/settings';
 
@@ -20,13 +17,14 @@ const Tweet = ({
   setSnackMessage,
 
 }) => {
-    const time = () => { 
-      return tweet.scheduled_time
-      ? `Scheduled for ${moment.unix(tweet.scheduled_time).calendar()}`
-      : `Generated ${moment(tweet.created_at).fromNow()}` };
-    const getUrl = () => {
-      return `http://twitter.com/${tweet.user_screen_name}/status/...`
-    }
+  const time = () => {
+    return tweet.scheduled_time
+    ? `Scheduled for ${moment.unix(tweet.scheduled_time).calendar()}`
+    : `Generated ${moment(tweet.created_at).fromNow()}`
+  };
+  const getUrl = () => {
+    return `http://twitter.com/${tweet.user_screen_name}/status/...`
+  };
   return (
     <Card style={style.main}>
       <CardHeader
@@ -35,7 +33,11 @@ const Tweet = ({
         avatar={<Settings style={style.avatar} />}
         style={style.header}
       >
-        <Trash tweet={tweet} trashTweet={trashTweet} setSnackmessage={setSnackMessage} />
+        <Trash 
+          tweet={tweet} 
+          trashTweet={trashTweet} 
+          setSnackMessage={setSnackMessage}
+        />
       </CardHeader>
       <CardText style={style.tweet}>
 
@@ -49,14 +51,28 @@ const Tweet = ({
         }
 
         {tweet.tweet_id_str
-          ? <TweetSource tweet={tweet}/>
+          ? <TweetSource tweet={tweet} />
           : null
         }
       </CardText>
       <CardActions style={style.buttons}>
-        <Post tweet={tweet} postTweet={postTweet} redirectToPosted={redirectToPosted} setSnackMessage={setSnackMessage}/>
-        <Schedule tweet={tweet} scheduleTweet={scheduleTweet} redirectToScheduled={redirectToScheduled} setSnackMessage={setSnackMessage}/>
-        <Edit tweet={tweet} requestEdit={requestEdit} setSnackMessage={setSnackMessage} />
+        <Post
+          tweet={tweet}
+          postTweet={postTweet}
+          redirectToPosted={redirectToPosted}
+          setSnackMessage={setSnackMessage}
+        />
+        <Schedule
+          tweet={tweet}
+          scheduleTweet={scheduleTweet}
+          redirectToScheduled={redirectToScheduled}
+          setSnackMessage={setSnackMessage}
+        />
+        <Edit
+          tweet={tweet}
+          requestEdit={requestEdit}
+          setSnackMessage={setSnackMessage}
+        />
       </CardActions>
     </Card>
   );

@@ -28,35 +28,34 @@ export const Cancel = ({ tweet, cancelEdit, setSnackMessage }) => {
   const onCancelEdit = () => {
     return cancelEdit()
     .then(() => setSnackMessage('No changes made to tweet'))
-    .catch(console.log('error in snack and redirecting'));
+    .catch(err => console.log('error in snacking', err));
   }
 
   return (
     <FloatingActionButton
-    mini={true}
-    onTouchTap={onCancelEdit}
-    style={style.icon}
-    backgroundColor="#89bdd3"
+      mini={true}
+      onTouchTap={onCancelEdit}
+      style={style.icon}
+      backgroundColor="#89bdd3"
     > 
       <CancelIcon />
     </FloatingActionButton> 
   );
 };
 
-export const Save = ({ tweet, editTweet, setSnackMessage, redirectToPosted}) => {
+export const Save = ({ tweet, editTweet, setSnackMessage }) => {
   const onTouchSave = () => {
     return editTweet()
-    .then(()=> redirectToPosted())
-    .then(()=> setSnackMessage('Posted successfully!'))
-    .catch(console.log('error in snack and redirecting'));
+    .then(() => setSnackMessage('Saved successfully!'))
+    .catch(err => console.log('error in snacking', err));
   };
 
   return (
     <FloatingActionButton
-    mini={true}
-    onTouchTap={onTouchSave}
-    style={style.icon}
-    backgroundColor="#89bdd3"
+      mini={true}
+      onTouchTap={onTouchSave}
+      style={style.icon}
+      backgroundColor="#89bdd3"
     > 
       <SaveIcon />
     </FloatingActionButton> 
@@ -65,9 +64,9 @@ export const Save = ({ tweet, editTweet, setSnackMessage, redirectToPosted}) => 
 export const Schedule = ({ tweet, scheduleTweet, setSnackMessage, redirectToScheduled}) => {
   const onTouchSchedule = () => {
     return scheduleTweet()
-    .then(()=> redirectToScheduled())
-    .then(()=> setSnackMessage('Scheduled successfully!'))
-    .catch(console.log('error in snack and redirecting'));
+    .then(() => redirectToScheduled())
+    .then(() => setSnackMessage('Scheduled successfully!'))
+    .catch(err => console.log('error in snack and redirecting', err));
   };
 
   return (
@@ -84,7 +83,7 @@ export const Post = ({tweet, postTweet, setSnackMessage, redirectToPosted }) => 
     return postTweet()
     .then(()=> redirectToPosted())
     .then(()=> setSnackMessage('Posted successfully!'))
-    .catch(console.log('error in snack and redirecting'));
+    .catch(err => console.log('error in snack and redirecting', err));
   };
 
   return (
@@ -113,11 +112,12 @@ export const Edit = ({tweet, requestEdit}) => {
   );
 };
 
-export const Trash = ({tweet, trashTweet, setSnackMessage }) => {
+export const Trash = ({ tweet, trashTweet, setSnackMessage }) => {
+  console.log('snacke message ----> ', setSnackMessage);
   const onTouchTrash = () => {
     return trashTweet()
-    .then(()=> setSnackMessage('Deleted successfully!'))
-    .catch(console.log('error in snack and redirecting'));
+    .then(() => setSnackMessage('Deleted successfully!'))
+    .catch(err => console.log('error in snack and redirecting', err));
   };
   return (
     <FloatingActionButton
