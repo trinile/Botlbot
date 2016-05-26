@@ -15,6 +15,10 @@ const Tweet = ({
   trashTweet,
   requestEdit,
   scheduleTweet,
+  redirectToPosted,
+  redirectToScheduled,
+  setSnackMessage,
+
 }) => {
     const time = () => { 
       return tweet.scheduled_time
@@ -28,15 +32,21 @@ const Tweet = ({
       <CardHeader
         title="Bot Generated Tweet"
         subtitle={time()}
-        avatar={<Settings style={style.avatar}/>}
+        avatar={<Settings style={style.avatar} />}
         style={style.header}
       >
-        <Trash tweet={tweet} trashTweet={trashTweet}/>
+        <Trash tweet={tweet} trashTweet={trashTweet} setSnackmessage={setSnackMessage} />
       </CardHeader>
       <CardText style={style.tweet}>
+
         { tweet.tweet_id_str && (<p>{tweet.bot_tweet_body.replace(/https?:\/\/[\S]+\b/, getUrl())}</p>) }
         { !tweet.tweet_id_str && tweet.news_headline && (<p>{tweet.bot_tweet_body.replace(/https?:\/\/[\S]+\b/, 'nytimes.com/...')}</p>) }
         { !tweet.tweet_id_str && !tweet.news_headline && (<p>{tweet.bot_tweet_body}</p>) }
+
+        {tweet.news_headline
+        ? <NewsSource tweet={tweet} />
+        : null
+        }
 
         {tweet.news_headline
         ? <NewsSource tweet={tweet} />
@@ -49,12 +59,9 @@ const Tweet = ({
         }
       </CardText>
       <CardActions style={style.buttons}>
-        <Post tweet={tweet} postTweet={postTweet}/>
-        {tweet.scheduled_time
-        ? <Schedule style={style.scheduled} tweet={tweet} scheduleTweet={scheduleTweet}/>
-        : <Schedule tweet={tweet} scheduleTweet={scheduleTweet}/>
-        }
-        <Edit tweet={tweet} requestEdit={requestEdit} />
+        <Post tweet={tweet} postTweet={postTweet} redirectToPosted={redirectToPosted} setSnackMessage={setSnackMessage}/>
+        <Schedule tweet={tweet} scheduleTweet={scheduleTweet} redirectToPosted={redirectToScheduled} setSnackMessage={setSnackMessage}/>
+        <Edit tweet={tweet} requestEdit={requestEdit} setSnackMessage={setSnackMessage} />
       </CardActions>
     </Card>
   );
@@ -66,6 +73,7 @@ Tweet.propTypes = {
   trashTweet: PropTypes.func,
   scheduleTweet: PropTypes.func,
   requestEdit: PropTypes.func,
+  setSnackMessage: PropTypes.func,
 };
 
 export default Tweet;

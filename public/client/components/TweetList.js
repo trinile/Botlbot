@@ -17,7 +17,11 @@ const TweetList = ({
   onPostTweet,
   onTrashTweet,
   onEditTweet,
-  onScheduleTweet }) => {
+  onScheduleTweet,
+  redirectToScheduled,
+  redirectToPosted,
+  setSnackMessage,
+}) => {
 
   return (
     <div>
@@ -27,18 +31,23 @@ const TweetList = ({
             return <EditTweet 
               key={index}
               tweet={t} 
-              postTweet={() => onPostTweet(t.bot_tweet_id)} 
+              postTweet={() => onPostTweet(t.bot_tweet_id)}
               cancelEdit={() => cancelEditTweet(t.bot_tweet_id)}
               editTweet={() => onEditTweet(t.bot_tweet_id, t.bot_tweet_body)}
+              setSnackMessage={setSnackMessage}
               />
           } else if (t.tweet_status === 'available') {
             return <Tweet
               key={index}
               tweet={t}
               postTweet={() => onPostTweet(t.bot_tweet_id)}
+              redirectToPosted={redirectToPosted}
+              redirectToScheduled={redirectToScheduled}
               trashTweet={() => onTrashTweet(t.bot_tweet_id)}
               requestEdit={() => onRequestEdit(t.bot_tweet_id)}
               scheduleTweet={() => onScheduleTweet(t.bot_tweet_id, t.schedule)}
+              setSnackMessage={setSnackMessage}
+
               />
           } else if (t.tweet_status === 'posted_in_db') {
             return (<PostedTweet
@@ -49,10 +58,13 @@ const TweetList = ({
             return ( <Tweet
               key={index}
               tweet={t}
+              redirectToPosted={redirectToPosted}
+              redirectToScheduled={redirectToScheduled}
               postTweet={() => onPostTweet(t.bot_tweet_id)}
               trashTweet={() => onTrashTweet(t.bot_tweet_id)}
               requestEdit={() => onRequestEdit(t.bot_tweet_id)}
               scheduleTweet={() => onScheduleTweet(t.bot_tweet_id, t.schedule)}
+              setSnackMessage={setSnackMessage}
               /> )
           }
         })}
@@ -70,6 +82,9 @@ TweetList.propTypes = {
   onRequestEdit: PropTypes.func,
   cancelEditTweet: PropTypes.func,
   onScheduleTweet: PropTypes.func,
+  redirectToScheduled: PropTypes.func,
+  redirectToPosted: PropTypes.func,
+  setSnackMessage: PropTypes.func,
 };
 
 

@@ -126,6 +126,7 @@ export function postTweetAsync(id) {
         } else if (res.status === 500) {
           dispatch(fetchFailure(res.status));
         }
+        return res;
       })
       .catch(err => {
         dispatch(fetchFailure(err));

@@ -4,6 +4,8 @@ import TweetList from '../components/TweetList';
 import { addTweets, postTweet, trashTweet, requestEdit, editTweet, cancelEditTweet} from '../actions/tweets';
 import { postTweetAsync, getTweetsAsync, editTweetAsync, trashTweetAsync, scheduleTweetAsync } from '../actions/tweets.js';
 import { tweetsFilter } from '../actions/TweetsFilter';
+import { push } from 'react-router-redux';
+import { setSnackMessage } from '../actions/snack';
 //function that takes in tweet and filter action
 
 const filterTweets = (tweets, filter) => {
@@ -39,6 +41,9 @@ class TweetListContainer extends React.Component {
       editTweet, 
       onRequestEdit,
       onScheduleTweet,
+      redirectToScheduled,
+      redirectToPosted,
+      setSnackMessage,
        } = this.props;
     return (
       <TweetList 
@@ -49,6 +54,9 @@ class TweetListContainer extends React.Component {
       onEditTweet={editTweet}
       onTrashTweet={onTrashTweet}
       onScheduleTweet={onScheduleTweet}
+      redirectToScheduled={redirectToScheduled}
+      redirectToPosted={redirectToPosted}
+      setSnackMessage={setSnackMessage}
       />
     ) 
   }
@@ -57,28 +65,16 @@ const mapStateToProps = (state) => ({
   tweets: filterTweets(state.tweets, state.tweetsFilter)
 });
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  filterTweets: () => {
-    dispatch(tweetsFilter(ownProps.filter));
-  },
-  editTweet: (id, bot_tweet_body) => {
-    dispatch(editTweetAsync(id, bot_tweet_body));
-  },
-  cancelEditTweet: (id) => {
-    dispatch(cancelEditTweet(id));
-  },
-  onRequestEdit: (id) => {
-    dispatch(requestEdit(id));
-  },
-  onPostTweet: (id) => {
-    dispatch(postTweetAsync(id));
-  },
-  onTrashTweet: (id) => {
-    dispatch(trashTweetAsync(id));
-  },
-  onScheduleTweet: (id, schedule) => {
-    console.log('innnnnnnnnnnn schedule');
-    dispatch(scheduleTweetAsync(id, schedule));
-  },
+  filterTweets: () => dispatch(tweetsFilter(ownProps.filter)),
+  editTweet: (id, bot_tweet_body) => dispatch(editTweetAsync(id, bot_tweet_body)),
+  cancelEditTweet: (id) => dispatch(cancelEditTweet(id)),
+  onRequestEdit: (id) => dispatch(requestEdit(id)),
+  onPostTweet: (id) => dispatch(postTweetAsync(id)),
+  onTrashTweet: (id) => dispatch(trashTweetAsync(id)),
+  onScheduleTweet: (id, schedule) => dispatch(scheduleTweetAsync(id, schedule)),
+  redirectToScheduled: () => dispatch(push('/scheduled')),
+  redirectToPosted: () => dispatch(push('/posted')),
+  setSnackMessage: (message) => dispatch(setSnackMessage(message)),
 });
 
 export default connect(

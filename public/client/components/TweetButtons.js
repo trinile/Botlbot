@@ -24,11 +24,17 @@ const style = {
   },
 };
 
-export const Cancel = ({ tweet, cancelEdit }) => {
+export const Cancel = ({ tweet, cancelEdit, setSnackMessage }) => {
+  const onCancelEdit = () => {
+    return cancelEdit()
+    .then(() => setSnackMessage('No changes made to tweet'))
+    .catch(console.log('error in snack and redirecting'));
+  }
+
   return (
     <FloatingActionButton
     mini={true}
-    onTouchTap={cancelEdit}
+    onTouchTap={onCancelEdit}
     style={style.icon}
     backgroundColor="#89bdd3"
     > 
@@ -37,11 +43,18 @@ export const Cancel = ({ tweet, cancelEdit }) => {
   );
 };
 
-export const Save = ({ tweet, editTweet }) => {
+export const Save = ({ tweet, editTweet, setSnackMessage, redirectToPosted}) => {
+  const onTouchSave = () => {
+    return editTweet()
+    .then(()=> redirectToPosted())
+    .then(()=> setSnackMessage('Posted successfully!'))
+    .catch(console.log('error in snack and redirecting'));
+  };
+
   return (
     <FloatingActionButton
     mini={true}
-    onTouchTap={editTweet}
+    onTouchTap={onTouchSave}
     style={style.icon}
     backgroundColor="#89bdd3"
     > 
@@ -49,22 +62,36 @@ export const Save = ({ tweet, editTweet }) => {
     </FloatingActionButton> 
   );
 };
-export const Schedule = ({ tweet, scheduleTweet }) => {
+export const Schedule = ({ tweet, scheduleTweet, setSnackMessage, redirectToScheduled}) => {
+  const onTouchSchedule = () => {
+    return scheduleTweet()
+    .then(()=> redirectToScheduled())
+    .then(()=> setSnackMessage('Scheduled successfully!'))
+    .catch(console.log('error in snack and redirecting'));
+  };
+
   return (
     <SchedulePopOver
       style={style.icon}
       tweet={tweet}
-      onSchedule={scheduleTweet} 
+      onSchedule={onTouchSchedule} 
     />
   );
 };
 
-export const Post = ({tweet, postTweet}) => {
+export const Post = ({tweet, postTweet, setSnackMessage, redirectToPosted }) => {
+  const onTouchPost = () => {
+    return postTweet()
+    .then(()=> redirectToPosted())
+    .then(()=> setSnackMessage('Posted successfully!'))
+    .catch(console.log('error in snack and redirecting'));
+  };
+
   return (
   <FloatingActionButton
     mini={true}
     linkButton={true}
-    onTouchTap={postTweet}
+    onTouchTap={onTouchPost}
     style={style.icon}
     backgroundColor="#89bdd3"
   >
@@ -86,12 +113,17 @@ export const Edit = ({tweet, requestEdit}) => {
   );
 };
 
-export const Trash = ({tweet, trashTweet}) => {
+export const Trash = ({tweet, trashTweet, setSnackMessage }) => {
+  const onTouchTrash = () => {
+    return trashTweet()
+    .then(()=> setSnackMessage('Deleted successfully!'))
+    .catch(console.log('error in snack and redirecting'));
+  };
   return (
     <FloatingActionButton
       mini={true}
       style={style.icon}
-      onTouchTap={trashTweet}
+      onTouchTap={onTouchTrash}
       backgroundColor="white"
       iconStyle={style.launch}
     >

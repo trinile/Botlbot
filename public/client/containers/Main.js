@@ -4,31 +4,10 @@ import SiteNav from '../components/SiteNav';
 import SnackContainer from '../containers/SnackContainer';
 import { logoutUser } from '../actions/Logout';
 
-const style = {
-  //commenting out sidebar styling for later
-  // sidebar: {
-  //   //click efffect is gone with position set to fixed**********
-  //   position:'fixed',
-  //   minWidth: '15rem',
-  //   background: 'blue',
-  //   display: 'flex',
-  //   'justifyContent':'flex-start',
-  //   height: '100%',
-  //   padding: '10px',
-  // },
-//   main: {
-//     position: 'relative',
-//     minWidth: '30rem',
-//     display: 'flex',
-//     'justifyContent':'flex-end',
-//     overflow: 'hidden'
-//   }
-}
-
 const Main = ({ dispatch, isAuthenticated, main, sidebar }) => (
   <div>
     {sidebar}
-    <div className="Main" id="2" style={{marginLeft: '266px'}}/*style={style.main}*/>
+    <div className="Main" id="2" style={{marginLeft: '266px'}}>
       <SiteNav
         isAuthenticated={isAuthenticated}
         onLogoutClick={() => dispatch(logoutUser())}

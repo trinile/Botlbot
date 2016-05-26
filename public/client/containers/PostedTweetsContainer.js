@@ -5,11 +5,11 @@ import TweetListContainer from './TweetListContainer';
 
 class PostedTweetsContainer extends React.Component {
 
-  componentDidMount() {
+  componentWillMount() {
     const { dispatch } = this.props;
     dispatch(getPostedTweetsAsync());
   }
-  
+
   render() {
     return (
       <main>
