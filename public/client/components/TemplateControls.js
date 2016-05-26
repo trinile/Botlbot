@@ -14,13 +14,13 @@ const TemplateControls = ({
   redirectToDashboard
 }) => (
   <span className={styles.templatecontrols}>
-    <TextField 
+    <TextField
       hintText={'Name for your template'} 
       onChange={(e) => updateName(e.target.value)}
       value={template.name}
     />
-    <br/>
-    <br/>
+    <br />
+    <br />
     <RaisedButton 
       label={'Save'} 
       disabled={template.length === 0 || template.name === undefined || template.name === ''} 
