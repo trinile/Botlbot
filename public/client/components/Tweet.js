@@ -22,10 +22,10 @@ const Tweet = ({
 }) => {
     const time = () => { 
       return tweet.scheduled_time
-      ? 'Scheduled for ' + moment.unix(tweet.scheduled_time).calendar()
-      : 'Generated ' + moment(tweet.created_at).fromNow() };
+      ? `Scheduled for ${moment.unix(tweet.scheduled_time).calendar()}`
+      : `Generated ${moment(tweet.created_at).fromNow()}` };
     const getUrl = () => {
-      return 'http://twitter.com/' + tweet.user_screen_name + '/status/...'
+      return `http://twitter.com/${tweet.user_screen_name}/status/...`
     }
   return (
     <Card style={style.main}>
@@ -39,14 +39,9 @@ const Tweet = ({
       </CardHeader>
       <CardText style={style.tweet}>
 
-        { tweet.tweet_id_str && (<p>{tweet.bot_tweet_body.replace(/https?:\/\/[\S]+\b/, getUrl())}</p>) }
-        { !tweet.tweet_id_str && tweet.news_headline && (<p>{tweet.bot_tweet_body.replace(/https?:\/\/[\S]+\b/, 'nytimes.com/...')}</p>) }
-        { !tweet.tweet_id_str && !tweet.news_headline && (<p>{tweet.bot_tweet_body}</p>) }
-
-        {tweet.news_headline
-        ? <NewsSource tweet={tweet} />
-        : null
-        }
+        {tweet.tweet_id_str && (<p>{tweet.bot_tweet_body.replace(/https?:\/\/[\S]+\b/, getUrl())}</p>) }
+        {!tweet.tweet_id_str && tweet.news_headline && (<p>{tweet.bot_tweet_body.replace(/https?:\/\/[\S]+\b/, 'nytimes.com/...')}</p>) }
+        {!tweet.tweet_id_str && !tweet.news_headline && (<p>{tweet.bot_tweet_body}</p>) }
 
         {tweet.news_headline
         ? <NewsSource tweet={tweet} />
@@ -60,7 +55,7 @@ const Tweet = ({
       </CardText>
       <CardActions style={style.buttons}>
         <Post tweet={tweet} postTweet={postTweet} redirectToPosted={redirectToPosted} setSnackMessage={setSnackMessage}/>
-        <Schedule tweet={tweet} scheduleTweet={scheduleTweet} redirectToPosted={redirectToScheduled} setSnackMessage={setSnackMessage}/>
+        <Schedule tweet={tweet} scheduleTweet={scheduleTweet} redirectToScheduled={redirectToScheduled} setSnackMessage={setSnackMessage}/>
         <Edit tweet={tweet} requestEdit={requestEdit} setSnackMessage={setSnackMessage} />
       </CardActions>
     </Card>
@@ -74,6 +69,8 @@ Tweet.propTypes = {
   scheduleTweet: PropTypes.func,
   requestEdit: PropTypes.func,
   setSnackMessage: PropTypes.func,
+  redirectToScheduled: PropTypes.func,
+  redirectToPosted: PropTypes.func,
 };
 
 export default Tweet;
