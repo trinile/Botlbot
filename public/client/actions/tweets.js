@@ -11,6 +11,8 @@ import {
 } from '../constants.js';
 import { fetchRequest, fetchSuccess, fetchFailure } from './requestStatus';
 
+// id is bot_tweet_id from generatedtweets table 
+
 export function requestEdit(id) {
   return {
     type: EDIT_TWEET_REQUEST,
@@ -73,10 +75,9 @@ export function scheduledTweets(scheduledtweets) {
   };
 };
 
-//set into local storage
-//this should probably be called when dashboard mounts and user is authenticated
-//makes a call to api to retrieve most current tweets in database
+// Below are async actions that will make a request to API endpoint
 
+// this function is called when Dashboard is mounted.
 export function getTweetsAsync(page) {
   console.log('CLIENT SIDE PAGE IS', page);
   page = page || 0;
@@ -85,36 +86,21 @@ export function getTweetsAsync(page) {
     return fetch('/tweets/generated?page=' + page,
       { method: 'GET', credentials: 'same-origin' })
       .then(result => result.json())
-      .then(result => {
-        console.log('result ----> ', result);
-        localStorage.setItem('tweets', JSON.stringify(result));
-        return dispatch(addTweets(result));
-      })
-      .catch(err => {
-        console.error(err);
-        dispatch(fetchFailure(err));
-      });
+      .then(result => dispatch(addTweets(result)))
+      .catch(err => dispatch(fetchFailure(err)));
   };
 }
 
+// this function is called when PostedTweetsContainer is mounted.
 export function getPostedTweetsAsync() {
   return dispatch => {
     dispatch(fetchRequest());
     return fetch('/tweets/posted', { method: 'GET', credentials: 'same-origin'})
       .then(result => result.json())
-      .then(result => {
-        console.log('result ----> ', result);
-        localStorage.setItem('postedtweets', JSON.stringify(result));
-        return dispatch(postedTweets(result));
-      })
-      .catch(err => {
-        console.error(err);
-        dispatch(fetchFailure(err));
-      });
+      .then(result => dispatch(postedTweets(result)))
+      .catch(err => dispatch(fetchFailure(err)));
   };
 }
-
-// id is generated tweet ID
 export function postTweetAsync(id) {
   return dispatch => {
     dispatch(fetchRequest());
@@ -126,28 +112,21 @@ export function postTweetAsync(id) {
         } else if (res.status === 500) {
           dispatch(fetchFailure(res.status));
         }
-        return res;
+        // return res;
       })
-      .catch(err => {
-        dispatch(fetchFailure(err));
-      });
+      .catch(err => dispatch(fetchFailure(err)));
   };
 }
 
+// this function is called when ScheduledTweetsContainer is mounted.
 export function getScheduledTweetsAsync() {
   return dispatch => {
     dispatch(fetchRequest());
     return fetch('/tweets/scheduled', 
       { method: 'GET', credentials: 'same-origin' })
       .then(result => result.json())
-      .then(result => {
-        // console.log('result ----> ', result);
-        return dispatch(scheduledTweets(result));
-      })
-      .catch(err => {
-        console.error(err);
-        dispatch(fetchFailure(err));
-      });
+      .then(result => dispatch(scheduledTweets(result)))
+      .catch(err => dispatch(fetchFailure(err)));
   }; 
 }
 
@@ -157,7 +136,7 @@ export function editTweetAsync(id, tweet_text) {
     return fetch('/tweets/' + id, {
       method: 'PUT',
       headers: {
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       mode: 'cors',
@@ -165,7 +144,6 @@ export function editTweetAsync(id, tweet_text) {
       body: JSON.stringify({ text: tweet_text }),
     })
     .then(res => {
-      console.log('response ----------> ', res);
       if (res.status === 201) {
         dispatch(fetchSuccess());
         dispatch(editTweet(id, tweet_text));
@@ -173,14 +151,12 @@ export function editTweetAsync(id, tweet_text) {
         dispatch(fetchFailure(res.status));
       }
     })
-    .catch(err => {
-      dispatch(fetchFailure(err));
-    });
+    .catch(err => dispatch(fetchFailure(err)));
   };
 }
-
+// scheduling a tweet by a user changes tweet_status to 'scheduled'
+// and inserts entry into scheduledtweets table and schedule_id into generatedtweets as foreign key
 export function scheduleTweetAsync(id, schedule) {
-  console.log('IN SCHEDULE TWEET ASYNC _----->di ---------> ', id, schedule);
   return dispatch => {
     dispatch(fetchRequest());
     return fetch('/tweets/schedule/' + id,
@@ -190,7 +166,7 @@ export function scheduleTweetAsync(id, schedule) {
         'Content-Type': 'application/json',
       },
       credentials: 'same-origin',
-      body: JSON.stringify({ schedule: schedule }),
+      body: JSON.stringify({ schedule }),
       })
       .then(res => {
         if (res.status === 201) {
@@ -200,16 +176,15 @@ export function scheduleTweetAsync(id, schedule) {
           dispatch(fetchFailure(res.status));
         }
       })
-      .catch(err => {
-        dispatch(fetchFailure(err));
-      });
+      .catch(err => dispatch(fetchFailure(err)));
   };
 }
-
+// trashing a tweet by user only changes tweet_status to 'trashed'
+// actual deleting from database to be handled by a worker.
 export function trashTweetAsync(id) {
   return dispatch => {
     dispatch(fetchRequest());
-    return fetch('/tweets/' + id, { method: 'DELETE', credentials: 'same-origin'})
+    return fetch('/tweets/' + id, { method: 'DELETE', credentials: 'same-origin' })
       .then(res => {
         if (res.status === 201) {
           dispatch(fetchSuccess());
@@ -218,8 +193,6 @@ export function trashTweetAsync(id) {
           dispatch(fetchFailure(res.status));
         }
       })
-      .catch(err => {
-        dispatch(fetchFailure(err));
-      });
+      .catch(err => dispatch(fetchFailure(err)));
   };
 }
