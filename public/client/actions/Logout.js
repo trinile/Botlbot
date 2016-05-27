@@ -1,43 +1,39 @@
-//logs the user out
 import {
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
-  LOGOUT_FAILURE
+  LOGOUT_FAILURE,
 } from '../constants.js';
 import { replace } from 'react-router-redux';
 import fetch from 'isomorphic-fetch';
-//three possible states for logging out.
-//need three actions.
-//actions are useful if we call the API to log the user out.
 
 export const requestLogout = () => {
   return (
-    {
-      type: LOGOUT_REQUEST,
-      isFetching: true,
-      isAuthenticated: true
-    }
+  {
+    type: LOGOUT_REQUEST,
+    isFetching: true,
+    isAuthenticated: true,
+  }
   );
 };
 
 export const receiveLogout = () => {
   return (
-    {
-      type: LOGOUT_SUCCESS,
-      isFetching: false,
-      isAuthenticated: false
-    }
+  {
+    type: LOGOUT_SUCCESS,
+    isFetching: false,
+    isAuthenticated: false,
+  }
   );
 };
 
-//double check this function
-export const LogoutFailure = () => {
+export const logoutFailure = (message) => {
   return (
-    {
-      type: LOGOUT_FAILURE,
-      isFetching: false,
-      isAuthenticated: true
-    }
+  {
+    type: LOGOUT_FAILURE,
+    isFetching: false,
+    isAuthenticated: true,
+    message,
+  }
   );
 };
 
@@ -51,9 +47,6 @@ export function logoutUser() {
         dispatch(receiveLogout());
         dispatch(replace('/'));
       })
-      .catch(err => {
-        console.log(err);
-        dispatch(LogoutFailure());
-      });
+      .catch(err => dispatch(logoutFailure(err)));
   };
-};
+}

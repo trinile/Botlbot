@@ -10,6 +10,7 @@ import {
   SCHEDULED_TWEETS,
 } from '../constants.js';
 import { fetchRequest, fetchSuccess, fetchFailure } from './requestStatus';
+import fetch from 'isomorphic-fetch';
 
 // id is bot_tweet_id from generatedtweets table 
 
