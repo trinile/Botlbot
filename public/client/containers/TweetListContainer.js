@@ -1,16 +1,16 @@
 import { connect } from 'react-redux';
-import React from 'react';
+import React, { PropTypes } from 'react';
 import TweetList from '../components/TweetList';
-import { addTweets, postTweet, trashTweet, requestEdit, editTweet, cancelEditTweet} from '../actions/tweets';
-import { postTweetAsync, getTweetsAsync, editTweetAsync, trashTweetAsync, scheduleTweetAsync } from '../actions/tweets.js';
-import { tweetsFilter } from '../actions/TweetsFilter';
+import { requestEdit, editTweet, cancelEditTweet } from '../actions/tweets';
+import { postTweetAsync, editTweetAsync, trashTweetAsync, scheduleTweetAsync } from '../actions/tweets.js';
+import { tweetsFilter } from '../actions/tweetsFilter';
 import { push } from 'react-router-redux';
 import { setSnackMessage } from '../actions/snack';
-//function that takes in tweet and filter action
 
+// TweetListContainer to be used for showing any list of tweets
+// Tweets that will be displayed is determined by filter
 const filterTweets = (tweets, filter) => {
-  console.log('what is filter.........', filter);
-  switch(filter) {
+  switch (filter) {
     case 'SHOW_ALL':
       return tweets;
     case 'SHOW_AVAILABLE':
@@ -37,7 +37,6 @@ class TweetListContainer extends React.Component {
       onPostTweet, 
       cancelEditTweet,
       onTrashTweet, 
-      getValidTweets, 
       editTweet, 
       onRequestEdit,
       onScheduleTweet,
@@ -47,16 +46,16 @@ class TweetListContainer extends React.Component {
        } = this.props;
     return (
       <TweetList 
-      tweets={tweets} 
-      onPostTweet={onPostTweet}
-      onRequestEdit={onRequestEdit}
-      cancelEditTweet={cancelEditTweet}
-      onEditTweet={editTweet}
-      onTrashTweet={onTrashTweet}
-      onScheduleTweet={onScheduleTweet}
-      redirectToScheduled={redirectToScheduled}
-      redirectToPosted={redirectToPosted}
-      setSnackMessage={setSnackMessage}
+        tweets={tweets} 
+        onPostTweet={onPostTweet}
+        onRequestEdit={onRequestEdit}
+        cancelEditTweet={cancelEditTweet}
+        onEditTweet={editTweet}
+        onTrashTweet={onTrashTweet}
+        onScheduleTweet={onScheduleTweet}
+        redirectToScheduled={redirectToScheduled}
+        redirectToPosted={redirectToPosted}
+        setSnackMessage={setSnackMessage}
       />
     ) 
   }
@@ -77,8 +76,20 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   setSnackMessage: (message) => dispatch(setSnackMessage(message)),
 });
 
+TweetListContainer.PropTypes = {
+  tweets: PropTypes.arrayOf(React.PropTypes.object),
+  onPostTweet: PropTypes.func,
+  cancelEditTweet: PropTypes.func,
+  onTrashTweet: PropTypes.func,
+  editTweet: PropTypes.func,
+  onRequestEdit: PropTypes.func,
+  onScheduleTweet: PropTypes.func,
+  redirectToScheduled: PropTypes.func,
+  redirectToPosted: PropTypes.func,
+  setSnackMessage: PropTypes.func,
+};
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(TweetListContainer);
-

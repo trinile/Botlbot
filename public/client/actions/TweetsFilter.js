@@ -14,5 +14,5 @@ export const pageFilter = (filter) => {
   return {
     type: PAGE_FILTER,
     filter,
-  }
+  };
 };
