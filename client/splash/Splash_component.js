@@ -1,6 +1,8 @@
 import React from 'react';
 import Login from '../auth/Auth_component_Login';
 import styles from '../logo/styles/logo.css';
+import { Link } from 'react-router';
+import RaisedButton from 'material-ui/RaisedButton';
 
 const Splash = () => (
   <div style={{
@@ -38,8 +40,11 @@ const Splash = () => (
     </span>
     <div style={{alignSelf: 'flex-end', marginRight: '25%', fontFamily: 'Roboto, sans-serif'}}>
       <h1 style={{backgroundColor: 'inherit', color: 'inherit', marginBottom: '4px'}}>botlbot</h1>
-      <p style={{marginTop: '0', marginBottom: '3rem'}}>your twitterbot in a bottle</p>
-      <Login />
+      <p style={{marginTop: '0px', marginBottom: '3rem'}}>your twitterbot in a bottle</p>
+      <div style={{display: 'flex'}}> 
+        <Login />
+        <RaisedButton style={{marginLeft: '1.5rem'}} label='About' containerElement={<Link to="/about" />}/>
+      </div>
     </div>
   </div>
 );

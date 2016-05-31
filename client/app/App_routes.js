@@ -8,12 +8,13 @@ import Splash from '../splash/Splash_component';
 import SideMenuContainer from '../sideMenu/SideMenu_container';
 import PostedTweetsContainer from '../tweets/Tweets_container_PostedTweets';
 import ScheduledTweetsContainer from '../tweets/Tweets_container_ScheduledTweets';
+import About from '../components/About';
 
 const Routes = ({history}) => (
     <Router history={history} >
       <Route path="/" component={ Splash } />
+      <Route path="/about" component={ About }/>
       <Route component={MainContainer}>
-        <Route path="/about" components={{main: Dashboard}}/>
         <Route path="/dashboard" components={{main: Dashboard, sidebar: SideMenuContainer}} />
         <Route path="/posted" components={{main: PostedTweetsContainer, sidebar: SideMenuContainer}}/>
         <Route path="/scheduled" components={{main: ScheduledTweetsContainer, sidebar: SideMenuContainer }}/>

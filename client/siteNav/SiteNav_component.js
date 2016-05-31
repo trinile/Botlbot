@@ -21,13 +21,8 @@ const SiteNav = ({ isAuthenticated, onLogoutClick }) => (
     <FlatButton
       linkButton={true}
       label="About"
-      containerElement={<a href="https://github.com/Sabine-Sardine/botlbot/" target="_blank" />}
+      containerElement={<Link to="/about" />}
       />
-    <FlatButton
-      linkButton={true}
-      label="Home"
-      containerElement={<Link to="/" />}
-    />
     <FlatButton>
       <Logout onLogoutClick={onLogoutClick}/>
     </FlatButton>

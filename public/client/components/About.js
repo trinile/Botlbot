@@ -12,7 +12,7 @@ const About = () => (
       <img src={require('../assets/blackgear.png')} />
       <img src={require('../assets/blackgear.png')} />
       <img src={require('../assets/blackgear.png')} />
-    <div>
+    </div>
   </div>
 );
 
