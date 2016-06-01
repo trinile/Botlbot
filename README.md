@@ -1,8 +1,6 @@
 # Botlbot
 **Twitter users can build bots that will generate tweets based on templates (news sources, trending topics, or wordlists) and post to twitter.**
 
-**INSERT BUILD STATUS**
-
 ## Team
 
   - __Product Owner__: [Nathaniel Edwards](https://github.com/nthaniel)
