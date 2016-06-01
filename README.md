@@ -1,5 +1,5 @@
 # Botlbot
-**Twitter users can build bots that will generate tweets based on templates (news sources, trending topics, or wordlists) and post to twitter.**
+**Botlbot is a web application that allows Twitter users to build their own bots that will generate tweets for them based on templates they've created (from news articles from NYTimes and trending twitter topics, to random wordlists and emojis). From a list of tweets generated, a user can post, edit, schedule, or trash the tweet.**
 
 ## Team
 
@@ -41,7 +41,7 @@
 ## Development
 
 ### File Structure
-  ***See [FileStructure.md](linktoFileStructure)
+  ***See [FileStructure.md](linktoFileStructure)***
 
 ### Installation
   ***From within the root directory:***
