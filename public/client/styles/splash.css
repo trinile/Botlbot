@@ -1,3 +1,7 @@
+.container {
+  font-family: Roboto, sans-serif;
+}
+
 .element {
   height: 100vh;
   background-color: black;
@@ -11,4 +15,9 @@
 .element:nth-child(odd) {
   background-color: white;
   color: black;
+}
+
+.element:nth-child(odd) .button {
+  background-color: black;
+  color: white;
 }
