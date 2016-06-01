@@ -14,20 +14,18 @@
 1. [Example / Usage](#Usage)
 1. [Requirements](#requirements)
 1. [Development](#development)
-    1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
+    1. [Installation](#Installation)
 1. [Architecture](#architecture)
   - [High Level Architecture](#high-level-architecture)
   - [Database Schema](#database-schema)
 1. [API Endpoints](#api)
-1. [Team](#team)
 1. [Contributing](#contributing)
-1. [Questions and Issues](#questions-and-issues)
-1. [Meta](#meta)
+1. [Roadmap](#Roadmap)
+1. [Licensing](#Licensing)
 
 ## Usage
 
-> Some usage instructions
+![Botlbot](http://g.recordit.co/PBvWjpBnid.gif)
 
 ## Requirements
 
@@ -47,7 +45,7 @@
 ### File Structure
   ***See [FileStructure.md](linktoFileStructure)
 
-### Installing Dependencies
+### Installation
   ***From within the root directory:***
 
 1. Install Dependencies
@@ -58,33 +56,31 @@ npm install
 ```sh
 npm run build
 ```
-3. Move `bundle.html` into `\build` directory. 
-  1. This bundle.html references bundle.js from webpack.
 
-4. Run servers (TODO: create NPM run-dev command to run all servers in background)
+3. Run servers (TODO: create NPM run-dev command to run all servers in background)
 
-  1. Run file server
+  - Run file server
   ```sh 
   node server/server.js
   ```
-  1. Run Template Services 
+  - Run Template Services 
   ```sh
   node templateServices/server.js
   ```
-  1. Run Postgres SQL server 
+  - Run Postgres SQL server 
   
-  1. Run Redis Server to use redis-conf file
+  - Run Redis Server to use redis-conf file
   ```sh
   redis-server server/redis/redis-conf
   ```
 
-5. Create DATABASE in Postgres
-  1. In postgres create databases botlbot_db and botlbot_db_test;
+4. Create DATABASE in Postgres
+  - In postgres create databases botlbot_db and botlbot_db_test;
 ```sql
   CREATE DATABASE boltbot_db; 
   CREATE DATABASE botlbot_db_test;
 ```
-  1. From within root directory, run migrations to create tables.
+  - From within root directory, run migrations to create tables.
 ```sh
   knex migrate: latest 
 ``` 
@@ -92,8 +88,6 @@ npm run build
 ```sh
   node_modules/.bin/knex migrate:latest
 ```
-
-### Tasks 
 
 ## Architecture
 ### High Level Architecture
@@ -106,9 +100,17 @@ npm run build
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
-
+View the project roadmap [here](https://github.com/Sabine-Sardine/botlbot/issues)
 
 ## Contributing
 
+### Contributors
+  - [Nathaniel Edwards](https://github.com/nthaniel)
+  - [Daniel Tunon](https://github.com/danieltunon)
+  - [Trini Le](https://github.com/trinile)
+
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+
+## Licensing
+
+MIT
