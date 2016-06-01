@@ -20,8 +20,8 @@
   - [Database Schema](#database-schema)
 1. [API Endpoints](#api)
 1. [Contributing](#contributing)
-1. [Roadmap](#Roadmap)
-1. [Licensing](#Licensing)
+1. [Roadmap](#roadmap)
+1. [Licensing](#licensing)
 
 ## Usage
 
@@ -48,50 +48,49 @@
 ### Installation
   ***From within the root directory:***
 
-1. Install Dependencies
+#### Install Dependencies
 ```sh
 npm install
 ```
-2. Run Webpack Build
+#### Run Webpack Build
 ```sh
 npm run build
 ```
-
-3. Run servers (TODO: create NPM run-dev command to run all servers in background)
-
-  - Run file server
-  ```sh 
-  node server/server.js
-  ```
-  - Run Template Services 
-  ```sh
-  node templateServices/server.js
-  ```
-  - Run Postgres SQL server 
-  
+#### Run servers (TODO: create NPM run-dev command to run all servers in background)
+- Run file server
+```sh 
+node server/server.js
+```
+- Run Template Services 
+```sh
+node templateServices/server.js
+```
+  - Run Postgres SQL server
+```sh
+psql
+```
   - Run Redis Server to use redis-conf file
-  ```sh
-  redis-server server/redis/redis-conf
-  ```
-
-4. Create DATABASE in Postgres
-  - In postgres create databases botlbot_db and botlbot_db_test;
+```sh
+redis-server server/redis/redis-conf
+```
+#### Create DATABASE in Postgres
+- In postgres create databases botlbot_db and botlbot_db_test;
 ```sql
   CREATE DATABASE boltbot_db; 
   CREATE DATABASE botlbot_db_test;
 ```
-  - From within root directory, run migrations to create tables.
+- From within root directory, run migrations to create tables.
 ```sh
-  knex migrate: latest 
+knex migrate: latest 
 ``` 
-  OR 
+OR 
 ```sh
-  node_modules/.bin/knex migrate:latest
+node_modules/.bin/knex migrate:latest
 ```
 
 ## Architecture
 ### High Level Architecture
- ![Architecture](http://i65.tinypic.com/x5zfjo.jpg)
+ ![Architecture](http://i67.tinypic.com/2eav5m8.jpg)
 ### Database Schema
  ![Schema](http://i64.tinypic.com/2agt0yb.jpg)
 
