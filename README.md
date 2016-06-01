@@ -12,7 +12,7 @@
 1. [Example / Usage](#Usage)
 1. [Requirements](#requirements)
 1. [Development](#development)
-    1. [Installation](#Installation)
+    1. [Installation](#installation)
 1. [Architecture](#architecture)
   - [High Level Architecture](#high-level-architecture)
   - [Database Schema](#database-schema)
