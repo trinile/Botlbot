@@ -54,11 +54,14 @@
   width: 2.5rem;
   height: 2.5rem;
   animation: clockwise 10s linear infinite;
-  z-index: 10;
+  margin-bottom: 1rem;
 }
 
-.teamgear:nth-child(odd) {
+.teamgearreverse {
+  width: 2.5rem;
+  height: 2.5rem;
   animation: counterclockwise 10s linear infinite;
+  margin-bottom: 1rem;
 }
 
 @keyframes clockwise {
