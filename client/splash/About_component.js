@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Login from './Login';
-import Logo from './Logo';
+import Login from '../auth/Auth_component_Login';
+import Logo from '../logo/Logo_component';
 import RaisedButton from 'material-ui/RaisedButton';
-import styles from '../styles/logo.css';
-import splashStyles from '../styles/splash.css';
+import styles from '../logo/styles/logo.css';
+import splashStyles from './styles/splash.css';
 
 import { 
   Link,
