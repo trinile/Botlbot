@@ -13,16 +13,12 @@ const style = {
   toolbar: {
     backgroundColor: '#89bdd3',
   }
-}
+};
+
 const SiteNav = ({ isAuthenticated, onLogoutClick }) => (
   <Toolbar style={style.toolbar}>
   <ToolbarTitle text="botlbot" style={style.title}/>
   <ToolbarGroup>
-    <FlatButton
-      linkButton={true}
-      label="About"
-      containerElement={<Link to="/about" />}
-      />
     <FlatButton>
       <Logout onLogoutClick={onLogoutClick}/>
     </FlatButton>
