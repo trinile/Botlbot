@@ -4,13 +4,14 @@ const merge = require('webpack-merge');
 const webpack = require('webpack');
 
 const NpmInstallPlugin = require('npm-install-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const TARGET = process.env.npm_lifecycle_event;
 
 const PATHS = {
-  app: path.join(__dirname, './public/client'),
+  app: path.join(__dirname, './client'),
   build: path.join(__dirname, './build'),
-  style: path.join(__dirname, './public/client/styles')
+  style: path.join(__dirname, './client')
 };
 
 //to configure babel-preset-react hmre
@@ -28,13 +29,12 @@ process.env.BABEL_ENV = TARGET;
 
 const common = {
   // Entry accepts a path or an object of entries. We'll be using the
-  // latter form given it's convenient with more complex configurations.
   entry: {
-    app: PATHS.app
+    app: PATHS.app,
   },
   watch: true,
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
   },
   output: {
     path: PATHS.build,
@@ -50,17 +50,13 @@ const common = {
       }
     ],
     loaders: [
-      // { 
-      //   test: /\.css$/, 
-      //   loaders: ["style", "css"]
-      // },
       {
         // Test expects a RegExp! Note the slashes!
         test: /\.css$/,
         //css?modules enables module spec for css-loader
-        loaders: ['style','css?modules'],
-        // Include accepts either a path or an array of paths.
-        include: PATHS.styles
+        // loaders: ['style', 'css?modules'],
+        loader: 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',        // Include accepts either a path or an array of pat/hs.
+        include: PATHS.styles,
       },
        // Set up jsx. This accepts js too thanks to RegExp
       {
@@ -72,7 +68,7 @@ const common = {
         //load babel-loader for ES6 module definition based code to turn into ES5 bundles
         // Parse only app files! Without this it will go through entire project.
         // In addition to being slow, that will most likely result in an error.
-        include: PATHS.app
+        include: PATHS.app,
       },
       { 
         test: /\.(png|jpg|jpeg|gif|woff)$/, 
@@ -80,7 +76,7 @@ const common = {
       }
     ]
   },
-  devtool: 'source-map'
+  devtool: 'source-map',
 };
 
 
@@ -113,16 +109,17 @@ if(TARGET === 'start' || !TARGET) {
       port: process.env.PORT || 3450
     },
     plugins: [
-      new webpack.HotModuleReplacementPlugin(),
-      new NpmInstallPlugin({
-        save: true// --save
-      })
+        new ExtractTextPlugin('styles.css', { allChunks: true }),
+        new webpack.HotModuleReplacementPlugin(),
+        new NpmInstallPlugin({
+          save: true// --save
+        })
     ],
-    devtool: 'source-map'
+    devtool: 'source-map',
   });
 }
 
-if(TARGET === 'build') {
+if (TARGET === 'build') {
   module.exports = merge(common, {});
 }
 

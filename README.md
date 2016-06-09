@@ -1,8 +1,7 @@
 # Botlbot
-**Twitter users can build bots that will generate tweets based on templates (news sources, trending topics, or wordlists) and post to twitter.**
+**Botlbot is a web application that allows Twitter users to build their own bots that will generate tweets for them based on templates they've created (from news articles from NYTimes and trending twitter topics, to random wordlists and emojis). From a list of tweets generated, a user can post, edit, schedule, or trash the tweet.**
 
-**INSERT BUILD STATUS**
-
+Deployed link [here](http://botlbot.xyz)
 ## Team
 
   - __Product Owner__: [Nathaniel Edwards](https://github.com/nthaniel)
@@ -14,20 +13,18 @@
 1. [Example / Usage](#Usage)
 1. [Requirements](#requirements)
 1. [Development](#development)
-    1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
+    1. [Installation](#installation)
 1. [Architecture](#architecture)
   - [High Level Architecture](#high-level-architecture)
   - [Database Schema](#database-schema)
 1. [API Endpoints](#api)
-1. [Team](#team)
 1. [Contributing](#contributing)
-1. [Questions and Issues](#questions-and-issues)
-1. [Meta](#meta)
+1. [Roadmap](#roadmap)
+1. [Licensing](#licensing)
 
 ## Usage
 
-> Some usage instructions
+![Botlbot](http://g.recordit.co/PBvWjpBnid.gif)
 
 ## Requirements
 
@@ -45,15 +42,50 @@
 ## Development
 
 ### File Structure
-  ***See [FileStructure.md](linktoFileStructure)
-### Installing Dependencies
-  **
-From within the root directory:
+  ***See [FileStructure.md](linktoFileStructure)***
 
+### Installation
+  ***From within the root directory:***
+
+#### Install Dependencies
 ```sh
 npm install
 ```
-### Tasks 
+#### Run Webpack Build
+```sh
+npm run build
+```
+#### Run servers (TODO: create NPM run-dev command to run all servers in background)
+- Run file server
+```sh 
+node server/server.js
+```
+- Run Template Services 
+```sh
+node templateServices/server.js
+```
+  - Run Postgres SQL server
+```sh
+psql
+```
+  - Run Redis Server to use redis-conf file
+```sh
+redis-server server/redis/redis-conf
+```
+#### Create DATABASE in Postgres
+- In postgres create databases botlbot_db and botlbot_db_test;
+```sql
+  CREATE DATABASE boltbot_db; 
+  CREATE DATABASE botlbot_db_test;
+```
+- From within root directory, run migrations to create tables.
+```sh
+knex migrate: latest 
+``` 
+OR 
+```sh
+node_modules/.bin/knex migrate:latest
+```
 
 ## Architecture
 ### High Level Architecture
@@ -66,9 +98,17 @@ npm install
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
-
+View the project roadmap [here](https://github.com/Sabine-Sardine/botlbot/issues)
 
 ## Contributing
 
+### Contributors
+  - [Nathaniel Edwards](https://github.com/nthaniel)
+  - [Daniel Tunon](https://github.com/danieltunon)
+  - [Trini Le](https://github.com/trinile)
+
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+
+## Licensing
+
+MIT
