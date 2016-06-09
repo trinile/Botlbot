@@ -1,0 +1,128 @@
+.tweet {
+  height: 200px;
+  width: 50%;
+  margin: 0 auto;
+  border-radius: 5px;
+  background-color: purple;
+}
+
+.tweetContent {
+  display: inline-block;
+}
+.tweetStats {
+  display: inline-block;
+  
+}
+
+.tweetCard {
+  margin: 16px 32px 16px 0;
+  min-width: 400px;
+  max-width: 500px;
+  padding: 5px;
+  background: green;
+  color: #6A7C86;
+}
+
+.tweetBody: {
+  box-shadow: 0px ;
+  padding: 5px;
+  margin: 10px;
+  position: relative;
+  border: 1px dash #ddd;
+  text-align: left;
+  background-color: white;
+}
+/* */
+.paper: {
+  padding: 5px;
+  margin: 10px;
+  position: relative;
+  color: #6A7C86;
+  fill: #6A7C86;
+};
+
+.icon: {
+  display: inline-block;
+  box-shadow: 0px;
+  background-color: ;
+  fill: #6A7C86;
+};
+/* renamed from div */
+.div: {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  padding: 5px;
+  margin: 10px;
+};
+/*renamed from text */
+.text: {
+  width: 80%;
+  display: inline-block;
+};
+/* renamed from align*/
+.align: {
+  display: flex;
+  align-items: center;
+};
+
+.launch: {
+  fill: #6A7C86;
+  color: #6A7C86;
+};
+/*renamed from p */
+.p: {
+  padding-left: 10px;
+};
+.avatar: {
+  fill: white;
+  background-color: #c9c9c9;
+  height: 45px;
+  width: 45px;
+  border-radius: 25px;
+};
+
+.news: {
+  display: flex;
+  border-radius: 4px;
+  justify-content: space-around;
+  color: #6A7C86;
+  padding-left: 10px;
+  margin: 10px;
+};
+
+.tweetsource: {
+  border-radius: 4px;
+  box-shadow: ;
+  padding: 5px;
+  margin: 10px;
+  color: #6A7C86;
+  position: relative;
+};
+
+.tweetIcon: {
+  fill: #6A7C86;
+};
+
+.header: {
+  display: flex;
+  justify-content: space-around;
+  padding: 0px;
+  width: 100%;
+  padding-top: 15px;
+};
+
+.tweet: {
+  background-color: white;
+};
+
+.buttons: {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background-color: #89bdd3;
+  padding: 0px ;
+  padding-top: 5px;
+  padding-bottom: 5px;
+};
