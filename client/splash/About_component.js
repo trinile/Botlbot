@@ -78,9 +78,14 @@ class About extends Component {
             </span>
             <img src={require('../assets/tweet.png')} />
           </div>
-          <Link to="team" smooth={true} duration={500} >
-            <RaisedButton label='the team'/>
-          </Link>
+          <div>
+            <a href="https://github.com/Sabine-Sardine/botlbot" target="_blank">
+              <RaisedButton label='the code'/>
+            </a>
+            <Link to="team" smooth={true} duration={500} >
+              <RaisedButton label='the team' style={{marginLeft: '1.5rem'}}/>
+            </Link>
+          </div>
           <br/>
         </Element>
         <Element name="team" className={splashStyles.element}>
