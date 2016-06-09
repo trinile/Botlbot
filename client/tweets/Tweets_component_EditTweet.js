@@ -3,8 +3,8 @@ import style from './styles/Tweets_styles.js';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import { Save, Cancel, Trash } from './Tweets_component_TweetButtons';
-import { NewsSource } from './Tweets_component_NewsSource';
-import { TweetSource } from './Tweets_component_TwitterSource';
+import NewsSource from './Tweets_component_NewsSource';
+import TwitterSource from './Tweets_component_TwitterSource';
 import Settings from 'material-ui/svg-icons/action/settings';
 import moment from 'moment';
 
@@ -54,7 +54,7 @@ class EditTweet extends React.Component {
         }
         
         {tweet.tweet_id_str
-          ? <TweetSource tweet={tweet}/>
+          ? <TwitterSource tweet={tweet}/>
           : null
         }
         </CardText>
