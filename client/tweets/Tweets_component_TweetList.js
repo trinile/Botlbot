@@ -28,7 +28,7 @@ const TweetList = ({
       <div style={style}>
         {tweets.map((t, index) => {
           if (t.editing === true) {
-            return 
+            return (
               <EditTweet
                 key={index}
                 tweet={t} 
@@ -36,7 +36,7 @@ const TweetList = ({
                 cancelEdit={() => cancelEditTweet(t.bot_tweet_id)}
                 editTweet={() => onEditTweet(t.bot_tweet_id, t.bot_tweet_body)}
                 setSnackMessage={setSnackMessage}
-              /> ;
+              />) ;
           } else if (t.tweet_status === 'available') {
             return (
               <Tweet
