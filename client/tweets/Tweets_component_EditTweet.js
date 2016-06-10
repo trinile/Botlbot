@@ -9,11 +9,12 @@ import Settings from 'material-ui/svg-icons/action/settings';
 import moment from 'moment';
 
 class EditTweet extends React.Component {
-  
   onChangeText(event) {
     event.preventDefault();
-    const { tweet } = this.props;
-    tweet.bot_tweet_body = event.target.value;
+    const newBody = event.target.value;
+    // const { tweet } = this.props;
+    console.log('on change change text');
+    this.props.tweet.bot_tweet_body = newBody;
   }
 
   getTime() {
@@ -60,10 +61,11 @@ class EditTweet extends React.Component {
         </CardText>
         <CardActions style={style.buttons}>
           <Cancel 
-            tweet={tweet} 
-            cancelEdit={cancelEdit}/>
+            tweet={tweet}
+            cancelEdit={cancelEdit}
+            oldText={tweet.orig_text}/>
           <Save 
-            tweet={tweet} 
+            tweet={tweet}
             editTweet={editTweet}
             setSnackMessage={setSnackMessage}/>
         </CardActions>

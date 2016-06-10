@@ -22,13 +22,11 @@ const style = {
   },
 };
 
-export const Cancel = ({ tweet, cancelEdit, setSnackMessage }) => {
+export const Cancel = ({ tweet, cancelEdit , oldText}) => {
   const onCancelEdit = () => {
-    return cancelEdit()
-    .then(() => setSnackMessage('No changes made to tweet'))
-    .catch(err => console.log('error in snacking', err));
+    tweet.bot_tweet_body = oldText;
+    return cancelEdit();
   }
-
   return (
     <FloatingActionButton
       mini={true}

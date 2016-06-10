@@ -36,7 +36,7 @@ function tweet(state, action) {
       return state;
     case EDIT_TWEET_REQUEST:
       if (state.bot_tweet_id === action.id) {
-        return Object.assign({}, state, { editing: true });
+        return Object.assign({}, state, { editing: true, orig_text: action.tweet_text });
       }
       return state;
     case EDIT_TWEET:
@@ -46,7 +46,7 @@ function tweet(state, action) {
       return state;
     case CANCEL_EDIT_TWEET:
       if (state.bot_tweet_id === action.id) {
-        return Object.assign({}, state, { editing: false });
+        return Object.assign({}, state, { editing: false, tweet_text: action.tweet_text });
       }
     case SCHEDULE_TWEET:
       if (state.bot_tweet_id === action.id) {

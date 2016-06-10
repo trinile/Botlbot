@@ -11,10 +11,12 @@ import {
 
 // id is bot_tweet_id from generatedtweets table
 
-export function requestEdit(id) {
+export function requestEdit(id, tweet_text) {
+  console.log('tweet text', tweet_text);
   return {
     type: EDIT_TWEET_REQUEST,
     id,
+    tweet_text,
   };
 }
 export function editTweet(id, tweet_text) {

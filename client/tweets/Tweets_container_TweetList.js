@@ -74,7 +74,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   filterTweets: () => dispatch(tweetsFilter(ownProps.filter)),
   editTweet: (id, bot_tweet_body) => dispatch(editTweetAsync(id, bot_tweet_body)),
   cancelEditTweet: (id) => dispatch(cancelEditTweet(id)),
-  onRequestEdit: (id) => dispatch(requestEdit(id)),
+  onRequestEdit: (id, bot_tweet_body) => dispatch(requestEdit(id, bot_tweet_body)),
   onPostTweet: (id) => dispatch(postTweetAsync(id)),
   onTrashTweet: (id) => dispatch(trashTweetAsync(id)),
   onScheduleTweet: (id, schedule) => dispatch(scheduleTweetAsync(id, schedule)),

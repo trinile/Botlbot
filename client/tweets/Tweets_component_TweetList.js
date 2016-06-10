@@ -46,7 +46,7 @@ const TweetList = ({
                 redirectToPosted={redirectToPosted}
                 redirectToScheduled={redirectToScheduled}
                 trashTweet={() => onTrashTweet(t.bot_tweet_id)}
-                requestEdit={() => onRequestEdit(t.bot_tweet_id)}
+                requestEdit={() => onRequestEdit(t.bot_tweet_id, t.bot_tweet_body)}
                 scheduleTweet={() => onScheduleTweet(t.bot_tweet_id, t.schedule)}
                 setSnackMessage={setSnackMessage}
               /> );
