@@ -11,17 +11,18 @@ import {
 
 // id is bot_tweet_id from generatedtweets table
 
-export function requestEdit(id) {
+export function requestEdit(id, origText) {
   return {
     type: EDIT_TWEET_REQUEST,
     id,
+    origText,
   };
 }
-export function editTweet(id, tweet_text) {
+export function editTweet(id, bot_tweet_body) {
   return {
     type: EDIT_TWEET,
     id,
-    tweet_text,
+    bot_tweet_body,
   };
 }
 
@@ -32,7 +33,7 @@ export function cancelEditTweet(id) {
   };
 }
 
-export function editTweetAsync(id, tweet_text) {
+export function editTweetAsync(id, bot_tweet_body) {
   return dispatch => {
     dispatch(fetchRequest());
     return fetch('/tweets/' + id, {
@@ -43,12 +44,12 @@ export function editTweetAsync(id, tweet_text) {
       },
       mode: 'cors',
       credentials: 'same-origin',
-      body: JSON.stringify({ text: tweet_text }),
+      body: JSON.stringify({ text: bot_tweet_body}),
     })
     .then(res => {
       if (res.status === 201) {
         dispatch(fetchSuccess());
-        dispatch(editTweet(id, tweet_text));
+        dispatch(editTweet(id, bot_tweet_body));
       } else if (res.status === 500) {
         dispatch(fetchFailure(res.status));
       }

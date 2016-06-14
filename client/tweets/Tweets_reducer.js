@@ -36,12 +36,12 @@ function tweet(state, action) {
       return state;
     case EDIT_TWEET_REQUEST:
       if (state.bot_tweet_id === action.id) {
-        return Object.assign({}, state, { editing: true });
+        return Object.assign({}, state, { editing: true, orig_text: action.origText });
       }
       return state;
     case EDIT_TWEET:
       if (state.bot_tweet_id === action.id) {
-        return Object.assign({}, state, { editing: false, tweet_text: action.tweet_text });
+        return Object.assign({}, state, { editing: false, bot_tweet_body: action.bot_tweet_body });
       }
       return state;
     case CANCEL_EDIT_TWEET:
@@ -58,6 +58,7 @@ function tweet(state, action) {
   }
 }
 
+// fall-through is intentional.
 function tweets(state = [], action) {
   switch (action.type) {
     case ADD_NEW_TWEETS:
