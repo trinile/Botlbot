@@ -7,13 +7,14 @@ import NewsSource from './Tweets_component_NewsSource';
 import TwitterSource from './Tweets_component_TwitterSource';
 import Settings from 'material-ui/svg-icons/action/settings';
 import moment from 'moment';
+import Pure from 'purecss/build/pure-min.css';
+import Grid from 'purecss/build/grids-responsive-min.css';
+import Offset from '../app/pureCSS/offset.css';
 
 class EditTweet extends React.Component {
   onChangeText(event) {
     event.preventDefault();
     const newBody = event.target.value;
-    // const { tweet } = this.props;
-    console.log('on change change text');
     this.props.tweet.bot_tweet_body = newBody;
   }
 
@@ -25,7 +26,8 @@ class EditTweet extends React.Component {
   render() {
     const { tweet, editTweet, trashTweet, cancelEdit, setSnackMessage } = this.props;
     return (
-      <Card style={style.main} className={["pure-u-1 pure-u-md-1-2 pure-u-lg-1-3 offset-md-1-12"]}>
+      <Card style={style.main} className={[`${Grid["pure-u-1"]} 
+        ${Grid["pure-u-md-1-2"]} ${Grid["pure-u-lg-1-3"]} ${Offset["offset-md-1-12"]}`]}>
         <CardHeader
           title="EDITING Generated Tweet" 
           subtitle={this.getTime.bind(this)()}

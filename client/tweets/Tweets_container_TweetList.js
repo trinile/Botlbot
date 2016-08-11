@@ -14,6 +14,7 @@ import {
 import { tweetsFilter } from './Tweets_actions_tweetsFilter';
 import { setSnackMessage } from '../snack/Snack_actions.js';
 
+
 // TweetListContainer to be used for showing any list of tweets
 // Tweets that will be displayed is determined by filter
 const filterTweets = (tweets, filter) => {
@@ -49,10 +50,9 @@ class TweetListContainer extends React.Component {
       onScheduleTweet,
       redirectToScheduled,
       redirectToPosted,
-      setSnackMessage,
        } = this.props;
     return (
-      <TweetList 
+      <TweetList
         tweets={tweets} 
         onPostTweet={onPostTweet}
         onRequestEdit={onRequestEdit}
@@ -74,7 +74,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   filterTweets: () => dispatch(tweetsFilter(ownProps.filter)),
   editTweet: (id, bot_tweet_body) => dispatch(editTweetAsync(id, bot_tweet_body)),
   cancelEditTweet: (id) => dispatch(cancelEditTweet(id)),
-  onRequestEdit: (id) => dispatch(requestEdit(id)),
+  onRequestEdit: (id, bot_tweet_body) => dispatch(requestEdit(id, bot_tweet_body)),
   onPostTweet: (id) => dispatch(postTweetAsync(id)),
   onTrashTweet: (id) => dispatch(trashTweetAsync(id)),
   onScheduleTweet: (id, schedule) => dispatch(scheduleTweetAsync(id, schedule)),

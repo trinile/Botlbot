@@ -7,6 +7,10 @@ import { Trash, Post, Edit, Schedule } from './Tweets_component_TweetButtons';
 import NewsSource from './Tweets_component_NewsSource';
 import TweetSource from './Tweets_component_TwitterSource';
 import moment from 'moment';
+import Pure from 'purecss/build/pure-min.css';
+import Grid from 'purecss/build/grids-responsive-min.css';
+import Offset from '../app/pureCSS/offset.css';
+import helper from './Tweets_helper';
 
 const Tweet = ({
   tweet,
@@ -28,12 +32,18 @@ const Tweet = ({
     return `http://twitter.com/${tweet.user_screen_name}/status/...`
   };
   return (
-    <Card style={style.main}>
+    <Card style={style.main} className={[
+      `${Pure['pure-u-1']} ${Grid['pure-u-md-1-2']} ${Grid['pure-u-lg-1-3']} ${Offset['offset-md-1-12']}`
+    ]}>
       <CardHeader
         title="Bot Generated Tweet"
         subtitle={time()}
-        avatar={<Settings style={style.avatar} />}
+        // avatar={<Settings style={style.avatar} />}
+        avatar={helper.getUserInfo('profile_img')}
         style={style.header}
+        titleStyle={style.cardTitle}
+        subtitleStyle={style.cardTitle}
+        textStyle={style.cardTitle}
       >
         <Trash 
           tweet={tweet} 

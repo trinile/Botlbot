@@ -3,11 +3,13 @@ import Tweet from './Tweets_component_Tweet';
 // import styles from '../styles/main.css';
 import EditTweet from './Tweets_component_EditTweet.js';
 import PostedTweet from './Tweets_component_PostedTweet';
+import Pure from 'purecss/build/pure-min.css';
 
 const style = {
   display: 'flex',
-  justifyContent: 'space-around',
-  flexFlow: 'column wrap',
+  justifyContent: 'center',
+  marginBottom: '15px',
+  alignItems: 'center',
 };
 
 const TweetList = ({
@@ -25,7 +27,7 @@ const TweetList = ({
 
   return (
     <div>
-      <div style={style}>
+      <div style={style} className={Pure['pure-g']}>
         {tweets.map((t, index) => {
           if (t.editing === true) {
             return (
@@ -46,7 +48,7 @@ const TweetList = ({
                 redirectToPosted={redirectToPosted}
                 redirectToScheduled={redirectToScheduled}
                 trashTweet={() => onTrashTweet(t.bot_tweet_id)}
-                requestEdit={() => onRequestEdit(t.bot_tweet_id)}
+                requestEdit={() => onRequestEdit(t.bot_tweet_id, t.bot_tweet_body)}
                 scheduleTweet={() => onScheduleTweet(t.bot_tweet_id, t.schedule)}
                 setSnackMessage={setSnackMessage}
               /> );
@@ -60,7 +62,7 @@ const TweetList = ({
             return ( 
               <Tweet
                 key={index}
-                tweet={t}s
+                tweet={t}
                 redirectToPosted={redirectToPosted}
                 redirectToScheduled={redirectToScheduled}
                 postTweet={() => onPostTweet(t.bot_tweet_id)}

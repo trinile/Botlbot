@@ -3,9 +3,8 @@
 
 const style = {
   main: {
-    margin: '16px 32px 16px 0',
-    minWidth: '400px',
-    maxWidth: '500px',
+    marginTop: '10px',
+    marginBottom: '10px',
     padding: '5px',
     background: 'white',
     color: '#6A7C86',
@@ -46,6 +45,8 @@ const style = {
   align: {
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'space-around',
+    width: '50px',
   },
   launch: {
     fill: '#6A7C86',
@@ -53,6 +54,9 @@ const style = {
   },
   p: {
     paddingLeft: '10px',
+  },
+  cardTitle: {
+    padding: '0px',
   },
   avatar: {
     fill: 'white',
@@ -105,7 +109,7 @@ const style = {
   list: {
     display: 'flex',
     justifyContent: 'space-around',
-    flexFlow: 'column wrap',
+    // flexFlow: 'column wrap',
   },
 };
 

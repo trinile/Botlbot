@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import Pop from '../templateMenu/TemplateMenu_component_PopOver';
-// import TemplateMenuContainer from '../templateMenu/TemplateMenu_container';
 import styles from './styles/template.css';
 import { Paper } from 'material-ui';
+import Pure from 'purecss/build/pure-min.css';
 
 const clickOut = (e, toggleStatus, navigateOut) => {
   let parent = e.target.parentNode;
@@ -30,7 +30,8 @@ const Template = ({
   loadParams,
   updateChunk
 }) => (
-  <article>
+  <article
+    className={[`${Pure['pure-u-1']}`]}>
     <style>{`
       .Popover {
         z-index: 1400;
@@ -57,7 +58,9 @@ const Template = ({
     </style>
     <Paper 
       zdepth={2}
-      className={styles.template}
+      className={[
+        `${styles.template}`
+      ]}
     >
       <Pop
         item={{'Add!':true}}

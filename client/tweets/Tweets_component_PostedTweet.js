@@ -7,24 +7,29 @@ import Favorite from 'material-ui/svg-icons/action/favorite';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Launch from 'material-ui/svg-icons/action/launch';
 import Settings from 'material-ui/svg-icons/action/settings';
-import moment from 'moment';
+import Pure from 'purecss/build/pure-min.css';
+import Grid from 'purecss/build/grids-responsive-min.css';
+import helper from './Tweets_helper.js';
+import Offset from '../app/pureCSS/offset.css';
 
 const PostedTweet = ({ tweet }) => {
-  const getTime = () => {
-    return moment(tweet.created_at).calendar();
-  }
   return (
-    <Card style={style.main}>
+    <Card style={style.main} className={[
+      `${Pure['pure-u-1']} ${Grid['pure-u-md-1-2']} ${Grid['pure-u-lg-1-3']} ${Offset['offset-md-1-12']}`
+    ]}>
       <CardHeader
-        style={style.div}
         title="Posted to Twitter"
-        subtitle={getTime()}
-        avatar={<Settings style={style.avatar}/>}
+        subtitle={helper.getTime(tweet)}
+        avatar={helper.getUserInfo('profile_img')}
+        style={style.header}
+        titleStyle={style.cardTitle}
+        subtitleStyle={style.cardTitle}
+        textStyle={style.cardTitle}
       >
       <FloatingActionButton
         mini={true}
         linkButton={true}
-        href={tweet.tweet_text}
+        href={helper.tweetUrl(tweet)}
         style={style.icon}
         backgroundColor="white"
         iconStyle={style.launch}

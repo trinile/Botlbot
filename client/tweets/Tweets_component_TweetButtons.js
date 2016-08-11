@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './styles/tweet.css';
 import LaunchIcon from 'material-ui/svg-icons/action/launch';
 import Delete from 'material-ui/svg-icons/action/delete';
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
@@ -22,13 +23,11 @@ const style = {
   },
 };
 
-export const Cancel = ({ tweet, cancelEdit, setSnackMessage }) => {
+export const Cancel = ({ tweet, cancelEdit , oldText}) => {
   const onCancelEdit = () => {
-    return cancelEdit()
-    .then(() => setSnackMessage('No changes made to tweet'))
-    .catch(err => console.log('error in snacking', err));
+    tweet.bot_tweet_body = oldText;
+    return cancelEdit();
   }
-
   return (
     <FloatingActionButton
       mini={true}
@@ -59,7 +58,7 @@ export const Save = ({ tweet, editTweet, setSnackMessage }) => {
     </FloatingActionButton> 
   );
 };
-export const Schedule = ({ tweet, scheduleTweet, setSnackMessage, redirectToScheduled}) => {
+export const Schedule = ({ tweet, scheduleTweet, setSnackMessage, redirectToScheduled }) => {
   const onTouchSchedule = () => {
     return scheduleTweet()
     .then(() => redirectToScheduled())
@@ -97,7 +96,7 @@ export const Post = ({tweet, postTweet, setSnackMessage, redirectToPosted }) => 
   );
 };
 
-export const Edit = ({tweet, requestEdit}) => {
+export const Edit = ({ tweet, requestEdit }) => {
   return (
     <FloatingActionButton
       mini={true}
