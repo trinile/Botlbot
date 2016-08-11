@@ -67,8 +67,44 @@
       - Template_reducer_templateBuilder.js
       - Template_reducer_templateIDs.js
     + templateChunk
+      + styles
+        - templateChunk.css
+      - TemplateChunk_actions.js
+      - TemplateChunk_actions_counter.js
+      - TemplateChunk_component.js
+      - TemplatChunk_reducer_counter.js
+      - TemplateChunk_reducer_inProgress.js
     + templateMenu
+      - TemplateMenu_actions.js
+      - TemplateMenu_component.js
+      - TemplateMenu_component_AddButton.js
+      - TemplateMenu_component_PopOver.js
+      - TemplateMenu_container.js
+      - TemplateMenu_menuTree.js
+      - TemplateMenu_reducer.js
     + tweets
+      + styles
+        - tweet.css
+        - Tweets_styles.js
+      - Tweets_actions_editTweet.js
+      - Tweets_actions_getTweets.js
+      - Tweets_actions_postTweet.js
+      - Tweets_actions_scheduleTweet.js
+      - Tweets_actions_trashTweet.js
+      - Tweets_actions_tweetsFilter.js
+      - Tweets_component_EditTweet.js
+      - Tweets_component_NewsSource.js
+      - Tweets_component_PostedTweet.js
+      - Tweets_component_ScheduledTweet.js
+      - Tweets_component_SchedulePopOver.js
+      - Tweets_component_Tweet.js
+      - Tweets_component_TweetButtons.js
+      - Tweets_component_TweetList.js
+      - Tweets_component_TwitterSource.js
+      - Tweets_container_PostedTweets.js
+      - Tweets_container_TweetList.js
+      - Tweets_reducer.js
+      - Tweets_reducer_tweetsFilter.js
     - index.js
   + server
     + db
@@ -110,14 +146,8 @@
     - TweetsScheduling.js
     - wordlist.js
   + test
-    - auth_reducers.spec.js
     - reducers.spec.js
     - server.js
     - templateServices.spec.js
-    - tweet.spec.js
+    - tweetsController.spec.js
     - userModel.spec.js
-  + config
-    - knexfile.js
-    - webpack.config.js
-    - editorconfig
-
