@@ -41,13 +41,13 @@ module.exports = function(app, passport) {
   });
 
   app.get('/authenticate', ensureAuthenticated, function(req, res) {
-    res.status(200).json({ authID: req.user.id });
+    User.getUserInfo(req.user.id)
+    .then(results => res.status(200)
+      .json( { authID: req.user.id, username: results[0]['username'], profile_img: results[0]['profile_img'] } ));
   });
 
 // call when dashboard is loaded -> retrieves data from database
   app.get('/tweets/generated', ensureAuthenticated, function (req, res) {
-    console.log('REQ.QUERY.PAGE IS', JSON.stringify(req.query.page));
-    console.log('requesssssss ---->', req, req.user.id);
     Tweets.getGeneratedTweets(req.user.id, req.query.page)
     .then(results => res.status(200).json(results))
     .catch(err => res.status(500).send(err));
@@ -66,7 +66,6 @@ module.exports = function(app, passport) {
   });
 
   app.put('/tweets/:id', ensureAuthenticated, function (req, res) {
-    console.log('req-body-text ---------->', req.params.id, '------>', req.body);
     Tweets.modifyTweetText(req.params.id, req.body.text)
     .then((status) => res.status(201).send(status))
     .catch(err => res.status(500).send(err));
@@ -86,7 +85,6 @@ module.exports = function(app, passport) {
 
   // create route for scheduling
   app.post('/tweets/schedule/:id', ensureAuthenticated, function(req, res) {
-    console.log(req.body, req.params.id);
     Tweets.scheduleTweet(req.params.id, req.body.schedule)
     .then(reply => res.status(201).send(reply))
     .catch(err => res.status(500).send(err));
@@ -101,8 +99,8 @@ module.exports = function(app, passport) {
   });
 
   app.post('/templates', ensureAuthenticated, function(req, res) {
-    console.log('POSTED TO /TEMPLATES', req.body);
-    console.log('USER ID IS', req.user.id);
+    // console.log('POSTED TO /TEMPLATES', req.body);
+    // console.log('USER ID IS', req.user.id);
     Templates.saveTemplate(req.body, req.user.id)
       .then(id => { res.status(201).send('you posted it'); return id; })
       .then(id => fetch(`http://127.0.0.1:8558/generate/users/${req.user.id}/templates/${id}`,
@@ -114,7 +112,7 @@ module.exports = function(app, passport) {
   });
 
   app.put('/templates/:id', ensureAuthenticated, function(req, res) {
-    console.log('PUTTED TO /TEMPLATES/:id', req.params.id);
+    // console.log('PUTTED TO /TEMPLATES/:id', req.params.id);
     Templates.updateTemplate(req.params.id, req.body)
       .then(t => res.status(201).json(t))
       .then(() => fetch(`http://127.0.0.1:8558/generate/users/${req.user.id}/templates/${req.params.id}`,
@@ -126,21 +124,21 @@ module.exports = function(app, passport) {
   });
 
   app.get('/templates/:id', ensureAuthenticated, function(req, res) {
-    console.log('GETTED TO /TEMPLATES/:id', req.params.id);
+    // console.log('GETTED TO /TEMPLATES/:id', req.params.id);
     Templates.getTemplate(req.params.id)
       .then(t => { console.log(t); return res.status(200).json(t) })
       .catch((err) => res.status(400).send(`you dint got it: ${err}`));
   });
 
   app.delete('/templates/:id', ensureAuthenticated, function(req, res) {
-    console.log('DELETED AT /TEMPLATES/:id', req.params.id);
+    // console.log('DELETED AT /TEMPLATES/:id', req.params.id);
     Templates.deleteTemplate(req.params.id, req.user.id)
       .then(t => res.status(201).send('you deleted it'))
       .catch((err) => res.status(400).send(`you dint delete it: ${err}`));
   });
 
   app.get('/templates', ensureAuthenticated, function(req, res) {
-    console.log('GETTED TO /TEMPLATES');
+    // console.log('GETTED TO /TEMPLATES');
     // console.log(req.user.id);
     Templates.getTemplateNames(req.user.id)
     // Templates.getTemplateNames('727615201575469056')
