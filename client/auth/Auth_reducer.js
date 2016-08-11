@@ -14,7 +14,7 @@ import {
 
 export default function authStatus(state = {
   isFetching: false,
-  isAuthenticated: localStorage.getItem('authID') ? true: false
+  isAuthenticated: localStorage.getItem('userInfo') ? true: false
   }, action) {
   switch (action.type) {
     case LOGIN_REQUEST:

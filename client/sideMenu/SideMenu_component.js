@@ -8,6 +8,7 @@ import Menu from 'material-ui/Menu';
 import Paper from 'material-ui/Paper';
 import Pure from 'purecss/build/pure-min.css';
 import Side from '../app/pureCSS/sideMenu.css';
+import helper from '../tweets/Tweets_helper';
 
 const style = {
   drawer: {
@@ -24,10 +25,10 @@ const style = {
 };
 
 const SideMenu = ({ templateIDs, onLogoutClick }) => {
-  const userInfo = () => {
-    const info = localStorage.getItem('userInfo');
-    return JSON.parse(info).username;
-  }
+  // const userInfo = () => {
+  //   const info = localStorage.getItem('userInfo');
+  //   return JSON.parse(info).username;
+  // }
   return (
     <Paper 
       id={`${Side["menu"]}`}
@@ -35,7 +36,7 @@ const SideMenu = ({ templateIDs, onLogoutClick }) => {
       style={{padding: ''}}
     >
       <AppBar 
-        title={userInfo()} 
+        title={helper.getUserInfo('username')} 
         showMenuIconButton={false}
         style={style.appBar}
         titleStyle={{fontSize:'18px'}}

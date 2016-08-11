@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
     table.string('token');
     table.string('tokenSecret');
     table.string('username');
-    table.string('profile_img')
+    table.string('profile_img');
     table.timestamps(true, true);
   }).createTable('postedtweets', function(table){
     table.increments('tweet_id').primary();

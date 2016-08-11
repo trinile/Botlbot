@@ -36,7 +36,9 @@ export const authUser = () => {
     return fetch('/authenticate', { method: 'GET', credentials: 'same-origin' })
       .then(res => res.json())
       .then(json => {
-        localStorage.setItem('authID', json.authID);
+        localStorage.setItem('userInfo', JSON.stringify(
+          {authID: json.authID, username:json.username, profile_img: json.profile_img})
+        );
         dispatch(receiveLogin());
       })
       .catch(err => dispatch(loginError(err)));

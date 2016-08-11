@@ -1,8 +1,5 @@
-// const User = require('../models/user.js');
 const knex = require('../db');
-/**
-*
-*/
+
 function login(profile, token, secret) {
   return knex('users').where({
     user_twitter_id: profile.id
@@ -11,6 +8,7 @@ function login(profile, token, secret) {
       return knex('users').where({
         user_twitter_id: profile.id
       }).update({
+        profile_img: profile._json.profile_image_url,
         token: token,
         tokenSecret: secret,
         updated_at: new Date()
@@ -21,6 +19,7 @@ function login(profile, token, secret) {
       token: token,
       tokenSecret: secret,
       username: profile.username,
+      profile_img: profile._json.profile_image_url,
       updated_at: new Date(),
       created_at: new Date()
     }, 'user_twitter_id');
@@ -41,8 +40,15 @@ function getTokens(userId) {
     .then(results => results[0]);
 }
 
+function getUserInfo(userId) {
+  return knex('users')
+    .where({user_twitter_id: userId })
+    .select('username', 'profile_img')
+}
+
 module.exports = {
   login: login,
   getRecord: getRecord,
-  getTokens: getTokens
+  getTokens: getTokens,
+  getUserInfo: getUserInfo,
 };

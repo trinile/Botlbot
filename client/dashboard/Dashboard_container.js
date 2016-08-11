@@ -7,12 +7,11 @@ import { getTemplateNamesAsync } from '../template/Template_actions';
 import { resetPage } from '../pagination/Pagination_actions';
 // import SideMenu from '../sidemenu/SideMenu_component';
 import DashboardControlsContainer from './Dashboard_container_Controls';
-
+import EmptyList from './Dashboard_component_EmptyList';
 class Dashboard extends React.Component {
 
   componentWillMount() {
     const { dispatch, isAuthenticated } = this.props;
-    console.log('is user authenticated ----->', isAuthenticated);
     if (!isAuthenticated) {
       dispatch(authUser());
     }
@@ -20,12 +19,14 @@ class Dashboard extends React.Component {
     dispatch(getTweetsAsync());
     dispatch(getTemplateNamesAsync());
   }
-  
+
   render() {
+    const { tweets } = this.props;
     return (
       <div>
         <DashboardControlsContainer />
-        <TweetListContainer filter="SHOW_AVAILABLE" />
+        { tweets.length === 0 ? <EmptyList/> : null }
+        <TweetListContainer filter="SHOW_AVAILABLE"/>
       </div>
     );
   }
@@ -34,6 +35,7 @@ class Dashboard extends React.Component {
 function mapStatetoProps(state) {
   return {
     isAuthenticated: state.authStatus,
+    tweets: state.tweets,
   };
 }
 

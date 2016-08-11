@@ -36,26 +36,28 @@ function saveGeneratedTweets(tweets) {
 }
 
 function getGeneratedTweets(userID, page) {
-  console.log(page);
   return knex('generatedtweets')
     .where({ user_twitter_id: userID, tweet_status: 'available' })
     .select()
     .orderBy('updated_at', 'desc')
     .offset(page * 5)
-    .limit(5);
+    .limit(4);
 }
 
 function getScheduledTweets(userID) {
   return knex('generatedtweets')
   .where({ user_twitter_id: userID, tweet_status: 'scheduled' })
   .innerJoin('scheduledtweets', 'generatedtweets.schedule_id', 'scheduledtweets.schedule_id')
-  .select();
+  .select()
+  .orderBy('updated_at', 'desc')
 }
 
 function getPostedTweets(userID) {
   return knex('postedtweets')
     .where({ user_twitter_id: userID })
-    .select();
+    .select()
+    .orderBy('created_at', 'desc')
+    .limit(10);
 }
 
 function savePostedTweet(data) {
@@ -93,9 +95,7 @@ function scheduleTweet(bot_tweet_id, scheduleTime) {
     .where({ bot_tweet_id: bot_tweet_id })
     .select('schedule_id')
     .then(id => { 
-      // console.log('id of schedule tweet ------> ', id);
       if (id[0].schedule_id === null) {
-        // console.log('ID IS NULL--------->')
         return knex('scheduledtweets')
         .insert({scheduled_time: scheduleTime }, 'schedule_id')
         .then(id => { 
@@ -108,7 +108,6 @@ function scheduleTweet(bot_tweet_id, scheduleTime) {
               }, 'tweet_status')  
         })
       } else {
-        // console.log("UPDATE SCHEDULE!!!!");
         return knex('scheduledtweets')
         .where({ schedule_id : id[0].schedule_id })
         .update({
@@ -141,7 +140,6 @@ function deleteGeneratedTweets() {
 function findReadyTweets() {
   var nextFifteen = moment().add('15', 'minutes').format('X'); 
   var fifteenAgo = moment().subtract('15', 'minutes').format('X');//unix timestamp
-  // console.log(moment.unix(fifteen).calendar());
   return knex('scheduledtweets')
   .whereBetween('scheduled_time', [fifteenAgo, nextFifteen])
   .innerJoin('generatedtweets', 'scheduledtweets.schedule_id', 'generatedtweets.schedule_id')

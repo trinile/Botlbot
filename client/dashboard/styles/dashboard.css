@@ -1,0 +1,38 @@
+.container {
+  background-color: rgb(137, 189, 211);
+  width: 100%;
+  height: 600px;
+  display: inline-block;
+  text-align: center;
+}
+.gear {
+  width: 10.5rem;
+  height: 10.5rem;
+  top: 55%;
+  left: 45%;
+  animation: clockwise 10s linear infinite;
+  position: absolute;
+  z-index: 10;
+  opacity: .5;
+}
+
+.littlegear {
+  width: 7.5rem;
+  height: 7.5rem;
+  top: 45%;
+  left: 57%;
+  animation: counterclockwise 10s linear infinite;
+  position: absolute;
+  z-index: 10;
+  opacity: .5;
+}
+
+@keyframes clockwise {
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(360deg);}
+}
+
+@keyframes counterclockwise {
+  0% {transform: rotate(360deg);}
+  100% {transform: rotate(0deg);}
+}
