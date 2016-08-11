@@ -55,8 +55,7 @@ const common = {
         test: /\.css$/,
         //css?modules enables module spec for css-loader
         // loaders: ['style', 'css?modules'],
-        loader: 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',        // Include accepts either a path or an array of pat/hs.
-        include: PATHS.styles,
+        loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
       },
        // Set up jsx. This accepts js too thanks to RegExp
       {
